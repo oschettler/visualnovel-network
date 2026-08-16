@@ -10,6 +10,23 @@
 - [u2](in/u2)
 - [u3](in/u3)
 
+Leitreferenz für den Zeichenstil ist [in/u2/000008.jpg](in/u2/000008.jpg); die
+daraus abgeleiteten Merkmale stehen in
+[doc/stil-tuschezeichnung.md](doc/stil-tuschezeichnung.md).
+
+### Gesichter erzeugen
+
+Die Porträts sind generiert, nicht von Hand gezeichnet – jeder Strich entsteht
+als gefüllter Umriss mit variabler Breite:
+
+```bash
+python3 tools/portraits.py            # alle sechs neu nach doc/img/
+python3 tools/portraits.py lena-kowalski   # einzeln
+```
+
+- [tools/ink.py](tools/ink.py) – Strichgenerator (Feder-Duktus, Haare, Kleckse)
+- [tools/portraits.py](tools/portraits.py) – Bildinhalt der sechs Figuren
+
 ## Novelle "Das Netzwerk"
 
 - [Quelle](~/Documents/privat/Novelle_Zukunft-der-DW)
