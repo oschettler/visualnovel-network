@@ -191,29 +191,39 @@ def sarah(p, turn=0.0):
            druck=[(0.08, 0.40)], druck_w=5.0)
 
     # --- Haar: durchgehende Einzelstraehnen vom Scheitel bis auf die Schulter
-    p.strands([(196, 100), (176, 118), (158, 168), (152, 244), (154, 312),
-               (152, 372)],
-              [(190, 96), (150, 112), (122, 176), (110, 252), (114, 320),
-               (128, 378)],
-              26, w=(1.7, 2.6, 0), off=2.0, kurz=0.20)
-    p.strands([(204, 100), (224, 118), (243, 168), (249, 244), (247, 312),
-               (249, 372)],
-              [(210, 96), (250, 112), (279, 176), (291, 252), (287, 320),
-               (273, 378)],
-              26, w=(1.7, 2.6, 0), off=2.0, kurz=0.20)
-    # Scheitel: kurze Zuege ueber den Kopf, Ansatz und Spitzen ausgefranst
-    p.strands([(200, 92), (176, 100), (156, 122), (146, 152)],
-              [(200, 104), (180, 112), (164, 132), (156, 160)],
-              12, w=(1.5, 2.2, 0), off=1.6, kurz=0.28)
-    p.strands([(200, 92), (224, 100), (245, 122), (255, 152)],
-              [(200, 104), (220, 112), (237, 132), (245, 160)],
-              12, w=(1.5, 2.2, 0), off=1.6, kurz=0.28)
-    p.hairs([(126, 356), (150, 376)], 12, 20, w=(2.4, 1.4, 0), spread=0.32,
-            curl=0.25, angle=1.62, length_var=0.6)
-    p.hairs([(276, 356), (252, 376)], 12, 20, w=(2.4, 1.4, 0), spread=0.32,
-            curl=0.25, angle=1.52, length_var=0.6)
-    p.hairs([(162, 96), (200, 88), (240, 97)], 14, 12, w=(2.2, 1.3, 0),
-            spread=0.4, curl=0.4, out_dir=-1, curl_bias=0.4, length_var=0.6)
+    # Beide Leitkurven beginnen im selben Scheitelpunkt -- setzt die innere
+    # tiefer an als die aeussere, klafft am Oberkopf eine V-Kerbe
+    p.strands([(200, 88), (176, 114), (158, 168), (152, 248), (152, 330),
+               (151, 404)],
+              [(196, 90), (150, 108), (122, 176), (110, 258), (114, 338),
+               (126, 410)],
+              28, w=(1.7, 2.6, 0), off=2.0, kurz=0.12, spaet=0.01)
+    p.strands([(200, 88), (224, 114), (243, 168), (249, 248), (249, 330),
+               (250, 404)],
+              [(204, 90), (250, 108), (279, 176), (291, 258), (287, 338),
+               (275, 410)],
+              28, w=(1.7, 2.6, 0), off=2.0, kurz=0.12, spaet=0.01)
+    # Scheitel: schmale Trennung, von dort deckt das Haar den ganzen
+    # Schaedel bis zum Ansatz -- sonst wirkt der Oberkopf kahl
+    p.strands([(200, 89), (170, 95), (147, 119), (139, 154)],
+              [(200, 101), (184, 120), (170, 140), (162, 156)],
+              20, w=(1.5, 2.2, 0), off=1.9, kurz=0.16, spaet=0.02)
+    p.strands([(200, 89), (230, 95), (253, 119), (261, 154)],
+              [(200, 101), (216, 120), (230, 140), (238, 156)],
+              20, w=(1.5, 2.2, 0), off=1.9, kurz=0.16, spaet=0.02)
+
+    # Pony nach demselben Prinzip wie bei Lena -- haengende Buendel, Neigung
+    # nach aussen zunehmend. Bei ihr aber als Curtain Bangs: in der Mitte
+    # offen, sodass der Scheitel auf der Stirn weiterlaeuft, und nach aussen
+    # deutlich laenger. Das haelt sie von Lenas vollem Pony unterscheidbar.
+    for basis, winkel, zahl, laenge in (
+            ([(158, 130), (174, 119)], 1.78, 10, 92),
+            ([(176, 116), (190, 107)], 1.70, 10, 70),
+            ([(210, 107), (224, 116)], 1.44, 10, 70),
+            ([(226, 119), (242, 130)], 1.36, 10, 92)):
+        p.hairs(basis, zahl, laenge, w=(1.5, 1.7, 0), spread=0.15,
+                curl=0.20, angle=winkel, curl_bias=0.0, curl_var=0.9,
+                length_var=0.24, jitter=2.2)
 
     ohren(p, (137, 224), (265, 220), 0.9)
 
@@ -255,22 +265,17 @@ def jamal(p, turn=0.0):
            druck=[(0.08, 0.42)], druck_w=5.2)
 
     # --- Kurzhaarschnitt: kurze Einzelzuege, flach anliegend
-    p.strands([(158, 142), (188, 128), (222, 130), (250, 146)],
-              [(146, 128), (184, 105), (226, 107), (259, 134)],
-              42, w=(1.7, 2.4, 0), off=2.0, kurz=0.18, spaet=0.08)
-    p.strands([(150, 176), (146, 150), (158, 132)],
-              [(137, 178), (134, 146), (148, 124)],
-              12, w=(1.6, 2.2, 0), off=1.5, kurz=0.24)
-    p.strands([(250, 178), (256, 152), (245, 133)],
-              [(263, 180), (267, 148), (253, 125)],
-              12, w=(1.6, 2.2, 0), off=1.5, kurz=0.24)
-    p.hairs([(146, 132), (184, 108), (226, 110), (259, 138)], 26, 8,
-            w=(2.4, 1.3, 0), spread=0.3, curl=0.25, out_dir=-1,
-            curl_bias=0.5, length_var=0.5)
-    # Graue Schlaefen: nur duenne Einzelstriche, kaum Masse
-    p.hairs([(139, 176), (136, 152), (146, 130)], 9, 14, w=(1.8, 1.0, 0),
+    # Kappe laeuft ohne Absatz von Schlaefe zu Schlaefe ueber den Scheitel --
+    # getrennte Seitenstuecke wirken sonst wie angeklebte Koteletten
+    p.strands([(148, 180), (154, 148), (188, 132), (222, 134), (252, 150),
+               (258, 182)],
+              [(135, 178), (139, 138), (180, 92), (226, 94), (266, 140),
+               (265, 180)],
+              56, w=(1.7, 2.4, 0), off=2.0, kurz=0.10, spaet=0.05)
+    # Graue Schlaefen: duenne, lichte Striche am Rand der Kappe
+    p.hairs([(141, 172), (139, 150), (149, 132)], 8, 11, w=(1.6, 0.9, 0),
             spread=0.24, curl=0.3, angle=2.55, length_var=0.5)
-    p.hairs([(263, 172), (265, 148), (256, 128)], 8, 13, w=(1.8, 1.0, 0),
+    p.hairs([(261, 170), (263, 148), (253, 130)], 7, 10, w=(1.6, 0.9, 0),
             spread=0.24, curl=0.3, angle=0.60, length_var=0.5)
 
     ohren(p, (132, 222), (268, 218), 1.0)
@@ -326,21 +331,17 @@ def kat(p, turn=0.0):
            druck=[(0.08, 0.40)], druck_w=5.0)
 
     # --- Zerzaust: Masse am Scheitel, kurze Seiten, Spitzen nach aussen
-    p.strands([(156, 146), (188, 128), (222, 130), (250, 150)],
-              [(144, 126), (184, 100), (226, 103), (260, 134)],
-              26, w=(1.8, 2.5, 0), off=2.2, kurz=0.22, spaet=0.10, amp=1.0)
-    p.strands([(148, 212), (144, 172), (156, 140)],
-              [(131, 214), (130, 166), (146, 122)],
-              14, w=(1.7, 2.3, 0), off=1.8, kurz=0.26, amp=0.9)
-    p.strands([(252, 212), (256, 172), (244, 140)],
-              [(269, 214), (270, 166), (254, 122)],
-              14, w=(1.7, 2.3, 0), off=1.8, kurz=0.26, amp=0.9)
-    # Zerzaust: einzelne Straehnen stehen ab
-    p.hairs([(146, 128), (175, 101), (208, 96), (240, 108), (261, 138)], 30, 17,
-            w=(2.8, 1.5, 0), spread=0.42, curl=0.45, out_dir=-1,
-            curl_bias=0.5, curl_var=0.7, length_var=0.6)
-    p.hairs([(160, 112), (200, 100), (238, 114)], 14, 19, w=(2.6, 1.4, 0),
-            spread=0.5, curl=0.5, out_dir=-1, curl_bias=-0.4, length_var=0.6)
+    # Kappe in einem Zug von Schlaefe zu Schlaefe, ohne abgesetzte Seitenteile
+    p.strands([(150, 208), (147, 168), (158, 140), (190, 128), (222, 130),
+               (252, 146), (256, 172), (252, 208)],
+              [(133, 210), (131, 162), (140, 124), (180, 94), (226, 96),
+               (266, 128), (270, 166), (269, 210)],
+              58, w=(1.8, 2.5, 0), off=2.4, kurz=0.09, spaet=0.05, amp=1.0)
+    # Zerzaust: kurze Straehnen legen sich schraeg ueber die Kappe,
+    # statt senkrecht davon abzustehen
+    p.hairs([(142, 126), (176, 96), (222, 94), (262, 128)], 26, 9,
+            w=(2.4, 1.3, 0), spread=0.34, curl=0.5, out_dir=-1,
+            curl_bias=0.9, curl_var=0.4, length_var=0.5)
     # Kurz geschorene Seiten: ausgefranste Kante ueber den Ohren
     p.hairs([(137, 190), (136, 214), (143, 236)], 18, 9, w=(2.4, 1.3, 0),
             spread=0.4, curl=0.3, angle=2.75, length_var=0.55)
@@ -397,28 +398,42 @@ def lena(p, turn=0.0):
            druck=[(0.08, 0.40)], druck_w=5.0)
 
     # --- Bob: Einzelstraehnen, kinnlang, mit kurzem Pony
-    p.strands([(198, 96), (172, 112), (156, 158), (152, 232), (156, 300),
+    # Ansaetze stossen am Scheitel dicht zusammen und werden oben kaum
+    # beschnitten (kleines spaet) -- sonst klafft dort eine weisse Luecke
+    # Beide Leitkurven beginnen im selben Scheitelpunkt -- setzt die innere
+    # tiefer an als die aeussere, klafft am Oberkopf eine V-Kerbe
+    p.strands([(200, 88), (172, 110), (156, 158), (152, 232), (156, 300),
                (162, 348)],
-              [(192, 92), (150, 108), (126, 168), (120, 244), (128, 308),
+              [(197, 90), (150, 106), (126, 168), (120, 244), (128, 308),
                (144, 354)],
-              30, w=(1.7, 2.6, 0), off=1.8, kurz=0.09, spaet=0.06)
-    p.strands([(202, 96), (228, 112), (245, 158), (249, 232), (245, 300),
+              30, w=(1.7, 2.6, 0), off=1.8, kurz=0.09, spaet=0.01)
+    p.strands([(200, 88), (228, 110), (245, 158), (249, 232), (245, 300),
                (239, 348)],
-              [(208, 92), (250, 108), (275, 168), (281, 244), (273, 308),
+              [(203, 90), (250, 106), (275, 168), (281, 244), (273, 308),
                (257, 354)],
-              30, w=(1.7, 2.6, 0), off=1.8, kurz=0.09, spaet=0.06)
-    # Pony: fallende Zuege ueber der Stirn, stumpf auf einer Hoehe endend
-    p.strands([(159, 104), (154, 138), (157, 170)],
-              [(249, 106), (254, 140), (251, 172)],
-              26, w=(1.6, 2.5, 0), off=1.6, kurz=0.08, spaet=0.05)
-    p.hairs([(148, 344), (170, 356)], 10, 16, w=(2.4, 1.4, 0), spread=0.32,
-            curl=0.25, angle=1.64, length_var=0.6)
-    p.hairs([(274, 344), (252, 356)], 10, 16, w=(2.4, 1.4, 0), spread=0.32,
-            curl=0.25, angle=1.50, length_var=0.6)
-    p.hairs([(146, 348), (166, 354)], 12, 20, w=(3.0, 1.6, 0), spread=0.28,
-            curl=0.25, angle=1.66, length_var=0.55)
-    p.hairs([(276, 348), (256, 354)], 12, 20, w=(3.0, 1.6, 0), spread=0.28,
-            curl=0.25, angle=1.48, length_var=0.55)
+              30, w=(1.7, 2.6, 0), off=1.8, kurz=0.09, spaet=0.01)
+    # Kronenpartie: die Seitenpartien fallen vom Scheitel steil nach aussen
+    # ab und der Pony setzt erst tiefer an -- ohne diese Baender bliebe der
+    # Oberkopf dazwischen unbedeckt
+    p.strands([(200, 87), (172, 94), (150, 110), (140, 136)],
+              [(200, 99), (180, 112), (164, 130), (154, 152)],
+              22, w=(1.5, 2.2, 0), off=1.9, kurz=0.16, spaet=0.02)
+    p.strands([(200, 87), (228, 94), (250, 110), (260, 136)],
+              [(200, 99), (220, 112), (236, 130), (246, 152)],
+              22, w=(1.5, 2.2, 0), off=1.9, kurz=0.16, spaet=0.02)
+    # Pony: fuenf Buendel ueber die Stirnbreite. Jedes haengt nach unten, die
+    # Neigung nimmt nach aussen zu -- Haar faellt der Schwerkraft nach,
+    # statt sternfoermig vom Scheitel wegzustrahlen. Aussen laenger als in
+    # der Mitte, damit der Pony ohne Kante in die Seitenpartien uebergeht.
+    for basis, winkel, zahl in (
+            ([(160, 126), (176, 116)], 1.72, 12),
+            ([(178, 114), (192, 106)], 1.64, 12),
+            ([(194, 103), (212, 103)], 1.57, 14),
+            ([(214, 106), (228, 114)], 1.50, 12),
+            ([(230, 116), (246, 126)], 1.42, 12)):
+        p.hairs(basis, zahl, 75, w=(1.5, 1.7, 0), spread=0.15,
+                curl=0.20, angle=winkel, curl_bias=0.0, curl_var=0.9,
+                length_var=0.26, jitter=2.2)
 
     # Skeptisch: eine Braue hoeher als die andere
     p.stroke([(152, 202), (173, 195), (191, 200)], w=(1.4, 4.4, 0), amp=0.6)

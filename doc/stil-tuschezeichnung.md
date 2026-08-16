@@ -36,6 +36,33 @@ Kein Kreis ist rund, keine Körperhälfte gleicht der anderen. Brillengläser si
 - Locken sind offene Spiralzüge, keine ausgefüllten Kleckse.
 - Der Rand der Frisur ist immer zerfranst, nie glatt.
 
+Drei Fehler, die beim Zeichnen immer wieder auftreten und die Figur sofort künstlich wirken lassen:
+
+1. **Senkrechte Zipfel auf dem Scheitel.** Strähnen, die vom Oberkopf nach oben abstrahlen, sehen aus wie Antennen. Haar legt sich über den Schädel, es steht nicht senkrecht davon ab – abstehende Strähnen gehören schräg und kurz.
+2. **Zu breiter Scheitel.** Deckt die Frisur nur die Seiten und den Haaransatz, bleibt der Oberkopf leer und wirkt kahl. Die Partie muss vom Ansatz über den ganzen Schädel reichen; die Scheitellinie selbst bleibt schmal.
+3. **Abgesetzte Einzelstücke.** Getrennt gezeichnete Schläfenpartien oder Spitzen unterhalb der Frisur schweben und sehen aus wie angeklebt. Eine Frisur ist **eine** durchgehende Partie von Schläfe zu Schläfe; ihre Unruhe kommt aus den ausgefransten Rändern, nicht aus abgesetzten Teilen.
+
+### Der Pony im Besonderen
+
+Ein Pony ist der Teil, an dem das Ganze am schnellsten kippt – zwei Fehler liegen dabei nahe:
+
+- **Der Barcode:** gleich lange, parallele Züge mit stumpfer Unterkante. Entsteht, wenn man zwischen zwei Leitkurven interpoliert – das erzwingt Parallelität.
+- **Der Sternfächer:** Strähnen, die radial vom Scheitel wegstrahlen. Entsteht, wenn man den Pony aus zwei gegenläufigen Bündeln baut.
+
+Richtig ist beides nicht, denn **Haar fällt der Schwerkraft nach**. Ein Pony besteht aus mehreren Bündeln nebeneinander, die alle überwiegend senkrecht hängen; die Neigung nimmt nach außen nur leicht zu (etwa 1,7 rad außen links bis 1,4 rad außen rechts, in der Mitte 1,57). Dazu gehören: stark streuende Längen, sodass die Spitzen auf ganz verschiedenen Höhen sitzen; sichtbare Haut zwischen den Bündeln; einander überkreuzende Strähnen; und außen längere Partien, die ohne Kante in das gesichtsumrahmende Haar übergehen.
+
+Zwei Ausprägungen unterscheiden die Figuren:
+
+- **Voller Pony** (Lena): fünf Bündel über die ganze Stirnbreite, auch in der Mitte besetzt, kürzer.
+- **Curtain Bangs** (Sarah): in der Mitte offen, sodass der Scheitel auf der Stirn weiterläuft; nach außen deutlich länger. Passt zum Mittelscheitel und hält sie vom vollen Pony unterscheidbar.
+
+### Der Oberkopf
+
+Zwei getrennte Ursachen lassen dort eine kahle Stelle entstehen; beide müssen geprüft werden:
+
+1. **Die V-Kerbe am Scheitelpunkt.** Setzen die innere und die äußere Leitkurve einer Haarpartie auf verschiedenen Höhen an, liegt das Haar genau in der Mitte tiefer als daneben. Beide beginnen im selben Punkt, und der Ansatz wird dort kaum beschnitten (kleines `spaet`).
+2. **Die ungedeckte Krone.** Bei Mittelscheitel fallen die Seitenpartien vom Scheitel steil nach außen ab, der Pony setzt erst tiefer an – dazwischen bleibt der Oberkopf unbedeckt. Dafür braucht es eigene Kronenbänder, die vom Scheitel bis zu den Schläfen laufen und diese Fläche decken.
+
 ## 6. Schwarzflächen
 
 Sparsam, klein, als Akzent – nicht als Füllung. Immer unregelmäßig geformt, mit ausfransenden Spitzen an mindestens einer Seite. Typische Orte: Schatten unter dem Kinn, Nasenloch, Mundwinkel, Kleidungsfalte, Achselhöhle.
