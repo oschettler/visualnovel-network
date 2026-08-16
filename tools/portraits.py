@@ -32,6 +32,15 @@ def ohr(p, x, y, s=1.0, flip=1):
              w=(0, 2.0, 0), amp=0.7)
 
 
+def ohren(p, links, rechts, s=1.0):
+    """Bei gedrehtem Kopf verschwindet das abgewandte Ohr hinter der Wange:
+    zeigt die Nase nach rechts, bleibt nur das linke Ohr sichtbar."""
+    if p.turn > -0.12:
+        ohr(p, links[0], links[1], s, 1)
+    if p.turn < 0.12:
+        ohr(p, rechts[0], rechts[1], s, -1)
+
+
 def auge(p, x, y, r=7.5, tilt=0.0, lid=True):
     """Mandel mit Punktpupille -- kein Augapfel-Oval."""
     p.stroke([(x - r, y + tilt), (x - r * 0.3, y - r * 0.62),
@@ -60,20 +69,26 @@ def mund(p, x0, y0, x1, y1, bow=4, punkte=True):
 
 
 def hals_schultern(p, schulter_l=None, schulter_r=None):
+    kopf = p.turn
+    # Hals folgt dem Kopf zum Teil, der Rumpf dreht kaum mit
+    p.set_turn(kopf * 0.6, R=80.0)
     p.stroke([(177, 348), (174, 374), (177, 398)], w=(0, 2.8, 0), amp=0.8)
     p.stroke([(224, 344), (228, 372), (227, 396)], w=(0, 2.6, 0), amp=0.8)
     # Schatten unter dem Kinn -- die dunkelste Stelle des Gesichts
     p.stroke([(176, 352), (200, 370), (224, 351)], w=(2.5, 11.0, 2.0), amp=0.9)
     p.hatch(184, 372, 4, 13, 1.35, 9, w=(0, 1.7, 0))
+    p.set_turn(kopf * 0.25, R=115.0)
     sl = schulter_l or [(150, 402), (103, 425), (66, 467), (52, 520)]
     sr = schulter_r or [(253, 399), (299, 423), (335, 465), (349, 520)]
     kontur(p, sl, w=FINE, amp=1.8, cuts=[(0.0, 0.62), (0.70, 1.0)],
            druck=[(0.16, 0.50)], druck_w=5.5)
     kontur(p, sr, w=FINE, amp=1.8, cuts=[(0.0, 0.55), (0.63, 1.0)],
            druck=[(0.62, 0.94)], druck_w=5.0)
+    p.set_turn(kopf * 0.25, R=115.0)
 
 
-def michael(p):
+def michael(p, turn=0.0):
+    p.set_turn(turn)
     # Kopf leicht gedreht: linke Wange voller, rechte Seite knapper
     # --- Schaedel: kahl, Kontur laeuft ueber den Scheitel
     kontur(p, [(133, 190), (135, 141), (153, 104), (186, 84), (221, 86),
@@ -89,8 +104,7 @@ def michael(p):
            w=(0, 3.0, 0), amp=1.7, cuts=[(0.0, 0.73), (0.80, 1.0)],
            druck=[(0.10, 0.42)], druck_w=5.0)
 
-    ohr(p, 130, 220, 1.05, 1)
-    ohr(p, 270, 214, 0.95, -1)
+    ohren(p, (130, 220), (270, 214), 1.05)
 
     # --- Restliches Haar: nach hinten-unten gestrichen, Scheitel kahl
     p.hairs([(150, 126), (136, 148), (129, 175), (132, 200)], 34, 27,
@@ -166,8 +180,9 @@ def michael(p):
                (206, 486, 120, 7), (200, 66, 108, 5)])
 
 
-def sarah(p):
+def sarah(p, turn=0.0):
     """Dunkles, glattes Haar bis auf die Schultern, muede und entschlossen."""
+    p.set_turn(turn)
     kontur(p, [(141, 176), (138, 232), (147, 288), (163, 328), (182, 353), (203, 363)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.58), (0.65, 1.0)],
            druck=[(0.44, 0.88)], druck_w=5.6)
@@ -175,34 +190,32 @@ def sarah(p):
            w=(0, 3.0, 0), amp=1.6, cuts=[(0.0, 0.74), (0.81, 1.0)],
            druck=[(0.08, 0.40)], druck_w=5.0)
 
-    # --- Haar: Scheitel und je zwei Straehnenklumpen mit weisser Luecke
-    p.patch([(143, 154), (152, 110), (182, 88), (216, 89), (248, 110),
-             (259, 156), (240, 130), (212, 119), (182, 122), (158, 132)])
-    p.patch([(140, 146), (114, 190), (104, 252), (110, 316), (124, 372),
-             (152, 380), (152, 310), (146, 246), (150, 186)])
-    p.patch([(261, 146), (287, 190), (297, 252), (291, 316), (277, 372),
-             (249, 380), (249, 310), (255, 246), (251, 186)])
-    # Ausgefranste Raender und auslaufende Spitzen
-    p.hairs([(140, 158), (118, 208), (110, 268), (118, 340)], 32, 21,
-            w=(3.2, 1.7, 0), spread=0.26, curl=0.3, angle=1.90,
-            curl_bias=0.7, length_var=0.5)
-    p.hairs([(262, 158), (284, 208), (292, 268), (284, 340)], 32, 21,
-            w=(3.2, 1.7, 0), spread=0.26, curl=0.3, angle=1.24,
-            curl_bias=-0.7, length_var=0.5)
-    p.hairs([(118, 368), (148, 380)], 16, 24, w=(3.0, 1.6, 0), spread=0.30,
+    # --- Haar: durchgehende Einzelstraehnen vom Scheitel bis auf die Schulter
+    p.strands([(196, 100), (176, 118), (158, 168), (152, 244), (154, 312),
+               (152, 372)],
+              [(190, 96), (150, 112), (122, 176), (110, 252), (114, 320),
+               (128, 378)],
+              26, w=(1.7, 2.6, 0), off=2.0, kurz=0.20)
+    p.strands([(204, 100), (224, 118), (243, 168), (249, 244), (247, 312),
+               (249, 372)],
+              [(210, 96), (250, 112), (279, 176), (291, 252), (287, 320),
+               (273, 378)],
+              26, w=(1.7, 2.6, 0), off=2.0, kurz=0.20)
+    # Scheitel: kurze Zuege ueber den Kopf, Ansatz und Spitzen ausgefranst
+    p.strands([(200, 92), (176, 100), (156, 122), (146, 152)],
+              [(200, 104), (180, 112), (164, 132), (156, 160)],
+              12, w=(1.5, 2.2, 0), off=1.6, kurz=0.28)
+    p.strands([(200, 92), (224, 100), (245, 122), (255, 152)],
+              [(200, 104), (220, 112), (237, 132), (245, 160)],
+              12, w=(1.5, 2.2, 0), off=1.6, kurz=0.28)
+    p.hairs([(126, 356), (150, 376)], 12, 20, w=(2.4, 1.4, 0), spread=0.32,
             curl=0.25, angle=1.62, length_var=0.6)
-    p.hairs([(284, 368), (254, 380)], 16, 24, w=(3.0, 1.6, 0), spread=0.30,
+    p.hairs([(276, 356), (252, 376)], 12, 20, w=(2.4, 1.4, 0), spread=0.32,
             curl=0.25, angle=1.52, length_var=0.6)
-    # Scheitel: Straehnen nach beiden Seiten, Kante aufgerauht
-    p.hairs([(198, 106), (174, 114), (152, 134)], 18, 27, w=(2.8, 1.5, 0),
-            spread=0.26, curl=0.3, angle=2.55, curl_bias=0.6, length_var=0.45)
-    p.hairs([(202, 106), (226, 114), (249, 134)], 18, 27, w=(2.8, 1.5, 0),
-            spread=0.26, curl=0.3, angle=0.60, curl_bias=-0.6, length_var=0.45)
-    p.hairs([(160, 96), (200, 87), (242, 97)], 16, 13, w=(2.4, 1.3, 0),
+    p.hairs([(162, 96), (200, 88), (240, 97)], 14, 12, w=(2.2, 1.3, 0),
             spread=0.4, curl=0.4, out_dir=-1, curl_bias=0.4, length_var=0.6)
 
-    ohr(p, 137, 224, 0.9, 1)
-    ohr(p, 265, 220, 0.9, -1)
+    ohren(p, (137, 224), (265, 220), 0.9)
 
     p.stroke([(150, 200), (172, 193), (190, 199)], w=(1.5, 4.6, 0), amp=0.6)
     p.stroke([(212, 197), (232, 191), (252, 199)], w=(0, 4.8, 1.5), amp=0.6)
@@ -231,8 +244,9 @@ def sarah(p):
                (206, 488, 118, 7), (200, 70, 100, 5)])
 
 
-def jamal(p):
+def jamal(p, turn=0.0):
     """Kurzes Haar, graue Schlaefen, Dreitagebart, Kapuzenpulli."""
+    p.set_turn(turn)
     kontur(p, [(136, 184), (133, 238), (142, 292), (159, 330), (181, 354), (203, 363)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.57), (0.64, 1.0)],
            druck=[(0.44, 0.88)], druck_w=5.8)
@@ -240,25 +254,26 @@ def jamal(p):
            w=(0, 3.0, 0), amp=1.6, cuts=[(0.0, 0.73), (0.80, 1.0)],
            druck=[(0.08, 0.42)], druck_w=5.2)
 
-    # --- Kurzhaarschnitt: flach anliegende Masse, kaum Hoehe
-    p.patch([(136, 176), (142, 130), (170, 104), (206, 99), (241, 109),
-             (262, 137), (266, 180), (254, 150), (226, 133), (188, 131),
-             (157, 143)])
-    p.hairs([(144, 136), (172, 110), (206, 102), (241, 113), (263, 143)], 46, 9,
-            w=(2.8, 1.5, 0), spread=0.26, curl=0.25, out_dir=-1,
-            curl_bias=0.5, length_var=0.45)
-    p.hairs([(140, 168), (146, 138)], 10, 8, w=(2.2, 1.2, 0), spread=0.3,
-            curl=0.3, angle=2.7, length_var=0.5)
-    p.hairs([(263, 172), (258, 142)], 10, 8, w=(2.2, 1.2, 0), spread=0.3,
-            curl=0.3, angle=0.45, length_var=0.5)
+    # --- Kurzhaarschnitt: kurze Einzelzuege, flach anliegend
+    p.strands([(158, 142), (188, 128), (222, 130), (250, 146)],
+              [(146, 128), (184, 105), (226, 107), (259, 134)],
+              42, w=(1.7, 2.4, 0), off=2.0, kurz=0.18, spaet=0.08)
+    p.strands([(150, 176), (146, 150), (158, 132)],
+              [(137, 178), (134, 146), (148, 124)],
+              12, w=(1.6, 2.2, 0), off=1.5, kurz=0.24)
+    p.strands([(250, 178), (256, 152), (245, 133)],
+              [(263, 180), (267, 148), (253, 125)],
+              12, w=(1.6, 2.2, 0), off=1.5, kurz=0.24)
+    p.hairs([(146, 132), (184, 108), (226, 110), (259, 138)], 26, 8,
+            w=(2.4, 1.3, 0), spread=0.3, curl=0.25, out_dir=-1,
+            curl_bias=0.5, length_var=0.5)
     # Graue Schlaefen: nur duenne Einzelstriche, kaum Masse
     p.hairs([(139, 176), (136, 152), (146, 130)], 9, 14, w=(1.8, 1.0, 0),
             spread=0.24, curl=0.3, angle=2.55, length_var=0.5)
     p.hairs([(263, 172), (265, 148), (256, 128)], 8, 13, w=(1.8, 1.0, 0),
             spread=0.24, curl=0.3, angle=0.60, length_var=0.5)
 
-    ohr(p, 132, 222, 1.0, 1)
-    ohr(p, 268, 218, 1.0, -1)
+    ohren(p, (132, 222), (268, 218), 1.0)
 
     p.stroke([(146, 202), (169, 194), (188, 200)], w=(1.6, 5.2, 0), amp=0.6)
     p.stroke([(212, 198), (233, 192), (254, 201)], w=(0, 5.4, 1.6), amp=0.6)
@@ -300,8 +315,9 @@ def jamal(p):
                (206, 488, 116, 7), (200, 70, 100, 5)])
 
 
-def kat(p):
+def kat(p, turn=0.0):
     """Kurzer, zerzauster Schnitt mit Undercut, Sommersprossen, warm."""
+    p.set_turn(turn)
     kontur(p, [(140, 182), (137, 234), (147, 288), (164, 326), (183, 350), (203, 359)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.57), (0.64, 1.0)],
            druck=[(0.42, 0.86)], druck_w=5.6)
@@ -310,13 +326,20 @@ def kat(p):
            druck=[(0.08, 0.40)], druck_w=5.0)
 
     # --- Zerzaust: Masse am Scheitel, kurze Seiten, Spitzen nach aussen
-    p.patch([(128, 214), (131, 164), (145, 125), (173, 100), (206, 95),
-             (240, 106), (261, 133), (271, 168), (273, 214), (259, 180),
-             (250, 148), (222, 130), (186, 128), (156, 146), (145, 180)])
-    p.hairs([(146, 128), (175, 101), (208, 96), (240, 108), (261, 138)], 40, 18,
-            w=(3.4, 1.8, 0), spread=0.42, curl=0.45, out_dir=-1,
+    p.strands([(156, 146), (188, 128), (222, 130), (250, 150)],
+              [(144, 126), (184, 100), (226, 103), (260, 134)],
+              26, w=(1.8, 2.5, 0), off=2.2, kurz=0.22, spaet=0.10, amp=1.0)
+    p.strands([(148, 212), (144, 172), (156, 140)],
+              [(131, 214), (130, 166), (146, 122)],
+              14, w=(1.7, 2.3, 0), off=1.8, kurz=0.26, amp=0.9)
+    p.strands([(252, 212), (256, 172), (244, 140)],
+              [(269, 214), (270, 166), (254, 122)],
+              14, w=(1.7, 2.3, 0), off=1.8, kurz=0.26, amp=0.9)
+    # Zerzaust: einzelne Straehnen stehen ab
+    p.hairs([(146, 128), (175, 101), (208, 96), (240, 108), (261, 138)], 30, 17,
+            w=(2.8, 1.5, 0), spread=0.42, curl=0.45, out_dir=-1,
             curl_bias=0.5, curl_var=0.7, length_var=0.6)
-    p.hairs([(160, 112), (200, 100), (238, 114)], 18, 20, w=(3.0, 1.6, 0),
+    p.hairs([(160, 112), (200, 100), (238, 114)], 14, 19, w=(2.6, 1.4, 0),
             spread=0.5, curl=0.5, out_dir=-1, curl_bias=-0.4, length_var=0.6)
     # Kurz geschorene Seiten: ausgefranste Kante ueber den Ohren
     p.hairs([(137, 190), (136, 214), (143, 236)], 18, 9, w=(2.4, 1.3, 0),
@@ -324,8 +347,7 @@ def kat(p):
     p.hairs([(265, 192), (266, 216), (259, 238)], 18, 9, w=(2.4, 1.3, 0),
             spread=0.4, curl=0.3, angle=0.40, length_var=0.55)
 
-    ohr(p, 136, 220, 0.95, 1)
-    ohr(p, 265, 216, 0.95, -1)
+    ohren(p, (136, 220), (265, 216), 0.95)
 
     p.stroke([(148, 200), (170, 192), (189, 198)], w=(1.4, 4.4, 0), amp=0.6)
     p.stroke([(212, 196), (233, 190), (253, 199)], w=(0, 4.6, 1.4), amp=0.6)
@@ -364,8 +386,9 @@ def kat(p):
                (206, 488, 116, 7), (200, 66, 104, 5)])
 
 
-def lena(p):
+def lena(p, turn=0.0):
     """Scharfer Bob mit geradem Pony, wacher und skeptischer Blick."""
+    p.set_turn(turn)
     kontur(p, [(144, 186), (141, 238), (150, 290), (166, 326), (184, 350), (203, 359)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.56), (0.63, 1.0)],
            druck=[(0.44, 0.86)], druck_w=5.6)
@@ -373,18 +396,25 @@ def lena(p):
            w=(0, 3.0, 0), amp=1.6, cuts=[(0.0, 0.72), (0.79, 1.0)],
            druck=[(0.08, 0.40)], druck_w=5.0)
 
-    # --- Bob: Klumpen mit Lueckenlicht, Pony, kinnlang
-    p.patch([(142, 168), (146, 118), (176, 92), (210, 89), (244, 103),
-             (261, 138), (262, 174), (246, 146), (216, 130), (182, 132),
-             (158, 144)])
-    p.patch([(141, 156), (122, 200), (118, 258), (128, 316), (146, 352),
-             (170, 356), (158, 300), (150, 244), (152, 194)])
-    p.patch([(262, 156), (281, 200), (285, 258), (275, 316), (257, 352),
-             (233, 356), (245, 300), (253, 244), (251, 194)])
-    # Pony: kurze Kante ueber der Stirn
-    p.hairs([(150, 150), (182, 136), (216, 136), (252, 150)], 34, 11,
-            w=(3.0, 1.6, 0), spread=0.24, curl=0.22, out_dir=1,
-            curl_bias=0.4, length_var=0.45)
+    # --- Bob: Einzelstraehnen, kinnlang, mit kurzem Pony
+    p.strands([(198, 96), (172, 112), (156, 158), (152, 232), (156, 300),
+               (162, 348)],
+              [(192, 92), (150, 108), (126, 168), (120, 244), (128, 308),
+               (144, 354)],
+              30, w=(1.7, 2.6, 0), off=1.8, kurz=0.09, spaet=0.06)
+    p.strands([(202, 96), (228, 112), (245, 158), (249, 232), (245, 300),
+               (239, 348)],
+              [(208, 92), (250, 108), (275, 168), (281, 244), (273, 308),
+               (257, 354)],
+              30, w=(1.7, 2.6, 0), off=1.8, kurz=0.09, spaet=0.06)
+    # Pony: fallende Zuege ueber der Stirn, stumpf auf einer Hoehe endend
+    p.strands([(159, 104), (154, 138), (157, 170)],
+              [(249, 106), (254, 140), (251, 172)],
+              26, w=(1.6, 2.5, 0), off=1.6, kurz=0.08, spaet=0.05)
+    p.hairs([(148, 344), (170, 356)], 10, 16, w=(2.4, 1.4, 0), spread=0.32,
+            curl=0.25, angle=1.64, length_var=0.6)
+    p.hairs([(274, 344), (252, 356)], 10, 16, w=(2.4, 1.4, 0), spread=0.32,
+            curl=0.25, angle=1.50, length_var=0.6)
     p.hairs([(146, 348), (166, 354)], 12, 20, w=(3.0, 1.6, 0), spread=0.28,
             curl=0.25, angle=1.66, length_var=0.55)
     p.hairs([(276, 348), (256, 354)], 12, 20, w=(3.0, 1.6, 0), spread=0.28,
@@ -422,8 +452,9 @@ def lena(p):
                (206, 488, 116, 7), (200, 66, 102, 5)])
 
 
-def tom(p):
+def tom(p, turn=0.0):
     """Wilde Locken, jung, energisch -- offenes Grinsen."""
+    p.set_turn(turn)
     kontur(p, [(142, 190), (139, 240), (149, 290), (166, 324), (184, 346), (203, 355)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.56), (0.63, 1.0)],
            druck=[(0.42, 0.86)], druck_w=5.4)
@@ -431,18 +462,19 @@ def tom(p):
            w=(0, 3.0, 0), amp=1.6, cuts=[(0.0, 0.72), (0.79, 1.0)],
            druck=[(0.08, 0.40)], druck_w=4.8)
 
-    # --- Lockenkopf: einzelne Kleckse mit weissen Zwischenraeumen
-    p.curls([(138, 202), (132, 152), (156, 108), (196, 90), (238, 98),
-             (264, 140), (264, 198)], 28, 9.5, size_var=0.38, jitter=4.0)
-    p.curls([(150, 162), (174, 124), (212, 116), (246, 148)], 14, 8.0,
-            size_var=0.4, jitter=5.0)
-    p.curls([(180, 100), (216, 102)], 5, 7.5, size_var=0.38, jitter=5.0)
-    p.hairs([(150, 124), (182, 100), (220, 100), (252, 126)], 22, 14,
-            w=(2.6, 1.4, 0), spread=0.6, curl=0.6, out_dir=-1,
+    # --- Lockenkopf: offene Spiralzuege statt voller Kleckse
+    p.curls([(140, 200), (134, 152), (158, 110), (196, 92), (238, 100),
+             (262, 140), (262, 196)], 26, 9.5, size_var=0.38, jitter=4.5,
+            w=(2.4, 1.9, 0))
+    p.curls([(152, 160), (176, 126), (212, 118), (246, 148)], 13, 8.0,
+            size_var=0.4, jitter=5.5, w=(2.2, 1.7, 0))
+    p.curls([(182, 102), (218, 104)], 5, 7.5, size_var=0.38, jitter=5.0,
+            w=(2.2, 1.7, 0))
+    p.hairs([(150, 124), (182, 100), (220, 100), (252, 126)], 18, 13,
+            w=(2.4, 1.3, 0), spread=0.6, curl=0.6, out_dir=-1,
             curl_bias=0.3, curl_var=0.9, length_var=0.6)
 
-    ohr(p, 138, 226, 0.95, 1)
-    ohr(p, 262, 222, 0.95, -1)
+    ohren(p, (138, 226), (262, 222), 0.95)
 
     p.stroke([(150, 206), (172, 197), (190, 203)], w=(1.4, 4.2, 0), amp=0.6)
     p.stroke([(212, 201), (233, 195), (252, 204)], w=(0, 4.4, 1.4), amp=0.6)
@@ -489,16 +521,24 @@ FIGUREN = {
 }
 
 
+# Blickwinkel fuer Dialoge. Positiver Wert dreht die Nase nach rechts --
+# von links vorne gesehen wendet sich das Gesicht also nach rechts.
+# Jede Ansicht bekommt einen eigenen Zufallsstartwert, damit sie wie neu
+# gezeichnet wirkt und nicht wie eine verschobene Kopie.
+ANSICHTEN = [("", 0.0, 0), ("-von-links", 0.30, 101), ("-von-rechts", -0.30, 202)]
+
+
 def main(argv):
     names = argv or list(FIGUREN)
     for name in names:
         fn, seed = FIGUREN[name]
-        p = Pen(seed)
-        fn(p)
-        path = os.path.normpath(os.path.join(OUT, name + ".svg"))
-        with open(path, "w") as fh:
-            fh.write(p.svg(W, H))
-        print("geschrieben:", path, f"({len(p.paths)} Pfade)")
+        for suffix, turn, versatz in ANSICHTEN:
+            p = Pen(seed + versatz)
+            fn(p, turn)
+            path = os.path.normpath(os.path.join(OUT, name + suffix + ".svg"))
+            with open(path, "w") as fh:
+                fh.write(p.svg(W, H))
+            print("geschrieben:", os.path.basename(path), f"({len(p.paths)} Pfade)")
 
 
 if __name__ == "__main__":

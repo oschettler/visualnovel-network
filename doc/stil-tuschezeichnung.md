@@ -30,9 +30,10 @@ Kein Kreis ist rund, keine Körperhälfte gleicht der anderen. Brillengläser si
 
 ## 5. Haare und Bart
 
-- Nie als geschlossene, flächig gefüllte Silhouette.
-- Stattdessen: ein Bündel einzelner, vom Kopf bzw. Kinn **nach außen strahlender** Striche – dick am Ansatz, spitz auslaufend, unterschiedlich lang, unterschiedlich gekrümmt, einander überkreuzend.
-- Dazwischen einzelne massive schwarze Klumpen mit gezackten Rändern und kleinen Spitzen.
+- **Nie als geschlossene, flächig gefüllte Silhouette** – eine solche Haarkappe ist der auffälligste Stilbruch und wirkt sofort wie ein Aufkleber.
+- Stattdessen: ein Bündel **einzelner Striche**, dick am Ansatz, spitz auslaufend, unterschiedlich lang, unterschiedlich gekrümmt, einander überkreuzend. Die Dichte allein erzeugt die dunklen Partien; dazwischen bleibt überall Papier stehen.
+- Kurzes Haar strahlt vom Kopf nach außen, langes Haar fällt in durchgehenden Zügen. Jede Strähne setzt etwas später an und endet etwas früher als ihre Nachbarn – dadurch franst die Partie an **beiden** Enden aus.
+- Locken sind offene Spiralzüge, keine ausgefüllten Kleckse.
 - Der Rand der Frisur ist immer zerfranst, nie glatt.
 
 ## 6. Schwarzflächen
@@ -65,3 +66,15 @@ Gleichmäßige Strichstärke · geschlossene saubere Pfade · Spiegelsymmetrie �
 Striche dürfen **nicht** als `stroke` mit `stroke-width` gezeichnet werden – das erzeugt zwangsläufig gleichmäßig breite Linien und damit den Vektor-Clipart-Look. Jeder Strich muss als **gefüllter Umriss** (`fill="#000"`, kein `stroke`) erzeugt werden, dessen Breite entlang der Mittellinie variiert.
 
 Die Grafiken werden deshalb aus [`tools/ink.py`](../tools/ink.py) heraus generiert; die Bildinhalte stehen in [`tools/portraits.py`](../tools/portraits.py).
+
+## 12. Blickrichtungen
+
+Jede Figur liegt in drei Ansichten für Dialoge vor:
+
+| Datei | Kamera | Gesicht wendet sich |
+|---|---|---|
+| `name.svg` | frontal | geradeaus |
+| `name-von-links.svg` | von vorne links | nach rechts |
+| `name-von-rechts.svg` | von vorne rechts | nach links |
+
+Die Drehung entsteht im Generator als Zylinderprojektion um die Hochachse (`Pen.set_turn`): die Silhouette des Kopfes bleibt nahezu stehen, während die Züge über sie hinwegwandern, das abgewandte Auge sich zum Rand hin staucht und das abgewandte Ohr hinter der Wange verschwindet. Hals und Rumpf drehen nur gedämpft mit, Tuschespritzer gar nicht – sie liegen auf dem Papier, nicht auf dem Kopf. Jede Ansicht wird mit eigenem Zufallsstartwert gezeichnet, damit sie wie neu gezeichnet wirkt und nicht wie eine verschobene Kopie.

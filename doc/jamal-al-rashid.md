@@ -2,6 +2,8 @@
 
 ![Jamal Al-Rashid](img/jamal-al-rashid.svg)
 
+Für Dialoge zusätzlich von vorne links ([jamal-al-rashid-von-links.svg](img/jamal-al-rashid-von-links.svg)) und von vorne rechts ([jamal-al-rashid-von-rechts.svg](img/jamal-al-rashid-von-rechts.svg)).
+
 **Alter:** 35 Jahre (geboren 1991 in Damaskus, Syrien) · **Position:** Senior Developer, BRI Innovation Lab · **Wohnort:** Bonn-Beuel · **Familienstand:** ledig
 
 **Charakterbogen:** [jamal.md](../../Novelle_Zukunft-der-DW/plans/charakterprofile/jamal.md)

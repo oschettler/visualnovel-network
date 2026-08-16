@@ -2,6 +2,8 @@
 
 ![Katharina Müller](img/katharina-mueller.svg)
 
+Für Dialoge zusätzlich von vorne links ([katharina-mueller-von-links.svg](img/katharina-mueller-von-links.svg)) und von vorne rechts ([katharina-mueller-von-rechts.svg](img/katharina-mueller-von-rechts.svg)).
+
 **Alter:** 29 Jahre (geboren 1997 in Görlitz, Sachsen) · **Position:** Projektmanagerin, BRI Akademie · **Wohnort:** Köln-Ehrenfeld (WG) · **Familienstand:** ledig, in Beziehung mit Lisa (Lehrerin)
 
 **Charakterbogen:** [kat.md](../../Novelle_Zukunft-der-DW/plans/charakterprofile/kat.md)

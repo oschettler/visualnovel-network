@@ -2,6 +2,8 @@
 
 ![Sarah Hoffmann](img/sarah-hoffmann.svg)
 
+Für Dialoge zusätzlich von vorne links ([sarah-hoffmann-von-links.svg](img/sarah-hoffmann-von-links.svg)) und von vorne rechts ([sarah-hoffmann-von-rechts.svg](img/sarah-hoffmann-von-rechts.svg)).
+
 **Alter:** 42 Jahre (geboren 1984) · **Position:** Leiterin Corporate Strategy, Bundesrundfunk International (BRI) · **Wohnort:** Bonn-Südstadt · **Familienstand:** geschieden, keine Kinder
 
 **Charakterbogen:** [sarah.md](../../Novelle_Zukunft-der-DW/plans/charakterprofile/sarah.md)

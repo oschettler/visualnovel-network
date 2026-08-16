@@ -2,6 +2,8 @@
 
 ![Lena Kowalski](img/lena-kowalski.svg)
 
+Für Dialoge zusätzlich von vorne links ([lena-kowalski-von-links.svg](img/lena-kowalski-von-links.svg)) und von vorne rechts ([lena-kowalski-von-rechts.svg](img/lena-kowalski-von-rechts.svg)).
+
 **Alter:** 33 Jahre (geboren 1993 in Warschau, Polen) · **Position:** Investigative Journalistin, BRI Deutsch · **Wohnort:** Berlin-Kreuzberg · **Familienstand:** ledig
 
 **Charakterbogen:** [lena.md](../../Novelle_Zukunft-der-DW/plans/charakterprofile/lena.md)

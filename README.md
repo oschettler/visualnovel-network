@@ -17,12 +17,16 @@ daraus abgeleiteten Merkmale stehen in
 ### Gesichter erzeugen
 
 Die Porträts sind generiert, nicht von Hand gezeichnet – jeder Strich entsteht
-als gefüllter Umriss mit variabler Breite:
+als gefüllter Umriss mit variabler Breite, jede Frisur aus Einzelsträhnen:
 
 ```bash
-python3 tools/portraits.py            # alle sechs neu nach doc/img/
-python3 tools/portraits.py lena-kowalski   # einzeln
+python3 tools/portraits.py            # alle 18 Dateien neu nach doc/img/
+python3 tools/portraits.py lena-kowalski   # eine Figur, alle Ansichten
 ```
+
+Pro Figur entstehen drei Ansichten für Dialoge: `name.svg` (frontal),
+`name-von-links.svg` (Gesicht nach rechts gewandt) und `name-von-rechts.svg`
+(nach links gewandt).
 
 - [tools/ink.py](tools/ink.py) – Strichgenerator (Feder-Duktus, Haare, Kleckse)
 - [tools/portraits.py](tools/portraits.py) – Bildinhalt der sechs Figuren

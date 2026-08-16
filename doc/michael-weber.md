@@ -2,6 +2,8 @@
 
 ![Michael Weber](img/michael-weber.svg)
 
+Für Dialoge zusätzlich von vorne links ([michael-weber-von-links.svg](img/michael-weber-von-links.svg)) und von vorne rechts ([michael-weber-von-rechts.svg](img/michael-weber-von-rechts.svg)).
+
 **Alter:** 58 Jahre (geboren 1968 in Köln) · **Position:** Leiter Research & Cooperations, Bundesrundfunk International (BRI) · **Wohnort:** Bad Godesberg, Bonn · **Familienstand:** verheiratet mit Claudia (56), zwei erwachsene Kinder
 
 **Charakterbogen:** [michael.md](../../Novelle_Zukunft-der-DW/plans/charakterprofile/michael.md)

@@ -151,6 +151,33 @@ class Pen:
     def __init__(self, seed=0):
         self.rng = random.Random(seed)
         self.paths = []
+        self.warp = None
+        self.turn = 0.0
+
+    def set_turn(self, phi, cx=200.0, R=67.0):
+        """Kopfdrehung um die Hochachse als Zylinderprojektion.
+
+        phi > 0 dreht die Nase nach rechts. Punkte auf der Kopfrundung
+        wandern ueber die Silhouette hinweg, waehrend deren Rand fast
+        stehen bleibt -- so verhaelt sich ein gedrehter Kopf wirklich.
+        Was ausserhalb der Rundung liegt (Haarmasse), wird starr mit der
+        Kante mitgefuehrt, damit nichts vom Kopf abreisst."""
+        self.turn = phi
+        if abs(phi) < 1e-6:
+            self.warp = None
+            return
+        kante = R * math.cos(phi)
+
+        def f(x, y):
+            u = (x - cx) / R
+            if -1.0 <= u <= 1.0:
+                return (cx + R * math.sin(math.asin(u) + phi), y)
+            return (x + (1.0 if u > 0 else -1.0) * (kante - R), y)
+
+        self.warp = f
+
+    def _w(self, pts):
+        return [self.warp(x, y) for x, y in pts] if self.warp else pts
 
     def _add(self, d):
         if d:
@@ -165,7 +192,7 @@ class Pen:
         if jit:
             pts = [(x + self.rng.uniform(-jit, jit), y + self.rng.uniform(-jit, jit))
                    for x, y in pts]
-        line = resample(catmull(pts, per_seg, closed), step)
+        line = self._w(resample(catmull(pts, per_seg, closed), step))
         line = wobble(line, self.rng, amp, waves, hold_ends=not closed)
         if not cuts:
             return self._add(outline(line, w, self.rng))
@@ -189,7 +216,7 @@ class Pen:
             if spikes and i % max(1, n // spikes) == 0:
                 rr *= spike_len
             pts.append((cx + math.cos(a) * rr, cy + math.sin(a) * rr))
-        ring = catmull(pts, 10, closed=True)
+        ring = self._w(catmull(pts, 10, closed=True))
         return self._add("M" + f"{ring[0][0]:.1f},{ring[0][1]:.1f}"
                          + "".join(f"L{x:.1f},{y:.1f}" for x, y in ring[1:]) + "Z")
 
@@ -199,13 +226,45 @@ class Pen:
     def patch(self, pts, wob=2.0):
         """Geschlossene Tuscheflaeche mit unruhigem Rand -- fuer Haarmassen,
         die anschliessend mit hairs() ausgefranst werden."""
-        ring = wobble(catmull(pts, 12, closed=True), self.rng, wob, 3.2,
+        ring = wobble(self._w(catmull(pts, 12, closed=True)), self.rng, wob, 3.2,
                       hold_ends=False)
         return self._add("M" + f"{ring[0][0]:.1f},{ring[0][1]:.1f}"
                          + "".join(f"L{x:.1f},{y:.1f}" for x, y in ring[1:]) + "Z")
 
-    def curls(self, base, count, size, size_var=0.45, jitter=5.0):
-        """Lockenkopf: geclusterte unregelmaessige Kleckse mit Spitzen."""
+    def strands(self, innen, aussen, count, w=(1.6, 2.4, 0), off=1.7,
+                kurz=0.22, spaet=0.10, amp=0.7):
+        """Haarpartie als Buendel einzelner langer Zuege.
+
+        Zwischen der inneren und der aeusseren Leitkurve werden `count`
+        Straehnen interpoliert. Jede setzt etwas spaeter an und endet
+        etwas frueher als die Nachbarn -- dadurch franst die Partie an
+        beiden Enden aus, statt als geschlossene Kappe zu stehen."""
+        A = resample(catmull(innen, 14), 3.0)
+        B = resample(catmull(aussen, 14), 3.0)
+        n = min(len(A), len(B))
+        if n < 4:
+            return
+        for i in range(count):
+            t = (i + self.rng.uniform(-0.35, 0.35)) / max(1, count - 1)
+            t = min(1.0, max(0.0, t))
+            k0 = int(n * self.rng.uniform(0, spaet))
+            k1 = int(n * (1.0 - self.rng.uniform(0, kurz)))
+            if k1 - k0 < 3:
+                continue
+            schritt = max(1, (k1 - k0) // 12)
+            pts = []
+            for k in range(k0, k1, schritt):
+                ax, ay = A[k]
+                bx, by = B[k]
+                pts.append((ax + (bx - ax) * t + self.rng.uniform(-off, off),
+                            ay + (by - ay) * t + self.rng.uniform(-off, off)))
+            if len(pts) >= 2:
+                self.stroke(pts, w=(w[0] * self.rng.uniform(0.7, 1.3), w[1], w[2]),
+                            amp=amp, waves=1.4, step=2.6)
+
+    def curls(self, base, count, size, size_var=0.45, jitter=5.0,
+              w=(2.6, 2.0, 0), turns=0.82):
+        """Lockenkopf aus offenen Spiralzuegen statt aus vollen Kleckssen."""
         line = resample(catmull(base, 14), 2.0)
         n = len(line) - 1
         for i in range(count):
@@ -214,7 +273,15 @@ class Pen:
             x += self.rng.uniform(-jitter, jitter)
             y += self.rng.uniform(-jitter, jitter)
             r = size * (1 + self.rng.uniform(-size_var, size_var))
-            self.blob(x, y, r, 0.5, 9, spikes=2, spike_len=1.9)
+            a0 = self.rng.uniform(0, TAU)
+            drehung = self.rng.choice((1, -1))
+            pts = []
+            steps = 9
+            for k in range(steps):
+                a = a0 + drehung * turns * TAU * k / (steps - 1)
+                rr = r * (1.0 - 0.42 * k / (steps - 1))
+                pts.append((x + math.cos(a) * rr, y + math.sin(a) * rr))
+            self.stroke(pts, w=w, amp=0.4, waves=1.0, step=1.8)
 
     def hairs(self, base, count, length, w=(2.6, 1.6, 0), spread=0.32,
               curl=0.4, out_dir=1, jitter=0.35, length_var=0.55,
@@ -250,7 +317,17 @@ class Pen:
             self.stroke([root, mid, tip], w=ww, amp=0.5, waves=1.2, step=2.0)
 
     def spatter(self, zones, rng_seed=None):
-        """zones: Liste von (cx, cy, radius, anzahl)."""
+        """zones: Liste von (cx, cy, radius, anzahl).
+
+        Spritzer liegen auf dem Papier, nicht auf dem Kopf -- eine
+        eingestellte Drehung gilt fuer sie nicht."""
+        gemerkt, self.warp = self.warp, None
+        try:
+            self._spatter(zones)
+        finally:
+            self.warp = gemerkt
+
+    def _spatter(self, zones):
         for cx, cy, rad, cnt in zones:
             for _ in range(cnt):
                 a = self.rng.uniform(0, TAU)

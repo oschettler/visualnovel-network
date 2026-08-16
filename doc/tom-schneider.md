@@ -2,6 +2,8 @@
 
 ![Tom Schneider](img/tom-schneider.svg)
 
+Für Dialoge zusätzlich von vorne links ([tom-schneider-von-links.svg](img/tom-schneider-von-links.svg)) und von vorne rechts ([tom-schneider-von-rechts.svg](img/tom-schneider-von-rechts.svg)).
+
 **Alter:** 26 Jahre (geboren 2000 in München) · **Position:** Junior Developer, BRI Innovation Lab (Werkstudent) · **Wohnort:** Bonn-Nordstadt (WG) · **Familienstand:** ledig
 
 **Charakterbogen:** [tom.md](../../Novelle_Zukunft-der-DW/plans/charakterprofile/tom.md)

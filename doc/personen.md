@@ -1,6 +1,8 @@
 # Personen der Novelle "Das Netzwerk"
 
-Profilseiten der sechs Hauptfiguren, mit Gesichtern im Tuschezeichnungs-Stil der Urmel-Bücher (siehe [img/](img/)).
+Profilseiten der sechs Hauptfiguren, mit Gesichtern im Tuschezeichnungs-Stil der Urmel-Bücher (siehe [img/](img/) und [stil-tuschezeichnung.md](stil-tuschezeichnung.md)).
+
+Jede Figur liegt in drei Ansichten vor – frontal sowie `-von-links` und `-von-rechts` für Dialoge, in denen sich zwei Figuren einander zuwenden.
 
 - [Dr. Sarah Hoffmann](sarah-hoffmann.md) – Leiterin Corporate Strategy, Initiatorin des Netzwerks
 - [Jamal Al-Rashid](jamal-al-rashid.md) – Senior Developer, BRI Innovation Lab
