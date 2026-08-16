@@ -62,6 +62,7 @@ Zwei getrennte Ursachen lassen dort eine kahle Stelle entstehen; beide müssen g
 
 1. **Die V-Kerbe am Scheitelpunkt.** Setzen die innere und die äußere Leitkurve einer Haarpartie auf verschiedenen Höhen an, liegt das Haar genau in der Mitte tiefer als daneben. Beide beginnen im selben Punkt, und der Ansatz wird dort kaum beschnitten (kleines `spaet`).
 2. **Die ungedeckte Krone.** Bei Mittelscheitel fallen die Seitenpartien vom Scheitel steil nach außen ab, der Pony setzt erst tiefer an – dazwischen bleibt der Oberkopf unbedeckt. Dafür braucht es eigene Kronenbänder, die vom Scheitel bis zu den Schläfen laufen und diese Fläche decken.
+3. **Einseitig ausgefranste Kappen.** Bei einer Kappe, deren Leitkurven von Schläfe zu Schläfe laufen, beschneidet `kurz` das Strähnenende und `spaet` den Anfang – also die rechte bzw. die linke Seite. Sind die beiden Werte verschieden, franst eine Seite doppelt so stark aus wie die andere und reißt dort eine Lücke. Beide gleich groß halten.
 
 ## 6. Schwarzflächen
 

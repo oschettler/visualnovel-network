@@ -267,15 +267,17 @@ def jamal(p, turn=0.0):
     # --- Kurzhaarschnitt: kurze Einzelzuege, flach anliegend
     # Kappe laeuft ohne Absatz von Schlaefe zu Schlaefe ueber den Scheitel --
     # getrennte Seitenstuecke wirken sonst wie angeklebte Koteletten
+    # kurz und spaet gleich gross halten: die Leitkurven laufen von links
+    # nach rechts, ein groesseres kurz frisst sonst allein die rechte Seite
     p.strands([(148, 180), (154, 148), (188, 132), (222, 134), (252, 150),
                (258, 182)],
               [(135, 178), (139, 138), (180, 92), (226, 94), (266, 140),
                (265, 180)],
-              56, w=(1.7, 2.4, 0), off=2.0, kurz=0.10, spaet=0.05)
+              56, w=(1.7, 2.4, 0), off=2.0, kurz=0.04, spaet=0.04)
     # Graue Schlaefen: duenne, lichte Striche am Rand der Kappe
     p.hairs([(141, 172), (139, 150), (149, 132)], 8, 11, w=(1.6, 0.9, 0),
             spread=0.24, curl=0.3, angle=2.55, length_var=0.5)
-    p.hairs([(261, 170), (263, 148), (253, 130)], 7, 10, w=(1.6, 0.9, 0),
+    p.hairs([(255, 168), (257, 146), (248, 128)], 7, 10, w=(1.6, 0.9, 0),
             spread=0.24, curl=0.3, angle=0.60, length_var=0.5)
 
     ohren(p, (132, 222), (268, 218), 1.0)
@@ -336,7 +338,7 @@ def kat(p, turn=0.0):
                (252, 146), (256, 172), (252, 208)],
               [(133, 210), (131, 162), (140, 124), (180, 94), (226, 96),
                (266, 128), (270, 166), (269, 210)],
-              58, w=(1.8, 2.5, 0), off=2.4, kurz=0.09, spaet=0.05, amp=1.0)
+              58, w=(1.8, 2.5, 0), off=2.4, kurz=0.04, spaet=0.04, amp=1.0)
     # Zerzaust: kurze Straehnen legen sich schraeg ueber die Kappe,
     # statt senkrecht davon abzustehen
     p.hairs([(142, 126), (176, 96), (222, 94), (262, 128)], 26, 9,
@@ -345,7 +347,7 @@ def kat(p, turn=0.0):
     # Kurz geschorene Seiten: ausgefranste Kante ueber den Ohren
     p.hairs([(137, 190), (136, 214), (143, 236)], 18, 9, w=(2.4, 1.3, 0),
             spread=0.4, curl=0.3, angle=2.75, length_var=0.55)
-    p.hairs([(265, 192), (266, 216), (259, 238)], 18, 9, w=(2.4, 1.3, 0),
+    p.hairs([(259, 194), (260, 216), (254, 236)], 18, 9, w=(2.4, 1.3, 0),
             spread=0.4, curl=0.3, angle=0.40, length_var=0.55)
 
     ohren(p, (136, 220), (265, 216), 0.95)
