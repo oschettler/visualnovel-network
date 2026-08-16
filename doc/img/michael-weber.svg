@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520">
+<rect x="0" y="0" width="400" height="520" fill="#ffffff"/>
+
+<!-- shoulders / jacket with shirt collar -->
+<path d="M 55 520
+  C 62 452 100 410 148 393
+  L 176 424 L 200 400 L 224 424 L 252 393
+  C 300 410 338 452 345 520 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+<path d="M 156 401 L 200 445 L 244 401" fill="none" stroke="#111111" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M 184 402 L 200 428 L 216 402" fill="none" stroke="#111111" stroke-width="2" stroke-linejoin="round" opacity="0.7"/>
+<path d="M 100 440 L 130 470 M 300 440 L 270 470" fill="none" stroke="#111111" stroke-width="1.6" opacity="0.45"/>
+
+<!-- neck -->
+<path d="M 178 332 C 178 354 180 371 186 387 L 214 387 C 220 371 222 354 222 332 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+
+<!-- ears -->
+<path d="M 124 224 C 110 220 106 246 120 260 C 126 264 132 260 130 249" fill="#ffffff" stroke="#111111" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 276 224 C 290 220 294 246 280 260 C 274 264 268 260 270 249" fill="#ffffff" stroke="#111111" stroke-width="4" stroke-linejoin="round"/>
+
+<!-- face, slightly heavier / older jaw -->
+<path d="M 132 172 C 127 110 159 66 200 66 C 241 66 273 110 268 172
+  C 272 216 261 272 238 320 C 222 352 209 372 200 376
+  C 191 372 178 352 162 320 C 139 272 128 216 132 172 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5.5" stroke-linejoin="round"/>
+
+<!-- age lines: forehead, crow's feet, nasolabial -->
+<path d="M 158 130 C 172 124 228 124 242 130" fill="none" stroke="#111111" stroke-width="1.3" opacity="0.5"/>
+<path d="M 155 133 C 170 128 230 128 245 133" fill="none" stroke="#111111" stroke-width="1.1" opacity="0.4"/>
+<path d="M 138 214 L 130 220 M 138 226 L 129 228" fill="none" stroke="#111111" stroke-width="1.2" opacity="0.5"/>
+<path d="M 262 214 L 270 220 M 262 226 L 271 228" fill="none" stroke="#111111" stroke-width="1.2" opacity="0.5"/>
+<path d="M 178 275 C 172 285 168 292 163 297" fill="none" stroke="#111111" stroke-width="1.3" opacity="0.5"/>
+<path d="M 222 275 C 228 285 232 292 237 297" fill="none" stroke="#111111" stroke-width="1.3" opacity="0.5"/>
+
+<!-- glasses -->
+<circle cx="164" cy="222" r="20" fill="none" stroke="#111111" stroke-width="3.2"/>
+<circle cx="236" cy="222" r="20" fill="none" stroke="#111111" stroke-width="3.2"/>
+<path d="M 184 220 C 194 214 206 214 216 220" fill="none" stroke="#111111" stroke-width="3.2"/>
+<path d="M 144 216 L 128 212" fill="none" stroke="#111111" stroke-width="2.6"/>
+<path d="M 256 216 L 272 212" fill="none" stroke="#111111" stroke-width="2.6"/>
+
+<!-- eyebrows: thick, greying -->
+<path d="M 140 194 C 151 187 170 185 184 191" fill="none" stroke="#111111" stroke-width="4.8" stroke-linecap="round"/>
+<path d="M 216 191 C 230 185 249 187 260 194" fill="none" stroke="#111111" stroke-width="4.8" stroke-linecap="round"/>
+<path d="M 146 191 C 156 187 168 186 178 189" fill="none" stroke="#ffffff" stroke-width="1.3" opacity="0.5"/>
+<path d="M 222 189 C 232 186 244 187 254 191" fill="none" stroke="#ffffff" stroke-width="1.3" opacity="0.5"/>
+
+<!-- eyes behind glasses -->
+<ellipse cx="164" cy="223" rx="12" ry="7" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+<circle cx="164" cy="223" r="5" fill="#111111"/>
+<ellipse cx="236" cy="223" rx="12" ry="7" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+<circle cx="236" cy="223" r="5" fill="#111111"/>
+
+<!-- nose -->
+<path d="M 198 232 C 194 250 188 262 182 270 C 188 277 197 277 202 272" fill="none" stroke="#111111" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- moustache + mouth -->
+<path d="M 172 288 C 182 282 194 281 200 284 C 206 281 218 282 228 288" fill="none" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
+<path d="M 178 303 C 187 308 213 308 222 303" fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
+
+<!-- HAIR: receded, grey/white — outline only, thin fringe + side patches -->
+<path d="M 148 118 C 168 100 232 100 252 118 C 244 112 228 108 200 108 C 172 108 156 112 148 118 Z"
+  fill="none" stroke="#111111" stroke-width="2.6" stroke-linejoin="round"/>
+<path d="M 158 112 C 172 102 228 102 242 112" fill="none" stroke="#111111" stroke-width="1.2" opacity="0.5"/>
+
+<path d="M 147 143 C 142 128 141 110 148 94 C 155 82 163 76 168 80 C 160 92 154 108 156 126 C 156 132 152 138 147 143 Z"
+  fill="none" stroke="#111111" stroke-width="2.6" stroke-linejoin="round"/>
+<path d="M 151 100 C 155 92 160 87 165 85" fill="none" stroke="#111111" stroke-width="1" opacity="0.5"/>
+
+<path d="M 253 143 C 258 128 259 110 252 94 C 245 82 237 76 232 80 C 240 92 246 108 244 126 C 244 132 248 138 253 143 Z"
+  fill="none" stroke="#111111" stroke-width="2.6" stroke-linejoin="round"/>
+<path d="M 249 100 C 245 92 240 87 235 85" fill="none" stroke="#111111" stroke-width="1" opacity="0.5"/>
+
+<!-- ink spatter texture -->
+<circle cx="112" cy="335" r="2.1" fill="#111111"/>
+<circle cx="99" cy="352" r="1.5" fill="#111111"/>
+<circle cx="288" cy="335" r="2.1" fill="#111111"/>
+<circle cx="301" cy="352" r="1.5" fill="#111111"/>
+</svg>

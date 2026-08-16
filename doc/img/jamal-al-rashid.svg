@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520">
+<rect x="0" y="0" width="400" height="520" fill="#ffffff"/>
+
+<!-- shoulders / hoodie -->
+<path d="M 55 520
+  C 62 452 102 410 150 394
+  C 158 404 172 411 200 411
+  C 228 411 242 404 250 394
+  C 298 410 338 452 345 520 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+<!-- hood ties -->
+<path d="M 186 414 L 182 442 M 214 414 L 218 442" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+<circle cx="182" cy="444" r="3" fill="#111111"/>
+<circle cx="218" cy="444" r="3" fill="#111111"/>
+<path d="M 160 400 C 175 408 190 411 200 411 C 210 411 225 408 240 400" fill="none" stroke="#111111" stroke-width="2.2" opacity="0.6"/>
+
+<!-- neck -->
+<path d="M 178 330 C 178 353 180 370 186 386 L 214 386 C 220 370 222 353 222 330 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+
+<!-- ears -->
+<path d="M 124 222 C 110 218 106 244 120 258 C 126 262 132 258 130 247" fill="#ffffff" stroke="#111111" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 276 222 C 290 218 294 244 280 258 C 274 262 268 258 270 247" fill="#ffffff" stroke="#111111" stroke-width="4" stroke-linejoin="round"/>
+
+<!-- face -->
+<path d="M 133 170 C 128 108 159 65 200 65 C 241 65 272 108 267 170
+  C 271 214 260 270 237 318 C 221 350 208 371 200 375
+  C 192 371 179 350 163 318 C 140 270 129 214 133 170 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5.5" stroke-linejoin="round"/>
+
+<!-- stubble / short beard shading along jaw -->
+<path d="M 148 300 C 160 330 178 352 200 362 C 222 352 240 330 252 300" fill="none" stroke="#111111" stroke-width="1.3" opacity="0.5"/>
+<g opacity="0.55">
+<circle cx="158" cy="300" r="1.1" fill="#111111"/><circle cx="167" cy="312" r="1.1" fill="#111111"/><circle cx="178" cy="324" r="1.1" fill="#111111"/><circle cx="190" cy="333" r="1.1" fill="#111111"/><circle cx="200" cy="337" r="1.1" fill="#111111"/><circle cx="210" cy="333" r="1.1" fill="#111111"/><circle cx="222" cy="324" r="1.1" fill="#111111"/><circle cx="233" cy="312" r="1.1" fill="#111111"/><circle cx="242" cy="300" r="1.1" fill="#111111"/>
+<circle cx="163" cy="290" r="1.1" fill="#111111"/><circle cx="237" cy="290" r="1.1" fill="#111111"/>
+<circle cx="172" cy="345" r="1.1" fill="#111111"/><circle cx="228" cy="345" r="1.1" fill="#111111"/>
+</g>
+
+<!-- faint scar near temple, understated -->
+<path d="M 138 200 L 146 214" fill="none" stroke="#111111" stroke-width="1.3" opacity="0.45"/>
+
+<!-- watchful, level eyebrows -->
+<path d="M 141 199 C 152 193 170 191 183 196" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round"/>
+<path d="M 217 196 C 230 191 248 193 259 199" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round"/>
+
+<!-- eyes -->
+<ellipse cx="164" cy="222" rx="15" ry="7.5" fill="#ffffff" stroke="#111111" stroke-width="2.3"/>
+<circle cx="164" cy="222" r="5.5" fill="#111111"/>
+<ellipse cx="236" cy="222" rx="15" ry="7.5" fill="#ffffff" stroke="#111111" stroke-width="2.3"/>
+<circle cx="236" cy="222" r="5.5" fill="#111111"/>
+
+<!-- nose -->
+<path d="M 198 228 C 194 247 188 260 182 268 C 188 275 197 275 202 270" fill="none" stroke="#111111" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- mouth: calm, guarded -->
+<path d="M 175 300 C 187 304 213 304 225 300" fill="none" stroke="#111111" stroke-width="3.6" stroke-linecap="round"/>
+
+<!-- HAIR: short, cropped, dark with grey strands at temples -->
+<path d="M 135 148
+  C 122 92 156 56 200 55
+  C 244 56 278 92 265 148
+  C 261 122 255 108 240 100
+  C 250 112 251 128 247 140
+  C 236 108 220 92 200 90
+  C 180 92 164 108 153 140
+  C 149 128 150 112 160 100
+  C 145 108 139 122 135 148 Z"
+  fill="#111111" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+
+<!-- grey strands at temples (white hatch cut into black hair) -->
+<path d="M 139 132 C 141 118 147 106 156 98" fill="none" stroke="#ffffff" stroke-width="2.6" opacity="0.9" stroke-linecap="round"/>
+<path d="M 146 145 C 147 130 152 116 160 106" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.8" stroke-linecap="round"/>
+<path d="M 261 132 C 259 118 253 106 244 98" fill="none" stroke="#ffffff" stroke-width="2.6" opacity="0.9" stroke-linecap="round"/>
+<path d="M 254 145 C 253 130 248 116 240 106" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.8" stroke-linecap="round"/>
+
+<!-- close-crop texture -->
+<path d="M 175 68 C 178 78 178 88 175 96" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.6"/>
+<path d="M 200 62 C 202 74 202 86 200 96" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.6"/>
+<path d="M 225 68 C 222 78 222 88 225 96" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.6"/>
+
+<!-- ink spatter texture -->
+<circle cx="112" cy="335" r="2.1" fill="#111111"/>
+<circle cx="99" cy="352" r="1.5" fill="#111111"/>
+<circle cx="288" cy="335" r="2.1" fill="#111111"/>
+<circle cx="301" cy="352" r="1.5" fill="#111111"/>
+</svg>

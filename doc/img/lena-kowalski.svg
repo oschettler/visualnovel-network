@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520">
+<rect x="0" y="0" width="400" height="520" fill="#ffffff"/>
+
+<!-- shoulders / jacket, collar up -->
+<path d="M 55 520
+  C 62 452 100 408 145 390
+  L 130 430 L 168 402
+  C 178 408 190 411 200 411
+  C 210 411 222 408 232 402
+  L 270 430 L 255 390
+  C 300 408 338 452 345 520 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+<path d="M 168 402 C 178 396 190 393 200 393 C 210 393 222 396 232 402" fill="none" stroke="#111111" stroke-width="2" opacity="0.6"/>
+
+<!-- neck -->
+<path d="M 179 330 C 179 352 181 368 187 384 L 213 384 C 219 368 221 352 221 330 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+
+<!-- ears (mostly hidden by bob, small hint) -->
+<path d="M 128 226 C 118 224 116 242 126 252" fill="#ffffff" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M 272 226 C 282 224 284 242 274 252" fill="#ffffff" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"/>
+
+<!-- face: narrow, sharp jaw -->
+<path d="M 136 172 C 131 112 161 68 200 68 C 239 68 269 112 264 172
+  C 268 208 258 258 236 302 C 221 332 209 356 200 360
+  C 191 356 179 332 164 302 C 142 258 132 208 136 172 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5.5" stroke-linejoin="round"/>
+
+<!-- sharp cheekbone shading -->
+<path d="M 143 240 C 152 246 160 246 166 241" fill="none" stroke="#111111" stroke-width="1.4" opacity="0.5"/>
+<path d="M 234 241 C 240 246 248 246 257 240" fill="none" stroke="#111111" stroke-width="1.4" opacity="0.5"/>
+
+<!-- eyebrows: one raised = cynical, sharp -->
+<path d="M 141 196 C 152 189 170 187 183 191" fill="none" stroke="#111111" stroke-width="4.4" stroke-linecap="round"/>
+<path d="M 217 190 C 228 181 246 178 259 184" fill="none" stroke="#111111" stroke-width="4.4" stroke-linecap="round"/>
+
+<!-- eyes: narrow, intense -->
+<path d="M 148 220 C 155 213 172 213 180 219 C 172 225 155 225 148 220 Z" fill="#ffffff" stroke="#111111" stroke-width="2.6"/>
+<circle cx="167" cy="219" r="5.5" fill="#111111"/>
+<path d="M 220 219 C 228 212 245 211 252 217 C 245 224 228 225 220 219 Z" fill="#ffffff" stroke="#111111" stroke-width="2.6"/>
+<circle cx="234" cy="217" r="5.5" fill="#111111"/>
+
+<!-- nose: fine, straight -->
+<path d="M 199 226 C 196 244 192 256 187 264 C 192 270 199 270 203 266" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- mouth: thin, wry, one corner up -->
+<path d="M 175 298 C 185 302 210 304 226 296" fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
+
+<!-- HAIR: sharp chin-length bob, blunt fringe -->
+<path d="M 133 155
+  C 122 98 158 56 200 55
+  C 242 56 278 98 267 155
+  C 275 190 278 260 270 330
+  C 268 345 258 356 246 360
+  L 236 360
+  C 248 320 250 260 240 210
+  C 232 170 214 145 200 140
+  C 186 145 168 170 160 210
+  C 150 260 152 320 164 360
+  L 154 360
+  C 142 356 132 345 130 330
+  C 122 260 125 190 133 155 Z"
+  fill="#111111" stroke="#111111" stroke-width="4.6" stroke-linejoin="round"/>
+
+<!-- blunt fringe line cut across forehead -->
+<path d="M 152 120 C 168 108 232 108 248 120" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.9"/>
+
+<!-- hair texture strands -->
+<path d="M 145 175 C 138 220 140 280 150 335" fill="none" stroke="#ffffff" stroke-width="2.2" opacity="0.8"/>
+<path d="M 255 175 C 262 220 260 280 250 335" fill="none" stroke="#ffffff" stroke-width="2.2" opacity="0.8"/>
+<path d="M 178 145 C 172 200 174 270 182 330" fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.65"/>
+<path d="M 222 145 C 228 200 226 270 218 330" fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.65"/>
+
+<!-- ink spatter texture -->
+<circle cx="118" cy="342" r="2.1" fill="#111111"/>
+<circle cx="105" cy="358" r="1.5" fill="#111111"/>
+<circle cx="282" cy="342" r="2.1" fill="#111111"/>
+<circle cx="295" cy="358" r="1.5" fill="#111111"/>
+</svg>

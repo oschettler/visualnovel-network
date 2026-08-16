@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520">
+<rect x="0" y="0" width="400" height="520" fill="#ffffff"/>
+
+<!-- shoulders / crew-neck shirt -->
+<path d="M 55 520
+  C 62 452 100 411 150 396
+  C 156 412 175 420 200 420
+  C 225 420 244 412 250 396
+  C 300 411 338 452 345 520 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+<path d="M 168 400 C 178 410 188 414 200 414 C 212 414 222 410 232 400" fill="none" stroke="#111111" stroke-width="2" opacity="0.6"/>
+
+<!-- neck -->
+<path d="M 178 330 C 178 353 180 370 186 386 L 214 386 C 220 370 222 353 222 330 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+
+<!-- ears -->
+<path d="M 126 222 C 112 218 108 244 122 258 C 128 262 134 258 132 247" fill="#ffffff" stroke="#111111" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 274 222 C 288 218 292 244 278 258 C 272 262 266 258 268 247" fill="#ffffff" stroke="#111111" stroke-width="4" stroke-linejoin="round"/>
+
+<!-- face: rounder, open -->
+<path d="M 134 172 C 129 112 160 68 200 68 C 240 68 271 112 266 172
+  C 270 212 260 262 240 306 C 225 336 211 358 200 362
+  C 189 358 175 336 160 306 C 140 262 130 212 134 172 Z"
+  fill="#ffffff" stroke="#111111" stroke-width="5.5" stroke-linejoin="round"/>
+
+<!-- freckles -->
+<g fill="#111111" opacity="0.75">
+<circle cx="150" cy="238" r="1.3"/><circle cx="158" cy="244" r="1.2"/><circle cx="146" cy="248" r="1.1"/>
+<circle cx="163" cy="234" r="1"/><circle cx="155" cy="255" r="1.1"/>
+<circle cx="250" cy="238" r="1.3"/><circle cx="242" cy="244" r="1.2"/><circle cx="254" cy="248" r="1.1"/>
+<circle cx="237" cy="234" r="1"/><circle cx="245" cy="255" r="1.1"/>
+<circle cx="200" cy="252" r="1"/>
+</g>
+
+<!-- eyebrows: relaxed, slightly raised = friendly -->
+<path d="M 142 197 C 153 189 170 188 182 193" fill="none" stroke="#111111" stroke-width="4.3" stroke-linecap="round"/>
+<path d="M 218 193 C 230 188 247 189 258 197" fill="none" stroke="#111111" stroke-width="4.3" stroke-linecap="round"/>
+
+<!-- eyes: bright, open -->
+<ellipse cx="163" cy="222" rx="15" ry="9" fill="#ffffff" stroke="#111111" stroke-width="2.3"/>
+<circle cx="163" cy="223" r="6" fill="#111111"/>
+<circle cx="166" cy="220" r="1.4" fill="#ffffff"/>
+<ellipse cx="237" cy="222" rx="15" ry="9" fill="#ffffff" stroke="#111111" stroke-width="2.3"/>
+<circle cx="237" cy="223" r="6" fill="#111111"/>
+<circle cx="240" cy="220" r="1.4" fill="#ffffff"/>
+
+<!-- nose -->
+<path d="M 198 227 C 194 244 189 256 183 264 C 189 271 197 271 202 266" fill="none" stroke="#111111" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- mouth: warm smile -->
+<path d="M 170 296 C 182 308 218 308 230 296 C 218 302 182 302 170 296 Z" fill="#111111" opacity="0.85"/>
+
+<!-- HAIR: short, tousled, one side undercut -->
+<path d="M 136 150
+  C 122 96 156 58 200 57
+  C 244 58 278 96 264 150
+  C 258 118 244 96 220 88
+  C 232 100 236 116 232 132
+  C 220 104 202 92 200 92
+  C 198 92 180 104 168 132
+  C 164 116 168 100 180 88
+  C 158 96 144 118 136 150 Z"
+  fill="#111111" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+<!-- undercut on left side above ear -->
+<path d="M 132 165 C 128 180 128 196 134 208" fill="none" stroke="#111111" stroke-width="2.4" opacity="0.7"/>
+<path d="M 138 172 C 136 184 137 196 141 205" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.7"/>
+
+<!-- tousled texture -->
+<path d="M 165 70 C 158 82 154 96 155 110" fill="none" stroke="#ffffff" stroke-width="2.2" opacity="0.8"/>
+<path d="M 200 62 C 197 76 197 92 200 106" fill="none" stroke="#ffffff" stroke-width="2.2" opacity="0.8"/>
+<path d="M 235 70 C 242 82 246 96 245 110" fill="none" stroke="#ffffff" stroke-width="2.2" opacity="0.8"/>
+<path d="M 250 100 C 254 116 253 132 246 146" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.75"/>
+
+<!-- ink spatter texture -->
+<circle cx="112" cy="330" r="2.1" fill="#111111"/>
+<circle cx="99" cy="347" r="1.5" fill="#111111"/>
+<circle cx="288" cy="330" r="2.1" fill="#111111"/>
+<circle cx="301" cy="347" r="1.5" fill="#111111"/>
+</svg>
