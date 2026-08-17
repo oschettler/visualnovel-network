@@ -105,4 +105,6 @@ Jede Figur liegt in drei Ansichten für Dialoge vor:
 | `name-von-links.svg` | von vorne links | nach rechts |
 | `name-von-rechts.svg` | von vorne rechts | nach links |
 
+Seitenabhängige Züge müssen mit der Drehung mitgespiegelt werden: Der Nasenhaken zeigt auf die Seite, zu der sich das Gesicht wendet, und das abgewandte Ohr verschwindet hinter der Wange.
+
 Die Drehung entsteht im Generator als Zylinderprojektion um die Hochachse (`Pen.set_turn`): die Silhouette des Kopfes bleibt nahezu stehen, während die Züge über sie hinwegwandern, das abgewandte Auge sich zum Rand hin staucht und das abgewandte Ohr hinter der Wange verschwindet. Hals und Rumpf drehen nur gedämpft mit, Tuschespritzer gar nicht – sie liegen auf dem Papier, nicht auf dem Kopf. Jede Ansicht wird mit eigenem Zufallsstartwert gezeichnet, damit sie wie neu gezeichnet wirkt und nicht wie eine verschobene Kopie.

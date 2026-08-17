@@ -55,8 +55,13 @@ def auge(p, x, y, r=7.5, tilt=0.0, lid=True):
 
 
 def nase(p, x, y0, y1, w=8):
-    p.stroke([(x + 2, y0), (x - 2, y0 + (y1 - y0) * 0.55), (x - w, y1),
-              (x - w * 0.2, y1 + 5), (x + 3, y1 + 3)],
+    """Hakenstrich mit Nasenfluegel auf der abgewandten Seite.
+
+    Der Haken muss auf die Seite zeigen, zu der sich das Gesicht wendet --
+    bei nach rechts gedrehtem Kopf also gespiegelt."""
+    s = -1 if p.turn > 0.05 else 1
+    p.stroke([(x + 2 * s, y0), (x - 2 * s, y0 + (y1 - y0) * 0.55), (x - w * s, y1),
+              (x - w * 0.2 * s, y1 + 5), (x + 3 * s, y1 + 3)],
              w=(0, 2.4, 0), amp=0.6)
 
 

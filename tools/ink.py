@@ -61,6 +61,34 @@ def resample(pts, step=2.4):
     return out
 
 
+def resample_n(pts, n):
+    """Auf genau n gleich weit verteilte Punkte bringen.
+
+    Noetig, wenn zwei Kurven einander proportional entsprechen sollen:
+    beim Paaren nach Index wuerde die laengere von beiden abgeschnitten."""
+    if len(pts) < 2 or n < 2:
+        return list(pts)
+    d = [0.0]
+    for a, b in zip(pts, pts[1:]):
+        d.append(d[-1] + math.dist(a, b))
+    gesamt = d[-1]
+    if gesamt < 1e-9:
+        return [pts[0]] * n
+    out, j = [], 0
+    for i in range(n):
+        t = gesamt * i / (n - 1)
+        while j < len(d) - 2 and d[j + 1] < t:
+            j += 1
+        f = (t - d[j]) / ((d[j + 1] - d[j]) or 1e-9)
+        out.append((pts[j][0] + (pts[j + 1][0] - pts[j][0]) * f,
+                    pts[j][1] + (pts[j + 1][1] - pts[j][1]) * f))
+    return out
+
+
+def laenge(pts):
+    return sum(math.dist(a, b) for a, b in zip(pts, pts[1:]))
+
+
 def normals(pts):
     n = []
     for i, p in enumerate(pts):
@@ -239,9 +267,13 @@ class Pen:
         Straehnen interpoliert. Jede setzt etwas spaeter an und endet
         etwas frueher als die Nachbarn -- dadurch franst die Partie an
         beiden Enden aus, statt als geschlossene Kappe zu stehen."""
-        A = resample(catmull(innen, 14), 3.0)
-        B = resample(catmull(aussen, 14), 3.0)
-        n = min(len(A), len(B))
+        # Beide Kurven auf dieselbe Punktzahl bringen: sie sollen einander
+        # proportional entsprechen. Nach Index gepaart wuerde die laengere
+        # bei der Laenge der kuerzeren abgeschnitten -- die Partie endete
+        # dann auf einer Seite mitten im Bild.
+        A0, B0 = catmull(innen, 14), catmull(aussen, 14)
+        n = max(8, int(max(laenge(A0), laenge(B0)) / 3.0))
+        A, B = resample_n(A0, n), resample_n(B0, n)
         if n < 4:
             return
         for i in range(count):
