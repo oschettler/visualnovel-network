@@ -1,0 +1,7 @@
+emote,bow,braue_innen,braue_aussen,lid,pupille_x,pupille_y,mund_offen,augen_gross,bogen_daempfung
+neutral,3,0,0,1,0,0,0,1.0,1.0
+denk,-2,1,-4,1,4,-1,0,1.0,0.6
+sorge,-5,-4,2,1,0,1,0,1.0,0.2
+ent,0.5,3,3,1,0,0,0,1.0,0.15
+freude,9,-1,-2,1,0,0,0,1.0,0.6
+schock,-1,-6,-6,0,0,-1,1,1.45,0.3

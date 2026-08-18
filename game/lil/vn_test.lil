@@ -1,0 +1,434 @@
+# Kopflose Tests der Engine (game/lil/vn.lil).
+#
+# Aufruf von der Repo-Wurzel aus:  lilt game/lil/vn_test.lil
+#
+# Die Engine ist als Deck-Skript geschrieben und greift auf Karten (daten,
+# buehne, hintergruende) und die Module dd und pt zu. Das laesst sich mit
+# lilt nicht ausfuehren, wohl aber faelschen: Karten werden zu verschachtelten
+# keystores (die sind veraenderbar, anders als Lils Dictionaries), dd und pt
+# zu Dictionaries mit Attrappen. Damit laeuft ein kompletter Durchlauf
+# einschliesslich Auswahl, Variablen und Speichern.
+#
+# Was hier NICHT geprueft werden kann: das tatsaechliche Zeichnen, die
+# Eingabe und die echte Textanimation. Die Attrappe von dd.say bildet aber
+# die Kommandoerkennung des echten Moduls nach (Segmente an Leerzeilen
+# trennen, "!" am Anfang bedeutet Kommando), damit die Regieanweisungen
+# wirklich durchlaufen werden.
+
+# Die Testszene (game/lil/vn_testszene.twee) gehoert zu diesen Tests und
+# nicht zum Spiel. Sie deckt jeden Fall ab, den die Engine kennen muss:
+# Kommandos, Erzaehltext, Rede, Frage, Verzweigung, bedingter Text,
+# einzelner Link und ein Ende. Damit bleiben die Tests stabil, waehrend
+# game/data/szenen.twee um Kapitel waechst. Die echte Szenendatei prueft
+# der Bau (game/build/build_vn.lil).
+
+DECKS:"extern/decker/examples/decks/"
+
+# ------------------------------------------------------- Protokoll und Hilfen
+
+p:keystore[]
+p.gesagt:()
+p.kommandos:()
+p.fragen:()
+p.antworten:()
+p.stile:()
+p.fehler:()
+
+on merke feld wert do
+  alt:p[feld]
+  p[feld]:alt,list wert
+end
+
+on pruefe name bedingung do
+  if bedingung
+    print["  ok   %s" format name]
+  else
+    print["  FEHL %s" format name]
+    merke["fehler" name]
+  end
+end
+
+# ------------------------------------------------------------------ Attrappen
+
+# Die naechste Auswahl, die dd_ask treffen soll. Wird vom Testlauf gesetzt.
+p.wahlplan:()
+p.wahlindex:0
+
+dd:()
+dd.open:on dd_open d o do 1 end
+dd.close:on dd_close do 1 end
+dd.style:on dd_style o do
+  merke["stile" o]
+  1
+end
+dd.show:on dd_show x do 1 end
+
+# Bildet module.say des echten dd nach: an Leerzeilen trennen, Segmente
+# die mit "!" beginnen als Kommando an die Karte schicken.
+dd.say:on dd_say text do
+  segmente:rtext.split["\n\n" text]
+  each seg in segmente
+    t:rtext.string[seg]
+    if "!"~t[0]
+      p.befehl[1 drop t]
+    else
+      if 0<count t merke["gesagt" t] end
+    end
+  end
+end
+
+dd.ask:on dd_ask frage optionen do
+  merke["fragen" frage]
+  i:0
+  if p.wahlindex<count p.wahlplan i:p.wahlplan[p.wahlindex] end
+  p.wahlindex:1+p.wahlindex
+  merke["antworten" optionen[i]]
+  i
+end
+
+pt:()
+pt.command:on pt_command d x do merke["kommandos" x] end
+pt.animate:on pt_animate d do 1 end
+pt.clear:on pt_clear c do 1 end
+
+# --------------------------------------------------------------- Karten
+
+on neue_karte do
+  k:keystore[]
+  k.widgets:keystore[]
+  k
+end
+
+on neues_feld karte name inhalt do
+  f:keystore[]
+  f.text:inhalt
+  karte.widgets[name]:f
+  f
+end
+
+daten:neue_karte[]
+neues_feld[daten "quelle" read["game/lil/vn_testszene.twee"]]
+neues_feld[daten "stand" ""]
+
+buehne:neue_karte[]
+neues_feld[buehne "ortsmarke" ""]
+neues_feld[buehne "stimmung" "dunkel"]
+neues_feld[buehne "tempo" "2"]
+neues_feld[buehne "erzaehlerpos" "oben"]
+buehne.size:(512,342)
+bild:keystore[]
+bild.clear:on bild_clear do 1 end
+buehne.image:bild
+
+hintergruende:neue_karte[]
+
+# ------------------------------------------------------- Engine laden
+
+quelle:read["game/lil/vn.lil"]
+anhang:"
+e:()
+e.vn_rest:vn_rest
+e.vn_ohne_rand:vn_ohne_rand
+e.vn_stil:vn_stil
+e.vn_prosa:vn_prosa
+e.vn_frisch:vn_frisch
+e.vn_laden:vn_laden
+e.vn_speichern:vn_speichern
+e.vn_story:vn_story
+e.vn_spiele:vn_spiele
+e.vn_hintergrund:vn_hintergrund
+e.befehl:command
+e.vn_kapitel:vn_kapitel
+e.vn_kapiteltag:vn_kapiteltag
+e.vn_kapiteltitel:vn_kapiteltitel
+e.vn_index_text:vn_index_text
+e.vn_fortsetzbar:vn_fortsetzbar
+e.vn_sprecher:vn_sprecher
+e.vn_stil_rede:vn_stil_rede
+e.vn_stil_erzaehler:vn_stil_erzaehler
+e.vn_tempo:vn_tempo
+e.vn_stimmung:vn_stimmung
+e
+"
+
+tweedeck:read["" fuse (DECKS,"twee.deck")]
+twee:tweedeck.modules.twee.value
+
+b:()
+b.dd:dd
+b.pt:pt
+b.twee:twee
+b.daten:daten
+b.buehne:buehne
+b.hintergruende:hintergruende
+b.colors:colors
+b.rtext:rtext
+b.deck:0
+
+# eval[quelltext bindungen] liefert ein Dictionary mit .value (dem Wert des
+# letzten Ausdrucks) und .vars (allen Bindungen danach).
+erg:eval[("" fuse (quelle,anhang)) b]
+vn:erg.value
+p.befehl:vn.befehl
+
+# =========================================================== Test 1: Hilfen
+
+print["Test 1: Hilfsfunktionen"]
+
+pruefe["vn_rest schneidet das erste Wort ab" "Januar 2026, Bonn"~vn.vn_rest["zeit Januar 2026, Bonn" "zeit"]]
+pruefe["vn_rest bei Kommando ohne Argument" ""~vn.vn_rest["hell" "hell"]]
+
+s:vn.vn_stil["dunkel"]
+pruefe["Stil dunkel: weisse Schrift" s.fcolor~colors.white]
+pruefe["Stil dunkel: schwarzer Grund" s.bcolor~colors.black]
+h:vn.vn_stil["hell"]
+pruefe["Stil hell: schwarze Schrift" h.fcolor~colors.black]
+
+# =========================================================== Test 2: Story
+
+print[""]
+print["Test 2: Szenendatei"]
+
+story:vn.vn_story[]
+meta:twee.meta[story]
+namen:extract name from story
+pruefe["Startpassage ist gesetzt" 0<count meta.start]
+pruefe["Startpassage existiert" meta.start in namen]
+pruefe["Format ist Ply" meta.format~"Ply"]
+print["  %i Passagen: %s" format (count story), (", " fuse namen)]
+
+# Jede Passage muss sich rendern lassen, und jedes Sprungziel muss es geben.
+v:()
+v.entschlossenheit:0
+v.vorsicht:0
+v.zusammenhalt:0
+v.ausgestiegen:0
+v.tom_gestanden:0
+v.figur:""
+
+kaputt:()
+sackgassen:()
+each zeile in rows story
+  n:zeile.name
+  if !n in ("StoryTitle","StoryData")
+    r:twee.render[story n v]
+    ziele:extract arg from select where !arg="" from r.value
+    each z in ziele
+      if !z in namen kaputt:kaputt,list ("" fuse (n," -> ",z)) end
+    end
+    if 0~count ziele sackgassen:sackgassen,list n end
+  end
+end
+pruefe["alle Sprungziele existieren" 0~count kaputt]
+if 0<count kaputt print["  kaputt: %s" format (", " fuse kaputt)] end
+print["  Passagen ohne Ausgang (Enden): %s" format (", " fuse sackgassen)]
+
+# =========================================================== Test 3: Durchlauf
+
+on durchlauf plan do
+  p.gesagt:()
+  p.kommandos:()
+  p.fragen:()
+  p.antworten:()
+  p.stile:()
+  p.wahlplan:plan
+  p.wahlindex:0
+  daten.widgets.stand.text:""
+  vn.vn_spiele[1]
+  "%J" parse daten.widgets.stand.text
+end
+
+print[""]
+print["Test 3: Durchlauf, immer die erste Auswahl"]
+
+stand:durchlauf[(0,0)]
+pruefe["Endpassage erreicht" stand.passage~"t01-ende"]
+pruefe["Entschlossenheit zweimal erhoeht" stand.vars.entschlossenheit~2]
+pruefe["Vorsicht unberuehrt" stand.vars.vorsicht~0]
+pruefe["Text ausgegeben" 4<count p.gesagt]
+pruefe["Regieanweisungen durchgereicht" 8<count p.kommandos]
+pruefe["zwei Fragen gestellt" 2~count p.fragen]
+pruefe["Frage kommt aus der Szenendatei" (first p.fragen)~"Testfrage aus der Szenendatei?"]
+pruefe["besuchte Passagen vermerkt" 5~count stand.gesehen]
+print["  Weg: %s" format (", " fuse keys stand.gesehen)]
+
+print[""]
+print["Test 4: Durchlauf, immer die zweite Auswahl"]
+
+stand:durchlauf[(1,1)]
+pruefe["Endpassage erreicht" stand.passage~"t01-ende"]
+pruefe["Entschlossenheit unberuehrt" stand.vars.entschlossenheit~0]
+pruefe["Vorsicht zweimal erhoeht" stand.vars.vorsicht~2]
+print["  Weg: %s" format (", " fuse keys stand.gesehen)]
+
+print[""]
+print["Test 5: gemischter Weg und bedingter Text"]
+
+stand:durchlauf[(0,1)]
+pruefe["Entschlossenheit einmal erhoeht" stand.vars.entschlossenheit~1]
+pruefe["Vorsicht einmal erhoeht" stand.vars.vorsicht~1]
+volltext:"\n" fuse p.gesagt
+pruefe["bedingter Zweig gewaehlt" 0<count rtext.find[volltext "Bedingter Zweig fuer den ersten Weg."]]
+pruefe["anderer Zweig unterdrueckt" 0~count rtext.find[volltext "Bedingter Zweig fuer den zweiten Weg."]]
+
+print[""]
+print["Test 6: Kommandos landen richtig"]
+
+stand:durchlauf[(0,0)]
+eigene:()
+fremde:()
+each k in p.kommandos fremde:fremde,list first " " split k end
+pruefe["bg wird von der Engine abgefangen" !"bg" in fremde]
+pruefe["zeit wird von der Engine abgefangen" !"zeit" in fremde]
+pruefe["dunkel wird von der Engine abgefangen" !"dunkel" in fremde]
+pruefe["show geht an pt" "show" in fremde]
+pruefe["move geht an pt" "move" in fremde]
+pruefe["talk geht an pt" "talk" in fremde]
+pruefe["shake geht an pt" "shake" in fremde]
+pruefe["Ortsmarke gesetzt" 0<count buehne.widgets.ortsmarke.text]
+print["  Ortsmarke zuletzt: %s" format buehne.widgets.ortsmarke.text]
+
+# =========================================================== Test 7: Speichern
+
+print[""]
+print["Test 7: Speichern und Laden"]
+
+vn.vn_speichern[stand]
+zurueck:vn.vn_laden[]
+pruefe["Passage ueberlebt den Rundlauf" zurueck.passage~stand.passage]
+pruefe["Variablen ueberleben den Rundlauf" zurueck.vars.entschlossenheit~stand.vars.entschlossenheit]
+daten.widgets.stand.text:""
+pruefe["leerer Stand ergibt 0" 0~vn.vn_laden[]]
+
+# =========================================================== Test 8: Kapitel
+
+print[""]
+print["Test 8: Kapitelindex"]
+
+story:vn.vn_story[]
+k:vn.vn_kapitel[story]
+pruefe["ein Kapitelanfang gefunden" 1~count k.name]
+pruefe["Kapitelanfang ist die Startpassage" (first k.name)~"t01-anfang"]
+pruefe["Kapiteltitel aus den Metadaten" (first k.titel)~"Kapitel 1: Die Vision"]
+pruefe["Kapiteltag einer spaeteren Passage" "kapitel-01"~vn.vn_kapiteltag[story "t01-treffen"]]
+pruefe["Titel auch fuer eine Passage mitten im Kapitel" "Kapitel 1: Die Vision"~vn.vn_kapiteltitel[story "t01-ende"]]
+pruefe["unbekannte Passage ergibt leeren Tag" ""~vn.vn_kapiteltag[story "gibtesnicht"]]
+
+daten.widgets.stand.text:""
+t:vn.vn_index_text[]
+pruefe["Index nennt das Kapitel" 0<count rtext.find[rtext.string[t] "Die Vision"]]
+pruefe["erstes Kapitel ist immer anklickbar" "t01-anfang"~first extract arg from t]
+
+# =========================================================== Test 9: Fortsetzen
+
+print[""]
+print["Test 9: Weiterspielen"]
+
+daten.widgets.stand.text:""
+pruefe["ohne Spielstand nicht fortsetzbar" 0~vn.vn_fortsetzbar[]]
+
+stand:durchlauf[(0,0)]
+pruefe["am Ende ist beendet gesetzt" 1~stand.beendet]
+pruefe["durchgespielt gilt nicht als fortsetzbar" 0~vn.vn_fortsetzbar[]]
+
+mitten:stand
+mitten.beendet:0
+mitten.passage:"t01-treffen"
+vn.vn_speichern[mitten]
+pruefe["mittendrin ist fortsetzbar" 1~vn.vn_fortsetzbar[]]
+
+# ================================================ Test 10: Sprecher und Stil
+
+print[""]
+print["Test 10: Sprecher aus dem Text ablesen"]
+
+sp:vn.vn_sprecher["Sarah: Ich weiss."]
+pruefe["Sprecher erkannt" sp.name~"Sarah"]
+pruefe["Textbeginn hinter dem Doppelpunkt" "Ich weiss."~vn.vn_ohne_rand[sp.ab drop "Sarah: Ich weiss."]]
+
+sp:vn.vn_sprecher["Der Schnee fiel leise auf die Daecher."]
+pruefe["Erzaehlsatz ohne Doppelpunkt ist kein Sprecher" 0~count sp.name]
+
+sp:vn.vn_sprecher["Sie oeffnete eine neue E-Mail. Empfaenger: Martina Bergmann."]
+pruefe["langer Vorspann ist kein Sprecher" 0~count sp.name]
+
+sp:vn.vn_sprecher["Dr. Hartmann: Ich habe das Projekt gefunden."]
+pruefe["Nebenfigur mit Titel wird erkannt" sp.name~"Dr. Hartmann"]
+
+sp:vn.vn_sprecher["Sie las: der Bescheid war da."]
+pruefe["Erzaehlsatz mit Doppelpunkt bleibt Erzaehltext" 0~count sp.name]
+
+sp:vn.vn_sprecher["Und dann geschah etwas Merkwuerdiges an diesem Abend: nichts."]
+pruefe["langer Erzaehlvorspann bleibt Erzaehltext" 0~count sp.name]
+
+print[""]
+print["Test 11: Erzaehltext und Rede sehen verschieden aus"]
+
+buehne.widgets.stimmung.text:"dunkel"
+r:vn.vn_stil_rede["left"]
+e:vn.vn_stil_erzaehler[]
+pruefe["Rede folgt der Stimmung" r.fcolor~colors.white]
+pruefe["Erzaehler ist kursiv" e.tfont~"olympiad_italic"]
+pruefe["Erzaehler ist schwarz auf weiss" e.fcolor~colors.black]
+pruefe["Erzaehler steht auf dem Platzhalter" e.pos~"erzaehlplatz"]
+pruefe["Rede steht an der Standardstelle" 0~r.pos]
+buehne.widgets.erzaehlerpos.text:"unten"
+u:vn.vn_stil_erzaehler[]
+pruefe["umschaltbar nach unten" 0~u.pos]
+pruefe["auch unten schwarz auf weiss" u.fcolor~colors.black]
+buehne.widgets.erzaehlerpos.text:"oben"
+pruefe["Erzaehler ist linksbuendig" e.align~"left"]
+buehne.widgets.stimmung.text:"hell"
+r:vn.vn_stil_rede["left"]
+e:vn.vn_stil_erzaehler[]
+pruefe["Rede ist aufrecht" r.tfont~"olympiad"]
+buehne.widgets.stimmung.text:"dunkel"
+
+buehne.widgets.tempo.text:"0"
+pruefe["Tempo kommt aus dem Feld" 0~vn.vn_tempo[]]
+pruefe["Tempo wirkt im Stil" 0~(vn.vn_stil_rede["left"]).speed]
+buehne.widgets.tempo.text:"2"
+
+print[""]
+print["Test 12: Erzaehltext bewegt keine Muender"]
+
+stand:durchlauf[(0,0)]
+talkbefehle:()
+each k in p.kommandos
+  if "talk"~first " " split k talkbefehle:talkbefehle,list k end
+end
+pruefe["Sprechen wird angeschaltet" 0<count talkbefehle]
+pruefe["und auch wieder abgeschaltet" "talk" in talkbefehle]
+erz:0
+each o in p.stile
+  if o.tfont~"olympiad_italic" erz:erz+1 end
+end
+pruefe["Erzaehlabsaetze bekamen den Erzaehlerstil" 0<erz]
+
+# Die Beschriftung eines Einzellinks ist Erzaehltext, keine Rede: sie muss
+# den Erzaehlerstil bekommen und die Sprechanimation abschalten.
+p.gesagt:()
+p.stile:()
+p.kommandos:()
+p.wahlplan:(0,0)
+p.wahlindex:0
+daten.widgets.stand.text:""
+vn.vn_spiele[1]
+letzte:last p.stile
+pruefe["letzter Stil ist Erzaehlerstil" letzte.tfont~"olympiad_italic"]
+uebergaenge:0
+each g in p.gesagt
+  if g~"Es geht weiter." uebergaenge:uebergaenge+1 end
+end
+pruefe["Einzellink erschien als Text" 0<uebergaenge]
+
+# =========================================================== Ergebnis
+
+print[""]
+if 0~count p.fehler
+  print["Alle Tests bestanden."]
+else
+  print["%i Test(s) fehlgeschlagen:" format count p.fehler]
+  each f in p.fehler print["  %s" format f] end
+  exit[1]
+end

@@ -1,0 +1,3 @@
+[submodule "extern/decker"]
+	path = extern/decker
+	url = git@github.com:JohnEarnest/Decker.git

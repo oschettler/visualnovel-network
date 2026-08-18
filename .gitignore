@@ -1,3 +1,7 @@
 .DS_Store
 in/
 
+game/build/netzwerk.deck
+game/build/netzwerk.html
+game/data/art/
+__pycache__/

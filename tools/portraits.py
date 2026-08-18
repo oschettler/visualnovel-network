@@ -1,15 +1,29 @@
-"""Bildinhalte der sechs Figurenportraets.
+"""Bildinhalte der sechs Figurenportraets, inklusive Emote-Varianten.
 
 Stil: doc/stil-tuschezeichnung.md -- Technik: tools/ink.py
-Aufruf:  python3 tools/portraits.py [name ...]
+Die Gesichtsgeometrie jeder Figur (Augen, Brauen, Nase, Mund) steht als
+Dictionary in GEO. Wie ein Emote diese Geometrie veraendert (Mundbogen,
+Brauenneigung, Lidstellung, Pupillenversatz, Augengroesse) steht als Tabelle
+in game/data/emotes.csv -- siehe plans/graphic-novel-plan.md, Abschnitt 7.
+Haare, Silhouette, Kleidung, Ohren und Tuschespritzer bleiben figurenspezifischer
+Code, unberuehrt von den Emotes.
+
+Aufruf:
+  python3 tools/portraits.py                # alles: Ansichten, Emotes, Manifest
+  python3 tools/portraits.py sarah-hoffmann  # nur diese Figur
 """
 
+import csv
 import os
 import sys
 
 from ink import Pen
 
-OUT = os.path.join(os.path.dirname(__file__), "..", "doc", "img")
+ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
+OUT = os.path.join(ROOT, "doc", "img")
+EMOTE_OUT = os.path.join(OUT, "emotes")
+MANIFEST = os.path.join(ROOT, "game", "data", "art.csv")
+EMOTES_CSV = os.path.join(ROOT, "game", "data", "emotes.csv")
 W, H = 400, 520
 
 FINE = (0, 3.0, 0)      # Konturstrich
@@ -41,14 +55,23 @@ def ohren(p, links, rechts, s=1.0):
         ohr(p, rechts[0], rechts[1], s, -1)
 
 
-def auge(p, x, y, r=7.5, tilt=0.0, lid=True):
-    """Mandel mit Punktpupille -- kein Augapfel-Oval."""
+def auge(p, x, y, r=7.5, tilt=0.0, lid=True, pupil_dx=0.0, pupil_dy=0.0,
+         gross=1.0, blink=False):
+    """Mandel mit Punktpupille -- kein Augapfel-Oval.
+
+    `blink` ersetzt Mandel, Pupille und Lid durch einen einzelnen
+    geschlossenen Bogen -- fuer die Blinzelbilder."""
+    r = r * gross
+    if blink:
+        p.stroke([(x - r, y + tilt * 0.3), (x - r * 0.15, y + tilt * 0.3 + 2.0),
+                  (x + r, y + tilt * 0.3)], w=(0, 1.6, 0), amp=0.5)
+        return
     p.stroke([(x - r, y + tilt), (x - r * 0.3, y - r * 0.62),
               (x + r * 0.45, y - r * 0.5), (x + r, y - tilt * 0.5)],
              w=(0, 2.0, 0), amp=0.4)
     p.stroke([(x - r * 0.8, y + tilt + 1), (x, y + r * 0.5), (x + r * 0.85, y + 1)],
              w=(0, 1.5, 0), amp=0.4)
-    p.dot(x + r * 0.05, y - r * 0.08, 2.5)
+    p.dot(x + r * 0.05 + pupil_dx, y - r * 0.08 + pupil_dy, 2.5)
     if lid:
         p.stroke([(x - r * 1.1, y - r * 0.9), (x, y - r * 1.35), (x + r * 0.9, y - r * 1.0)],
                  w=(0, 1.3, 0), amp=0.4)
@@ -58,19 +81,11 @@ def nase(p, x, y0, y1, w=8):
     """Hakenstrich mit Nasenfluegel auf der abgewandten Seite.
 
     Der Haken muss auf die Seite zeigen, zu der sich das Gesicht wendet --
-    bei nach rechts gedrehtem Kopf also gespiegelt."""
+    bei nach rechts gedrehtem Kopf also gespiegelt. Von Emotes unberuehrt."""
     s = -1 if p.turn > 0.05 else 1
     p.stroke([(x + 2 * s, y0), (x - 2 * s, y0 + (y1 - y0) * 0.55), (x - w * s, y1),
               (x - w * 0.2 * s, y1 + 5), (x + 3 * s, y1 + 3)],
              w=(0, 2.4, 0), amp=0.6)
-
-
-def mund(p, x0, y0, x1, y1, bow=4, punkte=True):
-    p.stroke([(x0, y0), ((x0 + x1) / 2, (y0 + y1) / 2 + bow), (x1, y1)],
-             w=(0, 2.2, 0), amp=0.5)
-    if punkte:
-        p.dot(x0, y0, 1.9)
-        p.dot(x1, y1, 1.9)
 
 
 def hals_schultern(p, schulter_l=None, schulter_r=None):
@@ -92,7 +107,146 @@ def hals_schultern(p, schulter_l=None, schulter_r=None):
     p.set_turn(kopf * 0.25, R=115.0)
 
 
-def michael(p, turn=0.0):
+# ------------------------------------------------------- Gesicht aus Daten
+#
+# Die Gesichtsgeometrie (Augen, Brauen, Nase, Mund) steht hier als
+# Dictionary je Figur. Ein Emote moduliert diese Geometrie ueber die Zeilen
+# aus game/data/emotes.csv -- siehe braue(), augen() und mundzug() unten.
+# Jede Brauen-Stuetzpunktliste laeuft bei allen sechs Figuren gleich:
+# die linke Braue von aussen (Schlaefe) nach innen (Nasenwurzel), die
+# rechte von innen nach aussen -- daher aussen_erst=True/False.
+
+GEO = {
+    "michael": {
+        "auge_l": dict(x=165, y=221, r=7.8, tilt=1.0),
+        "auge_r": dict(x=235, y=216, r=7.0, tilt=-0.5),
+        "braue_l": dict(pts=[(143, 197), (166, 187), (187, 193)],
+                         w=(1.8, 6.0, 0), amp=0.7, aussen_erst=True),
+        "braue_r": dict(pts=[(213, 190), (235, 184), (256, 195)],
+                         w=(0, 6.4, 1.8), amp=0.7, aussen_erst=False),
+        "nase": dict(x=200, y0=227, y1=274, w=10),
+        "mund": dict(x0=178, y0=309, x1=221, y1=305, bow=4),
+    },
+    "sarah": {
+        "auge_l": dict(x=170, y=224, r=7.6, tilt=0.8),
+        "auge_r": dict(x=234, y=220, r=7.2, tilt=-0.4),
+        "braue_l": dict(pts=[(150, 200), (172, 193), (190, 199)],
+                         w=(1.5, 4.6, 0), amp=0.6, aussen_erst=True),
+        "braue_r": dict(pts=[(212, 197), (232, 191), (252, 199)],
+                         w=(0, 4.8, 1.5), amp=0.6, aussen_erst=False),
+        "nase": dict(x=202, y0=230, y1=274, w=8),
+        "mund": dict(x0=181, y0=310, x1=222, y1=306, bow=3),
+    },
+    "jamal": {
+        "auge_l": dict(x=167, y=226, r=7.6, tilt=0.9),
+        "auge_r": dict(x=235, y=222, r=7.2, tilt=-0.4),
+        "braue_l": dict(pts=[(146, 202), (169, 194), (188, 200)],
+                         w=(1.6, 5.2, 0), amp=0.6, aussen_erst=True),
+        "braue_r": dict(pts=[(212, 198), (233, 192), (254, 201)],
+                         w=(0, 5.4, 1.6), amp=0.6, aussen_erst=False),
+        "nase": dict(x=201, y0=232, y1=276, w=9),
+        "mund": dict(x0=180, y0=312, x1=221, y1=308, bow=2),
+    },
+    "kat": {
+        "auge_l": dict(x=169, y=224, r=8.2, tilt=0.8),
+        "auge_r": dict(x=234, y=220, r=7.8, tilt=-0.4),
+        "braue_l": dict(pts=[(148, 200), (170, 192), (189, 198)],
+                         w=(1.4, 4.4, 0), amp=0.6, aussen_erst=True),
+        "braue_r": dict(pts=[(212, 196), (233, 190), (253, 199)],
+                         w=(0, 4.6, 1.4), amp=0.6, aussen_erst=False),
+        "nase": dict(x=201, y0=230, y1=272, w=8),
+        "mund": dict(x0=176, y0=302, x1=226, y1=300, bow=15),
+    },
+    "lena": {
+        "auge_l": dict(x=171, y=226, r=7.4, tilt=1.0),
+        "auge_r": dict(x=233, y=219, r=7.0, tilt=-0.6),
+        "braue_l": dict(pts=[(152, 202), (173, 195), (191, 200)],
+                         w=(1.4, 4.4, 0), amp=0.6, aussen_erst=True),
+        "braue_r": dict(pts=[(211, 191), (232, 183), (251, 192)],
+                         w=(0, 4.8, 1.4), amp=0.6, aussen_erst=False),
+        "nase": dict(x=202, y0=232, y1=274, w=8),
+        "mund": dict(x0=180, y0=310, x1=224, y1=305, bow=5.5),
+    },
+    "tom": {
+        "auge_l": dict(x=170, y=230, r=8.4, tilt=0.8),
+        "auge_r": dict(x=234, y=226, r=8.0, tilt=-0.4),
+        "braue_l": dict(pts=[(150, 206), (172, 197), (190, 203)],
+                         w=(1.4, 4.2, 0), amp=0.6, aussen_erst=True),
+        "braue_r": dict(pts=[(212, 201), (233, 195), (252, 204)],
+                         w=(0, 4.4, 1.4), amp=0.6, aussen_erst=False),
+        "nase": dict(x=201, y0=236, y1=274, w=7),
+        "mund": dict(x0=172, y0=300, x1=228, y1=298, bow=21),
+    },
+}
+
+
+def braue(p, spec, row):
+    """Ein Brauenstrich, an den Enden je nach Emote verschoben.
+
+    Das innere Ende (nahe der Nase) wandert um `braue_innen`, das aeussere
+    (zur Schlaefe hin) um `braue_aussen`, die Punkte dazwischen linear
+    interpoliert -- der urspruengliche Keilstrich bleibt dabei erhalten,
+    nur seine Neigung aendert sich."""
+    pts = spec["pts"]
+    n = len(pts)
+    aussen_erst = spec.get("aussen_erst", True)
+    neu = []
+    for i, (x, y) in enumerate(pts):
+        t = i / (n - 1)
+        s0 = row["braue_aussen"] if aussen_erst else row["braue_innen"]
+        s1 = row["braue_innen"] if aussen_erst else row["braue_aussen"]
+        neu.append((x, y + s0 * (1 - t) + s1 * t))
+    p.stroke(neu, w=spec["w"], amp=spec.get("amp", 0.6))
+
+
+def brauen(p, geo, row):
+    braue(p, geo["braue_l"], row)
+    braue(p, geo["braue_r"], row)
+
+
+def augen(p, geo, row, blink=False):
+    for spec in (geo["auge_l"], geo["auge_r"]):
+        auge(p, spec["x"], spec["y"], spec["r"], tilt=spec.get("tilt", 0.0),
+             lid=bool(row["lid"]), pupil_dx=row["pupille_x"], pupil_dy=row["pupille_y"],
+             gross=row["augen_gross"], blink=blink)
+
+
+def wirksamer_bogen(spec, row):
+    """Mundbogen aus figureneigener Grundkruemmung und Emote-Abweichung.
+
+    Ohne die Grundkruemmung waeren alle sechs Figuren im neutralen Ausdruck
+    gleich, und Kat, Lena und Tom haetten ihren Gesichtsausdruck verloren.
+    Wie stark sie in ein Emote hineinwirkt, steht als "bogen_daempfung" in
+    der Emote-Tabelle: ausdrucksstarke Emotes wie "ent" verdraengen sie fast
+    ganz (sonst grinst Tom auch entschlossen noch), weiche wie "freude"
+    behalten sie."""
+    neutral_bow = EMOTES["neutral"]["bow"]
+    basis = spec.get("bow", neutral_bow)
+    if row.get("emote") == "neutral":
+        return basis
+    return row["bow"] + row["bogen_daempfung"] * (basis - neutral_bow)
+
+
+def mundzug(p, geo, row):
+    """Mund aus Eckpunkten plus Emote-Bogen.
+
+    `mund_offen` ersetzt den Strich durch eine kleine, unregelmaessige
+    Mundoeffnung -- fuer Sprechbilder und den Schock-Ausdruck."""
+    spec = geo["mund"]
+    x0, y0, x1, y1 = spec["x0"], spec["y0"], spec["x1"], spec["y1"]
+    bow = wirksamer_bogen(spec, row)
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2 + bow
+    if row["mund_offen"]:
+        p.stroke([(x0, y0), (mx, my - 4.5), (x1, y1)], w=(0, 2.0, 0), amp=0.5)
+        p.patch([(x0 + 4, y0 + 1), (mx, my + 6), (x1 - 4, y1 + 1), (mx, my - 3)], wob=1.3)
+    else:
+        p.stroke([(x0, y0), (mx, my), (x1, y1)], w=(0, 2.2, 0), amp=0.5)
+    p.dot(x0, y0, 1.9)
+    p.dot(x1, y1, 1.9)
+
+
+def michael(p, turn=0.0, row=None, blink=False):
+    row = row or EMOTES["neutral"]
     p.set_turn(turn)
     # Kopf leicht gedreht: linke Wange voller, rechte Seite knapper
     # --- Schaedel: kahl, Kontur laeuft ueber den Scheitel
@@ -129,12 +283,9 @@ def michael(p, turn=0.0):
     p.stroke([(163, 171), (198, 163), (236, 172)], w=(0, 1.6, 0), amp=0.9,
              cuts=[(0.1, 0.88)])
 
-    # --- Brauen: schwere Keile, asymmetrisch
-    p.stroke([(143, 197), (166, 187), (187, 193)], w=(1.8, 6.0, 0), amp=0.7)
-    p.stroke([(213, 190), (235, 184), (256, 195)], w=(0, 6.4, 1.8), amp=0.7)
-
-    auge(p, 165, 221, 7.8, tilt=1.0)
-    auge(p, 235, 216, 7.0, tilt=-0.5)
+    geo = GEO["michael"]
+    brauen(p, geo, row)
+    augen(p, geo, row, blink=blink)
 
     # --- Brille: schiefe Ovale, offen gezeichnet
     p.stroke([(142, 219), (150, 201), (171, 197), (188, 207), (189, 227),
@@ -147,7 +298,7 @@ def michael(p, turn=0.0):
     p.stroke([(142, 215), (130, 210)], w=(3.0, 1.8, 0), amp=0.4)
     p.stroke([(261, 209), (272, 205)], w=(2.8, 1.7, 0), amp=0.4)
 
-    nase(p, 200, 227, 274, w=10)
+    nase(p, **geo["nase"])
 
     # --- Schnauzbart: von der Mitte nach aussen gestrichen
     p.hairs([(196, 283), (184, 285), (172, 290)], 20, 15,
@@ -158,7 +309,7 @@ def michael(p, turn=0.0):
             curl_bias=-0.8, length_var=0.5)
     p.blob(198, 288, 5.0, 0.45, 9, spikes=2, spike_len=1.6)
 
-    mund(p, 178, 309, 221, 305, bow=4)
+    mundzug(p, geo, row)
 
     # --- Nasolabialfalten, Kraehenfuesse
     p.stroke([(182, 275), (174, 293), (168, 304)], w=(0, 2.0, 0), amp=0.6)
@@ -182,11 +333,12 @@ def michael(p, turn=0.0):
     p.hatch(84, 486, 4, 16, 1.15, 7, w=(0, 1.6, 0))
 
     p.spatter([(74, 300, 52, 9), (330, 306, 50, 9),
-               (206, 486, 120, 7), (200, 66, 108, 5)])
+               (206, 486, 120, 7), (200, 66, 108, 5)], rng_seed=p.seed)
 
 
-def sarah(p, turn=0.0):
+def sarah(p, turn=0.0, row=None, blink=False):
     """Dunkles, glattes Haar bis auf die Schultern, muede und entschlossen."""
+    row = row or EMOTES["neutral"]
     p.set_turn(turn)
     kontur(p, [(141, 176), (138, 232), (147, 288), (163, 328), (182, 353), (203, 363)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.58), (0.65, 1.0)],
@@ -232,17 +384,15 @@ def sarah(p, turn=0.0):
 
     ohren(p, (137, 224), (265, 220), 0.9)
 
-    p.stroke([(150, 200), (172, 193), (190, 199)], w=(1.5, 4.6, 0), amp=0.6)
-    p.stroke([(212, 197), (232, 191), (252, 199)], w=(0, 4.8, 1.5), amp=0.6)
-
-    auge(p, 170, 224, 7.6, tilt=0.8)
-    auge(p, 234, 220, 7.2, tilt=-0.4)
+    geo = GEO["sarah"]
+    brauen(p, geo, row)
+    augen(p, geo, row, blink=blink)
     # Muede Schatten unter den Augen
     p.stroke([(159, 238), (172, 243), (184, 239)], w=(0, 1.6, 0), amp=0.5)
     p.stroke([(220, 235), (233, 240), (245, 236)], w=(0, 1.5, 0), amp=0.5)
 
-    nase(p, 202, 230, 274, w=8)
-    mund(p, 181, 310, 222, 306, bow=3)
+    nase(p, **geo["nase"])
+    mundzug(p, geo, row)
     p.stroke([(186, 278), (179, 294)], w=(0, 1.7, 0), amp=0.5)
     p.stroke([(218, 276), (225, 292)], w=(0, 1.6, 0), amp=0.5)
 
@@ -256,11 +406,12 @@ def sarah(p, turn=0.0):
     p.stroke([(303, 448), (283, 474), (274, 506)], w=(0, 6.0, 0), amp=1.2)
 
     p.spatter([(72, 300, 50, 8), (332, 306, 48, 8),
-               (206, 488, 118, 7), (200, 70, 100, 5)])
+               (206, 488, 118, 7), (200, 70, 100, 5)], rng_seed=p.seed)
 
 
-def jamal(p, turn=0.0):
+def jamal(p, turn=0.0, row=None, blink=False):
     """Kurzes Haar, graue Schlaefen, Dreitagebart, Kapuzenpulli."""
+    row = row or EMOTES["neutral"]
     p.set_turn(turn)
     kontur(p, [(136, 184), (133, 238), (142, 292), (159, 330), (181, 354), (203, 363)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.57), (0.64, 1.0)],
@@ -287,14 +438,12 @@ def jamal(p, turn=0.0):
 
     ohren(p, (132, 222), (268, 218), 1.0)
 
-    p.stroke([(146, 202), (169, 194), (188, 200)], w=(1.6, 5.2, 0), amp=0.6)
-    p.stroke([(212, 198), (233, 192), (254, 201)], w=(0, 5.4, 1.6), amp=0.6)
+    geo = GEO["jamal"]
+    brauen(p, geo, row)
+    augen(p, geo, row, blink=blink)
 
-    auge(p, 167, 226, 7.6, tilt=0.9)
-    auge(p, 235, 222, 7.2, tilt=-0.4)
-
-    nase(p, 201, 232, 276, w=9)
-    mund(p, 180, 312, 221, 308, bow=2)
+    nase(p, **geo["nase"])
+    mundzug(p, geo, row)
 
     # --- Dreitagebart: kurze Striche und Punkte laengs des Kiefers
     p.hairs([(150, 300), (168, 332), (200, 352), (232, 330), (250, 298)], 60, 7,
@@ -324,11 +473,12 @@ def jamal(p, turn=0.0):
     p.stroke([(300, 450), (280, 476), (272, 506)], w=(0, 5.6, 0), amp=1.2)
 
     p.spatter([(74, 300, 50, 9), (330, 306, 48, 8),
-               (206, 488, 116, 7), (200, 70, 100, 5)])
+               (206, 488, 116, 7), (200, 70, 100, 5)], rng_seed=p.seed)
 
 
-def kat(p, turn=0.0):
+def kat(p, turn=0.0, row=None, blink=False):
     """Kurzer, zerzauster Schnitt mit Undercut, Sommersprossen, warm."""
+    row = row or EMOTES["neutral"]
     p.set_turn(turn)
     kontur(p, [(140, 182), (137, 234), (147, 288), (164, 326), (183, 350), (203, 359)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.57), (0.64, 1.0)],
@@ -357,17 +507,12 @@ def kat(p, turn=0.0):
 
     ohren(p, (136, 220), (265, 216), 0.95)
 
-    p.stroke([(148, 200), (170, 192), (189, 198)], w=(1.4, 4.4, 0), amp=0.6)
-    p.stroke([(212, 196), (233, 190), (253, 199)], w=(0, 4.6, 1.4), amp=0.6)
+    geo = GEO["kat"]
+    brauen(p, geo, row)
+    augen(p, geo, row, blink=blink)
 
-    auge(p, 169, 224, 8.2, tilt=0.8)
-    auge(p, 234, 220, 7.8, tilt=-0.4)
-
-    nase(p, 201, 230, 272, w=8)
-    # Warmes Laecheln: Bogen mit betonten Mundwinkeln
-    p.stroke([(176, 302), (200, 316), (226, 300)], w=(0, 2.6, 0), amp=0.5)
-    p.dot(176, 302, 2.2)
-    p.dot(226, 300, 2.2)
+    nase(p, **geo["nase"])
+    mundzug(p, geo, row)
     p.stroke([(182, 280), (176, 294)], w=(0, 1.7, 0), amp=0.5)
     p.stroke([(220, 278), (226, 292)], w=(0, 1.6, 0), amp=0.5)
 
@@ -391,11 +536,12 @@ def kat(p, turn=0.0):
     p.stroke([(302, 450), (282, 476), (273, 506)], w=(0, 5.8, 0), amp=1.2)
 
     p.spatter([(72, 302, 50, 9), (332, 306, 48, 8),
-               (206, 488, 116, 7), (200, 66, 104, 5)])
+               (206, 488, 116, 7), (200, 66, 104, 5)], rng_seed=p.seed)
 
 
-def lena(p, turn=0.0):
+def lena(p, turn=0.0, row=None, blink=False):
     """Scharfer Bob mit geradem Pony, wacher und skeptischer Blick."""
+    row = row or EMOTES["neutral"]
     p.set_turn(turn)
     kontur(p, [(144, 186), (141, 238), (150, 290), (166, 326), (184, 350), (203, 359)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.56), (0.63, 1.0)],
@@ -442,18 +588,12 @@ def lena(p, turn=0.0):
                 curl=0.20, angle=winkel, curl_bias=0.0, curl_var=0.9,
                 length_var=0.26, jitter=2.2)
 
-    # Skeptisch: eine Braue hoeher als die andere
-    p.stroke([(152, 202), (173, 195), (191, 200)], w=(1.4, 4.4, 0), amp=0.6)
-    p.stroke([(211, 191), (232, 183), (251, 192)], w=(0, 4.8, 1.4), amp=0.6)
+    geo = GEO["lena"]
+    brauen(p, geo, row)
+    augen(p, geo, row, blink=blink)
 
-    auge(p, 171, 226, 7.4, tilt=1.0)
-    auge(p, 233, 219, 7.0, tilt=-0.6)
-
-    nase(p, 202, 232, 274, w=8)
-    # Schmaler, leicht schiefer Mund
-    p.stroke([(180, 310), (200, 313), (224, 305)], w=(0, 2.4, 0), amp=0.5)
-    p.dot(180, 310, 2.0)
-    p.dot(224, 305, 2.0)
+    nase(p, **geo["nase"])
+    mundzug(p, geo, row)
     p.stroke([(184, 282), (178, 296)], w=(0, 1.7, 0), amp=0.5)
     p.stroke([(218, 280), (224, 294)], w=(0, 1.6, 0), amp=0.5)
     p.hatch(148, 250, 3, 9, 0.4, 5, w=(0, 1.4, 0))
@@ -471,11 +611,12 @@ def lena(p, turn=0.0):
     p.stroke([(303, 450), (283, 476), (275, 506)], w=(0, 5.6, 0), amp=1.2)
 
     p.spatter([(72, 302, 50, 9), (332, 308, 48, 8),
-               (206, 488, 116, 7), (200, 66, 102, 5)])
+               (206, 488, 116, 7), (200, 66, 102, 5)], rng_seed=p.seed)
 
 
-def tom(p, turn=0.0):
+def tom(p, turn=0.0, row=None, blink=False):
     """Wilde Locken, jung, energisch -- offenes Grinsen."""
+    row = row or EMOTES["neutral"]
     p.set_turn(turn)
     kontur(p, [(142, 190), (139, 240), (149, 290), (166, 324), (184, 346), (203, 355)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.56), (0.63, 1.0)],
@@ -498,19 +639,12 @@ def tom(p, turn=0.0):
 
     ohren(p, (138, 226), (262, 222), 0.95)
 
-    p.stroke([(150, 206), (172, 197), (190, 203)], w=(1.4, 4.2, 0), amp=0.6)
-    p.stroke([(212, 201), (233, 195), (252, 204)], w=(0, 4.4, 1.4), amp=0.6)
+    geo = GEO["tom"]
+    brauen(p, geo, row)
+    augen(p, geo, row, blink=blink)
 
-    auge(p, 170, 230, 8.4, tilt=0.8)
-    auge(p, 234, 226, 8.0, tilt=-0.4)
-
-    nase(p, 201, 236, 274, w=7)
-
-    # --- Offenes Grinsen: Bogen mit dunkler Mundoeffnung
-    p.stroke([(172, 300), (200, 320), (228, 298)], w=(0, 3.0, 0), amp=0.5)
-    p.patch([(180, 304), (200, 316), (220, 302), (200, 308)], wob=1.2)
-    p.dot(172, 300, 2.2)
-    p.dot(228, 298, 2.2)
+    nase(p, **geo["nase"])
+    mundzug(p, geo, row)
     p.stroke([(180, 282), (174, 294)], w=(0, 1.6, 0), amp=0.5)
     p.stroke([(221, 280), (227, 292)], w=(0, 1.5, 0), amp=0.5)
 
@@ -530,7 +664,7 @@ def tom(p, turn=0.0):
     p.hatch(150, 486, 4, 15, 1.2, 8, w=(0, 1.6, 0))
 
     p.spatter([(72, 304, 50, 9), (332, 308, 48, 8),
-               (206, 490, 116, 7), (200, 62, 106, 5)])
+               (206, 490, 116, 7), (200, 62, 106, 5)], rng_seed=p.seed)
 
 
 FIGUREN = {
@@ -542,6 +676,17 @@ FIGUREN = {
     "tom-schneider": (tom, 68),
 }
 
+# Langer Figurenname -> kurzer Puppenname (Ordner unter doc/img/emotes/ und
+# game/data/art/figuren/).
+PUPPEN = {
+    "sarah-hoffmann": "sarah",
+    "jamal-al-rashid": "jamal",
+    "michael-weber": "michael",
+    "katharina-mueller": "kat",
+    "lena-kowalski": "lena",
+    "tom-schneider": "tom",
+}
+
 
 # Blickwinkel fuer Dialoge. Positiver Wert dreht die Nase nach rechts --
 # von links vorne gesehen wendet sich das Gesicht also nach rechts.
@@ -549,18 +694,150 @@ FIGUREN = {
 # gezeichnet wirkt und nicht wie eine verschobene Kopie.
 ANSICHTEN = [("", 0.0, 0), ("-von-links", 0.30, 101), ("-von-rechts", -0.30, 202)]
 
+# Reihenfolge der sechs Emotes -- bestimmt auch die Reihenfolge im Manifest.
+EMOTE_NAMEN = ["neutral", "denk", "sorge", "ent", "freude", "schock"]
+# Fuer diese beiden Emotes wird zusaetzlich ein Blinzelbild erzeugt --
+# sie sind laut Plan die, in denen Figuren am laengsten stehen.
+BLINK_EMOTES = ["neutral", "ent"]
+
+
+def lade_emotes():
+    """Liest die Emote-Tabelle aus game/data/emotes.csv.
+
+    Das ist der einzige Ort, an dem Mundbogen, Brauenneigung, Lidstellung,
+    Pupillenversatz und Augengroesse je Emote festgelegt werden -- siehe
+    plans/graphic-novel-plan.md, Abschnitt 4 und 7."""
+    zeilen = {}
+    with open(EMOTES_CSV, newline="", encoding="utf-8") as fh:
+        for zeile in csv.DictReader(fh):
+            zeilen[zeile["emote"]] = {
+                "emote": zeile["emote"],
+                "bow": float(zeile["bow"]),
+                "braue_innen": float(zeile["braue_innen"]),
+                "braue_aussen": float(zeile["braue_aussen"]),
+                "lid": int(zeile["lid"]),
+                "pupille_x": float(zeile["pupille_x"]),
+                "pupille_y": float(zeile["pupille_y"]),
+                "mund_offen": int(zeile["mund_offen"]),
+                "augen_gross": float(zeile["augen_gross"]),
+                "bogen_daempfung": float(zeile["bogen_daempfung"]),
+            }
+    return zeilen
+
+
+EMOTES = lade_emotes()
+
+
+def schreibe_svg(p, pfad):
+    with open(pfad, "w") as fh:
+        fh.write(p.svg(W, H))
+    return len(p.paths)
+
+
+def zeichne_ansichten(name, fn, seed):
+    """Die drei bestehenden Blickrichtungen -- unveraendert im Verhalten."""
+    for suffix, turn, versatz in ANSICHTEN:
+        p = Pen(seed + versatz)
+        fn(p, turn)
+        pfad = os.path.normpath(os.path.join(OUT, name + suffix + ".svg"))
+        n = schreibe_svg(p, pfad)
+        print("geschrieben:", os.path.basename(pfad), f"({n} Pfade)")
+
+
+def zeichne_emotes(name, fn, seed, kurz):
+    """Alle 14 Emote-Canvases einer Figur, alle mit demselben Zufallsstartwert.
+
+    Nur das Gesicht (Brauen, Augen, Mund) unterscheidet sich zwischen den
+    Dateien -- Haare und Silhouette werden vor dem Gesicht gezeichnet und
+    verbrauchen den Zufallsstrom deshalb identisch, unabhaengig vom Emote."""
+    zielverzeichnis = os.path.join(EMOTE_OUT, kurz)
+    os.makedirs(zielverzeichnis, exist_ok=True)
+    manifest_zeilen = []
+
+    for emote in EMOTE_NAMEN:
+        row = EMOTES[emote]
+
+        p = Pen(seed)
+        fn(p, 0.0, row=row, blink=False)
+        pfad = os.path.join(zielverzeichnis, f"{emote}.svg")
+        n = schreibe_svg(p, pfad)
+        print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
+        manifest_zeilen.append(
+            (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
+             f"figuren/{kurz}/{emote}.gif", "480", "624", "1"))
+
+        offen_row = dict(row)
+        offen_row["mund_offen"] = 1
+        p = Pen(seed)
+        fn(p, 0.0, row=offen_row, blink=False)
+        pfad = os.path.join(zielverzeichnis, f"{emote}_open.svg")
+        n = schreibe_svg(p, pfad)
+        print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
+        manifest_zeilen.append(
+            (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
+             f"figuren/{kurz}/{emote}_open.gif", "480", "624", "1"))
+
+    for emote in BLINK_EMOTES:
+        row = EMOTES[emote]
+        p = Pen(seed)
+        fn(p, 0.0, row=row, blink=True)
+        pfad = os.path.join(zielverzeichnis, f"{emote}_blink.svg")
+        n = schreibe_svg(p, pfad)
+        print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
+        manifest_zeilen.append(
+            (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
+             f"figuren/{kurz}/{emote}_blink.gif", "480", "624", "1"))
+
+    return manifest_zeilen
+
+
+def schreibe_manifest(neue_zeilen, bearbeitete_kurznamen):
+    """Schreibt game/data/art.csv neu.
+
+    Zeilen, die nicht mit doc/img/emotes/ beginnen, bleiben unangetastet
+    (spaetere Hintergruende und aehnliches). Von den Emote-Zeilen werden nur
+    die der gerade bearbeiteten Figuren ersetzt -- ein Aufruf mit nur einem
+    Figurennamen darf die Zeilen der anderen Figuren nicht loeschen."""
+    behalten = []
+    if os.path.isfile(MANIFEST):
+        with open(MANIFEST, newline="", encoding="utf-8") as fh:
+            leser = csv.reader(fh)
+            next(leser, None)
+            for zeile in leser:
+                if not zeile:
+                    continue
+                pfad = zeile[0]
+                if not pfad.startswith("doc/img/emotes/"):
+                    behalten.append(zeile)
+                    continue
+                betroffen = any(pfad.startswith(f"doc/img/emotes/{k}/")
+                                 for k in bearbeitete_kurznamen)
+                if not betroffen:
+                    behalten.append(zeile)
+
+    with open(MANIFEST, "w", newline="", encoding="utf-8") as fh:
+        schreiber = csv.writer(fh)
+        schreiber.writerow(["svg", "gif", "breite", "hoehe", "transparent"])
+        for zeile in behalten:
+            schreiber.writerow(zeile)
+        for zeile in neue_zeilen:
+            schreiber.writerow(zeile)
+
+    print(f"Manifest geschrieben: {os.path.relpath(MANIFEST, ROOT)} "
+          f"({len(behalten) + len(neue_zeilen)} Zeilen)")
+
 
 def main(argv):
     names = argv or list(FIGUREN)
+    alle_manifest_zeilen = []
     for name in names:
         fn, seed = FIGUREN[name]
-        for suffix, turn, versatz in ANSICHTEN:
-            p = Pen(seed + versatz)
-            fn(p, turn)
-            path = os.path.normpath(os.path.join(OUT, name + suffix + ".svg"))
-            with open(path, "w") as fh:
-                fh.write(p.svg(W, H))
-            print("geschrieben:", os.path.basename(path), f"({len(p.paths)} Pfade)")
+        kurz = PUPPEN[name]
+        zeichne_ansichten(name, fn, seed)
+        alle_manifest_zeilen += zeichne_emotes(name, fn, seed, kurz)
+
+    bearbeitete_kurznamen = [PUPPEN[n] for n in names]
+    schreibe_manifest(alle_manifest_zeilen, bearbeitete_kurznamen)
 
 
 if __name__ == "__main__":

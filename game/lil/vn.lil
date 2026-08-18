@@ -1,0 +1,488 @@
+# Engine der Graphic Novel "Das Netzwerk".
+#
+# Diese Datei wird von game/build/build_vn.lil als DECK-Skript eingesetzt.
+# Decker verkettet Deck-, Karten- und Widget-Skripte, deshalb sehen alle
+# Karten und Knoepfe die hier definierten Funktionen.
+#
+# Vor Aenderungen unbedingt lesen: zelda-network/game/README.md,
+# Abschnitt "Sechs Lil-Fallstricke". Besonders relevant hier:
+# keine Operator-Prioritaet (jede Berechnung in eine eigene Variable),
+# in where-Klauseln gehoert "=" hin und nicht "~", und "each v k i in dict"
+# liefert zuerst den WERT.
+
+GROSS:"ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ"
+
+# ------------------------------------------------------------------ Stile
+
+on vn_stil name do
+  o:()
+  o.tfont:"olympiad"
+  o.bfont:"olympiad"
+  o.align:"left"
+  o.speed:vn_tempo[]
+  if name~"dunkel"
+    o.fcolor:colors.white
+    o.bcolor:colors.black
+  elseif name~"rueckblende"
+    o.fcolor:colors.black
+    o.bcolor:colors.lightgray
+  else
+    o.fcolor:colors.black
+    o.bcolor:colors.white
+  end
+  o
+end
+
+# Die Textgeschwindigkeit (0 = sofort) liegt aus demselben Grund wie die
+# Stimmung in einem Feld: der Sprecherstil wird pro Absatz neu gesetzt und
+# wuerde ein einmaliges dd.style sonst gleich wieder ueberschreiben.
+on vn_tempo do
+  t:buehne.widgets.tempo.text
+  if 0~count t 2 else "%i" parse t end
+end
+
+# Die Grundstimmung einer Szene (Kommandos !hell, !dunkel, !rueckblende)
+# steht in einem Feld auf der Buehne. Ein Deck-Skript wird bei JEDEM
+# Ereignis neu ausgefuehrt, eine Variable im Skript wuerde die Stimmung
+# also nicht ueber die Dialogboxen hinweg behalten.
+on vn_stimmung do
+  s:buehne.widgets.stimmung.text
+  if 0~count s "dunkel" else s end
+end
+
+# Erzaehltext und Rede sehen unterschiedlich aus: die Rede steht aufrecht,
+# der Erzaehltext kursiv. Die Stimmung der Szene gilt fuer beide gleich.
+# Zuvor wurde stattdessen die Stimmung umgedreht; seit es eine echte Kursive
+# gibt (olympiad_italic), ist das die ruhigere und uebliche Loesung.
+# Beide sind linksbuendig -- zentrierter Fliesstext ueber mehrere Zeilen
+# liest sich schlecht, weil der Zeilenanfang von Zeile zu Zeile springt.
+on vn_stil_rede ausrichtung do
+  o:vn_stil[vn_stimmung[]]
+  o.align:ausrichtung
+  o.pos:0
+  o.size:(0,0)
+  o
+end
+
+# Wo der Erzaehltext steht: "oben" setzt die Box auf das unsichtbare Widget
+# "erzaehlplatz" am oberen Kartenrand, "unten" laesst sie an der ueblichen
+# Stelle. Umschaltbar per Kommando !erzaehler oben bzw. !erzaehler unten.
+on vn_erzaehlerplatz do
+  t:buehne.widgets.erzaehlerpos.text
+  if 0~count t "oben" else t end
+end
+
+# Erzaehltext ist immer schwarz auf weiss, unabhaengig von der Stimmung der
+# Szene. Zusammen mit der Kursiven ist er damit auch dann klar von der Rede
+# getrennt, wenn die Szene hell gestimmt ist.
+on vn_stil_erzaehler do
+  o:vn_stil["hell"]
+  o.tfont:"olympiad_italic"
+  o.align:"left"
+  if (vn_erzaehlerplatz[])~"oben"
+    o.pos:"erzaehlplatz"
+    o.size:(760,0)
+  else
+    o.pos:0
+    o.size:(0,0)
+  end
+  o
+end
+
+# ------------------------------------------------------------------ Story
+
+# Die Szenendatei liegt als Text in einem Feld auf der Karte "daten",
+# damit das fertige Deck ohne Zugriff auf die Platte auskommt.
+on vn_story do
+  twee.read[daten.widgets.quelle.text]
+end
+
+on vn_frisch anfang do
+  s:()
+  s.passage:anfang
+  v:()
+  v.entschlossenheit:0
+  v.vorsicht:0
+  v.zusammenhalt:0
+  v.ausgestiegen:0
+  v.tom_gestanden:0
+  v.figur:""
+  s.vars:v
+  s.gesehen:()
+  s.beendet:0
+  s
+end
+
+on vn_speichern s do
+  daten.widgets.stand.text:"%J" format s
+end
+
+on vn_laden do
+  t:daten.widgets.stand.text
+  if 0~count t 0 else "%J" parse t end
+end
+
+# ---------------------------------------------------------------- Kapitel
+
+# Ein Kapitelanfang ist eine Passage, die einen "titel" in ihren
+# Twee-Metadaten traegt:
+#
+#   :: k01-buero [kapitel-01 teil-1] {"titel":"Die Vision"}
+#
+# Damit steht der Kapitelindex vollstaendig in der Szenendatei, und Twine
+# behaelt die Angabe beim Bearbeiten bei.
+on vn_kapitel story do
+  namen:()
+  titel:()
+  each z in rows story
+    m:z.meta
+    if "titel" in keys m
+      namen:namen,list z.name
+      titel:titel,list m.titel
+    end
+  end
+  k:()
+  k.name:namen
+  k.titel:titel
+  k
+end
+
+# Zu welchem Kapitel gehoert eine Passage? Ueber den "kapitel-NN"-Tag,
+# nicht ueber die Reihenfolge, damit Ruecksprunge nichts durcheinander
+# bringen.
+on vn_kapiteltag story passage do
+  gefunden:""
+  each z in rows story
+    if z.name~passage
+      each t in z.tags
+        if "kapitel-"~8 take t gefunden:t end
+      end
+    end
+  end
+  gefunden
+end
+
+on vn_kapiteltitel story passage do
+  tag:vn_kapiteltag[story passage]
+  titel:""
+  each z in rows story
+    if tag in z.tags
+      m:z.meta
+      if "titel" in keys m
+        if 0~count titel titel:m.titel end
+      end
+    end
+  end
+  titel
+end
+
+# Rich Text fuer die Indexkarte. Gespielte Kapitel sind anklickbar, das
+# erste immer. Der Linkinhalt ist der Passagenname, den "on link"
+# entgegennimmt.
+on vn_index_text do
+  story:vn_story[]
+  k:vn_kapitel[story]
+  s:vn_laden[]
+  gesehen:()
+  if !0~s gesehen:keys s.gesehen end
+  raze each i in range count k.name
+    n:k.name[i]
+    t:k.titel[i]
+    offen:(i~0)|(n in gesehen)
+    if offen
+      rtext.make[("" fuse (t,"\n")) "" n]
+    else
+      rtext.make[("" fuse (t," (noch nicht gespielt)\n")) "" ""]
+    end
+  end
+end
+
+on link val do
+  if 0<count val vn_start_bei[val] end
+end
+
+# ---------------------------------------------------------------- Kommandos
+
+# Hintergrund wechseln. Solange es die Bilder noch nicht gibt (bis M7),
+# bleibt die Buehne leer und die Ortsmarke traegt den Ort.
+on vn_hintergrund name do
+  h:hintergruende.widgets[name]
+  if h
+    buehne.image:h.copy[]
+  else
+    buehne.image.clear[]
+  end
+end
+
+on vn_ortsmarke text do
+  buehne.widgets.ortsmarke.text:text
+end
+
+# Argument eines Kommandos: alles nach dem ersten Wort.
+on vn_rest x wort do
+  n:1+count wort
+  n drop x
+end
+
+# Dialogizer schickt einen ganzen Absatz als ein Kommando. Mehrere
+# Regieanweisungen duerfen darin mit einfachem Zeilenumbruch gruppiert sein
+# (so beschreibt es auch die Puppeteer-Doku), deshalb wird hier zuerst in
+# Zeilen zerlegt. Ohne das landet der komplette Block als Argument beim
+# ersten Kommando.
+on command x do
+  each z in "\n" split x
+    vn_kommando[z]
+  end
+end
+
+on vn_kommando z do
+  t:z
+  if "!"~t[0] t:1 drop t end
+  if 0<count t vn_kommando_werte[t] end
+end
+
+on vn_kommando_werte x do
+  teile:" " split x
+  k:first teile
+  if k~"bg"
+    vn_hintergrund[teile[1]]
+  elseif k~"zeit"
+    vn_ortsmarke[vn_rest[x k]]
+  elseif k in ("hell","dunkel","rueckblende")
+    buehne.widgets.stimmung.text:k
+  elseif k~"erzaehler"
+    buehne.widgets.erzaehlerpos.text:teile[1]
+  elseif k~"schnell"
+    buehne.widgets.tempo.text:"0"
+  elseif k~"langsam"
+    buehne.widgets.tempo.text:"4"
+  elseif k~"tempo"
+    buehne.widgets.tempo.text:teile[1]
+  else
+    pt.command[deck x]
+  end
+end
+
+on animate do
+  pt.animate[deck]
+end
+
+# ------------------------------------------------------------------ Ablauf
+
+# Fuehrende Leerzeichen und Zeilenumbrueche abschneiden.
+# ACHTUNG: Zuweisungen in einer Lil-Funktion sind NICHT automatisch lokal.
+# Ohne "local" schreibt "s:..." in den umgebenden Gueltigkeitsbereich und
+# wuerde hier den Spielstand von vn_spiele ueberschreiben, der ebenfalls "s"
+# heisst.
+on vn_ohne_rand t do
+  local s:t
+  local weiter:1
+  while weiter
+    if 0~count s
+      weiter:0
+    elseif (first s) in (" ","\n")
+      s:1 drop s
+    else
+      weiter:0
+    end
+  end
+  s
+end
+
+# Wer spricht? Der Sprecher steht im Text selbst ("Sarah: Ich weiss."),
+# also wird er dort abgelesen statt zusaetzlich als !talk-Kommando
+# verlangt. Eine Quelle statt zweier, die auseinanderlaufen koennen.
+#
+# Erkannt wird nur ein kurzer Namensvorspann ohne Satzzeichen. Damit
+# bleibt ein Erzaehlsatz wie "Sie schrieb: Empfaenger: ..." Erzaehltext.
+on vn_sprecher roh do
+  r:()
+  r.name:""
+  r.ab:0
+  treffer:rtext.find[roh ":"]
+  if 0<count treffer
+    ende:first first treffer
+    kopf:vn_ohne_rand[ende take roh]
+    gut:1
+    if 0~count kopf gut:0 end
+    if 24<count kopf gut:0 end
+    if 0<count rtext.find[kopf "\n"] gut:0 end
+    # Ein Sprechername sieht aus wie ein Name: hoechstens drei Woerter, und
+    # jedes faengt gross an. Damit bleibt "Dr. Hartmann: ..." ein Sprecher,
+    # waehrend ein Erzaehlsatz wie "Sie las: ..." Erzaehltext bleibt, weil
+    # "las" klein anfaengt.
+    woerter:extract where count@value from " " split kopf
+    if 3<count woerter gut:0 end
+    each w in woerter
+      if !(first w) in GROSS gut:0 end
+    end
+    if gut
+      r.name:kopf
+      r.ab:1+ende
+    end
+  end
+  r
+end
+
+# Auf welcher Buehnenseite steht die Puppe? Puppeteer legt pro Puppe ein
+# Canvas-Widget mit genau ihrem Namen auf der Karte an, also laesst sich
+# das direkt ablesen und muss nicht mitgefuehrt werden.
+on vn_seite puppe do
+  w:buehne.widgets[puppe]
+  if w
+    x:first w.pos
+    b:first w.size
+    mitte:x+.5*b
+    halb:.5*first buehne.size
+    if mitte<halb "left" else "right" end
+  else
+    "left"
+  end
+end
+
+# Sprechernamen in der Menue-Schrift hervorheben.
+on vn_hervorheben seg name ab do
+  ganz:rtext.string[seg]
+  rest:rtext.span[seg (ab,count ganz)]
+  kopf:rtext.make[("" fuse (name,":")) "ahmPicnic"]
+  rtext.cat[kopf rest]
+end
+
+# Erzaehltext ohne Sprecher: eigener Stil, keine Puppe bewegt den Mund.
+on vn_erzaehle text do
+  pt.command[deck "talk"]
+  dd.style[vn_stil_erzaehler[]]
+  dd.say[text]
+end
+
+on vn_sag seg roh do
+  sp:vn_sprecher[roh]
+  if 0~count sp.name
+    vn_erzaehle[seg]
+  else
+    puppe:"%l" format sp.name
+    if puppe in keys buehne.widgets
+      pt.command[deck ("" fuse ("talk ",puppe))]
+    else
+      pt.command[deck "talk"]
+    end
+    dd.style[vn_stil_rede[vn_seite[puppe]]]
+    dd.say[vn_hervorheben[seg sp.name sp.ab]]
+  end
+end
+
+# Eine Passage darstellen. Gibt die Frage zurueck, die ueber den
+# Auswahlknoepfen stehen soll.
+#
+# Kommandos werden hier selbst erkannt und ausgefuehrt, statt sie von
+# dd.say erkennen zu lassen. Grund: dd prueft nur das allererste Zeichen
+# eines Absatzes. Ein Lil-Fragment davor, das nichts ausgibt (etwa
+# "{vorsicht:vorsicht+1 \"\"}"), hinterlaesst aber einen Zeilenumbruch,
+# und dann waere die Regieanweisung stillschweigend zu Fliesstext
+# geworden. Mit eigenem Abschneiden fuehrender Leerraeume kann das nicht
+# passieren.
+on vn_prosa zeilen do
+  frage:"Was tust du?"
+  segmente:rtext.split["\n\n" zeilen]
+  each seg in segmente
+    roh:rtext.string[seg]
+    t:vn_ohne_rand[roh]
+    if "?"~t[0]
+      frage:vn_rest[t "?"]
+    elseif "!"~t[0]
+      command[t]
+    else
+      if 0<count t vn_sag[seg roh] end
+    end
+  end
+  frage
+end
+
+on vn_spiele neu do
+  story:vn_story[]
+  meta:twee.meta[story]
+  namen:extract name from story
+  s:vn_laden[]
+  if neu s:vn_frisch[meta.start] end
+  if 0~s s:vn_frisch[meta.start] end
+  dd.open[deck vn_stil["dunkel"]]
+  laeuft:1
+  while laeuft
+    # Ein Tippfehler in einem Sprungziel darf das Spiel nicht aufhaengen.
+    if !s.passage in namen
+      fehltext:"" fuse ("Fehler in der Szenendatei: die Passage \"",s.passage,"\" gibt es nicht.")
+      dd.say[fehltext]
+      laeuft:0
+    else
+      r:twee.render[story s.passage s.vars]
+      s.vars:r.vars
+      zeilen:r.value
+      # ACHTUNG: "where 0<count arg" waere ein stiller No-Op-Filter, weil count
+      # die ganze Spalte aggregiert statt zeilenweise zu zaehlen. Richtig ist
+      # die zeilenweise Form "where !arg=""".
+      prosa:select where arg="" from zeilen
+      wahl:select where !arg="" from zeilen
+      g:s.gesehen
+      g[s.passage]:1
+      s.gesehen:g
+      frage:vn_prosa[prosa]
+      labels:extract text from wahl
+      ziele:extract arg from wahl
+      if 0~count wahl
+        # Keine Ausgaenge: Ende der Erzaehlung.
+        laeuft:0
+        s.beendet:1
+      elseif 1~count wahl
+        # Genau ein Ausgang ist keine Entscheidung, sondern eine
+        # Fortsetzung: Beschriftung als letzte Textbox zeigen und
+        # weiterspringen, statt einen sinnlosen Knopf anzubieten. Sie ist
+        # immer Erzaehltext ("Spaeter, in seiner Wohnung."), nie Rede.
+        vn_erzaehle[first labels]
+        s.passage:first ziele
+        vn_speichern[s]
+      else
+        i:dd.ask[frage labels]
+        s.passage:ziele[i]
+        vn_speichern[s]
+      end
+    end
+  end
+  dd.close[]
+  pt.clear[]
+  vn_speichern[s]
+end
+
+# "Weiterspielen" faengt neu an, wenn es nichts fortzusetzen gibt: kein
+# Spielstand, oder die Erzaehlung ist schon zu Ende gelaufen. Sonst
+# bekaeme man endlos die letzte Passage vorgesetzt.
+on vn_fortsetzbar do
+  s:vn_laden[]
+  if 0~s
+    0
+  elseif s.beendet
+    0
+  else
+    1
+  end
+end
+
+on vn_start neu do
+  frisch:neu
+  if !vn_fortsetzbar[] frisch:1 end
+  go["buehne"]
+  vn_spiele[frisch]
+  go["titel" "BoxOut"]
+end
+
+# Sprung an einen Kapitelanfang aus dem Index. Die Variablen bleiben
+# stehen, es ist ein Sprung in derselben Geschichte, kein neuer Anfang.
+on vn_start_bei passage do
+  s:vn_laden[]
+  if 0~s s:vn_frisch[passage] end
+  s.passage:passage
+  s.beendet:0
+  vn_speichern[s]
+  go["buehne"]
+  vn_spiele[0]
+  go["titel" "BoxOut"]
+end

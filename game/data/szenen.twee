@@ -1,0 +1,1103 @@
+:: StoryTitle
+Das Netzwerk
+
+:: StoryData
+{
+  "ifid": "8F1CB791-3C00-4023-AD56-7A1B6C26E894",
+  "format": "Ply",
+  "format-version": "1.0.0",
+  "start": "k01-buero"
+}
+
+:: k01-buero [kapitel-01 teil-1 pov-sarah datum-2026-01] {"titel":"Kapitel 1: Sarah - Die Vision"}
+!clear
+!bg sarah-buero
+!zeit Januar 2026, Bonn
+!dunkel
+
+Der Schnee fiel leise auf die Dächer der Bonner Innenstadt, als Sarah Hoffmann das Fenster ihres Büros im siebten Stock öffnete. Die kalte Luft brannte in ihren Lungen, aber sie brauchte sie.
+
+!show sarah neutral center
+
+USAGM workforce reduced by 85 percent. Voice of America effectively silenced.
+
+!show sarah schock
+
+Fünfundachtzig Prozent. In sechs Monaten. Das war keine Umstrukturierung. Das war eine Hinrichtung.
+
+!show sarah denk
+
+Ihr Blick fiel auf den kleinen Metallanhänger an ihrem Schlüsselbund. Ein Miniatur-Sendemast, kaum drei Zentimeter hoch.
+
+Sarah: Damit du nie vergisst, wofür wir senden.
+
+Damals hatte sie gelacht. Heute fühlte sich der kleine Mast an wie ein Relikt aus einer anderen Zeit.
+
+? Was tut Sarah mit dem, was sie gerade gelesen hat?
+
+[[Ein Konzept schreiben.->k01-konzept]]
+[[Erst das Fenster schließen und nachdenken.->k01-fenster]]
+
+:: k01-konzept [kapitel-01 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!show sarah ent
+
+Sie kehrte zu ihrem Schreibtisch zurück und öffnete ein neues Dokument.
+
+Sarah: Konzept: Föderierte Medieninfrastruktur für den Bundesrundfunk International.
+
+Sie schrieb zwei Stunden lang. Ein Netzwerk von Hubs, verteilt über die Welt. Jeder Hub autonom, aber verbunden.
+
+Wenn Berlin das Budget kürzte, würden die Hubs weitersenden. Wenn Bonn die Zentrale schloss, würde das Netzwerk weiterleben.
+
+[[Es klopft.->k01-michael]]
+
+:: k01-fenster [kapitel-01 teil-1 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah sorge
+
+Sie schloss das Fenster. Draußen eilten Menschen durch den Schnee. Niemand schaute auf. Niemand sah die Katastrophe kommen.
+
+Aber sie sah sie. Seit der Bundestagswahl im letzten Herbst.
+
+[[Es klopft.->k01-michael]]
+
+:: k01-michael [kapitel-01 teil-1 pov-sarah]
+!zeit Januar 2026, Bonn, 18 Uhr
+!show sarah neutral centerleft
+!show michael sorge offcenterright
+!move michael centerright 45
+!wait
+
+Michael Weber stand im Türrahmen, Schnee auf seinem grauen Mantel.
+
+Michael: Fünfundachtzig Prozent. Das könnte uns auch passieren.
+
+Sarah: Ich weiß.
+
+!show michael denk
+
+Michael: Föderiert. Wie E-Mail. Niemand besitzt E-Mail. Niemand kann E-Mail abschalten.
+
+Michael: Aber E-Mail ist keine Rundfunkanstalt.
+
+!show sarah ent
+
+Sarah: Noch nicht.
+
+{if entschlossenheit>0 "Michael lehnte sich zurück und las, was sie geschrieben hatte. Er schwieg lange." else "Michael lehnte sich zurück. Sie hatte ihm noch nichts zu zeigen, nur einen Gedanken." end}
+
+? Michael fragt: und wenn es nicht funktioniert?
+
+[[Dann haben wir es wenigstens versucht.->k01-versucht]]
+[[Dann habe ich uns alle ruiniert.->k01-ruiniert]]
+
+:: k01-versucht [kapitel-01 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!show sarah ent
+
+Sarah: Dann haben wir es wenigstens versucht.
+
+!show michael neutral
+
+Michael: Ich kenne jemanden. Einen Entwickler. Jamal Al-Rashid. Arbeitet im Innovation Lab. Brillant. Und er versteht, was auf dem Spiel steht.
+
+[[Weiter.->k01-senden]]
+
+:: k01-ruiniert [kapitel-01 teil-1 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah sorge
+
+Sarah: Dann habe ich uns alle ruiniert. Dich. Mich. Jeden, den ich hineinziehe.
+
+!show michael denk
+
+Michael: Sarah, ich habe in den Achtzigern über die Stasi geforscht. Ich weiß, wie man diskret ist.
+
+Michael: Ich kenne jemanden. Einen Entwickler. Jamal Al-Rashid. Arbeitet im Innovation Lab.
+
+[[Weiter.->k01-senden]]
+
+:: k01-senden [kapitel-01 teil-1 pov-sarah]
+!clear
+!zeit Januar 2026, Bonn, 21 Uhr
+
+Als Michael gegangen war, blieb Sarah noch lange an ihrem Schreibtisch sitzen.
+
+!show sarah ent center
+
+Sie öffnete eine neue E-Mail. Empfänger: Martina Bergmann, Intendantin. Betreff: Innovationsprojekt, Antrag auf Machbarkeitsstudie.
+
+Um 21 Uhr drückte sie auf Senden.
+
+!shake 3 3 10
+
+Der Cursor blinkte. Die E-Mail verschwand.
+
+Kein Zurück mehr.
+
+[[Zwei Monate später.->k02-lab]]
+
+:: k02-lab [kapitel-02 teil-1 pov-jamal datum-2026-03] {"titel":"Kapitel 2: Jamal - Der Code"}
+!clear
+!bg innovation-lab
+!zeit März 2026, Bonn
+!dunkel
+
+!show jamal denk center
+
+Die Zeile Code war elegant. Zu elegant, vielleicht. Jamal fragte sich, ob jemand später diese Eleganz als Beweis verwenden würde. Beweis dafür, dass er gewusst hatte, was er tat.
+
+Er schüttelte den Kopf. Es war März 2026. Alles war noch legal. Noch.
+
+Jamal: ActivityPub federation layer.
+
+Das Protokoll war offen, gut dokumentiert, von Tausenden verwendet. Mastodon, PeerTube, Pixelfed. Das Fediverse wuchs. Warum sollte der Bundesrundfunk International nicht Teil davon sein?
+
+!show jamal neutral
+
+Durch das Fenster sah er den Rhein, träge und grau unter dem Märzhimmel. Elf Jahre war es her, dass er zum ersten Mal deutschen Boden betreten hatte. Damals hatte er gedacht, er bliebe ein paar Monate. Bis die Lage in Syrien sich beruhigt.
+
+Elf Jahre.
+
+!show jamal sorge
+
+Er erinnerte sich an das überfüllte Boot. Das kalte Wasser. Und dann, Wochen später, in einem Aufnahmelager in Bayern, hatte ihm jemand ein Smartphone in die Hand gedrückt.
+
+Der Freiwillige: Du kannst Englisch?
+
+Jamal: Ja. Und Arabisch. Und ein bisschen Code.
+
+!show jamal neutral
+
+Sein Telefon vibrierte. Eine Nachricht von Sarah. Ob er heute Nachmittag vorbeikommen könne, sie wolle über die Architektur sprechen.
+
+Er öffnete ihre Machbarkeitsstudie. Offiziell genehmigt. Budget bewilligt. Alles legal.
+
+!show jamal denk
+
+Statt eines zentralen Systems ein Netzwerk autonomer Knoten. Jeder Hub konnte unabhängig produzieren und senden, alle blieben verbunden. Nairobi, Neu-Delhi, Beirut, Kiew, São Paulo.
+
+Es war machbar. Definitiv machbar. Die Technologie existierte, offen, erprobt, skalierbar.
+
+Aber Sarah plante nicht für den Normalfall. Er hatte es in ihren Augen gesehen. Sie plante für den schlimmsten.
+
+[[Um 15 Uhr klopfte er an ihre Tür.->k02-treffen]]
+
+:: k02-treffen [kapitel-02 teil-1 pov-jamal]
+!clear
+!bg sarah-buero
+!zeit März 2026, Bonn, 15 Uhr
+
+!show sarah neutral centerleft
+!show jamal neutral centerright
+
+Sarah: Jamal! Komm rein.
+
+Sie räumte hastig einen Stapel Papiere vom Besucherstuhl.
+
+Sarah: Skalierbarkeit. Wenn wir, hypothetisch, das System schnell ausbauen müssten. Wie viele Hubs könnten wir in sechs Monaten aufsetzen?
+
+!show jamal denk
+
+Jamal: Mit genug Ressourcen? Zehn, vielleicht fünfzehn. Aber dann bräuchten wir lokale Teams. In jedem Hub. Das ist nicht nur ein technisches Problem. Das ist ein menschliches.
+
+!show sarah denk
+
+Sarah: Und wenn wir diese Leute finden, könnten sie das System autonom betreiben?
+
+Jamal: Theoretisch ja. Das ist der Sinn von Föderation.
+
+Er zögerte. Der Satz lag ihm auf der Zunge, und er wusste, dass er ihn nicht mehr zurücknehmen konnte.
+
+? Sagt Jamal, was er denkt?
+
+[[Du fragst nicht nach einem Innovationsprojekt.->k02-direkt]]
+[[Er lässt es bei der Technik bewenden.->k02-vorsichtig]]
+
+:: k02-direkt [kapitel-02 teil-1 pov-jamal]
+{entschlossenheit:entschlossenheit+1 ""}
+
+!show jamal ent
+
+Jamal: Aber du fragst nicht nach einem Innovationsprojekt, oder? Du fragst nach einem Backup-System. Für den Fall, dass hier alles zusammenbricht.
+
+!show sarah schock
+
+Sarah sah ihn lange an. Dann lächelte sie. Ein müdes, trauriges Lächeln.
+
+!show sarah neutral
+
+Sarah: Ich frage nach Versicherung. Hoffnung ist gut. Aber Versicherung ist besser.
+
+[[Später, in seiner Wohnung.->k02-nacht]]
+
+:: k02-vorsichtig [kapitel-02 teil-1 pov-jamal]
+{vorsicht:vorsicht+1 ""}
+
+!show jamal sorge
+
+Jamal: Dann brauchen wir Redundanz auf der Speicherebene. Ich schreibe dir die Anforderungen auf.
+
+Er sagte nichts von dem, was er wirklich dachte. Er hatte gelernt, wann man eine Frage nicht stellt. Diese Lektion hatte in Damaskus begonnen.
+
+!show sarah denk
+
+Sarah nickte, und für einen Moment sah es aus, als wolle sie selbst aussprechen, worum es ging. Dann tat sie es nicht.
+
+Sarah: Danke, Jamal. Schick mir die Anforderungen.
+
+[[Später, in seiner Wohnung.->k02-nacht]]
+
+:: k02-nacht [kapitel-02 teil-1 pov-jamal]
+!clear
+!bg jamals-wohnung
+!zeit März 2026, Bonn-Beuel, nachts
+
+!show jamal denk center
+
+In seiner Wohnung in Bonn-Beuel saß Jamal am Küchentisch und starrte auf seinen Laptop. Die Architektur-Diagramme. Die Repositories. Die Dokumentation.
+
+Alles legal. Alles genehmigt. Alles im Rahmen.
+
+Aber er wusste, was Sarah wirklich gefragt hatte. Ob er ein System bauen könne, das überlebt, wenn sie es nicht tun.
+
+Und die Antwort war ja.
+
+!show jamal sorge
+
+Sein Blick fiel auf das Foto an der Wand. Seine Familie in Damaskus, 2010. Vor dem Krieg. Sein Vater, der Journalist. Sein Bruder, der Student. Seine Mutter, die Lehrerin. Alle lächelnd.
+
+Zwei von ihnen waren tot. Einer verschwunden.
+
+Sein Vater hatte für die Pressefreiheit gekämpft. Und verloren.
+
+!show jamal ent
+
+Jamal öffnete seinen Editor und begann zu tippen. Diesmal nicht für den BRI. Nicht für Sarah. Nicht für das Projekt.
+
+Für seinen Vater. Für die Idee, dass Information frei sein sollte.
+
+Der Code floss. Elegant. Präzise. Gefährlich.
+
+[[Einen Monat später.->k03-mentor]]
+
+:: k03-mentor [kapitel-03 teil-1 pov-michael datum-2026-04] {"titel":"Kapitel 3: Michael - Der Mentor"}
+!clear
+!bg michael-buero
+!zeit April 2026, Bonn
+!dunkel
+
+!show michael denk centerleft
+
+Michael Weber hatte sein Leben der Medienethik gewidmet. Mit achtundfünfzig las er Sarahs Antrag zum dritten Mal. Saubere Sprache, klare Ziele. Und zwischen den Zeilen eine Frage, die dort nicht stand. Was tun wir, wenn die Demokratie versagt?
+
+!show sarah neutral offcenterright
+!move sarah centerright 30
+!show michael neutral centerleft
+
+Sarah: Michael? Hast du Zeit?
+
+Michael: Für dich immer. Technisch solide, budgetär realistisch. Und politisch hochexplosiv.
+
+!show sarah sorge
+
+Sarah: Du hast es also verstanden.
+
+Michael: Ich bin alt, nicht blind. Du baust ein Backup-System. Für den Fall, dass die AfD den BRI zerstört.
+
+Sarah: Ich baue ein resilientes System. Für den Fall, dass irgendeine Regierung die Pressefreiheit einschränkt.
+
+!show michael sorge
+
+Michael: Angenommen, dein Netzwerk rettet den Journalismus. Wer kontrolliert es dann?
+
+Sarah: Die Journalisten. Die Hubs. Dezentral.
+
+Michael: Ohne demokratische Legitimation. Ohne Rechtsaufsicht. Und wer entscheidet, wann die Demokratie versagt hat?
+
+Stille hing zwischen ihnen. Lehrer und Schülerin, dachte Michael. Zwei Generationen von Journalisten.
+
+!show michael neutral
+
+Michael: Was willst du von mir?
+
+Sarah: Deine Unterstützung. Deine Expertise. Deine, nun, Absolution.
+
+Michael: Ich bin kein Priester, Sarah.
+
+!show sarah ent
+
+Sarah: Nein. Du bist ein Ethiker. Ich brauche jemanden, der mir sagt, ob richtig ist, was ich vorhabe.
+
+!show michael denk
+
+Michael: Ich kann dir nicht sagen, ob es richtig ist. Nur, ob es ethisch vertretbar ist. Und das hängt davon ab, wie du es umsetzt.
+
+? Wie antwortet Michael?
+
+[[Transparenz und Kontrolle, dann unterstütze ich es.->k03-vorsicht]]
+[[Es ist Zeit zu handeln, koste es, was es wolle.->k03-entschlossen]]
+
+:: k03-vorsicht [kapitel-03 teil-1 pov-michael]
+{vorsicht:vorsicht+1 ""}
+!show michael denk
+
+Michael: Transparenz. Rechenschaft. Demokratische Kontrolle, auch dezentral. Wenn du das garantieren kannst, unterstütze ich das Projekt.
+
+Sarah: Das will ich.
+
+!show michael neutral
+
+Michael: Gut. Dann bin ich dabei. Als Berater. Als Mentor. Als Gewissen.
+
+[[Er unterschrieb den Antrag.->k03-nacht]]
+
+:: k03-entschlossen [kapitel-03 teil-1 pov-michael]
+{entschlossenheit:entschlossenheit+1 ""}
+!show michael ent
+
+Michael: Ich habe einmal über Whistleblowing geschrieben. Gerechtfertigt, wenn alle legalen Wege erschöpft sind. Wir sind noch nicht so weit. Aber wir sollten bereit sein, wenn es so weit ist.
+
+Sarah: Danke, Michael.
+
+Michael: Danke mir nicht. Noch nicht. Diesen Weg gibt es vielleicht kein Zurück mehr.
+
+[[Er unterschrieb den Antrag.->k03-nacht]]
+
+:: k03-nacht [kapitel-03 teil-1 pov-michael]
+!clear
+!bg bad-godesberg
+!zeit April 2026, Bad Godesberg, nachts
+!dunkel
+
+Zu Hause schlief Claudia bereits. Die Chemotherapie machte sie müde. Brustkrebs, Stadium zwei. Die Prognose gut, nicht sicher.
+
+!show michael sorge center
+
+Michael öffnete den Laptop und suchte: Untreue öffentlicher Dienst, Strafe. Bis zu fünf Jahre Gefängnis. Verlust der Pension.
+
+Er klappte ihn zu. April 2026. Alles noch legal. Er hatte nur einen Antrag unterschrieben.
+
+Aber er wusste, was Sarah wirklich plante. Und dass er eines Tages wählen müsste. Prinzipien oder Praxis. Seine Pension oder seine Überzeugung.
+
+!show michael neutral
+
+Michael: Ich liebe dich.
+
+Claudia murmelte im Schlaf und lächelte. Michael schloss die Augen. Schlafen konnte er nicht.
+
+[[Zwei Monate später, in Köln.->k04-netzwerk]]
+
+:: k04-netzwerk [kapitel-04 teil-1 pov-kat datum-2026-06] {"titel":"Kapitel 4: Kat - Das Netzwerk"}
+!clear
+!bg kats-wg
+!zeit Juni 2026, Köln, nachts
+!dunkel
+
+!show kat schock center
+
+Kurz vor Mitternacht vibrierte Kats Handy. Lisa schlief schon neben ihr.
+
+Du bist eine Verräterin. Warte nur ab, was passiert, wenn wir an der Macht sind.
+
+Keine Unterschrift. Aber Kat wusste, wer es war. Ihr Bruder Markus.
+
+!show kat sorge
+
+Als Kinder waren sie unzertrennlich gewesen, in Görlitz, an der Grenze. Dann kam 2015. Erst Kommentare beim Familienessen, dann Pegida, dann 2023 die AfD. Die Familie zerbrach. Kat zog nach Köln.
+
+Kat öffnete Facebook. Markus' neuester Post: ein Foto von einer AfD-Veranstaltung, er im Publikum, grinsend. Endlich wird aufgeräumt, Deutschland den Deutschen.
+
+!show kat ent
+
+Familie ist nicht nur Blut. Familie ist, wer für dich da ist.
+
+Kat klickte auf Entfreunden.
+
+[[Zwei Tage später, in Bonn.->k04-akademie]]
+
+:: k04-akademie [kapitel-04 teil-1 pov-kat]
+!clear
+!bg bri-akademie
+!zeit Juni 2026, Bonn
+!hell
+
+!show kat neutral centerleft
+!show sarah neutral centerright
+
+Kat: Unsere Partner. Nairobi, Neu-Delhi, Beirut, Kiew, Bogotá. Überall Kontakte, Vertrauen, Infrastruktur.
+
+Sarah: Und du denkst, wir können sie nutzen?
+
+Kat: Einbeziehen. Ich habe vorgefühlt. Aisha in Nairobi sagt, sie haben schon einmal ein Netzwerk gegen eine Regierung aufgebaut, sie können es wieder tun. Rajesh in Neu-Delhi: wenn Deutschland fällt, sind wir alle in Gefahr. Und Nadia in Beirut arbeitet längst dezentral, verschlüsselt, föderiert.
+
+!show michael neutral offtop
+
+Michael: Wir sind nicht die Ersten, die das durchmachen. Wir können von denen lernen, die schon länger kämpfen.
+
+!show sarah denk
+
+Sarah: Fünf Hubs. Was würde das kosten?
+
+Kat: Zweihundertfünfzigtausend initial, hunderttausend jährlich.
+
+Sarah: Machbar.
+
+!show michael sorge offtop
+
+Michael: Noch sind wir im legalen Rahmen. Aber wir müssen vorsichtig sein.
+
+? Wie rahmt Kat das Projekt?
+
+[[Wir nennen es ein Resilienz-Projekt.->k04-vorsicht]]
+[[Wir stehen zusammen, komme, was wolle.->k04-zusammenhalt]]
+
+:: k04-vorsicht [kapitel-04 teil-1 pov-kat]
+{vorsicht:vorsicht+1 ""}
+!show kat denk
+
+Kat: Ein Resilienz-Projekt. Gegen Cyberangriffe, Naturkatastrophen, politische Krisen. Alles davon ist wahr. Nur eben nicht alles.
+
+Sarah nickte langsam.
+
+[[Eine Woche später.->k04-team]]
+
+:: k04-zusammenhalt [kapitel-04 teil-1 pov-kat]
+{zusammenhalt:zusammenhalt+1 ""}
+!show kat ent
+
+Kat: Familie ist nicht nur Blut. Familie ist, wer für dich da ist. Aisha, Rajesh, Nadia. Wir sind nicht allein in diesem Kampf.
+
+Sarah lächelte.
+
+[[Eine Woche später.->k04-team]]
+
+:: k04-team [kapitel-04 teil-1 pov-kat]
+!clear
+!zeit Juni 2026, Bonn, eine Woche später
+
+!show kat neutral centerleft
+!show sarah neutral centerright
+!show jamal neutral offbottom
+!show michael neutral offtop
+
+Kat stellte das Netzwerk dem vollständigen Team vor. Neu im Raum: Lena Kowalski, investigative Journalistin, und Tom Schneider, ein junger Entwickler.
+
+Lena: Ich habe über ähnliche Netzwerke in Polen recherchiert. Nach der PiS-Übernahme haben unabhängige Journalisten dezentrale Strukturen aufgebaut. Es funktioniert. Aber es ist hart.
+
+Michael: Wenn wir diesen Weg gehen, gibt es kein Zurück.
+
+Sarah: Noch ist alles legal. Noch sind wir nur ein Innovationsprojekt.
+
+!show kat sorge
+
+Kat: Aber wir wissen, worauf es hinausläuft.
+
+Sarah: Ich schlage vor, wir machen weiter. Jeder entscheidet für sich.
+
+!show kat ent
+
+Kat: Ich bin dabei. Für meine Großmutter. Für Lisa. Für alle, die nicht wollen, dass sich Geschichte wiederholt.
+
+Einer nach dem anderen stimmten zu. Auch Tom, unsicher, aber neugierig.
+
+Sarah: Dann sind wir ein Team.
+
+[[Drei Monate später, in Berlin.->k05-warnung]]
+
+:: k05-warnung [kapitel-05 teil-1 pov-lena datum-2026-09] {"titel":"Kapitel 5: Lena - Die Warnung"}
+!clear
+!bg lena-buero
+!zeit September 2026, Berlin
+!dunkel
+
+!show lena sorge centerleft
+
+Der Ordner auf Lenas Schreibtisch war fünf Zentimeter dick, das Etikett AfD Medienpolitik 2024 bis 2026. Ein Strategiepapier, ihr zugespielt.
+
+Budgetkürzungen. Aufsichtsräte neu besetzen. Redaktionelle Kontrolle übernehmen. Auslandsagitation beenden, das sind wir.
+
+Das war kein Wahlkampfgetöse. Das war ein Plan. So etwas hatte Lena schon einmal gesehen, in Polen, 2015, als die PiS an die Macht kam.
+
+!show sarah schock offcenterright
+!move sarah centerright 30
+
+Sarah: Wo hast du das her?
+
+Lena: Eine Quelle in der Fraktion. Gewissensbisse. Es ist echt.
+
+!show lena neutral
+
+Lena: Ich habe mit Kollegen in Polen gesprochen. Wenn die AfD an die Macht kommt, habt ihr sechs Monate. Vielleicht weniger.
+
+Sarah: Deshalb bauen wir das Netzwerk.
+
+Lena: Ich weiß. Aber ein technisches Netzwerk reicht nicht. Sie greifen nicht nur die Technik an. Sie greifen die Menschen an. Ich habe es in Polen erlebt. Kollegen, die ihren Job verloren, die verklagt wurden, die bedroht wurden.
+
+!show lena sorge
+
+Lena: Ich bin gegangen. Weil ich dachte, in Deutschland bin ich sicher. Und jetzt passiert es wieder.
+
+Sarah: Deshalb müssen wir kämpfen. Hier. Jetzt.
+
+Sarah: Und bist du bereit, die Grenze zu überschreiten? Von Beobachterin zu Akteurin?
+
+? Wie antwortet Lena?
+
+[[Neutralität ist keine Option mehr. Ich wähle eine Seite.->k05-entschlossen]]
+[[Erst dokumentieren, dann handeln.->k05-vorsicht]]
+
+:: k05-entschlossen [kapitel-05 teil-1 pov-lena]
+{entschlossenheit:entschlossenheit+1 ""}
+!show lena ent
+
+Lena: Objektivität heißt, die Wahrheit zu berichten. Neutralität heißt, keine Seite zu wählen. Manchmal muss man die Seite der Wahrheit wählen.
+
+!show sarah neutral
+
+Sarah: Willkommen im Team.
+
+[[Zwei Wochen später.->k05-konferenz]]
+
+:: k05-vorsicht [kapitel-05 teil-1 pov-lena]
+{vorsicht:vorsicht+1 ""}
+!show lena denk
+
+Lena: Erst Dokumentation. Beweise. Öffentlichkeit. Wenn sie angreifen, müssen wir zeigen können, was sie tun. Dann handeln wir.
+
+!show sarah neutral
+
+Sarah: Willkommen im Team.
+
+[[Zwei Wochen später.->k05-konferenz]]
+
+:: k05-konferenz [kapitel-05 teil-1 pov-lena]
+!clear
+!bg konferenzraum
+!zeit September 2026, Bonn
+!hell
+
+!show lena neutral center
+
+Lena stand vor versammelten Journalisten. Fotos von TVP, Polen, vor und nach der PiS-Übernahme. Erst eine kritische Talkshow. Dann nur noch Regierungspropaganda.
+
+Lena: Die Aufsichtsräte wurden neu besetzt, kritische Journalisten entlassen. Das droht auch uns. Auslandsagitation beenden, das sind wir.
+
+Ein Kollege: Ist das nicht Aktivismus? Sollten wir nicht neutral bleiben?
+
+Lena: Neutralität ist nicht dasselbe wie Objektivität. Wenn eine Seite die Demokratie angreift und die andere sie verteidigt, ist Neutralität Komplizenschaft. Desmond Tutu hat es so gesagt. Wer in Situationen der Ungerechtigkeit neutral bleibt, hat die Seite des Unterdrückers gewählt.
+
+!show lena freude
+
+Die Redakteurin: Ich will helfen. Was kann ich tun?
+
+Lena: Dokumentieren. Alles dokumentieren. Jede AfD-Aussage zu Medien, jede Drohung. Wir brauchen ein Archiv.
+
+Nach und nach kamen Journalisten zu ihr. Ein Netzwerk bildete sich. Nicht mit großen Gesten. Mit kleinen Entscheidungen.
+
+[[Drei Monate später.->k06-durchbruch]]
+
+:: k06-durchbruch [kapitel-06 teil-1 pov-tom datum-2026-12] {"titel":"Kapitel 6: Tom - Der Durchbruch"}
+!clear
+!bg innovation-lab
+!zeit Dezember 2026, Bonn, kurz vor Mitternacht
+!dunkel
+
+!show tom denk center
+
+Fünf Terminal-Fenster auf dem Bildschirm. Fünf SSH-Verbindungen. Fünf Hubs: Nairobi, Neu-Delhi, Beirut, Kiew, Bogotá. Alle online. Alle föderiert.
+
+!show tom freude
+
+Tom: Es funktioniert. Es funktioniert wirklich.
+
+Er postete auf der Nairobi-Instanz, wechselte zu der in Delhi. Da war sein Post schon wieder. Automatisch repliziert.
+
+!show tom schock
+
+Tom: Holy shit.
+
+Das Netzwerk lebte.
+
+[[Drei Tage später, in Hamburg.->k06-congress]]
+
+:: k06-congress [kapitel-06 teil-1 pov-tom]
+!clear
+!bg ccc-halle
+!zeit Dezember 2026, 37C3, Hamburg
+!hell
+
+!show tom neutral centerleft
+
+Im Zug hatte eine Frau mit bunten Aufklebern auf dem Laptop neben ihm gesessen. Chaos Computer Club, Tor Project, EFF.
+
+Alex: Föderierte Medien? Für wen arbeitest du?
+
+Tom: Bundesrundfunk International. Innovation Lab.
+
+Alex: Ich bin bei einem Kollektiv in Berlin. Wir betreiben auch Mastodon-Instanzen. Ich bin Alex.
+
+Sie hatten die ganze Fahrt über Föderation geredet, über Resilienz.
+
+Alex: Ihr bereitet euch auf den Worst Case vor, oder? Falls die Regierung schwierig wird.
+
+Tom nickte.
+
+Alex: Smart. Willkommen im Netzwerk.
+
+!clear
+!show tom ent center
+
+Auf der Bühne zeigte Tom das Diagramm der fünf Hubs.
+
+Tom: Jeder Hub ist autonom. Jeder kann unabhängig operieren. Aber alle sind verbunden. Und wir suchen Verbündete.
+
+Applaus.
+
+!show tom freude
+
+Am Assembly kamen mehr Menschen, als er erwartet hatte. Entwickler, Systemadministratorinnen, Aktivistinnen.
+
+Alex: Das Kollektiv kann Backup-Hubs hosten. Tor Project richtet Onion-Services ein.
+
+Tom schrieb Namen auf, Kontakte, Angebote. Sie waren nicht allein.
+
+[[Zurück in Bonn präsentiert Tom die Ergebnisse.->k06-bonn]]
+
+:: k06-bonn [kapitel-06 teil-1 pov-tom]
+!clear
+!bg konferenzraum
+!zeit Dezember 2026, Bonn
+!hell
+
+!show tom ent centerleft
+!show sarah neutral centerright
+
+Tom: Der Congress war ein Erfolg. Wir haben Verbündete gefunden.
+
+Sarah: Das ist großartig, Tom.
+
+!hide sarah
+!show michael denk offcenterright
+!move michael centerright 45
+!wait
+
+Michael: Aber wir müssen vorsichtig sein. Je mehr Menschen involviert sind, desto größer das Risiko.
+
+? Wie reagiert Tom auf Michaels Warnung?
+
+[[Die Chaos-Leute verstehen OpSec.->k06-vertrauen]]
+[[Klare Grenzen sind richtig.->k06-grenzen]]
+
+:: k06-vertrauen [kapitel-06 teil-1 pov-tom]
+{zusammenhalt:zusammenhalt+1 ""}
+!show tom ent
+
+Tom: Die Chaos-Leute sind diskret. Sie verstehen OpSec.
+
+!show michael neutral
+!show lena denk offcenterleft
+
+Michael: Trotzdem. Wir müssen klare Grenzen ziehen. Compartmentalization.
+
+Lena: Wie bei Geheimdiensten.
+
+Michael: Genau wie bei Geheimdiensten. Weil wir im Grunde eine konspirative Operation sind. Noch legal, aber...
+
+Sarah: Aber an der Grenze.
+
+[[Weiter.->k06-demo]]
+
+:: k06-grenzen [kapitel-06 teil-1 pov-tom]
+{vorsicht:vorsicht+1 ""}
+!show tom denk
+
+Tom: Du hast recht. Lieber wenige verlässliche Kontakte als viele lose.
+
+!show michael neutral
+!show lena denk offcenterleft
+
+Michael: Klare Grenzen. Compartmentalization.
+
+Lena: Wie bei Geheimdiensten.
+
+Michael: Genau wie bei Geheimdiensten. Weil wir im Grunde eine konspirative Operation sind. Noch legal, aber...
+
+Sarah: Aber an der Grenze.
+
+[[Weiter.->k06-demo]]
+
+:: k06-demo [kapitel-06 teil-1 pov-tom]
+!hide michael
+!show tom freude center
+
+Tom zeigte den Proof of Concept live. Fünf Hubs, alle verbunden.
+
+Tom: Hello from the BRI Innovation Lab. Testing the network.
+
+Sekunden später: Antworten aus allen Hubs.
+
+!hide tom
+!show kat freude center
+
+Kat: Das ist die Zukunft.
+
+!hide kat
+!show lena ent center
+
+Lena: Das ist Kontinuität. Die Mission geht weiter, egal was kommt.
+
+!hide lena
+!show sarah ent center
+
+Sarah: Auf das Netzwerk.
+
+!hide sarah
+!show tom freude center
+
+Tom: Auf die Zukunft.
+
+Das Team stieß an. Von einem Projekt zu einer Bewegung.
+
+[[Der Frühling brachte eine andere Nachricht.->k07-krise]]
+
+:: k07-krise [kapitel-07 teil-1 pov-sarah datum-2027-03] {"titel":"Kapitel 7: Sarah - Die Krise"}
+!clear
+!bg konferenzraum
+!zeit März 2027, Bonn
+!hell
+
+!show sarah neutral centerleft
+!show michael neutral centerright
+
+Der Frühling kam früh in diesem Jahr. An einem anderen Tag hätte Sarah ihn genießen können.
+
+Sandra: Der Antrag auf Fortsetzung des Projekts wird abgelehnt.
+
+!show sarah schock
+
+Rot gestempelt: ABGELEHNT. Vierzehn Monate Arbeit, mit einem Satz zunichte gemacht.
+
+Sandra: Es tut mir leid, Sarah. Aber bei der aktuellen Haushaltslage können wir keine Mittel mehr für experimentelle Projekte freigeben.
+
+Sarah: Wir haben alle Meilensteine erreicht. Wir haben Partner in Nairobi, Neu-Delhi, Warschau.
+
+Sandra: Ich weiß. Aber die Landtagswahl in Nordrhein-Westfalen letzte Woche...
+
+Sie musste den Satz nicht beenden. Die AfD hatte achtundzwanzig Prozent geholt.
+
+Michael: Wie viel Zeit haben wir?
+
+Sandra: Das Projekt läuft Ende April aus.
+
+!hide michael
+!show jamal sorge centerright
+
+Jamal: Einen Monat.
+
+Sandra: Das Direktorium. Einstimmig. Martina auch.
+
+Sandra ging. Die Tür schloss sich leise. Niemand sprach.
+
+!hide jamal
+!show tom sorge centerright
+
+Tom: Das war's dann wohl.
+
+!show sarah ent
+
+Sarah: Nein.
+
+[[Alle sehen sie an.->k07-vorschlag]]
+
+:: k07-vorschlag [kapitel-07 teil-1 pov-sarah]
+!hide tom
+!show sarah ent centerleft
+!show jamal sorge centerright
+
+Sarah: Wir haben vierzehn Monate gearbeitet. Ein System, das funktioniert. Partner auf drei Kontinenten.
+
+Jamal: Aber ohne Budget...
+
+Sarah: Ohne offizielles Budget. Aber wir haben Server, Zugänge, Kontakte.
+
+!hide jamal
+!show michael sorge centerright
+
+Michael: Sarah. Was schlägst du vor?
+
+Sarah: Wir machen weiter. Inoffiziell.
+
+!hide michael
+!show lena schock centerright
+
+Lena: Inoffiziell. Du meinst, ohne Genehmigung?
+
+Sarah: Wir nutzen, was wir haben. Wir arbeiten in unserer Freizeit.
+
+!hide lena
+!show michael denk centerright
+
+Michael: Wir brechen die Regeln.
+
+Sarah: Wir beugen die Regeln. Es gibt einen Unterschied.
+
+Michael: Gibt es den?
+
+!show sarah denk
+
+Sarah: Die Bundestagswahl ist in zwei Jahren. Wenn die AfD gewinnt, existiert das hier nicht mehr.
+
+!hide michael
+!show kat sorge centerright
+
+Kat: Das wissen wir nicht sicher.
+
+!hide kat
+!show lena sorge centerright
+
+Lena: Doch. Ich habe die Dokumente gesehen. Der BRI ist auf der Liste. Ganz oben.
+
+!hide lena
+!show jamal sorge centerright
+
+Jamal: Und wenn wir erwischt werden?
+
+Sarah: Dann verlieren wir unsere Jobs. Vielleicht mehr. Aber wenn wir nichts tun, verlieren wir sie sowieso.
+
+!hide jamal
+!show michael denk centerright
+
+Michael: Es gibt einen Unterschied zwischen Regeln beugen und Regeln brechen. Wenn wir das tun, dürfen wir keine Gesetze brechen. Wir dürfen niemanden gefährden.
+
+Sarah: Einverstanden.
+
+Sarah bat alle, nach Hause zu gehen und in einer Woche wiederzukommen. Jeder sollte für sich entscheiden.
+
+[[Michael bleibt als Letzter.->k07-michael]]
+
+:: k07-michael [kapitel-07 teil-1 pov-sarah]
+!clear
+!show sarah denk centerleft
+!show michael sorge centerright
+
+Michael: Sarah. Bist du sicher?
+
+? Wie antwortet Sarah?
+
+[[Ja. Ich bin sicher.->k07-sicher]]
+[[Nein. Aber wir müssen es versuchen.->k07-ehrlich]]
+
+:: k07-sicher [kapitel-07 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!show sarah ent
+
+Sarah: Ja. Ich bin sicher.
+
+Michael: Auch wenn es schiefgeht?
+
+Sarah: Auch dann.
+
+[[Weiter.->k07-schluss]]
+
+:: k07-ehrlich [kapitel-07 teil-1 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah sorge
+
+Sarah: Nein. Aber ich bin sicher, dass wir es versuchen müssen.
+
+Michael: Auch wenn es schiefgeht?
+
+Sarah: Auch dann.
+
+[[Weiter.->k07-schluss]]
+
+:: k07-schluss [kapitel-07 teil-1 pov-sarah]
+!show michael neutral
+
+Michael: Dann bin ich dabei. Egal, was die anderen entscheiden. Ich bin achtundfünfzig Jahre alt. Ich habe mein ganzes Leben über Ethik gesprochen. Jetzt ist es Zeit, es zu leben.
+
+!clear
+!show sarah denk center
+
+Als er gegangen war, blieb Sarah allein. Sie nahm den Schlüsselanhänger in die Hand. Der kleine Sendemast war kalt.
+
+Sarah: Noch nicht. Noch sind wir nicht tot.
+
+[[Drei Monate später sollte sich zeigen, wie weit sie schon gegangen waren.->k08-dilemma]]
+
+:: k08-dilemma [kapitel-08 teil-1 pov-michael datum-2027-06] {"titel":"Kapitel 8: Michael - Das Dilemma"}
+!clear
+!bg michael-buero
+!zeit Juni 2027, Bonn
+!dunkel
+
+!show michael denk centerleft
+
+Drei Monate seit der Ablehnung. Auf dem Bildschirm ein Budgetantrag: Forschungsprojekt Medienethik im digitalen Zeitalter. Ein harmloser Titel, genehmigt, finanziert, korrekt. Nur dass es dieses Projekt nicht gab. Fünfundvierzigtausend Euro flossen in Server, in Bandbreite, in das Projekt, das offiziell nicht mehr existierte.
+
+!show michael sorge
+
+Sein Handy vibrierte. Eine Nachricht von Sarah: Meeting um 16 Uhr?
+
+!show jamal sorge offcenterright
+!move jamal centerright 40
+!play klopfen
+!wait
+
+Jamal: Wir haben ein Problem. Die Revision. Dr. Hartmann hat Fragen gestellt. Über das Forschungsprojekt.
+
+Michael: Was für Fragen?
+
+Jamal: Ob es Zwischenberichte gibt, Publikationen. Ich habe gesagt, du arbeitest noch an der Auswertung. Er fragt in drei Monaten nach.
+
+Michael: Wir können einen Bericht schreiben. Etwas Akademisches. Etwas Glaubwürdiges.
+
+!show jamal denk
+
+Jamal: Können wir das? Können wir ihn einfach belügen?
+
+!show michael denk
+
+Michael: Ich weiß es nicht.
+
+[[Im Konferenzraum warten die anderen.->k08-konferenzraum]]
+
+:: k08-konferenzraum [kapitel-08 teil-1 pov-michael]
+!clear
+!bg konferenzraum
+!zeit Juni 2027, Bonn
+
+!show jamal sorge centerleft
+!show kat denk centerright
+
+Jamal: Dr. Hartmann stellt Fragen. Er will einen Zwischenbericht.
+
+Kat: Können wir ihm einen geben?
+
+!hide jamal
+!show michael neutral centerleft
+
+Michael: Einen echten? Nein. Einen gefälschten? Vielleicht.
+
+!hide kat
+!show lena sorge centerright
+
+Lena: Gefälscht. Wir reden jetzt über Fälschung.
+
+!hide lena
+!show tom sorge centerright
+
+Tom: Das ist Betrug.
+
+!show michael sorge
+
+Michael: Ja. Das ist es.
+
+!hide tom
+!show sarah ent offcenterright
+!move sarah centerright 40
+!wait
+
+Sarah: Wir wussten, dass es schwierig werden würde. Aber wir wussten auch, warum wir das tun.
+
+!hide sarah
+!show lena sorge centerright
+
+Lena: Erinnere mich. Warum tun wir das?
+
+!hide lena
+!show sarah ent centerright
+
+Sarah: Weil die Alternative schlimmer ist. Weil wir in zwei Jahren vielleicht keine BRI mehr haben.
+
+!show michael denk
+
+Michael ging zur Tafel. Argumente dafür: Pressefreiheit schützen, Infrastruktur aufbauen, moralische Pflicht. Argumente dagegen: Betrug, Vertrauensbruch, persönliche Risiken.
+
+Michael: Das ist die Realität. Beide Seiten haben recht.
+
+!hide sarah
+!show tom denk centerright
+
+Tom: Und was machen wir jetzt?
+
+Michael: Wir entscheiden. Jeder für sich. Ich habe mein ganzes Leben über Ethik geforscht. Über Bonhoeffer. Über seine Entscheidung, sich der Verschwörung gegen Hitler anzuschließen.
+
+Tom: Und? Was ist deine Antwort?
+
+? Was antwortet Michael?
+
+[[Ich kann nicht tatenlos zusehen.->k08-bonhoeffer]]
+[[Ich handle nur mit größter Vorsicht.->k08-vorsicht]]
+
+:: k08-bonhoeffer [kapitel-08 teil-1 pov-michael]
+{entschlossenheit:entschlossenheit+1 ""}
+!show michael ent
+
+Michael: Ich weiß nicht, ob das, was wir tun, richtig ist. Aber ich weiß, dass ich nicht tatenlos zusehen kann. Dass ich nicht in zwei Jahren zurückblicken und sagen will: ich hätte etwas tun können, aber ich hatte Angst.
+
+Michael: Also ja. Ich mache weiter. Ich schreibe den Bericht für Dr. Hartmann. Ich lüge, wenn ich muss. Aber mit offenen Augen.
+
+[[Weiter.->k08-zustimmung]]
+
+:: k08-vorsicht [kapitel-08 teil-1 pov-michael]
+{vorsicht:vorsicht+1 ""}
+!show michael sorge
+
+Michael: Ich weiß es nicht. Aber ich weiß, dass wir jeden Schritt abwägen müssen. Trotzdem: tatenlos zusehen ist auch eine Entscheidung.
+
+Michael: Also ja. Ich mache weiter. Mit offenen Augen, aber mit Vorsicht.
+
+[[Weiter.->k08-zustimmung]]
+
+:: k08-zustimmung [kapitel-08 teil-1 pov-michael]
+!hide michael
+!hide tom
+!show jamal ent center
+
+Jamal: Ich bin dabei.
+
+!hide jamal
+!show kat freude center
+
+Kat: Ich auch.
+
+!hide kat
+!show lena sorge center
+
+Lena: Gott helfe uns. Ich auch.
+
+!hide lena
+!show tom neutral center
+
+Tom: Dann sind wir alle dabei.
+
+!hide tom
+!show sarah ent centerleft
+!show kat denk centerright
+
+Sarah: Dann machen wir weiter. Aber wir müssen vorsichtiger sein.
+
+Kat: Und wenn doch?
+
+Sarah: Dann tragen wir die Konsequenzen. Zusammen.
+
+[[Zu Hause, spät in der Nacht.->k08-bad-godesberg]]
+
+:: k08-bad-godesberg [kapitel-08 teil-1 pov-michael]
+!clear
+!bg bad-godesberg
+!zeit Juni 2027, Bad Godesberg, nachts
+!dunkel
+
+!show michael denk centerleft
+
+Claudia schlief schon. Michael öffnete ein neues Dokument: Zwischenbericht, Forschungsprojekt Medienethik im digitalen Zeitalter. Akademisch, präzise, überzeugend. Eine Lüge, verpackt in Wahrheit.
+
+Er schrieb bis spät in die Nacht. Mit jedem Wort wusste er: Es gab kein Zurück mehr.
+
+Sie hatten die Grenze überschritten. Von der Grauzone in die Illegalität.
+
+Und im September würden sie entscheiden müssen, wie weit sie zu gehen bereit waren.

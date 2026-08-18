@@ -1,0 +1,629 @@
+# Baut das Deck der Graphic Novel "Das Netzwerk" kopflos aus den Daten.
+#
+# Aufruf von der Repo-Wurzel aus:
+#   lilt game/build/build_vn.lil
+#
+# Ergebnis: game/build/netzwerk.deck (in Decker oeffnen) und
+# game/build/netzwerk.html (eigenstaendig im Browser lauffaehig).
+#
+# Der Bau prueft die Szenendatei mit. Ein kaputtes Sprungziel, eine
+# unbekannte Puppe, ein unbekanntes Emote, eine unbekannte Buehnenposition
+# oder ein unbekanntes Kommando brechen den Bau ab. Ein fehlender
+# Hintergrund ist nur eine Warnung, weil die Hintergrundbilder laut Plan
+# erst in M7 entstehen.
+
+# Kartengroesse. Deckers Vorgabe ist 512x342; das Doppelte holt aus den
+# Vektorzeichnungen sichtbar mehr heraus (siehe plans/graphic-novel-plan.md,
+# Abschnitt 7.5), weil Decker die Karte sonst nur nachbarschaftlich
+# hochrechnet.
+BREITE:1024
+HOEHE:684
+
+DECKS:"extern/decker/examples/decks/"
+ARTFIG:"game/data/art/figuren/"
+ARTBG:"game/data/art/hintergruende/"
+
+# Gueltige Kommandos: erst die eigenen aus game/lil/vn.lil, dann die von
+# Puppeteer (aus dessen Modulquelltext abgelesen).
+EIGENE:("bg","zeit","hell","dunkel","rueckblende","schnell","langsam","tempo","erzaehler")
+PTCMD:("show","hide","flip","order","move","anim","wait","shake","talk","play","clear","lil")
+
+# Die 20 benannten Buehnenpositionen von Puppeteer.
+POSITIONEN:("center","offcenterleft","centerleft","centerright","offcenterright","offtopleft","offtopright","topleft","offtop","top","topright","offleft","left","bottom","right","offright","offbottomleft","offbottom","offbottomright")
+
+p:keystore[]
+p.fehler:()
+p.warnung:()
+p.platzhalter:()
+p.sprecher:()
+p.sicht:()
+p.zeigt:()
+
+# Gleiche Regel wie in der Engine: fuehrende Leerraeume abschneiden, damit
+# ein Kommando nach einem Lil-Fragment nicht uebersehen wird.
+on ohne_rand t do
+  s:t
+  weiter:1
+  while weiter
+    if 0~count s
+      weiter:0
+    elseif (first s) in (" ","\n")
+      s:1 drop s
+    else
+      weiter:0
+    end
+  end
+  s
+end
+
+GROSS:"ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ"
+
+# Gleiche Regel wie vn_sprecher in game/lil/vn.lil: hoechstens drei Woerter
+# vor dem Doppelpunkt, jedes grossgeschrieben, hoechstens 24 Zeichen.
+on sprecher_von roh do
+  name:""
+  treffer:rtext.find[roh ":"]
+  if 0<count treffer
+    ende:first first treffer
+    kopf:ohne_rand[ende take roh]
+    gut:1
+    if 0~count kopf gut:0 end
+    if 24<count kopf gut:0 end
+    if 0<count rtext.find[kopf "\n"] gut:0 end
+    woerter:extract where count@value from " " split kopf
+    if 3<count woerter gut:0 end
+    each w in woerter
+      if !(first w) in GROSS gut:0 end
+    end
+    if gut name:kopf end
+  end
+  name
+end
+
+on fehle t do
+  p.fehler:p.fehler,list t
+end
+
+on warne t do
+  if !t in p.warnung p.warnung:p.warnung,list t end
+end
+
+# ------------------------------------------------------------ Bilder einlesen
+
+# Welche Emotes es je Figur wirklich gibt, ergibt sich aus den Dateien.
+# Eine neue Zeichnung braucht also keine Zeile Code, nur eine neue Datei.
+on bilder verzeichnis do
+  d:()
+  eintraege:dir[verzeichnis]
+  each e in rows eintraege
+    if e.type~".gif"
+      n:count e.name
+      k:(n-4) take e.name
+      d[k]:read["" fuse (verzeichnis,e.name)]
+    end
+  end
+  d
+end
+
+figuren:()
+each e in rows dir[ARTFIG]
+  if e.dir
+    figuren[e.name]:bilder["" fuse (ARTFIG,e.name,"/")]
+  end
+end
+
+hintergruende:bilder[ARTBG]
+
+# Alle Figuren haben dieselbe Bildbreite; die erste genuegt.
+PUPPENBREITE:640
+each em name i in figuren
+  each bild emote j in em
+    PUPPENBREITE:first bild.size
+  end
+end
+
+print["Figuren: %i" format count figuren]
+each em name i in figuren
+  print["  %s: %s" format name, (", " fuse keys em)]
+end
+print["Hintergruende: %i" format count hintergruende]
+
+# ------------------------------------------------------------ Szenen pruefen
+
+quelltext:read["game/data/szenen.twee"]
+
+tweedeck:read["" fuse (DECKS,"twee.deck")]
+twee:tweedeck.modules.twee.value
+story:twee.read[quelltext]
+meta:twee.meta[story]
+namen:extract name from story
+
+if !meta.start in namen
+  fehle["" fuse ("Startpassage \"",meta.start,"\" gibt es nicht")]
+end
+
+# Standardbelegung der Variablen, damit sich jede Passage rendern laesst.
+v:()
+v.entschlossenheit:0
+v.vorsicht:0
+v.zusammenhalt:0
+v.ausgestiegen:0
+v.tom_gestanden:0
+v.figur:""
+
+# Ein Emote, das in den Szenen vorkommt, aber noch nicht gezeichnet ist,
+# wird als Platzhalter aus "neutral" erzeugt. So bleibt das Deck spielbar,
+# bevor M2 die echten Zeichnungen liefert.
+on merke_platzhalter figur emote do
+  s:"" fuse (figur,"/",emote)
+  if !s in p.platzhalter
+    p.platzhalter:p.platzhalter,list s
+  end
+end
+
+# ---------------------------------------------------- Ueberlappende Puppen
+#
+# Puppeteers Buehnenpositionen fallen auf drei x-Spalten zusammen: 0 (left,
+# centerleft, topleft), (B-P)/2 (center, top, bottom) und B-P (right,
+# centerright, topright). Die Varianten einer Spalte unterscheiden sich nur
+# in der Hoehe, und eine Puppe ist fast so hoch wie die Karte. Bei der
+# aktuellen Puppenbreite ueberlappen benachbarte Spalten, es passen also nur
+# zwei Figuren gleichzeitig auf die Buehne, eine links und eine rechts.
+# Ohne diese Pruefung sieht man das erst im Spiel als uebereinanderliegende
+# Figuren.
+
+on spalte pos do
+  local vorn:3 take pos
+  local mitte:BREITE-PUPPENBREITE
+  if vorn~"off"
+    -1
+  elseif pos in ("centerleft","topleft","left","offbottomleft")
+    0
+  elseif pos in ("center","top","bottom")
+    mitte/2
+  elseif pos in ("centerright","topright","right")
+    mitte
+  else
+    -1
+  end
+end
+
+on pruefe_buehne passage do
+  local bnamen:()
+  local bxs:()
+  each pos name i in p.sicht
+    local x:spalte[pos]
+    local sichtbar:p.zeigt[name]
+    if sichtbar
+      if !x~-1
+        bnamen:bnamen,list name
+        bxs:bxs,list x
+      end
+    end
+  end
+  local bn:count bnamen
+  local i:0
+  while i<bn
+    local j:i+1
+    while j<bn
+      local a:bxs[i]
+      local b:bxs[j]
+      local links:if a<b a else b end
+      local rechts:if a<b b else a end
+      local grenze:links+PUPPENBREITE
+      if rechts<grenze
+        local paar:"" fuse (bnamen[i]," und ",bnamen[j])
+        fehle["" fuse ("Puppen ueberlappen in ",passage,": ",paar," (nur zwei Figuren passen nebeneinander, links und rechts)")]
+      end
+      j:j+1
+    end
+    i:i+1
+  end
+end
+
+on buehne_kommando passage x do
+  local bteile:extract where count@value from " " split x
+  local bk:first bteile
+  if bk~"clear"
+    p.sicht:()
+    p.zeigt:()
+  elseif bk~"show"
+    if 1<count bteile
+      local bfig:bteile[1]
+      local d:p.sicht
+      if 3<count bteile
+        d[bfig]:bteile[3]
+      elseif !bfig in keys d
+        d[bfig]:"center"
+      end
+      p.sicht:d
+      # !hide macht nur unsichtbar; ein spaeteres !show ohne Position zeigt
+      # die Puppe wieder an derselben Stelle. Sichtbarkeit und Position
+      # muessen deshalb getrennt mitlaufen.
+      local v:p.zeigt
+      v[bfig]:1
+      p.zeigt:v
+    end
+  elseif bk~"move"
+    if 2<count bteile
+      local d:p.sicht
+      d[bteile[1]]:bteile[2]
+      p.sicht:d
+    end
+  elseif bk~"hide"
+    if 1<count bteile
+      local v:p.zeigt
+      v[bteile[1]]:0
+      p.zeigt:v
+    end
+  end
+end
+
+on pruefe_show teile do
+  if 3>count teile
+    fehle["" fuse ("!show braucht Name und Emote: ",(" " fuse teile))]
+  else
+    fig:teile[1]
+    emo:teile[2]
+    if !fig in keys figuren
+      fehle["" fuse ("unbekannte Puppe: ",fig)]
+    else
+      if !emo in keys figuren[fig]
+        merke_platzhalter[fig emo]
+      end
+    end
+    if 3<count teile
+      pos:teile[3]
+      if !pos in POSITIONEN
+        fehle["" fuse ("unbekannte Buehnenposition: ",pos," (in: ",(" " fuse teile),")")]
+      end
+    end
+  end
+end
+
+on pruefe_kommando x do
+  teile:extract where count@value from " " split x
+  if 0<count teile
+    k:first teile
+    if k~"show"
+      pruefe_show[teile]
+    elseif k~"bg"
+      if !teile[1] in keys hintergruende
+        warne["" fuse ("Hintergrund fehlt noch: ",teile[1])]
+      end
+    elseif k~"zeit"
+      # Das Ortsmarken-Feld auf der Buehne ist 300 Pixel breit. Laengerer
+      # Text wuerde stillschweigend abgeschnitten.
+      n:1+count k
+      rest:n drop x
+      if 52<count rest
+        laenge:"%i" format count rest
+        warne["" fuse ("Ortsmarke zu lang (",laenge," Zeichen): ",rest)]
+      end
+    elseif k~"move"
+      if 2<count teile
+        pos:teile[2]
+        if !pos in POSITIONEN
+          fehle["" fuse ("unbekannte Buehnenposition: ",pos," (in: ",(" " fuse teile),")")]
+        end
+      end
+    elseif k in ("hide","flip","order","anim","talk")
+      if 1<count teile
+        fig:teile[1]
+        if !fig in keys figuren
+          fehle["" fuse ("unbekannte Puppe: ",fig," (in: ",(" " fuse teile),")")]
+        end
+      end
+    else
+      if !k in EIGENE
+        if !k in PTCMD
+          fehle["" fuse ("unbekanntes Kommando: !",k)]
+        end
+      end
+    end
+  end
+end
+
+enden:()
+each zeile in rows story
+  n:zeile.name
+  if !n in ("StoryTitle","StoryData")
+    r:twee.render[story n v]
+    zeilen:r.value
+    ziele:extract arg from select where !arg="" from zeilen
+    each z in ziele
+      if !z in namen
+        fehle["" fuse ("Sprungziel fehlt: ",n," -> ",z)]
+      end
+    end
+    if 0~count ziele enden:enden,list n end
+    hat_bg:0
+    hat_clear:0
+    # Regieanweisungen: Absaetze, die mit "!" beginnen, zeilenweise pruefen.
+    prosa:select where arg="" from zeilen
+    each seg in rtext.split["\n\n" prosa]
+      t:ohne_rand[rtext.string[seg]]
+      if "!"~t[0]
+        each cz in "\n" split t
+          c:cz
+          if "!"~c[0] c:1 drop c end
+          if 0<count c
+            erstes:first " " split c
+            if erstes~"bg" hat_bg:1 end
+            if erstes~"clear" hat_clear:1 end
+            pruefe_kommando[c]
+            buehne_kommando[n c]
+          end
+        end
+        # Erst wenn der ganze Block durch ist, steht die Buehne still.
+        pruefe_buehne[n]
+      elseif !"?"~t[0]
+        sp:sprecher_von[t]
+        if 0<count sp
+          if !sp in p.sprecher p.sprecher:p.sprecher,list sp end
+        end
+      end
+    end
+    # Ein Szenenwechsel ohne !clear laesst die Puppen der vorigen Szene
+    # stehen. Das sieht man erst im Spiel als uebereinanderliegende Figuren,
+    # deshalb ist es hier ein Fehler und keine Warnung.
+    if hat_bg
+      if !hat_clear
+        fehle["" fuse ("!bg ohne !clear in Passage ",n," (Puppen der vorigen Szene blieben stehen)")]
+      end
+    end
+  end
+end
+
+print[""]
+print["Szenen: %i Passagen, %i Ende(n): %s" format (-2+count story), (count enden), (", " fuse enden)]
+
+# Wer im Text spricht. Die Engine leitet daraus die Puppe ab (kleingeschriebener
+# Name), deshalb faellt ein Tippfehler hier als "ohne Puppe" auf.
+if 0<count p.sprecher
+  mit:()
+  ohne:()
+  each sp in p.sprecher
+    puppe:"%l" format sp
+    if puppe in keys figuren
+      mit:mit,list sp
+    else
+      ohne:ohne,list sp
+    end
+  end
+  print["Sprecher mit Puppe: %s" format (", " fuse mit)]
+  if 0<count ohne
+    print["Sprecher ohne Puppe (Nebenfiguren, bitte auf Tippfehler pruefen):"]
+    print["  %s" format (", " fuse ohne)]
+  end
+end
+
+if 0<count p.platzhalter
+  print["Platzhalter (Emote noch nicht gezeichnet, nutzt neutral):"]
+  each s in p.platzhalter print["  %s" format s] end
+end
+
+if 0<count p.warnung
+  print["Warnungen:"]
+  each s in p.warnung print["  %s" format s] end
+end
+
+if 0<count p.fehler
+  print[""]
+  print["%i Fehler in den Daten:" format count p.fehler]
+  each s in p.fehler print["  %s" format s] end
+  exit[1]
+end
+
+# ------------------------------------------------------------ Deck aufbauen
+
+nd:newdeck[]
+nd.name:"Das Netzwerk"
+nd.author:"Olav Schettler"
+
+nd.add[tweedeck.modules.twee]
+nd.add[read["" fuse (DECKS,"dialog.deck")].modules.dd]
+nd.add[read["" fuse (DECKS,"puppeteer.deck")].modules.pt]
+
+# Schriften aus dem Beispieldeck. Deckers eingebaute Schriften sind Bitmaps
+# mit fester Pixelhoehe; bei der doppelten Kartengroesse waeren sie physisch
+# halb so gross. olympiad hat mit Hoehe 20 genau die doppelte Hoehe von body
+# und bringt eine echte Kursive mit, die den Erzaehltext von der Rede
+# unterscheidet. Der Name muss beim Hinzufuegen mitgegeben werden, sonst
+# landet die Schrift namenlos im Deck.
+fdeck:read["" fuse (DECKS,"fonts.deck")]
+each fname in ("olympiad","olympiad_italic","ahmPicnic","olympiad_title")
+  nd.add[fdeck.fonts[fname] fname]
+end
+
+nd.script:read["game/lil/vn.lil"]
+
+titel:nd.cards.home
+titel.name:"titel"
+
+on feld karte name pos groesse inhalt do
+  w:karte.add["field" name]
+  w.pos:pos
+  w.size:groesse
+  w.text:inhalt
+  w.locked:1
+  w.border:0
+  w
+end
+
+on karte_widget karte name pos groesse do
+  w:karte.add["button" name]
+  w.pos:pos
+  w.size:groesse
+  w.show:"none"
+  w
+end
+
+on knopf karte name pos groesse beschriftung skript do
+  w:karte.add["button" name]
+  w.pos:pos
+  w.size:groesse
+  w.text:beschriftung
+  w.font:"olympiad"
+  w.style:"rect"
+  w.script:skript
+  w
+end
+
+# --- Titelkarte
+kopf:feld[titel "kopf" (0,120) (1024,56) "Das Netzwerk"]
+kopf.font:"olympiad_title"
+kopf.align:"center"
+unter:feld[titel "unter" (0,190) (1024,56) "Eine Graphic Novel nach der Novelle von Olav Schettler"]
+unter.font:"olympiad"
+unter.align:"center"
+
+knopf[titel "beginnen" (352,320) (320,40) "Neu beginnen" "on click do vn_start[1] end"]
+knopf[titel "weiter" (352,372) (320,40) "Weiterspielen" "on click do vn_start[0] end"]
+knopf[titel "kapitel" (352,424) (320,40) "Kapitel" "on click do go[\"index\" \"SlideLeft\"] end"]
+knopf[titel "hinweis" (352,476) (320,40) "Rechtlicher Hinweis" "on click do go[\"hinweis\" \"SlideLeft\"] end"]
+
+fort:feld[titel "fortschritt" (0,570) (1024,32) ""]
+fort.font:"olympiad"
+fort.align:"center"
+fort.show:"transparent"
+
+# Beim Betreten der Titelkarte zeigen, wo man steht, und "Weiterspielen"
+# nur anbieten, wenn es etwas fortzusetzen gibt.
+titel.script:"on view do
+  s:vn_laden[]
+  if 0~s
+    fortschritt.text:\"Noch nicht begonnen.\"
+  elseif s.beendet
+    fortschritt.text:\"Durchgespielt.\"
+  else
+    fortschritt.text:\"\" fuse (\"Zuletzt: \",vn_kapiteltitel[vn_story[] s.passage])
+  end
+  weiter.show:if vn_fortsetzbar[] \"solid\" else \"none\" end
+end"
+
+# --- Kapitelindex
+index:nd.add["card" "index"]
+ik:feld[index "kopf" (32,44) (960,32) "Kapitel"]
+ik.font:"ahmPicnic"
+liste:feld[index "liste" (32,96) (960,480) ""]
+liste.font:"olympiad"
+liste.scrollbar:1
+knopf[index "zurueck3" (752,608) (240,40) "Zurueck" "on click do go[\"titel\" \"SlideRight\"] end"]
+index.script:"on view do
+  liste.value:vn_index_text[]
+end"
+
+# --- Rechtlicher Hinweis, wortgleich aus der Novelle
+hinweis:nd.add["card" "hinweis"]
+ht:feld[hinweis "text" (32,32) (960,540) read["game/data/hinweis.txt"]]
+ht.font:"olympiad"
+ht.scrollbar:1
+knopf[hinweis "zurueck" (752,600) (240,40) "Zurueck" "on click do go[\"titel\" \"SlideRight\"] end"]
+
+# --- Buehne
+buehne:nd.add["card" "buehne"]
+# Deckers Menueleiste belegt fest die obersten 16 Pixel der Karte
+# ("int menu=16" in extern/decker/c/dom.h). Alles darueber ist beim
+# Bearbeiten verdeckt, deshalb beginnt die Ortsmarke darunter.
+om:feld[buehne "ortsmarke" (16,24) (620,28) ""]
+om.show:"transparent"
+om.font:"ahmPicnic"
+
+# Haelt die Grundstimmung der Szene (!hell, !dunkel, !rueckblende) ueber
+# Ereignisgrenzen hinweg, siehe vn_stimmung in game/lil/vn.lil.
+st:feld[buehne "stimmung" (16,600) (200,28) "dunkel"]
+st.show:"none"
+tp:feld[buehne "tempo" (240,600) (120,28) "2"]
+tp.show:"none"
+ep:feld[buehne "erzaehlerpos" (400,600) (160,28) "oben"]
+ep.show:"none"
+
+# Unsichtbarer Platzhalter, auf den Dialogizer die Erzaehlbox zentriert
+# (dd rechnet: box.pos = widget.pos + 0.5*(widget.size - box.size)).
+pl:karte_widget[buehne "erzaehlplatz" (132,80) (760,140)]
+
+# --- Daten: Szenentext und Spielstand
+daten:nd.add["card" "daten"]
+q:feld[daten "quelle" (16,16) (992,480) quelltext]
+q.scrollbar:1
+feld[daten "stand" (16,512) (992,80) ""]
+knopf[daten "zurueck2" (752,612) (240,40) "Zurueck" "on click do go[\"titel\"] end"]
+
+# --- Hintergruende (bis M7 leer)
+hg:nd.add["card" "hintergruende"]
+each bild name i in hintergruende
+  c:hg.add["canvas" name]
+  c.size:bild.size
+  c.paste[bild (0,0) 1]
+end
+
+# --- Figurenblaetter: eine Karte je Figur, ein Canvas je Emote
+each emotes figur i in figuren
+  blatt:nd.add["card" figur]
+  neutral:emotes.neutral
+  each bild emote j in emotes
+    c:blatt.add["canvas" emote]
+    c.size:bild.size
+    c.paste[bild (0,0) 1]
+  end
+  # Platzhalter fuer noch nicht gezeichnete Emotes
+  each s in p.platzhalter
+    teile:"/" split s
+    if (first teile)~figur
+      emote:teile[1]
+      c:blatt.add["canvas" emote]
+      c.size:neutral.size
+      c.paste[neutral (0,0) 1]
+    end
+  end
+end
+
+# ------------------------------------------- Skripte gegenlesen
+
+# Decker ignoriert ein fehlerhaftes Skript stillschweigend: der Knopf tut
+# dann einfach nichts. eval[] meldet Parserfehler dagegen im Feld "error",
+# ohne den Bau abzubrechen, also wird hier jedes erzeugte Skript geprueft.
+on pruefe_skript wo quelltext do
+  if 0<count quelltext
+    r:eval[quelltext ()]
+    if 0<count r.error
+      fehle["" fuse ("Skriptfehler in ",wo,": ",r.error)]
+    end
+  end
+end
+
+pruefe_skript["deck.script" nd.script]
+each k kname i in nd.cards
+  pruefe_skript["" fuse ("Karte ",kname) k.script]
+  each w wname j in k.widgets
+    pruefe_skript["" fuse ("Karte ",kname,", Widget ",wname) w.script]
+  end
+end
+
+if 0<count p.fehler
+  print[""]
+  print["%i Skriptfehler:" format count p.fehler]
+  each s in p.fehler print["  %s" format s] end
+  exit[1]
+end
+
+# ------------------------------------------------------------ Schreiben
+
+# Die Kartengroesse steht nur im Dateikopf und ist ueber die Deck-Schnittstelle
+# nicht erreichbar. Das Format erlaubt ausdruecklich, sie von Hand zu aendern
+# ("this permits hand-altering the size of a deck", format.md), also wird der
+# kodierte Text angefasst und wieder eingelesen.
+zeilen:"\n" split nd.encoded
+gross:each z in zeilen
+  if "size:["~6 take z ("size:[%i,%i]" format BREITE,HOEHE) else z end
+end
+fertig:newdeck["\n" fuse gross]
+
+write["game/build/netzwerk.deck" fertig]
+write["game/build/netzwerk.html" fertig]
+
+print[""]
+print["geschrieben: game/build/netzwerk.deck"]
+print["geschrieben: game/build/netzwerk.html"]
+print["Karten: %s" format (", " fuse keys nd.cards)]

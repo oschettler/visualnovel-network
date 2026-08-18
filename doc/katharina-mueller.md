@@ -20,7 +20,7 @@ Aufgewachsen in Görlitz, der Grenzstadt zu Polen, als Tochter einer Krankenschw
 
 ## Charakter
 
-Organisationstalent, empathisch, gute Netzwerkerin mit Gespür für unterschiedliche Kulturen – aber manchmal zu kompromissbereit, mit Angst vor Konfrontation. Ihr Bruder Tobias ist AfD-Sympathisant; der Kontakt ist abgebrochen.
+Organisationstalent, empathisch, gute Netzwerkerin mit Gespür für unterschiedliche Kulturen – aber manchmal zu kompromissbereit, mit Angst vor Konfrontation. Ihr Bruder Markus ist seit 2023 AfD-Mitglied; der Kontakt ist abgebrochen.
 
 ## Rolle in der Geschichte
 

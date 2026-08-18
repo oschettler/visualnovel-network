@@ -1,0 +1,81 @@
+:: StoryTitle
+Testszene
+
+:: StoryData
+{
+  "format": "Ply",
+  "format-version": "1.0.0",
+  "start": "t01-anfang"
+}
+
+:: t01-anfang [kapitel-01 teil-1 pov-sarah datum-2026-01] {"titel":"Kapitel 1: Die Vision"}
+!bg sarah-buero
+!zeit Januar 2026, Bonn
+!dunkel
+
+Erzaehlabsatz ohne Sprecher, der die Sprechanimation abschalten muss.
+
+!show sarah neutral center
+
+Sarah: Eine Zeile Rede mit Sprechernamen.
+
+!show sarah schock
+
+Ein zweiter Erzaehlabsatz.
+
+? Testfrage aus der Szenendatei?
+
+[[Erster Weg.->t01-a]]
+[[Zweiter Weg.->t01-b]]
+
+:: t01-a [kapitel-01 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!show sarah ent
+
+Sarah: Der erste Weg.
+
+[[Es geht weiter.->t01-treffen]]
+
+:: t01-b [kapitel-01 teil-1 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah sorge
+
+Sarah: Der zweite Weg.
+
+[[Es geht weiter.->t01-treffen]]
+
+:: t01-treffen [kapitel-01 teil-1 pov-sarah]
+!zeit Januar 2026, Bonn, 18 Uhr
+!show sarah neutral centerleft
+!show michael sorge offcenterright
+!move michael centerright 45
+!wait
+
+Michael: Rede der zweiten Figur, rechts auf der Buehne.
+
+{if entschlossenheit>0 "Bedingter Zweig fuer den ersten Weg." else "Bedingter Zweig fuer den zweiten Weg." end}
+
+? Zweite Testfrage?
+
+[[Dritter Weg.->t01-c]]
+[[Vierter Weg.->t01-d]]
+
+:: t01-c [kapitel-01 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+
+Sarah: Der dritte Weg.
+
+[[Zum Ende.->t01-ende]]
+
+:: t01-d [kapitel-01 teil-1 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+
+Sarah: Der vierte Weg.
+
+[[Zum Ende.->t01-ende]]
+
+:: t01-ende [kapitel-01 teil-1 pov-sarah]
+!clear
+!shake 3 3 10
+
+Letzter Erzaehlabsatz ohne Ausgang. Entschlossenheit {entschlossenheit}, Vorsicht {vorsicht}.

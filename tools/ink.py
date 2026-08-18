@@ -177,6 +177,7 @@ def outline(pts, w, rng=None, breathe=0.42):
 
 class Pen:
     def __init__(self, seed=0):
+        self.seed = seed
         self.rng = random.Random(seed)
         self.paths = []
         self.warp = None
@@ -352,12 +353,22 @@ class Pen:
         """zones: Liste von (cx, cy, radius, anzahl).
 
         Spritzer liegen auf dem Papier, nicht auf dem Kopf -- eine
-        eingestellte Drehung gilt fuer sie nicht."""
+        eingestellte Drehung gilt fuer sie nicht.
+
+        Mit `rng_seed` bekommen die Spritzer einen eigenen Zufallsstrom.
+        Das ist noetig, sobald mehrere Fassungen desselben Bildes entstehen
+        (Emotes, Blinzeln): sonst haengen sie davon ab, wie viel Zufall das
+        Gesicht davor verbraucht hat, und wackeln beim Umschalten mit.
+        Sie liegen aber auf dem Papier und duerfen sich nicht bewegen."""
         gemerkt, self.warp = self.warp, None
+        gemerkte_rng = self.rng
+        if rng_seed is not None:
+            self.rng = random.Random(rng_seed)
         try:
             self._spatter(zones)
         finally:
             self.warp = gemerkt
+            self.rng = gemerkte_rng
 
     def _spatter(self, zones):
         for cx, cy, rad, cnt in zones:
