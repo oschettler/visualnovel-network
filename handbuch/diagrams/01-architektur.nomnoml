@@ -1,0 +1,41 @@
+#title: Vom Quelltext zum Deck
+#direction: down
+#spacing: 50
+#padding: 12
+#background: white
+
+[<frame>Quellen|
+  [Novelle .adoc|30 Kapitel|:pov: :date: *Ort:*]
+  [doc/personen.md|6 Charakterprofile]
+  [doc/stil-tuschezeichnung.md]
+]
+
+[<frame>Daten (game/data)|
+  [szenen.twee|Passagen, Dialog, Regie, Auswahl]
+  [emotes.csv|Mundbogen, Brauen, Lid je Emote]
+  [art.csv|SVG-zu-GIF-Manifest]
+  [art/*.gif|generierte Strichgrafik]
+]
+
+[<frame>Werkzeuge (tools)|
+  [portraits.py|+ ink.py, Emote-Tabelle]
+  [szenen.py|Hintergruende im Tuschestil]
+  [render_art.py|SVG nach GIF, 1-bit + transparent]
+]
+
+[<frame>Build (game/build)|
+  [build_vn.lil|prueft und baut, headless mit lilt]
+]
+
+[<frame>Deck (game/build/netzwerk.deck)|
+  [Module|twee, dd, pt]
+  [Karte buehne|Hintergrund-Canvas + Engine-Skript]
+  [Karten je Figur|Emote-Canvases]
+  [Karte hintergruende|alle Orte als Canvases]
+  [Karte daten|Spielstand, szenen.twee]
+]
+
+[<frame>Quellen] -> [<frame>Daten (game/data)]
+[<frame>Werkzeuge (tools)] -> [<frame>Daten (game/data)]
+[<frame>Daten (game/data)] -> [<frame>Build (game/build)]
+[<frame>Build (game/build)] -> [<frame>Deck (game/build/netzwerk.deck)]

@@ -75,6 +75,14 @@ end
 # Erzaehltext ist immer schwarz auf weiss, unabhaengig von der Stimmung der
 # Szene. Zusammen mit der Kursiven ist er damit auch dann klar von der Rede
 # getrennt, wenn die Szene hell gestimmt ist.
+on vn_stil_frage do
+  o:vn_stil[vn_stimmung[]]
+  o.align:"left"
+  o.pos:0
+  o.size:(0,0)
+  o
+end
+
 on vn_stil_erzaehler do
   o:vn_stil["hell"]
   o.tfont:"olympiad_italic"
@@ -107,6 +115,13 @@ on vn_frisch anfang do
   v.ausgestiegen:0
   v.tom_gestanden:0
   v.figur:""
+  v.g09:0
+  v.g10:0
+  v.g11:0
+  v.g12:0
+  v.g13:0
+  v.g14:0
+  v.gesamt:0
   s.vars:v
   s.gesehen:()
   s.beendet:0
@@ -201,6 +216,100 @@ on link val do
   if 0<count val vn_start_bei[val] end
 end
 
+# ------------------------------------------------------------ Blickrichtung
+
+# Zu jeder Figur gibt es drei Puppen: frontal, "_r" (schaut nach rechts,
+# steht also links) und "_l" (schaut nach links, steht rechts). Sprechen
+# zwei Figuren miteinander, wenden sie sich dadurch einander zu.
+#
+# In der Szenendatei steht trotzdem nur der schlichte Name. Welche Variante
+# gemeint ist, ergibt sich aus der Buehnenposition, und das rechnet die
+# Engine hier aus. Puppeteer spricht eine Puppe ueber den Namen ihrer Karte
+# an, deshalb sind es technisch drei Puppen.
+on vn_richtung fig pos do
+  if 0<count rtext.find[pos "left"]
+    "" fuse (fig,"_r")
+  elseif 0<count rtext.find[pos "right"]
+    "" fuse (fig,"_l")
+  else
+    fig
+  end
+end
+
+# Ohne Positionsangabe gilt die Variante, die schon auf der Buehne SICHTBAR
+# ist. Nur nach der Existenz zu fragen reicht nicht: Puppeteers !hide setzt
+# lediglich show auf "none", das Widget bleibt in card.widgets stehen. Wer
+# nur die Existenz prueft, versteckt spaeter die falsche Variante, und die
+# sichtbare bleibt neben der naechsten Figur stehen.
+on vn_sichtbar name do
+  local w:buehne.widgets[name]
+  if w
+    if w.show~"none" 0 else 1 end
+  else
+    0
+  end
+end
+
+on vn_aktive fig do
+  local rechts:"" fuse (fig,"_r")
+  local links:"" fuse (fig,"_l")
+  if vn_sichtbar[rechts]
+    rechts
+  elseif vn_sichtbar[links]
+    links
+  elseif vn_sichtbar[fig]
+    fig
+  elseif rechts in keys buehne.widgets
+    rechts
+  elseif links in keys buehne.widgets
+    links
+  else
+    fig
+  end
+end
+
+# Wechselt eine Figur die Seite, muss die alte Variante von der Buehne,
+# sonst stuenden beide gleichzeitig da.
+on vn_andere_weg fig behalten do
+  local a:fig
+  local b:"" fuse (fig,"_r")
+  local c:"" fuse (fig,"_l")
+  each v in (a,b,c)
+    if !v~behalten
+      if v in keys buehne.widgets
+        pt.command[deck ("" fuse ("hide ",v))]
+      end
+    end
+  end
+end
+
+# Setzt in einem Puppeteer-Kommando den schlichten Figurennamen durch die
+# passende Variante. !move behaelt die Blickrichtung bei; wer sie aendern
+# will, nimmt !show mit neuer Position.
+on vn_mit_richtung x do
+  local teile:extract where count@value from " " split x
+  local k:first teile
+  if 2>count teile
+    x
+  else
+    local fig:teile[1]
+    local pos:""
+    if k~"show"
+      if 3<count teile pos:teile[3] end
+    end
+    local puppe:vn_aktive[fig]
+    if 0<count pos puppe:vn_richtung[fig pos] end
+    if k~"show" vn_andere_weg[fig puppe] end
+    local schwanz:2 drop teile
+    if 0~count schwanz
+      "" fuse (k," ",puppe)
+    else
+      local ende:" " fuse schwanz
+      "" fuse (k," ",puppe," ",ende)
+    end
+  end
+end
+
 # ---------------------------------------------------------------- Kommandos
 
 # Hintergrund wechseln. Solange es die Bilder noch nicht gibt (bis M7),
@@ -258,13 +367,57 @@ on vn_kommando_werte x do
     buehne.widgets.tempo.text:"4"
   elseif k~"tempo"
     buehne.widgets.tempo.text:teile[1]
+  elseif k in ("show","hide","flip","order","anim","talk","move")
+    pt.command[deck vn_mit_richtung[x]]
   else
     pt.command[deck x]
   end
 end
 
+# Waehrend dd.say und dd.ask laufen, blockiert Decker die normale
+# Ereigniszustellung: ein Klick auf den Heim-Knopf kaeme nie an. Dialogizer
+# schickt aber weiter "animate" an die aktuelle Karte, und dort sind
+# Zeigerposition und Tastendruck ablesbar. Der Klick setzt deshalb nur einen
+# Merker; die Hauptschleife bricht dann zwischen zwei Textboxen sauber ab.
+on vn_heim_geklickt do
+  local b:buehne.widgets.heim
+  local getroffen:0
+  if b
+    if pointer.down
+      local px:first pointer.pos
+      local py:last pointer.pos
+      # "by" ist in Lil ein reserviertes Wort und als Variablenname
+      # nicht erlaubt.
+      local kx:first b.pos
+      local ky:last b.pos
+      local krechts:kx+first b.size
+      local kunten:ky+last b.size
+      if (px>kx)&(px<krechts)&(py>ky)&(py<kunten) getroffen:1 end
+    end
+  end
+  getroffen
+end
+
 on animate do
   pt.animate[deck]
+  if deck.card~buehne
+    if vn_heim_geklickt[] buehne.widgets.abbruch.text:"1" end
+  end
+end
+
+on vn_abbruch do
+  local t:buehne.widgets.abbruch.text
+  if t~"1" 1 else 0 end
+end
+
+on vn_abbruch_loeschen do
+  buehne.widgets.abbruch.text:"0"
+end
+
+# Klick auf den Heim-Knopf ausserhalb der Dialogschleife.
+on vn_heim do
+  buehne.widgets.abbruch.text:"1"
+  go["titel" "BoxOut"]
 end
 
 # ------------------------------------------------------------------ Ablauf
@@ -360,7 +513,8 @@ on vn_sag seg roh do
   if 0~count sp.name
     vn_erzaehle[seg]
   else
-    puppe:"%l" format sp.name
+    basis:"%l" format sp.name
+    puppe:vn_aktive[basis]
     if puppe in keys buehne.widgets
       pt.command[deck ("" fuse ("talk ",puppe))]
     else
@@ -387,6 +541,10 @@ on vn_prosa zeilen do
   each seg in segmente
     roh:rtext.string[seg]
     t:vn_ohne_rand[roh]
+    if vn_abbruch[]
+      # Heim-Knopf gedrueckt: keine weiteren Textboxen mehr zeigen.
+      t:""
+    end
     if "?"~t[0]
       frage:vn_rest[t "?"]
     elseif "!"~t[0]
@@ -399,6 +557,7 @@ on vn_prosa zeilen do
 end
 
 on vn_spiele neu do
+  vn_abbruch_loeschen[]
   story:vn_story[]
   meta:twee.meta[story]
   namen:extract name from story
@@ -428,7 +587,11 @@ on vn_spiele neu do
       frage:vn_prosa[prosa]
       labels:extract text from wahl
       ziele:extract arg from wahl
-      if 0~count wahl
+      if vn_abbruch[]
+        # Heim-Knopf: Stand sichern und zurueck ins Menue. Die Passage wird
+        # beim Weiterspielen von vorn gezeigt, gespeichert wird passagenweise.
+        laeuft:0
+      elseif 0~count wahl
         # Keine Ausgaenge: Ende der Erzaehlung.
         laeuft:0
         s.beendet:1
@@ -441,6 +604,7 @@ on vn_spiele neu do
         s.passage:first ziele
         vn_speichern[s]
       else
+        dd.style[vn_stil_frage[]]
         i:dd.ask[frage labels]
         s.passage:ziele[i]
         vn_speichern[s]
@@ -450,6 +614,7 @@ on vn_spiele neu do
   dd.close[]
   pt.clear[]
   vn_speichern[s]
+  vn_abbruch_loeschen[]
 end
 
 # "Weiterspielen" faengt neu an, wenn es nichts fortzusetzen gibt: kein

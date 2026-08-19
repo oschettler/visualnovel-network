@@ -93,16 +93,22 @@ pt.clear:on pt_clear c do 1 end
 
 # --------------------------------------------------------------- Karten
 
+# Die Karte selbst ist ein keystore (veraenderbar), ihre Widget-Liste aber
+# ein gewoehnliches Dictionary: die Engine fragt mit "keys buehne.widgets"
+# ab, welche Puppen auf der Buehne stehen, und "keys" liefert bei einem
+# keystore nichts zurueck.
 on neue_karte do
   k:keystore[]
-  k.widgets:keystore[]
+  k.widgets:()
   k
 end
 
 on neues_feld karte name inhalt do
-  f:keystore[]
+  local f:keystore[]
   f.text:inhalt
-  karte.widgets[name]:f
+  local w:karte.widgets
+  w[name]:f
+  karte.widgets:w
   f
 end
 
@@ -115,6 +121,7 @@ neues_feld[buehne "ortsmarke" ""]
 neues_feld[buehne "stimmung" "dunkel"]
 neues_feld[buehne "tempo" "2"]
 neues_feld[buehne "erzaehlerpos" "oben"]
+neues_feld[buehne "abbruch" "0"]
 buehne.size:(512,342)
 bild:keystore[]
 bild.clear:on bild_clear do 1 end
@@ -148,6 +155,11 @@ e.vn_stil_rede:vn_stil_rede
 e.vn_stil_erzaehler:vn_stil_erzaehler
 e.vn_tempo:vn_tempo
 e.vn_stimmung:vn_stimmung
+e.vn_richtung:vn_richtung
+e.vn_aktive:vn_aktive
+e.vn_mit_richtung:vn_mit_richtung
+e.vn_sichtbar:vn_sichtbar
+e.vn_stil_frage:vn_stil_frage
 e
 "
 
@@ -421,6 +433,41 @@ each g in p.gesagt
   if g~"Es geht weiter." uebergaenge:uebergaenge+1 end
 end
 pruefe["Einzellink erschien als Text" 0<uebergaenge]
+
+# ============================================== Test 13: Blickrichtungen
+
+print[""]
+print["Test 13: Blickrichtungen"]
+
+pruefe["links stehend schaut nach rechts" "sarah_r"~vn.vn_richtung["sarah" "centerleft"]]
+pruefe["rechts stehend schaut nach links" "sarah_l"~vn.vn_richtung["sarah" "centerright"]]
+pruefe["mittig bleibt frontal" "sarah"~vn.vn_richtung["sarah" "center"]]
+pruefe["Auftritt von links schaut nach rechts" "michael_r"~vn.vn_richtung["michael" "offcenterleft"]]
+
+pruefe["show mit Position setzt die Variante" "show sarah_r ent centerleft"~vn.vn_mit_richtung["show sarah ent centerleft"]]
+pruefe["show rechts setzt die Gegenrichtung" "show michael_l sorge centerright"~vn.vn_mit_richtung["show michael sorge centerright"]]
+pruefe["ohne Puppe auf der Buehne bleibt es frontal" "talk sarah"~vn.vn_mit_richtung["talk sarah"]]
+
+# Steht eine Variante auf der Buehne, gilt sie auch ohne Positionsangabe.
+neues_feld[buehne "sarah_l" ""]
+pruefe["aktive Variante wird uebernommen" "sarah_l"~vn.vn_aktive["sarah"]]
+pruefe["Emotewechsel behaelt die Richtung" "show sarah_l denk"~vn.vn_mit_richtung["show sarah denk"]]
+pruefe["talk trifft die aktive Variante" "talk sarah_l"~vn.vn_mit_richtung["talk sarah"]]
+
+# Puppeteers !hide laesst das Widget stehen und setzt nur show auf "none".
+# Eine versteckte Variante darf deshalb nicht mehr als aktiv gelten, sonst
+# versteckt das naechste !hide die falsche und die sichtbare bleibt stehen.
+buehne.widgets.sarah_l.show:"none"
+neues_feld[buehne "sarah" ""]
+buehne.widgets.sarah.show:"solid"
+pruefe["versteckte Variante gilt nicht als aktiv" "sarah"~vn.vn_aktive["sarah"]]
+pruefe["hide trifft die sichtbare Variante" "hide sarah"~vn.vn_mit_richtung["hide sarah"]]
+
+# Fragen duerfen nicht den Erzaehlerplatz erben, sonst laeuft eine lange
+# Auswahlliste oben aus dem Bild.
+f:vn.vn_stil_frage[]
+pruefe["Frage steht an der Standardstelle" 0~f.pos]
+pruefe["Frage ist aufrecht" f.tfont~"olympiad"]
 
 # =========================================================== Ergebnis
 

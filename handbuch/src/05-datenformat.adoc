@@ -1,0 +1,312 @@
+[[das-datenformat]]
+= Das Datenformat
+
+Die gesamte Geschichte, mit jeder Regieanweisung, jeder Entscheidung und
+jeder Variable, steht in einer einzigen Datei: `game/data/szenen.twee`,
+gut 3300 Zeilen, echtes Twee 3 im Story-Format **Ply**. Damit ist die
+Datei sowohl in Twine bearbeitbar (Story-Format über
+`https://beyondloom.com/decker/ply/format.js` hinzufügen) als auch von
+`twee.read[]` direkt lesbar. Wer eine Szene ändern, eine Figur auftreten
+lassen, einen Hintergrund wechseln oder eine Entscheidung einbauen will,
+editiert diese eine Datei und baut neu, siehe <<bearbeiten>>.
+
+== Passagen
+
+Eine Passage ist eine Szene an einem Ort. Kapitel mit Ortswechsel werden
+auf mehrere Passagen aufgeteilt, Kapitel ohne auf eine. Der Passagenname
+folgt dem Muster `k<NN>-<kurzname>`, zum Beispiel `k01-buero` oder
+`k15-abstimmung`. Der Name ist ausschließlich der Sprungziel-Bezeichner,
+er wird nie angezeigt.
+
+Kopf einer Passage aus der echten Szenendatei:
+
+[source]
+----
+:: k01-buero [kapitel-01 teil-1 pov-sarah datum-2026-01] {"titel":"Kapitel 1: Sarah - Die Vision"}
+----
+
+Das ist: der Passagenname, in eckigen Klammern die Tags, in geschweiften
+Klammern ein JSON-Objekt mit beliebigen Metadaten.
+
+== Tags
+
+Tags tragen Metadaten für Werkzeuge und den Kapitelindex, nicht für die
+Darstellung selbst: `kapitel-01`, `teil-1`, `pov-sarah`, `datum-2026-01`.
+Die Darstellung (Hintergrund, Stimmung, welche Figur wo steht) steuern
+stattdessen Kommandos im Fließtext, weil die dann an genau der richtigen
+Stelle im Text stehen und nicht nur passagenweit gelten.
+
+== Kapiteltitel als Metadatum
+
+Ein Kapitelanfang trägt seinen Titel im JSON-Objekt:
+
+[source]
+----
+{"titel":"Kapitel 1: Sarah - Die Vision"}
+----
+
+Die Engine baut daraus den kompletten Kapitelindex (`vn_kapitel` in
+`game/lil/vn.lil`, siehe <<software-architektur>>): sie liest jede Passage
+mit einem `titel`-Schlüssel im Metadaten-Objekt und merkt sich Name und
+Titel. Zu welchem Kapitel eine beliebige andere Passage gehört, ermittelt
+`vn_kapiteltag` über den `kapitel-NN`-Tag, nicht über die Reihenfolge in
+der Datei, damit Rücksprünge (etwa die frei wählbare Reihenfolge in
+Teil II) nichts durcheinanderbringen. Twee 3 erlaubt beliebige Schlüssel
+in diesem Objekt, und `twee.write[]` gibt sie unverändert zurück, Twine
+behält die Angabe beim Bearbeiten also bei.
+
+== Bezeichner ohne Umlaute, Text mit Umlauten
+
+Passagennamen, Kommandonamen, Puppen- und Emote-Namen, Hintergrund-Namen
+und Variablennamen sind ASCII (`k01-buero`, `!rueckblende`,
+`goerlitz-kinderzimmer`). Das gilt nur für Bezeichner. Jeder Text, den die
+spielende Person zu sehen bekommt, hat selbstverständlich Umlaute, und
+`lilt`, `twee.read[]` und `twee.render[]` reichen sie verlustfrei durch.
+
+== Regieanweisungen
+
+Eine Zeile, die mit `!` beginnt, ist für Ply gewöhnlicher Fließtext, für
+die Engine aber eine Regieanweisung. Kommandos stehen als eigener Absatz,
+durch Leerzeilen von der Prosa abgetrennt; mehrere Kommandos dürfen
+innerhalb eines Absatzes mit einfachem Zeilenumbruch gruppiert werden.
+
+[cols="1,2,1"]
+|===
+|Kommando |Wirkung |Herkunft
+
+|`!bg sarah-buero`
+|Hintergrundbild wechseln
+|eigenes Kommando
+
+|`!hell` / `!dunkel` / `!rueckblende`
+|Dialogizer-Stil umschalten
+|eigenes Kommando
+
+|`!zeit Januar 2026, Bonn`
+|Ort- und Zeitmarke einblenden
+|eigenes Kommando
+
+|`!schnell` / `!langsam` / `!tempo 3`
+|Textgeschwindigkeit
+|eigenes Kommando
+
+|`!erzaehler oben` / `!erzaehler unten`
+|wo der Erzähltext steht
+|eigenes Kommando
+
+|`!show sarah sorge centerleft`
+|Puppe zeigen, mit Emote und Position
+|`pt` (Puppeteer)
+
+|`!move sarah centerright 45`
+|Puppe bewegen
+|`pt`
+
+|`!hide tom` / `!clear`
+|Puppe(n) entfernen
+|`pt`
+
+|`!shake 5 5 15`
+|Bildschirm wackeln (Betonung)
+|`pt`
+
+|`!play klopfen`
+|Ton abspielen
+|`pt`
+
+|`!wait 30`
+|warten, Animation laufen lassen
+|`pt`
+|===
+
+Es gibt bewusst kein `!talk`-Kommando mehr: wer spricht, ergibt sich aus
+dem Sprecherpräfix im Text selbst, siehe unten.
+
+== Sprecherpräfix
+
+Sprecher stehen als kurzer Vorspann vor einem Doppelpunkt im Text:
+
+[source]
+----
+Sarah: Ich weiß.
+----
+
+Erzähltext bekommt kein Präfix. Erkannt wird ein Sprecher an einem
+Vorspann, der wie ein Name aussieht: höchstens drei Wörter, höchstens
+24 Zeichen, jedes Wort großgeschrieben. So bleibt `Dr. Hartmann: ...` ein
+Sprecher, während `Sie las: der Bescheid war da.` Erzähltext bleibt, weil
+"las" klein anfängt. Das ist die **einzige** Quelle dafür, wer spricht:
+
+* Die Puppe mit dem kleingeschriebenen Vornamen bewegt den Mund
+  (`Sarah:` steuert die Puppe `sarah`). Gibt es keine solche Puppe, ist es
+  eine Nebenfigur ohne Portrait, und keine Puppe bewegt sich.
+* Erzähltext bewegt keine Münder.
+* Rede und Erzähltext sehen verschieden aus: Rede folgt der Stimmung der
+  Szene und steht aufrecht, Erzähltext ist immer schwarz auf weiß und
+  steht kursiv. Beide sind linksbündig.
+* Zwei Sprecher unterscheiden sich automatisch über die Ausrichtung der
+  Dialogbox: wer links auf der Bühne steht, spricht linksbündig, wer
+  rechts steht, rechtsbündig, abgelesen an der Bühnenposition des
+  zugehörigen Canvas-Widgets.
+
+== Die `?`-Frage
+
+Eine Prosazeile, die mit `?` beginnt, ist die Frage, die über den
+Auswahlknöpfen erscheint:
+
+[source]
+----
+? Was tut Sarah mit dem, was sie gerade gelesen hat?
+----
+
+Fehlt sie, nimmt die Engine den Standardtext "Was tust du?".
+
+== Links: eine Fortsetzung oder eine Entscheidung
+
+Auswahl entsteht über Ply-Links am Ende einer Passage:
+
+[source]
+----
+[[Ein Konzept schreiben.->k01-konzept]]
+[[Erst das Fenster schließen und nachdenken.->k01-fenster]]
+----
+
+**Genau ein Link ist keine Auswahl, sondern eine Fortsetzung.** Die Engine
+zeigt dann die Beschriftung als letzte Textbox und springt weiter, statt
+einen Knopf mit nur einer Möglichkeit anzubieten:
+
+[source]
+----
+[[Es klopft.->k01-michael]]
+----
+
+Beschriftungen von Fortsetzungslinks sollten deshalb sprechend sein
+("Es klopft.", "Zwei Monate später."), keine Platzhalter wie "Weiter.".
+Erst ab zwei Links erscheint die Frage mit echten Knöpfen.
+
+[IMPORTANT]
+====
+Ein Bindestrich in der **Beschriftung** eines Links löscht den Link
+spurlos: statt eines Auswahlknopfes erscheint der rohe Text
+`[[Die Chaos-Leute verstehen OpSec.->k06-vertrauen]]` im Spiel. Im
+**Sprungziel** ist ein Bindestrich dagegen harmlos, und Passagennamen
+benutzen ihn ständig (`k01-buero`). Nachgemessen mit Minimalbeispielen:
+
+[cols="1,1"]
+|===
+|Passage |Ergebnis
+
+|`[[Chaosleute->x]]`
+|1 Link
+
+|`[[Chaos-Leute->x]]`
+|0 Links
+
+|`[[Erster->k06-vertrauen]]`
+|1 Link
+|===
+
+`build_vn.lil` bricht deshalb ab, wenn eine Link-Beschriftung einen
+Bindestrich enthält. Beschriftungen also umformulieren: aus
+"Wir nennen es ein Resilienz-Projekt." wird "Wir nennen es ein Projekt für
+Resilienz."
+====
+
+== Variablen und bedingter Text
+
+Variablen werden über `{lil}`-Fragmente gesetzt. Sie bleiben über
+Passagen hinweg erhalten (`twee.render[]` gibt `r.vars` zurück, die
+Engine reicht es an den nächsten Aufruf weiter) und werden nach jeder
+Passage gespeichert:
+
+[source]
+----
+{entschlossenheit:entschlossenheit+1 ""}
+----
+
+Das abschließende `""` ist kein Stilmittel, sondern notwendig: ein
+`{...}`-Fragment, das nur eine Variable setzen soll, muss mit `""` enden,
+sonst erscheint der Wert der Zuweisung selbst als Text im Spiel.
+
+Bedingter Text entsteht genauso als Fragment, das einen Wert statt eines
+leeren Strings zurückgibt:
+
+[source]
+----
+{if entschlossenheit>0 "Michael lehnte sich zurück und las, was sie
+geschrieben hatte. Er schwieg lange." else "Michael lehnte sich zurück.
+Sie hatte ihm noch nichts zu zeigen, nur einen Gedanken." end}
+----
+
+[IMPORTANT]
+====
+Ply führt `{...}`-Fragmente aus und schluckt Fehler dabei
+**stillschweigend**. Ein `if` ohne `end` rendert einfach zu nichts: die
+bedingte Textstelle fehlt im Spiel, ohne Meldung, ohne Lücke, ohne
+Hinweis. `build_vn.lil` schneidet deshalb jedes Fragment mit einem
+Klammer-Tiefenzähler heraus und wertet es einzeln mit `eval[]` aus, das
+Syntaxfehler im Feld `error` meldet statt sie zu verschlucken, und bricht
+den Bau bei einem Fehler ab.
+====
+
+== Eine vollständige Beispielpassage
+
+Der Anfang von Kapitel 1, wörtlich aus `game/data/szenen.twee`:
+
+[source]
+----
+:: k01-buero [kapitel-01 teil-1 pov-sarah datum-2026-01] {"titel":"Kapitel 1: Sarah - Die Vision"}
+!clear
+!bg sarah-buero
+!zeit Januar 2026, Bonn
+!dunkel
+
+Der Schnee fiel leise auf die Dächer der Bonner Innenstadt, als Sarah Hoffmann das Fenster ihres Büros im siebten Stock öffnete. Die kalte Luft brannte in ihren Lungen, aber sie brauchte sie.
+
+!show sarah neutral center
+
+USAGM workforce reduced by 85 percent. Voice of America effectively silenced.
+
+!show sarah schock
+
+Fünfundachtzig Prozent. In sechs Monaten. Das war keine Umstrukturierung. Das war eine Hinrichtung.
+
+!show sarah denk
+
+Ihr Blick fiel auf den kleinen Metallanhänger an ihrem Schlüsselbund. Ein Miniatur-Sendemast, kaum drei Zentimeter hoch.
+
+Sarah: Damit du nie vergisst, wofür wir senden.
+
+Damals hatte sie gelacht. Heute fühlte sich der kleine Mast an wie ein Relikt aus einer anderen Zeit.
+
+? Was tut Sarah mit dem, was sie gerade gelesen hat?
+
+[[Ein Konzept schreiben.->k01-konzept]]
+[[Erst das Fenster schließen und nachdenken.->k01-fenster]]
+
+:: k01-konzept [kapitel-01 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!show sarah ent
+
+Sie kehrte zu ihrem Schreibtisch zurück und öffnete ein neues Dokument.
+
+Sarah: Konzept: Föderierte Medieninfrastruktur für den Bundesrundfunk International.
+
+Sie schrieb zwei Stunden lang. Ein Netzwerk von Hubs, verteilt über die Welt. Jeder Hub autonom, aber verbunden.
+
+Wenn Berlin das Budget kürzte, würden die Hubs weitersenden. Wenn Bonn die Zentrale schloss, würde das Netzwerk weiterleben.
+
+[[Es klopft.->k01-michael]]
+----
+
+An dieser Passage lässt sich fast das ganze Format ablesen: `!clear` räumt
+die Bühne, `!bg` setzt den Hintergrund, `!zeit` die Ortsmarke, `!dunkel`
+die Stimmung. `!show sarah neutral center` bringt die Puppe auf die Bühne,
+spätere `!show sarah <emote>`-Zeilen ohne Position wechseln nur den
+Ausdruck und behalten die zuletzt gültige Position bei (siehe
+`vn_aktive` in <<software-architektur>>). Der Absatz ohne Sprecherpräfix
+("USAGM workforce...") ist Erzähltext (in diesem Fall ein wörtliches
+Zitat), `Sarah: ...` ist Rede. Die `?`-Frage und die zwei Links am Ende
+von `k01-buero` bilden die erste Entscheidung der Geschichte; die Antwort
+`k01-konzept` erhöht `entschlossenheit` und führt über einen
+Ein-Link-Übergang ("Es klopft.") weiter zu `k01-michael`.

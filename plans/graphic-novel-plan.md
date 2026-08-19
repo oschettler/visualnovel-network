@@ -576,17 +576,40 @@ ohne dass `sorge` bei ihm zum Lächeln wird.
 
 ### 7.4 Blickrichtung
 
-`portraits.py` kann bereits drehen (`ANSICHTEN`, Zylinderprojektion um die
-Hochachse). Zwei Stufen:
+Jede Figur liegt in **drei Blickrichtungen** vor: frontal, `_r` (turn +0.30,
+Gesicht nach rechts, steht also links) und `_l` (turn -0.30, steht rechts).
+Sprechen zwei Figuren miteinander, wenden sie sich dadurch einander zu.
 
-- **Stufe 1 (M2):** nur frontal (`turn=0.0`). Ein Figurenblatt je Figur,
-  Puppen stehen links und rechts, blicken aber nach vorn. Für eine Visual Novel
-  völlig üblich und halbiert den Aufwand.
-- **Stufe 2 (später, optional):** je Figur zwei Blätter `sarah-r` (turn +0.30,
-  Gesicht nach rechts, steht links) und `sarah-l` (turn -0.30, steht rechts).
-  Dann wenden sich zwei Figuren einander zu. `!flip` wird **nicht** benutzt: eine
-  gespiegelte Tuschezeichnung sieht falsch aus (Nasenhaken, verdecktes Ohr), und
-  der Generator kann die Drehung richtig zeichnen.
+`!flip` wird **nicht** benutzt: eine gespiegelte Tuschezeichnung sieht falsch
+aus (Nasenhaken zeigt in die falsche Richtung, das verdeckte Ohr taucht auf).
+Der Generator zeichnet die Drehung stattdessen richtig, als Zylinderprojektion
+um die Hochachse.
+
+Technisch sind das drei Puppen, weil Puppeteer eine Puppe über den Namen ihrer
+Karte anspricht. **In der Szenendatei steht trotzdem nur `sarah`.** Die Engine
+leitet die Variante aus der Bühnenposition ab: eine Position, die "left"
+enthält, ergibt `sarah_r`, eine mit "right" ergibt `sarah_l`, alles andere
+bleibt frontal. Ohne Positionsangabe (etwa bei einem reinen Emotewechsel) gilt
+die Variante, die schon auf der Bühne steht; die Engine liest das an den
+vorhandenen Widgets ab und braucht dafür keinen mitgeführten Zustand. Wechselt
+eine Figur die Seite, räumt die Engine die alte Variante selbst ab.
+
+`!move` behält die Blickrichtung bei, weil ein Wechsel mitten in der Bewegung
+ein anderes Widget wäre. Wer die Richtung ändern will, nimmt `!show` mit neuer
+Position.
+
+**Welche Variante gerade gilt, entscheidet die Sichtbarkeit, nicht die
+Existenz.** Puppeteers `!hide` entfernt das Widget nicht, es setzt nur
+`show` auf `"none"`. Wer nur fragt, ob ein Widget existiert, findet deshalb
+auch längst versteckte Varianten und versteckt beim nächsten `!hide` die
+falsche, während die sichtbare neben der nächsten Figur stehen bleibt. Genau
+so entstand nach dem Einbau der Blickrichtungen wieder eine Überlagerung, die
+die Bauprüfung nicht sehen konnte, weil sie mit den schlichten Figurennamen
+rechnet.
+
+Kosten: 6 Figuren mal 14 Bilder mal 3 Richtungen sind 252 Zeichnungen. Der
+Generator braucht dafür 10 Sekunden, die Umwandlung nach GIF weitere 40, und
+das Deck wächst von 768 KB auf gut 2 MB.
 
 ### 7.5 Größen
 
@@ -669,6 +692,16 @@ Nach mehreren Durchläufen in Decker steht die Trennung so fest:
 - Umschaltbar per `!erzaehler oben` und `!erzaehler unten`, gespeichert im
   Feld `erzaehlerpos` auf der Bühne. Die Rede setzt `pos` und `size` bei jedem
   Absatz ausdrücklich zurück, sonst bliebe sie am Erzählerplatz kleben.
+- **Auch die Frage über den Auswahlknöpfen braucht einen eigenen Stil.**
+  `dd.ask[]` erbt sonst den zuletzt gesetzten, also meist den des
+  Erzähltextes, und eine Auswahlliste mit sieben Möglichkeiten läuft dann am
+  oberen Bildrand aus dem Bild. `vn_stil_frage` setzt deshalb wieder
+  Standardposition und volle Breite.
+
+**Die Ortsmarke steht oben links, die Erzählbox darunter.** Beide oben zu
+platzieren geht nur, wenn der Mittelpunkt des Platzhalters tief genug liegt:
+die Box wächst von ihrem Mittelpunkt aus nach oben und unten, ein langer
+Erzählabsatz würde sonst die Ortsmarke überdecken.
 
 ---
 
@@ -683,6 +716,7 @@ Nach mehreren Durchläufen in Decker steht die Trennung so fest:
 | `michael-buero` (Research & Cooperations) | 3, 12, 19, 23 |
 | `bri-akademie` (Bonn) | 4 |
 | `kats-wg` (Köln-Ehrenfeld) | 4 |
+| `uebersicht` (neutrale Fläche für die Teil II-Übersicht) | Teil II |
 | `cafe-bonn` | 5, 13 |
 | `lena-buero` (BRI-Redaktion) | 5, 20 |
 | `ccc-halle` (37C3, Hamburg) | 6 |
@@ -712,6 +746,59 @@ München. Er stammte aus `plans/orte.md` der Novelle, das eine ältere Fassung
 von Kapitel 6 beschreibt. Im heutigen Kapiteltext kommt die Szene nicht vor
 (`:location:` nennt nur Bonn und Hamburg), und auch sonst spielt kein Kapitel
 dort. Aufgefallen ist das erst beim Adaptieren, nicht beim Planen.
+
+### Wie die Hintergründe aussehen
+
+Die Vorlagen sind die Tuschezeichnungen der Urmel-Bücher (`in/u1`, `in/u2`,
+`in/u3`). Drei Dinge machen sie als Szene aus:
+
+1. Es gibt keinen Horizont und keine Wände. Die Gegenstände stehen auf
+   weissem Papier.
+2. Der Boden ist nur angedeutet: lockere waagerechte Schraffur, ein paar
+   Steinchen, Tuschespritzer, dazu ein schwerer Zug, der die Linie trägt.
+   Nie eine gefüllte Fläche.
+3. Geräte und Möbel sind offene, leicht schiefe Umrisse mit wenigen Details:
+   Knöpfe als Kreise, Nieten und Tasten als Punktreihen, Holzlatten als drei
+   parallele Striche.
+
+`tools/szenen.py` baut daraus einen Formenschatz (Kasten, Tisch, Stuhl,
+Fenster, Regal, Serverschrank, Apparat, Kolben, Pflanze, Papierstapel,
+Mikrofon, Sofa) und setzt die 18 Orte daraus zusammen. Zwei Fallen dabei:
+
+- **Bricht ein Kasten an allen vier Kanten symmetrisch in der Mitte auf,
+  entstehen vier Eckwinkel statt einer Form.** Nur eine Kante darf brechen,
+  und die Linien müssen über die Ecken hinausschiessen.
+- **Waagerechte Striche übereinander sind kein Papierstapel, sondern
+  Schraffur.** Erst die seitlichen Kanten und ein schwerer Zug oben machen
+  daraus einen Stapel. Dasselbe gilt für Schatten: wenige kurze Striche dicht
+  unter dem Gegenstand, nie ein Block daneben.
+
+### Die Figuren müssen den Hintergrund verdecken
+
+Eine reine Strichzeichnung besteht aus Tusche und Transparenz. Ohne
+Gegenmassnahme scheint der Hintergrund also mitten durch die Gesichter, und
+bei zwei Figuren auf der Bühne wird das Bild unlesbar: Fensterkreuz im Auge,
+Bodenschraffur quer über den Mund. In den Vorlagen ist die Figur dagegen
+weisses Papier und verdeckt, was hinter ihr liegt.
+
+**Die Silhouette gehört in die Zeichnung, nicht in eine Nachbearbeitung.**
+`umriss()` in `tools/portraits.py` zeichnet vor allem anderen eine
+geschlossene Fläche über Haar, Kopf, Hals und Schultern, und `Pen.flaeche()`
+gibt sie im SVG als weissen Pfad unter der Tusche aus. Je Figur sind das
+sechs Zahlen (Scheitelpunkt, halbe Breite oben und auf Ohrhöhe, Ende der
+Haarpartie), die Schulterlinie ist für alle dieselbe und stammt aus
+`hals_schultern()`.
+
+Dazu darf `Pen.svg()` das weisse Rechteck über die ganze Fläche weglassen
+(`grund=False`). Für die Puppen ist damit genau die Figur undurchsichtig und
+alles daneben durchsichtig. `render_art.py` nimmt anschliessend einfach den
+Alphakanal des gerenderten SVG als Maske.
+
+Ein erster Versuch hatte die Silhouette stattdessen nachträglich aus dem
+fertigen Bild gewonnen: Tusche morphologisch schliessen, von den Rändern
+fluten, das Nichterreichte als Inneres nehmen. Das versiegelte zwar den Kopf,
+nicht aber den Rumpf, denn der endet am unteren Bildrand und ist dort offen.
+Aus der Zeichnung heraus ist es sowohl einfacher als auch vollständig.
 
 **Reihenfolge-Empfehlung:** In M1 bis M5 ersetzt die `!zeit`-Ortsmarke
 (eingeblendeter Text auf leerer Bühne) den Hintergrund. Erst in M7 werden die
@@ -748,10 +835,14 @@ fünf machen weiter, die Figur des Spielers steigt aus, und die Geschichte kehrt
 mit gesetzter Variable `ausgestiegen` in die Hauptlinie zurück. Betroffen sind
 danach mehrere Szenen in Teil III und der Epilog.
 
-**3. Perspektivwahl (an Teilgrenzen).**
-In Teil III laufen sechs Kapitel parallel im Zeitraum Oktober 2027 bis Juni 2029.
-Der Spieler wählt die Reihenfolge, in der er sie sieht. Kein Zustand, aber
-Handlungsmacht ohne Plotänderung.
+**3. Perspektivwahl, aber nur in Teil II.**
+Ursprünglich war sie auch für Teil III vorgesehen, unter der Annahme, dessen
+Kapitel liefen parallel. Das stimmt nicht: die Kapitel 16 bis 29 sind streng
+chronologisch, in Teil III eines alle drei Monate, in Teil IV monatlich. Eine
+frei wählbare Reihenfolge würde dort die Kausalität zerstören, etwa Toms Fehler
+im Januar 2029 nach dessen Entdeckung im Juni. Teil III und IV sind deshalb
+linear; die freie Reihenfolge gibt es nur in Teil II, wo die sechs Kapitel
+tatsächlich denselben Abend zeigen.
 
 ```nomnoml
 #direction: down
@@ -883,12 +974,26 @@ sonst erst dort auffiele.
 | M2 | **erledigt** | `game/data/emotes.csv`, `tools/portraits.py` umgebaut (Gesichtsgeometrie in `GEO`, Emote-Werte aus der Tabelle), `tools/render_art.py`, 84 Zeichnungen in 240x312, sechs Figurenblätter im Deck, Blinzel- und Sprechbilder vorhanden. Offen: Blinzeln und Sprechanimation in Decker in Bewegung sehen |
 | M3 | **erledigt** | Kapitelindex aus den Passagen-Metadaten, Titelkarte mit Fortschritt, Weiterspielen (springt bei fehlendem oder beendetem Stand auf Anfang), Sprecherableitung aus dem Text, eigener Erzählerstil ohne Mundbewegung, Stimmung und Tempo als Kommandos. 12 Testgruppen, alle grün |
 | M4 | **erledigt** | Kapitel 1 bis 8 als `szenen.twee`, 43 Passagen, acht Haltungswahlen (je eine pro Kapitel), Kapitelindex, Ortsmarken statt Hintergrundbildern |
-| M5 | Die Abstimmung | Kapitel 9 bis 15, Figurenwahl, Ja-/Nein-Verzweigung, `videokonferenz`-Darstellung |
-| M6 | Teil III und IV | Kapitel 16 bis 30, Perspektivwahl, Varianten für `ausgestiegen` und `tom_gestanden`, Epilogvarianten |
-| M7 | Ausstattung | 18 Hintergründe in `szenen.py`, Töne, Übergänge, Großaufnahmen, `netzwerk.html`-Export |
+| M5 | **erledigt** | Teil II vollständig: Übersichtskarte `t2-runde` mit frei wählbarer Reihenfolge, Kapitel 9 bis 14 als sechs innere Kapitel, Kapitel 15 mit Figurenwahl und Ja/Nein-Verzweigung. 90 Passagen, 6.400 Wörter Spieltext |
+| M6 | **erledigt** | Kapitel 16 bis 30 als lineare Kette, Toms folgenreiche Entscheidung in Kapitel 21, sieben `ausgestiegen`- und fünf `tom_gestanden`-Varianten, Epilog nach Haltungszählern. Gesamt: 166 Passagen, 32 Entscheidungspunkte, 12.100 Wörter Spieltext |
+| M7 | **erledigt** | 18 Hintergründe in `tools/szenen.py` nach den Urmel-Vorlagen, deckende Figurensilhouetten aus dem Generator, `tools/szenenbild.py` für Beispielszenen, Handbuch in `handbuch/` als HTML, EPUB und PDF. Offen: Töne und Übergänge |
 
 M1 bis M3 sind Technik und voneinander abhängig. M4 bis M6 sind Schreibarbeit
 und laufen danach parallel zu M7.
+
+### Das Handbuch
+
+`handbuch/` folgt mechanisch der Vorlage aus `zelda-network/handbuch`:
+AsciiDoc-Quellen in `src/`, Bau über Docker in `build/`, Ausgabe nach
+`output/` als HTML, EPUB und PDF. Zehn Kapitel von der Einleitung über
+Architektur, Datenformat, Bilderzeugung und Handlung bis zu Lil und Glossar,
+mit Beispielszenen aus `tools/szenenbild.py` und den nomnoml-Diagrammen
+dieses Plans.
+
+Eine Abweichung von der Vorlage war nötig: das HTML-Ziel bekommt
+`-a data-uri`, sonst verweist asciidoctor relativ auf das Quellverzeichnis
+und die fertige Datei in `output/` zeigt keine Bilder mehr, sobald man sie
+irgendwohin kopiert.
 
 ### Was M1 tatsächlich gebracht hat
 
@@ -1028,6 +1133,69 @@ unverändert und sind Pflichtlektüre. Die für dieses Projekt gefährlichsten:
   Sprungziel als fehlend meldete. Das Symptom zeigt dabei nicht im
   Entferntesten auf die Ursache. Hilfsvariablen in Funktionen deshalb immer
   mit `local` deklarieren.
+
+### Ein fehlerhaftes Lil-Fragment verschwindet spurlos
+
+Ply führt `{...}`-Fragmente aus und schluckt Fehler stillschweigend. Ein `if`
+ohne `end` rendert einfach zu nichts: die bedingte Textstelle fehlt im Spiel,
+ohne Meldung, ohne Lücke, ohne Hinweis. Bei über dreissig Fragmenten in
+166 Passagen ist das eine unangenehme Fehlerklasse, und sie ist mir selbst im
+Epilog passiert.
+
+`build_vn.lil` schneidet deshalb jedes Fragment mit einem Klammer-Tiefenzähler
+heraus und wertet es einzeln mit `eval[]` aus, das Syntaxfehler im Feld
+`error` meldet, statt sie zu verschlucken.
+
+### Ein Bindestrich zerstört Ply-Links
+
+Ein Bindestrich in der **Beschriftung** eines Links löscht den Link spurlos:
+statt eines Auswahlknopfes erscheint der rohe Text
+`[[Die Chaos-Leute verstehen OpSec.->k06-vertrauen]]` im Spiel. Im
+**Sprungziel** ist er dagegen harmlos. Nachgemessen mit Minimalbeispielen:
+
+| Passage | Ergebnis |
+|---|---|
+| `[[Chaosleute->x]]` | 1 Link |
+| `[[Chaos-Leute->x]]` | 0 Links |
+| `[[Erster->k06-vertrauen]]` | 1 Link |
+
+`build_vn.lil` bricht deshalb ab, wenn eine Link-Beschriftung einen
+Bindestrich enthält. Beschriftungen also umformulieren: aus "Wir nennen es ein
+Resilienz-Projekt." wird "Wir nennen es ein Projekt für Resilienz."
+
+### Die Abstimmung, und was der Spieler wirklich entscheidet
+
+Teil II hat zwei Strukturen, die es sonst nirgends gibt.
+
+**Die Übersichtskarte `t2-runde`.** Die sechs Vorbereitungskapitel spielen
+alle am selben Abend, jede Figur für sich. Der Spieler wählt die Reihenfolge.
+Umgesetzt ist das mit bedingten Links: jedes Kapitel setzt beim Verlassen ein
+Flag (`g09` bis `g14`) und kehrt zur Übersicht zurück, und die Übersicht zeigt
+nur die noch ungesehenen an.
+
+```
+{if g09 "" else rtext.make["Sarah schreibt die Einladung." "" "k09-einladung"] end}
+{gesamt:g09+g10+g11+g12+g13+g14 if 6~gesamt rtext.make["Der 16. September, 20 Uhr." "" "k15-abstimmung"] else "" end}
+```
+
+`rtext.make[text schrift ziel]` erzeugt eine Zeile mit Sprungziel, die die
+Engine genau wie einen `[[...]]`-Link behandelt. Erst wenn alle sechs Flags
+stehen, erscheint der Weg zur Abstimmung.
+
+**Der Ausstieg statt des Vetos.** Die Novelle verlangt Einstimmigkeit: "Wenn
+auch nur einer Nein sagt, ist das Projekt vorbei." Der Spieler wählt erst, für
+welche der sechs Figuren er den Zettel schreibt (`figur`), dann Ja oder Nein.
+
+Ein Nein könnte die Geschichte hier beenden, und genau das soll es nicht: die
+Novelle bleibt kanonisch. Gelöst ist das nicht durch Ignorieren der Wahl,
+sondern indem die Gruppe ihre eigene Regel unter Druck neu verhandelt. Die
+Figur des Spielers legt kein Veto gegen das Projekt ein, sondern gegen die
+eigene Beteiligung. Fünf machen weiter, einer geht und nimmt alles mit, was er
+weiß, was Michael als das größere Risiko benennt. `ausgestiegen` bleibt für
+den Rest der Geschichte gesetzt und färbt Schwur, Teil III und den Epilog.
+
+Das ist die einzige Stelle, an der eine Spielerentscheidung den Bestand der
+Gruppe ändert, und sie kostet etwas, ohne die Handlung zu brechen.
 
 ### Zwei Figuren, mehr passen nicht
 

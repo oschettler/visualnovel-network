@@ -1,0 +1,442 @@
+<svg version="1.1" baseProfile="full" width="1766.0" height="990.0" viewBox="0 0 1766 990" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >Vom Quelltext zum Deck</title>
+	<desc >#title: Vom Quelltext zum Deck
+	#direction: down
+	#spacing: 50
+	#padding: 12
+	#background: white
+	
+	[&lt;frame&gt;Quellen|
+	  [Novelle .adoc|30 Kapitel|:pov: :date: *Ort:*]
+	  [doc/personen.md|6 Charakterprofile]
+	  [doc/stil-tuschezeichnung.md]
+	]
+	
+	[&lt;frame&gt;Daten (game/data)|
+	  [szenen.twee|Passagen, Dialog, Regie, Auswahl]
+	  [emotes.csv|Mundbogen, Brauen, Lid je Emote]
+	  [art.csv|SVG-zu-GIF-Manifest]
+	  [art/*.gif|generierte Strichgrafik]
+	]
+	
+	[&lt;frame&gt;Werkzeuge (tools)|
+	  [portraits.py|+ ink.py, Emote-Tabelle]
+	  [szenen.py|Hintergruende im Tuschestil]
+	  [render_art.py|SVG nach GIF, 1-bit + transparent]
+	]
+	
+	[&lt;frame&gt;Build (game/build)|
+	  [build_vn.lil|prueft und baut, headless mit lilt]
+	]
+	
+	[&lt;frame&gt;Deck (game/build/netzwerk.deck)|
+	  [Module|twee, dd, pt]
+	  [Karte buehne|Hintergrund-Canvas + Engine-Skript]
+	  [Karten je Figur|Emote-Canvases]
+	  [Karte hintergruende|alle Orte als Canvases]
+	  [Karte daten|Spielstand, szenen.twee]
+	]
+	
+	[&lt;frame&gt;Quellen] -&gt; [&lt;frame&gt;Daten (game/data)]
+	[&lt;frame&gt;Werkzeuge (tools)] -&gt; [&lt;frame&gt;Daten (game/data)]
+	[&lt;frame&gt;Daten (game/data)] -&gt; [&lt;frame&gt;Build (game/build)]
+	[&lt;frame&gt;Build (game/build)] -&gt; [&lt;frame&gt;Deck (game/build/netzwerk.deck)]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="white">
+				<rect x="0.0" y="0.0" height="990.0" width="1766.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(12, 12)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<path d="M370.5 224.0 L370.5 249 L456.0387017463755 271.8493792336209 L456.0 271.8 " fill="none"></path>
+					<path d="M446.3 276.1 L456.0 271.8 L449.7 263.3 L464.1 274.0 Z"></path>
+					<path d="M1246.5 204.0 L1246.5 249 L1160.9612982536244 271.8493792336209 L1161.0 271.8 " fill="none"></path>
+					<path d="M1167.3 263.3 L1161.0 271.8 L1170.7 276.1 L1152.9 274.0 Z"></path>
+					<path d="M808.5 458.0 L808.5 483 L808.5 499.6666666666667 L808.5 499.7 " fill="none"></path>
+					<path d="M801.8 491.3 L808.5 499.7 L815.2 491.3 L808.5 508.0 Z"></path>
+					<path d="M808.5 692.0 L808.5 717 L808.5 733.6666666666666 L808.5 733.7 " fill="none"></path>
+					<path d="M801.8 725.3 L808.5 733.7 L815.2 725.3 L808.5 742.0 Z"></path>
+					<g data-name="Quellen">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Quellen">
+							<rect x="0.0" y="0.0" height="224.0" width="741.0" data-name="Quellen"></rect>
+							<path d="M0.0 40.0 L75.0 40.0 L95.0 20.0 L95.0 0.0" fill="none" data-name="Quellen"></path>
+						</g>
+						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Quellen" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Quellen" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="Quellen" data-compartment="0">Quellen</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Quellen" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Quellen" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="Quellen" data-compartment="1">
+									<g data-name="Novelle .adoc">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Novelle .adoc">
+											<rect x="0.0" y="0.0" height="120.0" width="161.0" data-name="Novelle .adoc"></rect>
+											<path d="M0.0 40.0 L161.0 40.0" fill="none" data-name="Novelle .adoc"></path>
+											<path d="M0.0 80.0 L161.0 80.0" fill="none" data-name="Novelle .adoc"></path>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Novelle .adoc" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Novelle .adoc" data-compartment="0">
+												<text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="Novelle .adoc" data-compartment="0">Novelle .adoc</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Novelle .adoc" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Novelle .adoc" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="Novelle .adoc" data-compartment="1">30 Kapitel</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Novelle .adoc" data-compartment="2">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Novelle .adoc" data-compartment="2">
+												<text x="0.0" y="14.1" stroke="none" data-name="Novelle .adoc" data-compartment="2">:pov: :date: *Ort:*</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="doc/personen.md">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="doc/personen.md">
+											<rect x="211.0" y="20.0" height="80.0" width="166.0" data-name="doc/personen.md"></rect>
+											<path d="M211.0 60.0 L377.0 60.0" fill="none" data-name="doc/personen.md"></path>
+										</g>
+										<g transform="translate(211, 20)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="doc/personen.md" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="doc/personen.md" data-compartment="0">
+												<text x="71.0" y="14.1" stroke="none" text-anchor="middle" data-name="doc/personen.md" data-compartment="0">doc/personen.md</text>
+												
+											</g>
+										</g>
+										<g transform="translate(211, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="doc/personen.md" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="doc/personen.md" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="doc/personen.md" data-compartment="1">6 Charakterprofile</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="doc/stil-tuschezeichnung.md">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="doc/stil-tuschezeichnung.md">
+											<rect x="427.0" y="40.0" height="40.0" width="250.0" data-name="doc/stil-tuschezeichnung.md"></rect>
+										</g>
+										<g transform="translate(427, 40)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="doc/stil-tuschezeichnung.md" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="doc/stil-tuschezeichnung.md" data-compartment="0">
+												<text x="113.0" y="14.1" stroke="none" text-anchor="middle" data-name="doc/stil-tuschezeichnung.md" data-compartment="0">doc/stil-tuschezeichnung.md</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="Daten (game/data)">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Daten (game/data)">
+							<rect x="212.5" y="274.0" height="184.0" width="1192.0" data-name="Daten (game/data)"></rect>
+							<path d="M212.5 314.0 L374.5 314.0 L394.5 294.0 L394.5 274.0" fill="none" data-name="Daten (game/data)"></path>
+						</g>
+						<g transform="translate(212.5, 274)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Daten (game/data)" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Daten (game/data)" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="Daten (game/data)" data-compartment="0">Daten (game/data)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(212.5, 314)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Daten (game/data)" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Daten (game/data)" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="Daten (game/data)" data-compartment="1">
+									<g data-name="szenen.twee">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="szenen.twee">
+											<rect x="0.0" y="0.0" height="80.0" width="295.0" data-name="szenen.twee"></rect>
+											<path d="M0.0 40.0 L295.0 40.0" fill="none" data-name="szenen.twee"></path>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="szenen.twee" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="szenen.twee" data-compartment="0">
+												<text x="135.5" y="14.1" stroke="none" text-anchor="middle" data-name="szenen.twee" data-compartment="0">szenen.twee</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="szenen.twee" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="szenen.twee" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="szenen.twee" data-compartment="1">Passagen, Dialog, Regie, Auswahl</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="emotes.csv">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="emotes.csv">
+											<rect x="345.0" y="0.0" height="80.0" width="293.0" data-name="emotes.csv"></rect>
+											<path d="M345.0 40.0 L638.0 40.0" fill="none" data-name="emotes.csv"></path>
+										</g>
+										<g transform="translate(345, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="emotes.csv" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="emotes.csv" data-compartment="0">
+												<text x="134.5" y="14.1" stroke="none" text-anchor="middle" data-name="emotes.csv" data-compartment="0">emotes.csv</text>
+												
+											</g>
+										</g>
+										<g transform="translate(345, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="emotes.csv" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="emotes.csv" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="emotes.csv" data-compartment="1">Mundbogen, Brauen, Lid je Emote</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="art.csv">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="art.csv">
+											<rect x="688.0" y="0.0" height="80.0" width="191.0" data-name="art.csv"></rect>
+											<path d="M688.0 40.0 L879.0 40.0" fill="none" data-name="art.csv"></path>
+										</g>
+										<g transform="translate(688, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="art.csv" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="art.csv" data-compartment="0">
+												<text x="83.5" y="14.1" stroke="none" text-anchor="middle" data-name="art.csv" data-compartment="0">art.csv</text>
+												
+											</g>
+										</g>
+										<g transform="translate(688, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="art.csv" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="art.csv" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="art.csv" data-compartment="1">SVG-zu-GIF-Manifest</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="art/*.gif">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="art/*.gif">
+											<rect x="929.0" y="0.0" height="80.0" width="199.0" data-name="art/*.gif"></rect>
+											<path d="M929.0 40.0 L1128.0 40.0" fill="none" data-name="art/*.gif"></path>
+										</g>
+										<g transform="translate(929, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="art/*.gif" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="art/*.gif" data-compartment="0">
+												<text x="87.5" y="14.1" stroke="none" text-anchor="middle" data-name="art/*.gif" data-compartment="0">art/*.gif</text>
+												
+											</g>
+										</g>
+										<g transform="translate(929, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="art/*.gif" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="art/*.gif" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="art/*.gif" data-compartment="1">generierte Strichgrafik</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="Werkzeuge (tools)">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Werkzeuge (tools)">
+							<rect x="791.0" y="20.0" height="184.0" width="911.0" data-name="Werkzeuge (tools)"></rect>
+							<path d="M791.0 60.0 L950.0 60.0 L970.0 40.0 L970.0 20.0" fill="none" data-name="Werkzeuge (tools)"></path>
+						</g>
+						<g transform="translate(791, 20)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Werkzeuge (tools)" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Werkzeuge (tools)" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="Werkzeuge (tools)" data-compartment="0">Werkzeuge (tools)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(791, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Werkzeuge (tools)" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Werkzeuge (tools)" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="Werkzeuge (tools)" data-compartment="1">
+									<g data-name="portraits.py">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="portraits.py">
+											<rect x="0.0" y="0.0" height="80.0" width="210.0" data-name="portraits.py"></rect>
+											<path d="M0.0 40.0 L210.0 40.0" fill="none" data-name="portraits.py"></path>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="portraits.py" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="portraits.py" data-compartment="0">
+												<text x="93.0" y="14.1" stroke="none" text-anchor="middle" data-name="portraits.py" data-compartment="0">portraits.py</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="portraits.py" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="portraits.py" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="portraits.py" data-compartment="1">+ ink.py, Emote-Tabelle</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="szenen.py">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="szenen.py">
+											<rect x="260.0" y="0.0" height="80.0" width="245.0" data-name="szenen.py"></rect>
+											<path d="M260.0 40.0 L505.0 40.0" fill="none" data-name="szenen.py"></path>
+										</g>
+										<g transform="translate(260, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="szenen.py" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="szenen.py" data-compartment="0">
+												<text x="110.5" y="14.1" stroke="none" text-anchor="middle" data-name="szenen.py" data-compartment="0">szenen.py</text>
+												
+											</g>
+										</g>
+										<g transform="translate(260, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="szenen.py" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="szenen.py" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="szenen.py" data-compartment="1">Hintergruende im Tuschestil</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="render_art.py">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="render_art.py">
+											<rect x="555.0" y="0.0" height="80.0" width="292.0" data-name="render_art.py"></rect>
+											<path d="M555.0 40.0 L847.0 40.0" fill="none" data-name="render_art.py"></path>
+										</g>
+										<g transform="translate(555, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="render_art.py" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="render_art.py" data-compartment="0">
+												<text x="134.0" y="14.1" stroke="none" text-anchor="middle" data-name="render_art.py" data-compartment="0">render_art.py</text>
+												
+											</g>
+										</g>
+										<g transform="translate(555, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="render_art.py" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="render_art.py" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="render_art.py" data-compartment="1">SVG nach GIF, 1-bit + transparent</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="Build (game/build)">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Build (game/build)">
+							<rect x="638.0" y="508.0" height="184.0" width="341.0" data-name="Build (game/build)"></rect>
+							<path d="M638.0 548.0 L795.0 548.0 L815.0 528.0 L815.0 508.0" fill="none" data-name="Build (game/build)"></path>
+						</g>
+						<g transform="translate(638, 508)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Build (game/build)" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Build (game/build)" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="Build (game/build)" data-compartment="0">Build (game/build)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(638, 548)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Build (game/build)" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Build (game/build)" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="Build (game/build)" data-compartment="1">
+									<g data-name="build_vn.lil">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="build_vn.lil">
+											<rect x="0.0" y="0.0" height="80.0" width="277.0" data-name="build_vn.lil"></rect>
+											<path d="M0.0 40.0 L277.0 40.0" fill="none" data-name="build_vn.lil"></path>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="build_vn.lil" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="build_vn.lil" data-compartment="0">
+												<text x="126.5" y="14.1" stroke="none" text-anchor="middle" data-name="build_vn.lil" data-compartment="0">build_vn.lil</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="build_vn.lil" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="build_vn.lil" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="build_vn.lil" data-compartment="1">prueft und baut, headless mit lilt</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="Deck (game/build/netzwerk.deck)">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Deck (game/build/netzwerk.deck)">
+							<rect x="174.5" y="742.0" height="184.0" width="1268.0" data-name="Deck (game/build/netzwerk.deck)"></rect>
+							<path d="M174.5 782.0 L451.5 782.0 L471.5 762.0 L471.5 742.0" fill="none" data-name="Deck (game/build/netzwerk.deck)"></path>
+						</g>
+						<g transform="translate(174.5, 742)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (game/build/netzwerk.deck)" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Deck (game/build/netzwerk.deck)" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="Deck (game/build/netzwerk.deck)" data-compartment="0">Deck (game/build/netzwerk.deck)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(174.5, 782)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (game/build/netzwerk.deck)" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Deck (game/build/netzwerk.deck)" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="Deck (game/build/netzwerk.deck)" data-compartment="1">
+									<g data-name="Module">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Module">
+											<rect x="0.0" y="0.0" height="80.0" width="116.0" data-name="Module"></rect>
+											<path d="M0.0 40.0 L116.0 40.0" fill="none" data-name="Module"></path>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Module" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Module" data-compartment="0">
+												<text x="46.0" y="14.1" stroke="none" text-anchor="middle" data-name="Module" data-compartment="0">Module</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Module" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Module" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="Module" data-compartment="1">twee, dd, pt</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="Karte buehne">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte buehne">
+											<rect x="166.0" y="0.0" height="80.0" width="309.0" data-name="Karte buehne"></rect>
+											<path d="M166.0 40.0 L475.0 40.0" fill="none" data-name="Karte buehne"></path>
+										</g>
+										<g transform="translate(166, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Karte buehne" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Karte buehne" data-compartment="0">
+												<text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="Karte buehne" data-compartment="0">Karte buehne</text>
+												
+											</g>
+										</g>
+										<g transform="translate(166, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte buehne" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte buehne" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="Karte buehne" data-compartment="1">Hintergrund-Canvas + Engine-Skript</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="Karten je Figur">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Karten je Figur">
+											<rect x="525.0" y="0.0" height="80.0" width="159.0" data-name="Karten je Figur"></rect>
+											<path d="M525.0 40.0 L684.0 40.0" fill="none" data-name="Karten je Figur"></path>
+										</g>
+										<g transform="translate(525, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Karten je Figur" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Karten je Figur" data-compartment="0">
+												<text x="67.5" y="14.1" stroke="none" text-anchor="middle" data-name="Karten je Figur" data-compartment="0">Karten je Figur</text>
+												
+											</g>
+										</g>
+										<g transform="translate(525, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karten je Figur" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karten je Figur" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="Karten je Figur" data-compartment="1">Emote-Canvases</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="Karte hintergruende">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte hintergruende">
+											<rect x="734.0" y="0.0" height="80.0" width="203.0" data-name="Karte hintergruende"></rect>
+											<path d="M734.0 40.0 L937.0 40.0" fill="none" data-name="Karte hintergruende"></path>
+										</g>
+										<g transform="translate(734, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Karte hintergruende" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Karte hintergruende" data-compartment="0">
+												<text x="89.5" y="14.1" stroke="none" text-anchor="middle" data-name="Karte hintergruende" data-compartment="0">Karte hintergruende</text>
+												
+											</g>
+										</g>
+										<g transform="translate(734, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte hintergruende" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte hintergruende" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="Karte hintergruende" data-compartment="1">alle Orte als Canvases</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="Karte daten">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte daten">
+											<rect x="987.0" y="0.0" height="80.0" width="217.0" data-name="Karte daten"></rect>
+											<path d="M987.0 40.0 L1204.0 40.0" fill="none" data-name="Karte daten"></path>
+										</g>
+										<g transform="translate(987, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Karte daten" data-compartment="0">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Karte daten" data-compartment="0">
+												<text x="96.5" y="14.1" stroke="none" text-anchor="middle" data-name="Karte daten" data-compartment="0">Karte daten</text>
+												
+											</g>
+										</g>
+										<g transform="translate(987, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte daten" data-compartment="1">
+											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte daten" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="Karte daten" data-compartment="1">Spielstand, szenen.twee</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

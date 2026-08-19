@@ -1,0 +1,58 @@
+---
+# Metadaten für das "Das Netzwerk"-Handbuch
+
+title: "Das Netzwerk: Handbuch zur Visual Novel"
+subtitle: "Spielen und weiterbauen mit Decker, Lil und Tuschezeichnung"
+author: "Olav Schettler"
+date: "2026"
+lang: de
+language: de-DE
+
+publisher: "Selbstverlag"
+rights: "CC BY-SA 4.0, Olav Schettler"
+
+subject:
+  - "Decker"
+  - "Lil"
+  - "Visual Novel"
+  - "Anleitung"
+
+keywords:
+  - "Decker"
+  - "Lil"
+  - "Visual Novel"
+  - "Twee"
+  - "Tuschezeichnung"
+
+description: |
+  Ein Handbuch für Einsteigerinnen und Einsteiger: wie man die Visual Novel
+  "Das Netzwerk" spielt, wie ihre Engine, ihr Datenformat und ihre generierte
+  Tuschegrafik aufgebaut sind, und wie man die Geschichte mit eigenen Szenen
+  weiterschreibt, auch ohne vorher programmiert zu haben.
+
+epub-version: 3
+
+pdf-theme: "build/theme.yml"
+documentclass: book
+papersize: a4
+fontsize: 11pt
+
+toc: true
+toc-depth: 2
+number-sections: false
+
+attributes:
+  icons: font
+  source-highlighter: rouge
+  rouge-style: github
+  sectanchors: true
+  sectlinks: true
+  linkattrs: true
+  experimental: true
+
+version: "1.0.0"
+revdate: "2026-08-10"
+author-email: "olav@schettler.net"
+
+license: "CC BY-SA 4.0"
+license-url: "https://creativecommons.org/licenses/by-sa/4.0/"

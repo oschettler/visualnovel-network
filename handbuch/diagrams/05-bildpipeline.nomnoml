@@ -1,0 +1,47 @@
+#title: Wie eine Zeichnung ins Spiel kommt
+#direction: right
+#spacing: 70
+#padding: 12
+#background: white
+
+[<frame>ink.py|
+  Pen-Klasse|
+  Striche mit variabler Breite
+]
+
+[<frame>portraits.py / szenen.py|
+  GEO je Figur|
+  Formenschatz je Ort
+]
+
+[<frame>emotes.csv|
+  Mundbogen, Brauen,|
+  Lid, Pupille je Emote
+]
+
+[<frame>doc/img/*.svg|
+  eine Datei je Emote|
+  bzw. je Hintergrund
+]
+
+[<frame>art.csv|
+  Manifest: svg, gif,|
+  Breite, Hoehe, transparent
+]
+
+[<frame>render_art.py|
+  rsvg-convert, dann magick|
+  silhouette() fuer Figuren
+]
+
+[<frame>game/data/art/*.gif|
+  1-Bit, Pattern 0/1|
+  lilt-lesbar
+]
+
+[emotes.csv] -> [portraits.py / szenen.py]
+[portraits.py / szenen.py] -> [doc/img/*.svg]
+[ink.py] -> [portraits.py / szenen.py]
+[doc/img/*.svg] -> [art.csv]
+[art.csv] liest -> [render_art.py]
+[render_art.py] schreibt -> [game/data/art/*.gif]

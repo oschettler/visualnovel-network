@@ -1,0 +1,23 @@
+#title: Story-Struktur: eine echte Verzweigung, sonst linear
+#direction: down
+#spacing: 45
+#padding: 12
+#background: white
+
+[<start>Titel]
+[Teil I|K1 bis K8|Haltungswahl je Kapitel]
+[<choice>K15 Die Abstimmung|Wahl der Figur|Ja oder Nein]
+[Teil III kanonisch|K16 bis K23|Reihenfolge waehlbar in Teil II]
+[Teil III ausgestiegen|Varianten derselben Kapitel|Variable ausgestiegen=1]
+[Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess]
+[<choice>Epilog|Variante nach Haltungszaehlern]
+[<end>Maerz 2030]
+
+[<start>Titel] -> [Teil I|K1 bis K8|Haltungswahl je Kapitel]
+[Teil I|K1 bis K8|Haltungswahl je Kapitel] -> [<choice>K15 Die Abstimmung|Wahl der Figur|Ja oder Nein]
+[<choice>K15 Die Abstimmung|Wahl der Figur|Ja oder Nein] -> [Teil III kanonisch|K16 bis K23|Reihenfolge waehlbar in Teil II]
+[<choice>K15 Die Abstimmung|Wahl der Figur|Ja oder Nein] -> [Teil III ausgestiegen|Varianten derselben Kapitel|Variable ausgestiegen=1]
+[Teil III kanonisch|K16 bis K23|Reihenfolge waehlbar in Teil II] -> [Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess]
+[Teil III ausgestiegen|Varianten derselben Kapitel|Variable ausgestiegen=1] -> [Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess]
+[Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess] -> [<choice>Epilog|Variante nach Haltungszaehlern]
+[<choice>Epilog|Variante nach Haltungszaehlern] -> [<end>Maerz 2030]

@@ -1,0 +1,208 @@
+<svg version="1.1" baseProfile="full" width="615.0" height="1054.0" viewBox="0 0 615 1054" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >Story-Struktur: eine echte Verzweigung, sonst linear</title>
+	<desc >#title: Story-Struktur: eine echte Verzweigung, sonst linear
+	#direction: down
+	#spacing: 45
+	#padding: 12
+	#background: white
+	
+	[&lt;start&gt;Titel]
+	[Teil I|K1 bis K8|Haltungswahl je Kapitel]
+	[&lt;choice&gt;K15 Die Abstimmung|Wahl der Figur|Ja oder Nein]
+	[Teil III kanonisch|K16 bis K23|Reihenfolge waehlbar in Teil II]
+	[Teil III ausgestiegen|Varianten derselben Kapitel|Variable ausgestiegen=1]
+	[Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess]
+	[&lt;choice&gt;Epilog|Variante nach Haltungszaehlern]
+	[&lt;end&gt;Maerz 2030]
+	
+	[&lt;start&gt;Titel] -&gt; [Teil I|K1 bis K8|Haltungswahl je Kapitel]
+	[Teil I|K1 bis K8|Haltungswahl je Kapitel] -&gt; [&lt;choice&gt;K15 Die Abstimmung|Wahl der Figur|Ja oder Nein]
+	[&lt;choice&gt;K15 Die Abstimmung|Wahl der Figur|Ja oder Nein] -&gt; [Teil III kanonisch|K16 bis K23|Reihenfolge waehlbar in Teil II]
+	[&lt;choice&gt;K15 Die Abstimmung|Wahl der Figur|Ja oder Nein] -&gt; [Teil III ausgestiegen|Varianten derselben Kapitel|Variable ausgestiegen=1]
+	[Teil III kanonisch|K16 bis K23|Reihenfolge waehlbar in Teil II] -&gt; [Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess]
+	[Teil III ausgestiegen|Varianten derselben Kapitel|Variable ausgestiegen=1] -&gt; [Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess]
+	[Teil IV|K24 bis K29|Aktivierung, Oeffentlichkeit, Prozess] -&gt; [&lt;choice&gt;Epilog|Variante nach Haltungszaehlern]
+	[&lt;choice&gt;Epilog|Variante nach Haltungszaehlern] -&gt; [&lt;end&gt;Maerz 2030]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="white">
+				<rect x="0.0" y="0.0" height="1054.0" width="615.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(12, 12)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<path d="M280.5 30.0 L280.5 52.5 L280.5 67.5 L280.5 67.5 " fill="none"></path>
+					<path d="M274.5 60.0 L280.5 67.5 L286.5 60.0 L280.5 75.0 Z"></path>
+					<path d="M280.5 195.0 L280.5 217.5 L280.5 232.5 L280.5 232.5 " fill="none"></path>
+					<path d="M274.5 225.0 L280.5 232.5 L286.5 225.0 L280.5 240.0 Z"></path>
+					<path d="M161.3 420.0 L131.5 442.5 L131.5 457.5 L131.5 457.5 " fill="none"></path>
+					<path d="M125.5 450.0 L131.5 457.5 L137.5 450.0 L131.5 465.0 Z"></path>
+					<path d="M399.7 420.0 L429.5 442.5 L429.5 457.5 L429.5 457.5 " fill="none"></path>
+					<path d="M423.5 450.0 L429.5 457.5 L435.5 450.0 L429.5 465.0 Z"></path>
+					<path d="M131.5 585.0 L131.5 607.5 L165.57499780276174 626.3670289847506 L165.6 626.4 " fill="none"></path>
+					<path d="M156.1 628.0 L165.6 626.4 L161.9 617.5 L172.1 630.0 Z"></path>
+					<path d="M429.5 585.0 L429.5 607.5 L395.42500219723826 626.3670289847506 L395.4 626.4 " fill="none"></path>
+					<path d="M399.1 617.5 L395.4 626.4 L404.9 628.0 L388.9 630.0 Z"></path>
+					<path d="M280.5 750.0 L280.5 772.5 L280.5 787.5 L280.5 787.5 " fill="none"></path>
+					<path d="M274.5 780.0 L280.5 787.5 L286.5 780.0 L280.5 795.0 Z"></path>
+					<path d="M280.5 915.0 L280.5 937.5 L280.5 952.5 L280.5 952.5 " fill="none"></path>
+					<path d="M274.5 945.0 L280.5 952.5 L286.5 945.0 L280.5 960.0 Z"></path>
+					<g data-name="Titel">
+						<g fill="#33322E" stroke="#33322E" data-name="Titel">
+							<circle r="12.0" cx="280.5" cy="15.0" stroke="none" data-name="Titel"></circle>
+						</g>
+					</g>
+					<g data-name="Teil I">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Teil I">
+							<rect x="176.5" y="75.0" height="120.0" width="208.0" data-name="Teil I"></rect>
+							<path d="M176.5 115.0 L384.5 115.0" fill="none" data-name="Teil I"></path>
+							<path d="M176.5 155.0 L384.5 155.0" fill="none" data-name="Teil I"></path>
+						</g>
+						<g transform="translate(176.5, 75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Teil I" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Teil I" data-compartment="0">
+								<text x="92.0" y="14.1" stroke="none" text-anchor="middle" data-name="Teil I" data-compartment="0">Teil I</text>
+								
+							</g>
+						</g>
+						<g transform="translate(176.5, 115)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil I" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil I" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil I" data-compartment="1">K1 bis K8</text>
+								
+							</g>
+						</g>
+						<g transform="translate(176.5, 155)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil I" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil I" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil I" data-compartment="2">Haltungswahl je Kapitel</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="K15 Die Abstimmung">
+						<g fill="#eee8d5" stroke="#33322E" data-name="K15 Die Abstimmung">
+							<path d="M280.5 240.0 L421.5 330.0 L280.5 420.0 L139.5 330.0 Z" data-name="K15 Die Abstimmung"></path>
+							<path d="M390.2 310.0 L170.8 310.0" fill="none" data-name="K15 Die Abstimmung"></path>
+							<path d="M390.2 350.0 L170.8 350.0" fill="none" data-name="K15 Die Abstimmung"></path>
+						</g>
+						<g transform="translate(186.5, 270)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="K15 Die Abstimmung" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="K15 Die Abstimmung" data-compartment="0">
+								<text x="82.0" y="14.1" stroke="none" text-anchor="middle" data-name="K15 Die Abstimmung" data-compartment="0">K15 Die Abstimmung</text>
+								
+							</g>
+						</g>
+						<g transform="translate(186.5, 310)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="K15 Die Abstimmung" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="K15 Die Abstimmung" data-compartment="1">
+								<text x="82.0" y="14.1" stroke="none" text-anchor="middle" data-name="K15 Die Abstimmung" data-compartment="1">Wahl der Figur</text>
+								
+							</g>
+						</g>
+						<g transform="translate(186.5, 350)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="K15 Die Abstimmung" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="K15 Die Abstimmung" data-compartment="2">
+								<text x="82.0" y="14.1" stroke="none" text-anchor="middle" data-name="K15 Die Abstimmung" data-compartment="2">Ja oder Nein</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Teil III kanonisch">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Teil III kanonisch">
+							<rect x="0.0" y="465.0" height="120.0" width="263.0" data-name="Teil III kanonisch"></rect>
+							<path d="M0.0 505.0 L263.0 505.0" fill="none" data-name="Teil III kanonisch"></path>
+							<path d="M0.0 545.0 L263.0 545.0" fill="none" data-name="Teil III kanonisch"></path>
+						</g>
+						<g transform="translate(0, 465)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Teil III kanonisch" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Teil III kanonisch" data-compartment="0">
+								<text x="119.5" y="14.1" stroke="none" text-anchor="middle" data-name="Teil III kanonisch" data-compartment="0">Teil III kanonisch</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 505)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil III kanonisch" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil III kanonisch" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil III kanonisch" data-compartment="1">K16 bis K23</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 545)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil III kanonisch" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil III kanonisch" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil III kanonisch" data-compartment="2">Reihenfolge waehlbar in Teil II</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Teil III ausgestiegen">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Teil III ausgestiegen">
+							<rect x="308.0" y="465.0" height="120.0" width="243.0" data-name="Teil III ausgestiegen"></rect>
+							<path d="M308.0 505.0 L551.0 505.0" fill="none" data-name="Teil III ausgestiegen"></path>
+							<path d="M308.0 545.0 L551.0 545.0" fill="none" data-name="Teil III ausgestiegen"></path>
+						</g>
+						<g transform="translate(308, 465)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Teil III ausgestiegen" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Teil III ausgestiegen" data-compartment="0">
+								<text x="109.5" y="14.1" stroke="none" text-anchor="middle" data-name="Teil III ausgestiegen" data-compartment="0">Teil III ausgestiegen</text>
+								
+							</g>
+						</g>
+						<g transform="translate(308, 505)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil III ausgestiegen" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil III ausgestiegen" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil III ausgestiegen" data-compartment="1">Varianten derselben Kapitel</text>
+								
+							</g>
+						</g>
+						<g transform="translate(308, 545)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil III ausgestiegen" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil III ausgestiegen" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil III ausgestiegen" data-compartment="2">Variable ausgestiegen=1</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Teil IV">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Teil IV">
+							<rect x="126.0" y="630.0" height="120.0" width="309.0" data-name="Teil IV"></rect>
+							<path d="M126.0 670.0 L435.0 670.0" fill="none" data-name="Teil IV"></path>
+							<path d="M126.0 710.0 L435.0 710.0" fill="none" data-name="Teil IV"></path>
+						</g>
+						<g transform="translate(126, 630)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Teil IV" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Teil IV" data-compartment="0">
+								<text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="Teil IV" data-compartment="0">Teil IV</text>
+								
+							</g>
+						</g>
+						<g transform="translate(126, 670)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil IV" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil IV" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil IV" data-compartment="1">K24 bis K29</text>
+								
+							</g>
+						</g>
+						<g transform="translate(126, 710)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Teil IV" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Teil IV" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="Teil IV" data-compartment="2">Aktivierung, Oeffentlichkeit, Prozess</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Epilog">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Epilog">
+							<path d="M280.5 795.0 L489.0 855.0 L280.5 915.0 L72.0 855.0 Z" data-name="Epilog"></path>
+							<path d="M489.0 855.0 L72.0 855.0" fill="none" data-name="Epilog"></path>
+						</g>
+						<g transform="translate(141.5, 815)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Epilog" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Epilog" data-compartment="0">
+								<text x="127.0" y="14.1" stroke="none" text-anchor="middle" data-name="Epilog" data-compartment="0">Epilog</text>
+								
+							</g>
+						</g>
+						<g transform="translate(141.5, 855)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Epilog" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Epilog" data-compartment="1">
+								<text x="127.0" y="14.1" stroke="none" text-anchor="middle" data-name="Epilog" data-compartment="1">Variante nach Haltungszaehlern</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Maerz 2030">
+						<g fill="#33322E" stroke="#33322E" data-name="Maerz 2030">
+							<circle r="10.0" cx="280.5" cy="975.0" data-name="Maerz 2030"></circle>
+							<circle r="4.0" cx="280.5" cy="975.0" stroke="none" data-name="Maerz 2030"></circle>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

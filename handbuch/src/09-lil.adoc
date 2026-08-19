@@ -1,0 +1,227 @@
+[[lil-fuer-ungeuebte]]
+= Lil für Ungeübte
+
+Dieses Kapitel gibt dir gerade so viel Lil, wie du zum Lesen und
+vorsichtigen Ändern von `game/lil/vn.lil` und `game/build/build_vn.lil`
+brauchst. Für alles Weitere:
+https://beyondloom.com/decker/learnlil.html["Learn Lil in 10 Minutes"] und
+die https://beyondloom.com/decker/lilquickref.html[Kurzreferenz].
+
+== Werte und Variablen
+
+Ein Doppelpunkt weist einer Variable einen Wert zu, nicht das
+Gleichheitszeichen:
+
+[source]
+----
+alter:13
+name:"Sarah"
+----
+
+== Funktionen aufrufen und definieren
+
+Funktionsaufrufe benutzen eckige Klammern, Argumente stehen ohne Kommas
+nebeneinander. `on ... do ... end` definiert eine Funktion, ihr letzter
+Ausdruck ist automatisch ihr Rückgabewert, ein eigenes `return`-Wort wie
+in anderen Sprachen gibt es nicht:
+
+[source,lil]
+----
+on vn_rest x wort do
+  n:1+count wort
+  n drop x
+end
+----
+
+== Bedingungen und Schleifen
+
+[source,lil]
+----
+if alter>12
+  show["du darfst mitspielen"]
+end
+
+each ding in "Schwert","Schild","Trank"
+  show[ding]
+end
+----
+
+== Die wichtigste Falle: Lil hat keine Rechenregeln
+
+In den meisten Programmiersprachen gilt "Punkt vor Strich". *In Lil gibt
+es diese Regel nicht.* Alles wird strikt von rechts nach links ausgewertet,
+egal welche Operatoren beteiligt sind:
+
+[source]
+----
+show[10-4/2]
+// ergibt 8, nicht wie erwartet 18
+// Lil liest das als 10-(4/2)
+----
+
+[IMPORTANT]
+====
+Deshalb gilt im ganzen Projekt eine feste Regel: sobald mehr als ein
+Rechenzeichen in einem Ausdruck vorkommt, wird geklammert, und jede
+Berechnung landet zuerst in einer eigenen Variable, bevor sie in ein
+Tupel oder eine Liste einfließt. `(px+m,py+m)` ist zum Beispiel *nicht*
+das Paar `(px+m, py+m)`, sondern `px+(m,(py+m))`. Richtig:
+
+[source]
+----
+x0:px+m
+y0:py+m
+(x0,y0)
+----
+====
+
+== Zehn Fallstricke, alle tatsächlich beim Bau dieses Projekts aufgetreten
+
+Diese Sammlung stammt aus `zelda-network/game/README.md` (Abschnitt
+"Sechs Lil-Fallstricke") und aus `plans/graphic-novel-plan.md`, Abschnitt
+13. Beide gelten unverändert für dieses Projekt.
+
+**1. In `where`-Klauseln gehört `=` hin, nicht `~`.** `where spalte~"x"`
+ist ein stiller No-Op-Filter, `where spalte="x"` filtert richtig. In der
+Engine hätte die naheliegende, aber falsche Form `where 0<count arg`
+sogar bei richtigem Vergleichsoperator nicht funktioniert, weil `count`
+eine ganze Spalte aggregiert statt zeilenweise zu zählen, siehe
+<<software-architektur>>.
+
+**2. `each v k i in dict` liefert zuerst den WERT, nicht den Schlüssel.**
+Beim Durchlaufen von `deck.cards` oder `card.widgets` führt die falsche
+Reihenfolge zu leeren Namen und einer stillen Fehlsuche.
+
+**3. Funktionsaufrufe vor einem Komma in einer Liste immer klammern.**
+Ohne Klammern verschluckt der Aufruf sonst den Rest der Liste als eigenes
+Argument, ohne Fehlermeldung.
+
+**4. Verkettung ist `"" fuse (a,b,c)`, nicht `"praefix" fuse (a,b)`.**
+`fuse` benutzt sein linkes Argument als Trennzeichen *zwischen* den
+Elementen rechts. `"praefix" fuse (a,b)` ergibt also `a+"praefix"+b`, bei
+einem zusammengesetzten Pfad einen gültigen, aber falschen String.
+
+**5. Ein Modul-`.value`, das mit einer nackten Tabelle endet, wird zu
+einem flachen Spalten-Dict gecastet.** Tabelle vorher in ein Dict-Feld
+einbetten.
+
+**6. Zuweisungen in einer Funktion sind NICHT automatisch lokal.** Ohne
+`local` schreibt `x:...` in den umgebenden Gültigkeitsbereich, nicht in
+einen neuen, funktionslokalen. `vn_ohne_rand` in `game/lil/vn.lil` zeigt
+deshalb explizit, wie man es richtig macht:
+
+[source,lil]
+----
+# Fuehrende Leerzeichen und Zeilenumbrueche abschneiden.
+# ACHTUNG: Zuweisungen in einer Lil-Funktion sind NICHT automatisch lokal.
+# Ohne "local" schreibt "s:..." in den umgebenden Gueltigkeitsbereich und
+# wuerde hier den Spielstand von vn_spiele ueberschreiben, der ebenfalls "s"
+# heisst.
+on vn_ohne_rand t do
+  local s:t
+  local weiter:1
+  while weiter
+    if 0~count s
+      weiter:0
+    elseif (first s) in (" ","\n")
+      s:1 drop s
+    else
+      weiter:0
+    end
+  end
+  s
+end
+----
+
+In `build_vn.lil` traf genau dieser Fehler einmal die Prüffunktion selbst:
+eine Hilfsvariable ohne `local` überschrieb dort die globale Liste aller
+Passagennamen, woraufhin der Bau plötzlich *jedes* Sprungziel als fehlend
+meldete. Das Symptom zeigte dabei nicht im Entferntesten auf die Ursache.
+Hilfsvariablen in Funktionen deshalb immer mit `local` deklarieren.
+
+**7. `by` ist ein reserviertes Wort und als Variablenname nicht
+erlaubt.** `vn_heim_geklickt` in `game/lil/vn.lil` benennt deshalb, was
+sonst naheliegend `bx`/`by` hieße, um:
+
+[source,lil]
+----
+# "by" ist in Lil ein reserviertes Wort und als Variablenname
+# nicht erlaubt.
+local kx:first b.pos
+local ky:last b.pos
+local krechts:kx+first b.size
+local kunten:ky+last b.size
+----
+
+Reservierte Wörter lassen sich auch nicht als Funktionsparameter
+benutzen, und die Fehlermeldung dabei ist nicht immer eindeutig
+(`format` als Parametername ergibt zum Beispiel `'format' is a
+keyword...`, `table` als lokale Variable ein rätselhaftes
+`Expected name, but found :`). Im Zweifel kurz mit
+`lilt -e 'wort:1 show[wort]'` testen, ob ein Wort als Variablenname geht.
+
+**8. Ein fehlerhaftes Lil-Fragment in der Szenendatei verschwindet
+spurlos.** Ply führt `{...}`-Fragmente aus und schluckt Fehler dabei
+stillschweigend. Siehe <<das-datenformat>> für die Ausweichlösung
+(`eval[]` mit Fehlerfeld `error`).
+
+**9. `readcsv[]` auf einer kopfzeilenlosen Zahlen-CSV kann `lilt`
+segfaulten lassen** (Exit 139). In diesem Projekt weniger relevant, weil
+`game/data/emotes.csv` und `game/data/art.csv` eine Kopfzeile tragen und
+ohnehin per Python gelesen werden, nicht per Lil.
+
+**10. `x.paste[bild pos]` behandelt Pattern 0 nicht automatisch als
+transparent.** Dafür ein drittes, wahres Argument nötig:
+`x.paste[bild pos 1]`. Das benutzt zum Beispiel `vn_hintergrund` beim
+Kopieren des Bühnenbilds nicht, weil Hintergründe deckend sind, wohl aber
+Puppeteer intern beim Zeichnen der Puppen-Canvases.
+
+== Ein echtes Beispiel: Sprechererkennung
+
+So liest `vn_sprecher` in `game/lil/vn.lil` aus einem Textabsatz heraus,
+ob und wer spricht:
+
+[source,lil]
+----
+on vn_sprecher roh do
+  r:()
+  r.name:""
+  r.ab:0
+  treffer:rtext.find[roh ":"]
+  if 0<count treffer
+    ende:first first treffer
+    kopf:vn_ohne_rand[ende take roh]
+    gut:1
+    if 0~count kopf gut:0 end
+    if 24<count kopf gut:0 end
+    if 0<count rtext.find[kopf "\n"] gut:0 end
+    woerter:extract where count@value from " " split kopf
+    if 3<count woerter gut:0 end
+    each w in woerter
+      if !(first w) in GROSS gut:0 end
+    end
+    if gut
+      r.name:kopf
+      r.ab:1+ende
+    end
+  end
+  r
+end
+----
+
+Das zeigt mehrere Bausteine auf einmal: `rtext.find[]` sucht eine
+Teilzeichenkette, `first first treffer` holt die Position des ersten
+Treffers, `extract where count@value from ... split kopf` filtert eine
+Liste über eine Bedingung auf jedem Element, und ein Dictionary wird mit
+`r:()` feldweise aufgebaut statt in einem Ausdruck, genau damit die
+Rechtsassoziativität aus Fallstrick 3 keine Überraschung erzeugt.
+
+== Zum Weiterlesen
+
+* https://beyondloom.com/decker/learnlil.html["Learn Lil in 10 Minutes"]
+* https://beyondloom.com/decker/lilquickref.html[Lil-Kurzreferenz]
+* https://beyondloom.com/decker/lil.html[Das vollständige Lil-Handbuch]
+* `plans/graphic-novel-plan.md`, Abschnitt 13, für die ausführliche
+  Fassung dieser Fallstricke mit Fundgeschichte.
+* `../zelda-network/game/README.md`, Abschnitt "Sechs Lil-Fallstricke",
+  die Quelle der ersten sechs Punkte oben.

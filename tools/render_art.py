@@ -69,22 +69,51 @@ def rendere_zeile(zeile, tempdir):
     # erst weiss unterlegen und schwellwerten, dann weiss transparent schalten.
     # Der naheliegende Weg ueber -background none erzeugt Anti-Aliasing-Farben
     # und macht ausgerechnet Schwarz transparent -- deshalb NICHT aendern.
-    kommando = [
-        "magick", png_pfad,
-        "-background", "white", "-alpha", "remove", "-alpha", "off",
-        "-threshold", "60%",
-    ]
-    if transparent:
-        kommando += ["-transparent", "white"]
-    kommando.append(f"GIF:{gif_pfad}")
-
-    lauf = subprocess.run(kommando, capture_output=True, text=True)
+    sw_pfad = os.path.join(tempdir, os.path.basename(gif_pfad) + ".sw.png")
+    lauf = subprocess.run(
+        ["magick", png_pfad, "-background", "white", "-alpha", "remove",
+         "-alpha", "off", "-threshold", "60%", sw_pfad],
+        capture_output=True, text=True,
+    )
     if lauf.returncode != 0:
         sys.exit(f"Fehler bei magick fuer {svg_pfad}:\n{lauf.stderr}")
+
+    if transparent:
+        silhouette(sw_pfad, gif_pfad, breite, hoehe, tempdir, png_pfad)
+    else:
+        lauf = subprocess.run(["magick", sw_pfad, f"GIF:{gif_pfad}"],
+                              capture_output=True, text=True)
+        if lauf.returncode != 0:
+            sys.exit(f"Fehler bei magick fuer {svg_pfad}:\n{lauf.stderr}")
 
     gif_rel = os.path.relpath(gif_pfad, ART_DIR)
     print(f"geschrieben: {gif_rel} ({breite}x{hoehe})")
     return gif_pfad, transparent
+
+
+def silhouette(sw_pfad, gif_pfad, breite, hoehe, tempdir, png_pfad):
+    """Setzt die Puppe aus Tusche und deckender Silhouette zusammen.
+
+    Die Silhouette kommt aus der Zeichnung selbst (umriss() in
+    tools/portraits.py) und liegt im SVG als weisse Flaeche vor. Im
+    gerenderten PNG ist damit alles undurchsichtig, was zur Figur gehoert,
+    und alles daneben durchsichtig. Genau dieser Alphakanal wird hier zur
+    Maske: die Farben werden auf Schwarz und Weiss geschwellt, die
+    Durchsichtigkeit bleibt erhalten.
+    """
+    basis = os.path.basename(gif_pfad)
+    maske = os.path.join(tempdir, basis + ".maske.png")
+
+    schritte = [
+        # Alphakanal des gerenderten SVG als Maske: weiss, wo die Figur ist.
+        ["magick", png_pfad, "-alpha", "extract", "-threshold", "40%", maske],
+        ["magick", sw_pfad, maske, "-alpha", "off",
+         "-compose", "CopyOpacity", "-composite", f"GIF:{gif_pfad}"],
+    ]
+    for kommando in schritte:
+        lauf = subprocess.run(kommando, capture_output=True, text=True)
+        if lauf.returncode != 0:
+            sys.exit(f"Fehler in der Silhouetten-Kette fuer {gif_pfad}:\n{lauf.stderr}")
 
 
 def pruefe_gif(gif_pfad, transparent):
@@ -130,8 +159,8 @@ def pruefe_gif(gif_pfad, transparent):
         return False
 
     if transparent:
-        # Nur Muster 0 (transparent) und 1 (schwarz) sind erlaubt.
-        unerwartet = sorted(muster - {0, 1})
+        # 0 transparent, 1 Tusche, 32 das deckende Weiss der Silhouette.
+        unerwartet = sorted(muster - {0, 1, 32})
         if unerwartet:
             print(f"WARNUNG: {gif_rel} hat unerwartete Muster {unerwartet} (erwartet nur 0 und 1): {histogramm.strip()}")
             return False

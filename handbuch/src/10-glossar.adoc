@@ -1,0 +1,84 @@
+[[glossar]]
+= Glossar
+
+Kurze Erklärungen der Fachwörter aus diesem Handbuch, in der Reihenfolge
+des Alphabets.
+
+AsciiDoc:: Ein einfaches Textformat, aus dem sich Bücher, Webseiten und
+PDFs erzeugen lassen. Dieses Handbuch selbst ist in AsciiDoc geschrieben.
+
+Contraption:: Englisch für "Apparat" oder "Vorrichtung". In Decker eine
+Sammlung von Widgets, die zusammen etwas Wiederverwendbares ergeben, wie
+ein eigener kleiner Baustein. `dd` und `pt` sind selbst als solche
+Bausteine gebaut.
+
+Deck:: Eine ganze Decker-Datei, zum Beispiel `game/build/netzwerk.deck`.
+Vergleichbar mit einem Karteikasten voller Karten.
+
+Dialogizer (`dd`):: Das Decker-Modul für die Präsentationsschicht:
+modale Dialogbox, Klick-durch-Text, Auswahlknöpfe, Textanimation. Siehe
+<<software-architektur>>.
+
+Docker:: Ein Werkzeug, mit dem Programme in einer abgeschlossenen,
+vorbereiteten Umgebung laufen, ohne dass man sie selbst installieren
+muss. Wird hier benutzt, um dieses Handbuch aus AsciiDoc zu bauen, siehe
+`handbuch/README.md`.
+
+Emote:: Ein Gesichtsausdruck einer Figur, zum Beispiel `neutral`,
+`sorge` oder `schock`. Steht als Zeile in `game/data/emotes.csv` und als
+eigenes Canvas-Widget auf dem Figurenblatt jeder Puppe. Siehe
+<<die-bilder>>.
+
+Fediverse:: Ein Verbund unabhängiger, aber über offene Protokolle (etwa
+ActivityPub) miteinander verbundener sozialer Netzwerke, zum Beispiel
+Mastodon oder PeerTube. In der Novelle das technische Vorbild für das
+föderierte Sendenetzwerk, das die Figuren aufbauen.
+
+Haltungswahl:: Eine der häufigen, ein bis zwei Passagen später wieder
+zusammenlaufenden Entscheidungen in der Geschichte. Verändert eine
+Haltungsvariable (`entschlossenheit`, `vorsicht`, `zusammenhalt`) und
+damit späteren Text, nicht aber den Handlungsverlauf selbst. Siehe
+<<handlung>>.
+
+Hub:: Ein autonomer Knoten des Sendenetzwerks in der Novelle, zum
+Beispiel der `nairobi-hub`. Nicht zu verwechseln mit einem Hintergrundbild,
+auch wenn ein Hub im Spiel als Hintergrund gezeigt wird.
+
+Karte (in Decker):: Eine einzelne Seite oder Szene innerhalb eines Decks,
+vergleichbar mit einer Karteikarte. Siehe <<software-architektur>>.
+
+Lil:: Die kleine Programmiersprache, die in Decker eingebaut ist. Siehe
+<<lil-fuer-ungeuebte>>.
+
+Modul:: Ein fertiger, in sich abgeschlossener Decker-Baustein mit eigenen
+Funktionen, hier `twee`, `dd` und `pt`. Siehe <<software-architektur>>.
+
+Passage:: Eine Szene an einem Ort in `game/data/szenen.twee`: Text, Regie
+und Auswahlmöglichkeiten unter einem eindeutigen Namen. Siehe
+<<das-datenformat>>.
+
+Ply:: Das Twee-3-Story-Format, in dem `game/data/szenen.twee` geschrieben
+ist. Rendert Passagentext samt eingebetteter Lil-Fragmente zu einer
+rtext-Tabelle mit den Spalten `text`, `font`, `arg` und `pat`. Siehe
+<<software-architektur>>.
+
+Puppe:: Die Bühnendarstellung einer Figur in Puppeteer: eine Karte, deren
+Name der Puppenname ist, mit einem Canvas-Widget je Emote. Jede Figur hat
+drei Puppen (frontal, `_r`, `_l`) für die drei Blickrichtungen. Siehe
+<<die-bilder>>.
+
+Puppeteer (`pt`):: Das Decker-Modul für die Darstellungsschicht: Figuren
+auf der Bühne zeigen, bewegen, blinzeln, sprechen lassen. Siehe
+<<software-architektur>>.
+
+rtext:: Deckers Rich-Text-Datentyp: eine Tabelle aus Textsegmenten mit
+Formatierung. `twee.render[]` liefert eine solche Tabelle als Ergebnis
+einer gerenderten Passage.
+
+Twee:: Ein einfaches Textformat für interaktive Fiktion (`:: Passagenname
+[tags] {metadaten}`, gefolgt von Text und `[[Links]]`), ursprünglich aus
+dem Werkzeug Twine. `game/data/szenen.twee` ist im Story-Format Ply
+geschrieben. Siehe <<das-datenformat>>.
+
+Widget:: Ein einzelner Baustein auf einer Karte, zum Beispiel ein Knopf,
+ein Feld oder eine Zeichenfläche (Canvas). Siehe <<software-architektur>>.

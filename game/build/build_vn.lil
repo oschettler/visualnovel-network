@@ -130,7 +130,21 @@ print["Hintergruende: %i" format count hintergruende]
 
 # ------------------------------------------------------------ Szenen pruefen
 
-quelltext:read["game/data/szenen.twee"]
+# Mit einem Dateinamen als Argument wird nur geprueft, nicht gebaut. So
+# koennen einzelne Kapitel gegen alle Regeln geprueft werden, bevor sie in
+# game/data/szenen.twee wandern:
+#   lilt game/build/build_vn.lil /tmp/entwurf.twee
+NURPRUEFEN:0
+SZENEN:"game/data/szenen.twee"
+# args ist ("lilt", "<skript>") und bekommt einen dritten Eintrag erst, wenn
+# tatsaechlich ein Dateiname mitgegeben wird.
+if 2<count args
+  SZENEN:args[(count args)-1]
+  NURPRUEFEN:1
+  print["Pruefmodus: %s" format SZENEN]
+end
+
+quelltext:read[SZENEN]
 
 tweedeck:read["" fuse (DECKS,"twee.deck")]
 twee:tweedeck.modules.twee.value
@@ -150,6 +164,13 @@ v.zusammenhalt:0
 v.ausgestiegen:0
 v.tom_gestanden:0
 v.figur:""
+  v.g09:0
+  v.g10:0
+  v.g11:0
+  v.g12:0
+  v.g13:0
+  v.g14:0
+  v.gesamt:0
 
 # Ein Emote, das in den Szenen vorkommt, aber noch nicht gezeichnet ist,
 # wird als Platzhalter aus "neutral" erzeugt. So bleibt das Deck spielbar,
@@ -324,6 +345,54 @@ on pruefe_kommando x do
   end
 end
 
+# Lil-Fragmente in geschweiften Klammern einzeln herausschneiden.
+# Klammern koennen verschachtelt sein, deshalb mit Tiefenzaehler.
+on fragmente text do
+  local raus:()
+  local tiefe:0
+  local akt:""
+  each z in "" split text
+    if z~"{"
+      if 0~tiefe
+        akt:""
+      else
+        akt:"" fuse (akt,z)
+      end
+      tiefe:tiefe+1
+    elseif z~"}"
+      tiefe:tiefe-1
+      if 0~tiefe
+        raus:raus,list akt
+      else
+        akt:"" fuse (akt,z)
+      end
+    else
+      if 0<tiefe akt:"" fuse (akt,z) end
+    end
+  end
+  raus
+end
+
+# Ply fuehrt Fragmente aus und schluckt Fehler stillschweigend: ein "if"
+# ohne "end" rendert einfach zu nichts, und die bedingte Textstelle fehlt im
+# Spiel, ohne dass irgendwo etwas gemeldet wird. eval[] meldet den Fehler
+# dagegen im Feld "error".
+on pruefe_fragmente passage text do
+  each fr in fragmente[text]
+    local umgebung:v
+    umgebung.rtext:rtext
+    umgebung.image:image
+    umgebung.random:random
+    umgebung.story:0
+    umgebung.name:passage
+    local r:eval[fr umgebung]
+    if 0<count r.error
+      local kurz:60 take fr
+      fehle["" fuse ("Fehler im Lil-Fragment in ",passage,": ",r.error," -- {",kurz,"}")]
+    end
+  end
+end
+
 enden:()
 each zeile in rows story
   n:zeile.name
@@ -331,12 +400,29 @@ each zeile in rows story
     r:twee.render[story n v]
     zeilen:r.value
     ziele:extract arg from select where !arg="" from zeilen
+    # Ein Bindestrich in der BESCHRIFTUNG eines Ply-Links loescht den Link
+    # spurlos: er erscheint dann als roher Text "[[...->...]]" im Spiel.
+    # Im Sprungziel ist er dagegen harmlos.
+    each roh in "[[" split zeile.body
+      if 0<count rtext.find[roh "]]"]
+        local bis:first first rtext.find[roh "]]"]
+        local inhalt:bis take roh
+        local pfeil:rtext.find[inhalt "->"]
+        if 0<count pfeil
+          local vor:(first first pfeil) take inhalt
+          if 0<count rtext.find[vor "-"]
+            fehle["" fuse ("Bindestrich in Link-Beschriftung (Ply verliert den Link): [[",inhalt,"]] in ",n)]
+          end
+        end
+      end
+    end
     each z in ziele
       if !z in namen
         fehle["" fuse ("Sprungziel fehlt: ",n," -> ",z)]
       end
     end
     if 0~count ziele enden:enden,list n end
+    pruefe_fragmente[n zeile.body]
     hat_bg:0
     hat_clear:0
     # Regieanweisungen: Absaetze, die mit "!" beginnen, zeilenweise pruefen.
@@ -413,6 +499,12 @@ if 0<count p.fehler
   print["%i Fehler in den Daten:" format count p.fehler]
   each s in p.fehler print["  %s" format s] end
   exit[1]
+end
+
+if NURPRUEFEN
+  print[""]
+  print["Pruefung beendet, kein Deck gebaut."]
+  exit[0]
 end
 
 # ------------------------------------------------------------ Deck aufbauen
@@ -502,6 +594,14 @@ titel.script:"on view do
   weiter.show:if vn_fortsetzbar[] \"solid\" else \"none\" end
 end"
 
+# Heim-Knopf oben rechts auf jeder Karte ausser der Titelkarte selbst.
+# Auf der Buehne laeuft waehrend des Spiels eine blockierende Schleife, in der
+# Decker keine Klick-Ereignisse zustellt; dort wertet "on animate" die
+# Zeigerposition aus (siehe vn_heim_geklickt in game/lil/vn.lil).
+on heimknopf karte do
+  knopf[karte "heim" (904,24) (104,32) "Menü" "on click do vn_heim[] end"]
+end
+
 # --- Kapitelindex
 index:nd.add["card" "index"]
 ik:feld[index "kopf" (32,44) (960,32) "Kapitel"]
@@ -509,7 +609,8 @@ ik.font:"ahmPicnic"
 liste:feld[index "liste" (32,96) (960,480) ""]
 liste.font:"olympiad"
 liste.scrollbar:1
-knopf[index "zurueck3" (752,608) (240,40) "Zurueck" "on click do go[\"titel\" \"SlideRight\"] end"]
+knopf[index "zurueck3" (752,608) (240,40) "Zurück" "on click do go[\"titel\" \"SlideRight\"] end"]
+heimknopf[index]
 index.script:"on view do
   liste.value:vn_index_text[]
 end"
@@ -519,14 +620,15 @@ hinweis:nd.add["card" "hinweis"]
 ht:feld[hinweis "text" (32,32) (960,540) read["game/data/hinweis.txt"]]
 ht.font:"olympiad"
 ht.scrollbar:1
-knopf[hinweis "zurueck" (752,600) (240,40) "Zurueck" "on click do go[\"titel\" \"SlideRight\"] end"]
+knopf[hinweis "zurueck" (752,600) (240,40) "Zurück" "on click do go[\"titel\" \"SlideRight\"] end"]
+heimknopf[hinweis]
 
 # --- Buehne
 buehne:nd.add["card" "buehne"]
 # Deckers Menueleiste belegt fest die obersten 16 Pixel der Karte
 # ("int menu=16" in extern/decker/c/dom.h). Alles darueber ist beim
 # Bearbeiten verdeckt, deshalb beginnt die Ortsmarke darunter.
-om:feld[buehne "ortsmarke" (16,24) (620,28) ""]
+om:feld[buehne "ortsmarke" (16,24) (600,28) ""]
 om.show:"transparent"
 om.font:"ahmPicnic"
 
@@ -538,17 +640,25 @@ tp:feld[buehne "tempo" (240,600) (120,28) "2"]
 tp.show:"none"
 ep:feld[buehne "erzaehlerpos" (400,600) (160,28) "oben"]
 ep.show:"none"
+ab:feld[buehne "abbruch" (600,600) (80,28) "0"]
+ab.show:"none"
+
+heimknopf[buehne]
 
 # Unsichtbarer Platzhalter, auf den Dialogizer die Erzaehlbox zentriert
 # (dd rechnet: box.pos = widget.pos + 0.5*(widget.size - box.size)).
-pl:karte_widget[buehne "erzaehlplatz" (132,80) (760,140)]
+# Mittelpunkt bei y=90: eine dreizeilige Box beginnt damit knapp unter der
+# Menueleiste, eine einzeilige etwas tiefer. Weiter hinauf geht nicht, ohne
+# dass lange Boxen unter der Menueleiste verschwinden.
+pl:karte_widget[buehne "erzaehlplatz" (132,50) (760,140)]
 
 # --- Daten: Szenentext und Spielstand
 daten:nd.add["card" "daten"]
 q:feld[daten "quelle" (16,16) (992,480) quelltext]
 q.scrollbar:1
 feld[daten "stand" (16,512) (992,80) ""]
-knopf[daten "zurueck2" (752,612) (240,40) "Zurueck" "on click do go[\"titel\"] end"]
+knopf[daten "zurueck2" (752,612) (240,40) "Zurück" "on click do go[\"titel\"] end"]
+heimknopf[daten]
 
 # --- Hintergruende (bis M7 leer)
 hg:nd.add["card" "hintergruende"]

@@ -1,0 +1,216 @@
+[[bearbeiten]]
+= Bearbeiten und erweitern
+
+Dieses Kapitel zeigt an konkreten Abläufen, wie du das Spiel veränderst.
+Für die meisten Änderungen brauchst du keine einzige Zeile Lil, nur einen
+Texteditor und die Befehle aus <<einrichtung>>.
+
+[TIP]
+====
+Öffne `game/data/szenen.twee` und `game/data/emotes.csv` in einem
+einfachen Texteditor, nicht in Excel oder Numbers für die CSV-Dateien.
+Tabellenprogramme ändern gerne heimlich das Dateiformat, und dann
+funktioniert der Bau nicht mehr.
+====
+
+== Text ändern
+
+Suche die passende Passage in `game/data/szenen.twee` (der Passagenname
+verrät Kapitel und Ort, zum Beispiel `k07-vorschlag`), ändere den Text
+zwischen zwei Regieanweisungen oder Leerzeilen, speichere und baue neu:
+
+[source,bash]
+----
+lilt game/build/build_vn.lil   # oder: make deck
+----
+
+Öffne danach `game/build/netzwerk.deck` in Decker neu, siehe <<spielen>>.
+
+== Eine Szene ergänzen
+
+Eine neue Passage braucht mindestens Kopfzeile, Regie, Text und einen
+Ausgang. Minimalbeispiel, angehängt an eine bestehende Passage:
+
+[source]
+----
+:: k07-nachgedacht [kapitel-07 teil-1 pov-sarah]
+!show sarah denk
+
+Sarah dachte einen Moment nach, bevor sie antwortete.
+
+[[Weiter.->k07-schluss]]
+----
+
+Verlinke die neue Passage von irgendwo aus (ein bestehender
+Fortsetzungslink oder eine neue Auswahl), sonst ist sie zwar vorhanden,
+aber unerreichbar. Baue neu; `build_vn.lil` meldet am Ende eine Zeile wie
+
+[source]
+----
+Szenen: 166 Passagen, 1 Ende(n): k30-epilog-...
+----
+
+die auch unerreichbare Sackgassen mit auflistet, falls du eine Passage
+versehentlich ohne Ausgang lässt.
+
+== Eine Entscheidung einbauen
+
+Aus einer Fortsetzung wird eine Entscheidung, sobald du einen zweiten Link
+ergänzt und eine `?`-Frage davor setzt:
+
+[source]
+----
+? Was antwortet Sarah?
+
+[[Ja, sofort.->k07-ja]]
+[[Erst abwarten.->k07-abwarten]]
+----
+
+Beide Zielpassagen müssen existieren. Willst du damit auch eine der
+Haltungsvariablen beeinflussen, setze sie am Anfang der jeweiligen
+Zielpassage, mit abschließendem `""` (siehe <<das-datenformat>>):
+
+[source]
+----
+:: k07-ja [kapitel-07 teil-1 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+...
+----
+
+[IMPORTANT]
+====
+Enthält die Beschriftung eines Links einen Bindestrich, verschwindet der
+Link spurlos aus dem Spiel (siehe <<das-datenformat>>). Formuliere
+Beschriftungen notfalls um, Sprungziele dürfen Bindestriche unverändert
+enthalten.
+====
+
+== Ein Emote hinzufügen
+
+Ein siebtes Emote braucht drei Schritte:
+
+. Eine neue Zeile in `game/data/emotes.csv` mit allen Spalten
+  (`emote,bow,braue_innen,braue_aussen,lid,pupille_x,pupille_y,mund_offen,augen_gross,bogen_daempfung`).
+. `tools/portraits.py` neu laufen lassen (`make portraits`), das zeichnet
+  das neue Emote für alle sechs Figuren in allen drei Blickrichtungen und
+  ergänzt `game/data/art.csv` automatisch.
+. `tools/render_art.py` (`make art`), das wandelt die neuen SVGs nach GIF
+  um.
+
+Bis das Emote gezeichnet ist, ist es im Spiel trotzdem benutzbar:
+`build_vn.lil` erzeugt für ein in `szenen.twee` referenziertes, aber noch
+nicht vorhandenes Emote automatisch einen Platzhalter aus `neutral` und
+meldet das als Hinweis, nicht als Fehler:
+
+[source]
+----
+Platzhalter (Emote noch nicht gezeichnet, nutzt neutral):
+  sarah/mutig
+----
+
+== Einen Hintergrund ergänzen
+
+Neue Orte entstehen in `tools/szenen.py`: eine neue Zeichenfunktion nach
+dem Muster der bestehenden (siehe <<die-bilder>>, Formenschatz aus
+Kasten, Tisch, Stuhl, Fenster und so weiter), eingetragen im `SZENEN`-
+Dictionary am Ende der Datei. Dann:
+
+[source,bash]
+----
+python3 tools/szenen.py <name>   # nur diesen einen Hintergrund
+python3 tools/render_art.py hintergruende/<name>
+----
+
+Referenziere den Namen danach mit `!bg <name>` in der Szenendatei. Fehlt
+das Bild noch, bricht der Bau nicht ab, sondern warnt nur:
+
+[source]
+----
+Warnungen:
+  Hintergrund fehlt noch: <name>
+----
+
+Ein zum Test zusammengesetztes Beispielbild (Hintergrund plus Figuren)
+lässt sich jederzeit mit `tools/szenenbild.py` erzeugen, ohne das ganze
+Deck zu bauen:
+
+[source,bash]
+----
+python3 tools/szenenbild.py --ziel /tmp/probe.png <hintergrund> sarah:ent:links michael:sorge:rechts
+----
+
+== Was der Bau prüft, und was die Fehlermeldungen bedeuten
+
+`build_vn.lil` prüft die Daten, bevor überhaupt ein Deck entsteht. Eine
+Auswahl der Fehlermeldungen und ihrer Ursache:
+
+[cols="2,3"]
+|===
+|Meldung |Bedeutung
+
+|`Startpassage "..." gibt es nicht`
+|Der `"start"`-Wert im `StoryData`-Kopf von `szenen.twee` zeigt auf eine
+nicht existierende Passage.
+
+|`Sprungziel fehlt: <von> -> <ziel>`
+|Ein `[[...->ziel]]`-Link (oder ein `rtext.make[...]`) zeigt auf eine
+Passage, die es nicht gibt. Meist ein Tippfehler im Passagennamen.
+
+|`Bindestrich in Link-Beschriftung (Ply verliert den Link): [[...]] in ...`
+|Siehe oben: Beschriftung umformulieren, ohne Bindestrich.
+
+|`unbekannte Puppe: <name>`
+|Ein `!show`, `!hide`, `!move`, `!flip`, `!order`, `!anim` oder `!talk`
+nennt einen Figurennamen, für den es keinen Ordner unter
+`game/data/art/figuren/` gibt. Meist ein Tippfehler im Puppennamen (er
+ist immer klein geschrieben, `sarah` nicht `Sarah`).
+
+|`unbekannte Buehnenposition: <pos>`
+|Die Position hinter `!show` oder `!move` ist keine der von Puppeteer
+bekannten Positionen. `pt` fällt bei einem unbekannten Namen sonst
+still auf `bottom` zurück, ein Tippfehler wäre also nur als leicht falsch
+stehende Figur sichtbar, deshalb prüft der Bau das explizit.
+
+|`unbekanntes Kommando: !<name>`
+|Ein `!`-Kommando, das weder zu den eigenen (`bg`, `zeit`, `hell`, ...)
+noch zu Puppeteers Kommandos gehört. Meist ein Tippfehler.
+
+|`Puppen ueberlappen in <passage>: <a> und <b> (nur zwei Figuren passen nebeneinander, links und rechts)`
+|Mehr als zwei sichtbare Puppen stehen in derselben Bühnenspalte. Auf die
+1024 Pixel breite Bühne passen bei 480 Pixel Puppenbreite nur zwei
+Figuren gleichzeitig, eine links und eine rechts, siehe <<software-architektur>>.
+Löse Ensemble-Szenen über `!hide` und `!show`, nicht über mehr als zwei
+gleichzeitig sichtbare Figuren.
+
+|`!bg ohne !clear in Passage <name> (Puppen der vorigen Szene blieben stehen)`
+|Ein Szenenwechsel mit neuem Hintergrund, aber ohne vorheriges `!clear`.
+Ohne `!clear` bleiben die Puppen der vorigen Szene auf der Bühne stehen
+und überlagern sich mit den neuen.
+
+|`Fehler im Lil-Fragment in <passage>: <meldung> -- {...}`
+|Ein `{lil}`-Fragment lässt sich nicht auswerten, meist ein fehlendes
+`end` oder eine falsch platzierte Klammer. Ohne diese Prüfung würde Ply
+den Fehler stillschweigend schlucken und die Textstelle einfach
+verschwinden lassen, siehe <<das-datenformat>>.
+
+|`Skriptfehler in ...: ...`
+|Ein von `build_vn.lil` erzeugtes Deck-, Karten- oder Widget-Skript
+lässt sich nicht parsen. Decker selbst würde das ignorieren und der
+betroffene Knopf würde einfach nichts tun; der Bau macht den Fehler
+stattdessen sichtbar.
+|===
+
+Ein fehlender Hintergrund ist, wie oben gezeigt, nur eine Warnung, kein
+Fehler: das Deck bleibt spielbar, auch bevor alle Zeichnungen fertig sind.
+
+== Änderungen automatisch neu bauen
+
+[source,bash]
+----
+make watch
+----
+
+beobachtet `game/data`, `game/lil` und `game/build` und baut bei jeder
+Änderung automatisch Tests und Deck neu (braucht `entr`,
+`brew install entr`). Das ersetzt nicht das erneute Öffnen in Decker,
+siehe <<spielen>>.

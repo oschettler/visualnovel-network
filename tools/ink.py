@@ -180,6 +180,10 @@ class Pen:
         self.seed = seed
         self.rng = random.Random(seed)
         self.paths = []
+        # Weisse Flaechen, die VOR der Tusche gezeichnet werden: das Papier
+        # der Figur selbst. Ohne sie ist eine Strichzeichnung nur Tusche und
+        # Transparenz, und ein Hintergrund scheint mitten durch das Gesicht.
+        self.flaechen = []
         self.warp = None
         self.turn = 0.0
 
@@ -259,6 +263,19 @@ class Pen:
                       hold_ends=False)
         return self._add("M" + f"{ring[0][0]:.1f},{ring[0][1]:.1f}"
                          + "".join(f"L{x:.1f},{y:.1f}" for x, y in ring[1:]) + "Z")
+
+    def flaeche(self, pts, wob=1.4):
+        """Geschlossene weisse Flaeche unter der Zeichnung.
+
+        Der Rand darf leicht unruhig sein, er wird ohnehin von den
+        Tuschestrichen ueberdeckt. Wichtig ist nur, dass er die Kontur
+        aussen umschliesst."""
+        ring = wobble(self._w(catmull(pts, 12, closed=True)), self.rng, wob, 2.6,
+                      hold_ends=False)
+        d = ("M" + f"{ring[0][0]:.1f},{ring[0][1]:.1f}"
+             + "".join(f"L{x:.1f},{y:.1f}" for x, y in ring[1:]) + "Z")
+        self.flaechen.append(d)
+        return d
 
     def strands(self, innen, aussen, count, w=(1.6, 2.4, 0), off=1.7,
                 kurz=0.22, spaet=0.10, amp=0.7):
@@ -398,10 +415,21 @@ class Pen:
             self.stroke([(ox, oy), (ox + math.cos(a) * ln, oy + math.sin(a) * ln)],
                         w=w, amp=0.55, waves=1.1, step=2.2)
 
-    def svg(self, w=400, h=520, title=None):
+    def svg(self, w=400, h=520, title=None, grund=True):
+        """SVG der Zeichnung.
+
+        Mit `grund` liegt ein weisses Rechteck ueber die ganze Flaeche, wie
+        bei den Portraitseiten. Ohne `grund` bleibt der Bildgrund
+        durchsichtig, und nur die mit flaeche() gesetzten Silhouetten sind
+        weiss. Das brauchen die Puppen: die Figur soll den Hintergrund
+        verdecken, das Papier daneben nicht."""
         head = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}">'
         if title:
             head += f"<title>{title}</title>"
-        head += f'<rect width="{w}" height="{h}" fill="#fff"/>'
+        if grund:
+            head += f'<rect width="{w}" height="{h}" fill="#fff"/>'
+        flaechen = "".join(f'<path d="{d}"/>' for d in self.flaechen)
         body = "".join(f'<path d="{d}"/>' for d in self.paths)
-        return head + f'<g fill="#111" fill-rule="nonzero">{body}</g></svg>\n'
+        return (head
+                + f'<g fill="#fff" fill-rule="nonzero">{flaechen}</g>'
+                + f'<g fill="#111" fill-rule="nonzero">{body}</g></svg>\n')

@@ -1,0 +1,121 @@
+[[einrichtung]]
+= Einrichtung
+
+Zum reinen Spielen brauchst du nur Decker, siehe <<spielen>>. Alles
+Weitere auf dieser Seite ist nur nötig, wenn du selbst am Spiel bauen
+willst.
+
+== Was du installiert brauchst
+
+[cols="1,3"]
+|===
+|Werkzeug |Wofür
+
+|https://beyondloom.com/decker/[Decker]
+|Das fertige Deck spielen. Kostenlos für Mac, Windows und Linux.
+
+|`lilt`
+|Kommandozeilen-Werkzeug, liegt einer normalen Decker-Installation bei
+(gleicher Ordner wie das Decker-Programm). Baut das Deck und führt die
+Tests aus.
+
+|`rsvg-convert`
+|Wandelt die generierten SVG-Zeichnungen in PNG um, der erste Schritt der
+Bildpipeline, siehe <<die-bilder>>.
+
+|ImageMagick (`magick`)
+|Schwellwertet die PNGs auf zwei Farben und schneidet sie nach GIF frei,
+der zweite Schritt der Bildpipeline.
+
+|Python 3
+|Führt `tools/portraits.py`, `tools/szenen.py` und `tools/render_art.py`
+aus. Kein zusätzliches Paket nötig, nur die Standardbibliothek.
+
+|Docker Desktop
+|Nur um dieses Handbuch selbst zu bauen, siehe unten. Fürs Spiel selbst
+nicht nötig.
+|===
+
+Auf einem Mac mit Homebrew installierst du die Kommandozeilen-Werkzeuge
+mit:
+
+[source,bash]
+----
+brew install librsvg imagemagick
+----
+
+`lilt` prüfst du mit `lilt -e '1+1'` in einem Terminal; kommt `2` zurück,
+ist es gefunden und im Suchpfad.
+
+== Das fertige Spiel öffnen
+
+Im Projekt-Ordner liegt bereits eine fertig gebaute Version unter
+`game/build/netzwerk.deck`, plus `game/build/netzwerk.html` für den
+Browser. Siehe <<spielen>> für die Details.
+
+== Das Spiel selbst neu bauen
+
+Wenn du an `game/data/szenen.twee`, `game/data/emotes.csv` oder den
+Zeichnungen etwas änderst, musst du das Deck neu bauen, damit die
+Änderung im Spiel ankommt:
+
+[source,bash]
+----
+cd visualnovel-network
+lilt game/build/build_vn.lil
+----
+
+Das liest `game/data/szenen.twee`, prüft die Daten (siehe unten) und baut
+daraus `game/build/netzwerk.deck` und `game/build/netzwerk.html` neu. Das
+dauert nur wenige Sekunden, solange sich an den Zeichnungen nichts
+geändert hat.
+
+Kürzer geht es mit dem `Makefile` im Projekt-Wurzelverzeichnis:
+
+[source,bash]
+----
+make deck      # entspricht dem lilt-Aufruf oben
+make test      # Engine-Tests, game/lil/vn_test.lil
+make art       # SVG nach GIF wandeln, mit Histogramm-Pruefung
+make portraits # Portraits aus tools/portraits.py neu zeichnen
+make alles     # art, test und deck nacheinander
+make watch     # baut automatisch neu bei jeder Aenderung, braucht entr
+make help      # zeigt alle Ziele
+----
+
+[TIP]
+====
+`make watch` beobachtet `game/data`, `game/lil` und `game/build` und baut
+bei jeder Änderung an einer `.twee`-, `.lil`-, `.csv`- oder `.txt`-Datei
+automatisch neu (braucht das Werkzeug `entr`, `brew install entr`). Das
+ersetzt aber nicht das erneute Öffnen in Decker: die interaktive App darf
+aus Sicherheitsgründen keine Dateien selbst von der Platte nachladen, das
+darf nur `lilt`.
+====
+
+== Was der Bau prüft
+
+`build_vn.lil` liest nicht nur die Szenendatei ein, es prüft sie auch
+mit, bevor überhaupt ein Deck entsteht: fehlende Sprungziele, unbekannte
+Puppen, unbekannte Emotes, unbekannte Bühnenpositionen, unbekannte
+Kommandos, überlappende Puppen und fehlerhafte `{lil}`-Fragmente. Ein
+fehlender Hintergrund ist nur eine Warnung. Welche Fehlermeldung was genau
+bedeutet und wie du sie behebst, steht ausführlich in <<bearbeiten>>.
+
+== Das Handbuch selbst bauen
+
+Dieses Handbuch (das Dokument, das du gerade liest) ist AsciiDoc-Quelltext
+unter `handbuch/src/` und wird per Docker zu HTML, EPUB und PDF gebaut,
+ganz unabhängig vom Spiel selbst:
+
+[source,bash]
+----
+cd handbuch/build
+make html   # am einfachsten zum Nachschauen
+make epub
+make pdf
+make all    # epub und pdf zusammen
+----
+
+Details dazu, inklusive wie du ein Kapitel oder ein Diagramm änderst,
+stehen in `handbuch/README.md`.

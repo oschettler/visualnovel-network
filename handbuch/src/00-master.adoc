@@ -1,0 +1,78 @@
+= Das Netzwerk: Handbuch zur Visual Novel
+Olav Schettler
+:doctype: book
+:toc: left
+:toclevels: 2
+:sectnums:
+:icons: font
+:lang: de
+:encoding: utf-8
+:source-highlighter: rouge
+:experimental:
+// EPUB-spezifisch
+:ebook-format: epub3
+// Metadaten
+:author: Olav Schettler
+:email: olav@schettler.net
+:revdate: 2026-08-19
+:revnumber: 1.0
+:revremark: Erstentwurf
+:description: Handbuch zur Visual Novel "Das Netzwerk": spielen und weiterbauen mit Decker, Lil und generierter Tuschezeichnung, auch als Programmier-Einsteiger.
+:keywords: Decker, Lil, Visual Novel, Twee, Tuschezeichnung, Anleitung
+
+[preface]
+== Vorwort
+
+Dieses Handbuch gehört zur Visual Novel *Das Netzwerk*, einer spielbaren
+Adaption der gleichnamigen Novelle, gebaut mit
+https://beyondloom.com/decker/[Decker] und der Sprache Lil. Es richtet sich
+an alle, die die Geschichte einfach nur spielen wollen, genauso wie an
+alle, die selbst eine Szene ändern, eine Entscheidung einbauen oder eine
+neue Zeichnung ergänzen möchten, auch wenn sie noch nie programmiert haben.
+
+Du brauchst für die ersten Kapitel keine Vorkenntnisse. Wo es technischer
+wird, sagen wir das vorher an, und du kannst diese Abschnitte auch einfach
+überspringen, wenn sie dich gerade nicht interessieren.
+
+include::01-einleitung.adoc[leveloffset=+1]
+
+include::02-spielen.adoc[leveloffset=+1]
+
+include::03-einrichtung.adoc[leveloffset=+1]
+
+include::04-architektur.adoc[leveloffset=+1]
+
+include::05-datenformat.adoc[leveloffset=+1]
+
+include::06-bilder.adoc[leveloffset=+1]
+
+include::07-handlung.adoc[leveloffset=+1]
+
+include::08-erweitern.adoc[leveloffset=+1]
+
+include::09-lil.adoc[leveloffset=+1]
+
+include::10-glossar.adoc[leveloffset=+1]
+
+[colophon]
+== Impressum
+
+*Das Netzwerk: Handbuch zur Visual Novel*
+
+Autor: Olav Schettler +
+Kontakt: olav@schettler.net
+
+Die Novelle "Das Netzwerk" und ihre spielbare Adaption sind vollständig
+fiktional. Alle Charaktere, Namen, Institutionen, Handlungen und Ereignisse
+sind frei erfunden; Ähnlichkeiten mit realen Personen oder Institutionen
+sind rein zufällig. Der ausführliche rechtliche Hinweis steht im Spiel
+selbst unter dem Knopf "Rechtlicher Hinweis" auf der Titelkarte
+(`game/data/hinweis.txt`).
+
+Dieses Werk steht unter der Lizenz
+https://creativecommons.org/licenses/by-sa/4.0/[CC BY-SA 4.0]. Du darfst es
+teilen und verändern, solange du den Autor nennst und Bearbeitungen unter
+derselben Lizenz weitergibst. Die Novelle selbst steht unter
+https://creativecommons.org/licenses/by/4.0/[CC BY 4.0].
+
+_Geschrieben mit AsciiDoc, gebaut mit Asciidoctor._

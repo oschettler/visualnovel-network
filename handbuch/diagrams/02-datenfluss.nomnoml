@@ -1,0 +1,29 @@
+#title: Laufzeit-Datenfluss einer Passage
+#direction: right
+#spacing: 40
+#padding: 12
+#background: white
+
+[Engine|liest Passagennamen]
+[twee.render|Ply: Markup, Variablen, Links]
+[rtext-Tabelle]
+[Prosa (arg leer)]
+[Auswahl (arg gesetzt)]
+[dd.say|modale Box, splittet an Leerzeilen]
+[on command|Karte buehne]
+[pt.command|Puppen zeigen, bewegen, sprechen]
+[eigene Kommandos|!bg !hell !dunkel !ton]
+[dd.ask|Knoepfe, gibt Index zurueck]
+[naechste Passage]
+
+[Engine] -> [twee.render]
+[twee.render] -> [rtext-Tabelle]
+[rtext-Tabelle] -> [Prosa (arg leer)]
+[rtext-Tabelle] -> [Auswahl (arg gesetzt)]
+[Prosa (arg leer)] -> [dd.say]
+[dd.say] -> [on command]
+[on command] -> [pt.command]
+[on command] -> [eigene Kommandos]
+[Auswahl (arg gesetzt)] -> [dd.ask]
+[dd.ask] -> [naechste Passage]
+[naechste Passage] -> [Engine]

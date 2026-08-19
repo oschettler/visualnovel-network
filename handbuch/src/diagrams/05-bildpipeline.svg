@@ -1,0 +1,251 @@
+<svg version="1.1" baseProfile="full" width="1711.0" height="374.0" viewBox="0 0 1711 374" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >Wie eine Zeichnung ins Spiel kommt</title>
+	<desc >#title: Wie eine Zeichnung ins Spiel kommt
+	#direction: right
+	#spacing: 70
+	#padding: 12
+	#background: white
+	
+	[&lt;frame&gt;ink.py|
+	  Pen-Klasse|
+	  Striche mit variabler Breite
+	]
+	
+	[&lt;frame&gt;portraits.py / szenen.py|
+	  GEO je Figur|
+	  Formenschatz je Ort
+	]
+	
+	[&lt;frame&gt;emotes.csv|
+	  Mundbogen, Brauen,|
+	  Lid, Pupille je Emote
+	]
+	
+	[&lt;frame&gt;doc/img/*.svg|
+	  eine Datei je Emote|
+	  bzw. je Hintergrund
+	]
+	
+	[&lt;frame&gt;art.csv|
+	  Manifest: svg, gif,|
+	  Breite, Hoehe, transparent
+	]
+	
+	[&lt;frame&gt;render_art.py|
+	  rsvg-convert, dann magick|
+	  silhouette() fuer Figuren
+	]
+	
+	[&lt;frame&gt;game/data/art/*.gif|
+	  1-Bit, Pattern 0/1|
+	  lilt-lesbar
+	]
+	
+	[emotes.csv] -&gt; [portraits.py / szenen.py]
+	[portraits.py / szenen.py] -&gt; [doc/img/*.svg]
+	[ink.py] -&gt; [portraits.py / szenen.py]
+	[doc/img/*.svg] -&gt; [art.csv]
+	[art.csv] liest -&gt; [render_art.py]
+	[render_art.py] schreibt -&gt; [game/data/art/*.gif]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="white">
+				<rect x="0.0" y="0.0" height="374.0" width="1711.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(12, 12)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<path d="M211.0 60.0 L267 60 L312.40693534660414 88.75772571951597 L312.4 88.8 " fill="none"></path>
+					<path d="M297.6 90.4 L312.4 88.8 L307.5 74.6 L322.3 95.0 Z"></path>
+					<path d="M532.0 155.0 L567 155 L590.3333333333334 155 L590.3 155.0 " fill="none"></path>
+					<path d="M578.7 164.3 L590.3 155.0 L578.7 145.7 L602.0 155.0 Z"></path>
+					<path d="M232.0 250.0 L267 250 L312.40693534660414 221.24227428048403 L312.4 221.2 " fill="none"></path>
+					<path d="M307.5 235.4 L312.4 221.2 L297.6 219.6 L322.3 215.0 Z"></path>
+					<path d="M780.0 155.0 L815 155 L838.3333333333334 155 L838.3 155.0 " fill="none"></path>
+					<path d="M826.7 164.3 L838.3 155.0 L826.7 145.7 L850.0 155.0 Z"></path>
+					<text x="1095.0" y="179.0" stroke="none">liest</text>
+					<path d="M1083.0 155.0 L1118 155 L1141.3333333333333 155 L1141.3 155.0 " fill="none"></path>
+					<path d="M1129.7 164.3 L1141.3 155.0 L1129.7 145.7 L1153.0 155.0 Z"></path>
+					<text x="1399.0" y="179.0" stroke="none">schreibt</text>
+					<path d="M1387.0 155.0 L1422 155 L1445.3333333333333 155 L1445.3 155.0 " fill="none"></path>
+					<path d="M1433.7 164.3 L1445.3 155.0 L1433.7 145.7 L1457.0 155.0 Z"></path>
+					<g data-name="ink.py">
+						<g fill="#eee8d5" stroke="#33322E" data-name="ink.py">
+							<rect x="0.0" y="190.0" height="120.0" width="232.0" data-name="ink.py"></rect>
+							<path d="M0.0 230.0 L61.0 230.0 L81.0 210.0 L81.0 190.0" fill="none" data-name="ink.py"></path>
+							<path d="M0.0 270.0 L232.0 270.0" fill="none" data-name="ink.py"></path>
+						</g>
+						<g transform="translate(0, 190)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ink.py" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="ink.py" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="ink.py" data-compartment="0">ink.py</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 230)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ink.py" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="ink.py" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="ink.py" data-compartment="1">Pen-Klasse</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 270)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ink.py" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="ink.py" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="ink.py" data-compartment="2">Striche mit variabler Breite</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="portraits.py / szenen.py">
+						<g fill="#eee8d5" stroke="#33322E" data-name="portraits.py / szenen.py">
+							<rect x="302.0" y="95.0" height="120.0" width="230.0" data-name="portraits.py / szenen.py"></rect>
+							<path d="M302.0 135.0 L502.0 135.0 L522.0 115.0 L522.0 95.0" fill="none" data-name="portraits.py / szenen.py"></path>
+							<path d="M302.0 175.0 L532.0 175.0" fill="none" data-name="portraits.py / szenen.py"></path>
+						</g>
+						<g transform="translate(302, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="portraits.py / szenen.py" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="portraits.py / szenen.py" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="portraits.py / szenen.py" data-compartment="0">portraits.py / szenen.py</text>
+								
+							</g>
+						</g>
+						<g transform="translate(302, 135)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="portraits.py / szenen.py" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="portraits.py / szenen.py" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="portraits.py / szenen.py" data-compartment="1">GEO je Figur</text>
+								
+							</g>
+						</g>
+						<g transform="translate(302, 175)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="portraits.py / szenen.py" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="portraits.py / szenen.py" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="portraits.py / szenen.py" data-compartment="2">Formenschatz je Ort</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="emotes.csv">
+						<g fill="#eee8d5" stroke="#33322E" data-name="emotes.csv">
+							<rect x="21.0" y="0.0" height="120.0" width="190.0" data-name="emotes.csv"></rect>
+							<path d="M21.0 40.0 L125.0 40.0 L145.0 20.0 L145.0 0.0" fill="none" data-name="emotes.csv"></path>
+							<path d="M21.0 80.0 L211.0 80.0" fill="none" data-name="emotes.csv"></path>
+						</g>
+						<g transform="translate(21, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="emotes.csv" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="emotes.csv" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="emotes.csv" data-compartment="0">emotes.csv</text>
+								
+							</g>
+						</g>
+						<g transform="translate(21, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="emotes.csv" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="emotes.csv" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="emotes.csv" data-compartment="1">Mundbogen, Brauen,</text>
+								
+							</g>
+						</g>
+						<g transform="translate(21, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="emotes.csv" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="emotes.csv" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="emotes.csv" data-compartment="2">Lid, Pupille je Emote</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="doc/img/*.svg">
+						<g fill="#eee8d5" stroke="#33322E" data-name="doc/img/*.svg">
+							<rect x="602.0" y="95.0" height="120.0" width="178.0" data-name="doc/img/*.svg"></rect>
+							<path d="M602.0 135.0 L723.0 135.0 L743.0 115.0 L743.0 95.0" fill="none" data-name="doc/img/*.svg"></path>
+							<path d="M602.0 175.0 L780.0 175.0" fill="none" data-name="doc/img/*.svg"></path>
+						</g>
+						<g transform="translate(602, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="doc/img/*.svg" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="doc/img/*.svg" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="doc/img/*.svg" data-compartment="0">doc/img/*.svg</text>
+								
+							</g>
+						</g>
+						<g transform="translate(602, 135)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="doc/img/*.svg" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="doc/img/*.svg" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="doc/img/*.svg" data-compartment="1">eine Datei je Emote</text>
+								
+							</g>
+						</g>
+						<g transform="translate(602, 175)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="doc/img/*.svg" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="doc/img/*.svg" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="doc/img/*.svg" data-compartment="2">bzw. je Hintergrund</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="art.csv">
+						<g fill="#eee8d5" stroke="#33322E" data-name="art.csv">
+							<rect x="850.0" y="95.0" height="120.0" width="233.0" data-name="art.csv"></rect>
+							<path d="M850.0 135.0 L917.0 135.0 L937.0 115.0 L937.0 95.0" fill="none" data-name="art.csv"></path>
+							<path d="M850.0 175.0 L1083.0 175.0" fill="none" data-name="art.csv"></path>
+						</g>
+						<g transform="translate(850, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="art.csv" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="art.csv" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="art.csv" data-compartment="0">art.csv</text>
+								
+							</g>
+						</g>
+						<g transform="translate(850, 135)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="art.csv" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="art.csv" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="art.csv" data-compartment="1">Manifest: svg, gif,</text>
+								
+							</g>
+						</g>
+						<g transform="translate(850, 175)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="art.csv" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="art.csv" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="art.csv" data-compartment="2">Breite, Hoehe, transparent</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="render_art.py">
+						<g fill="#eee8d5" stroke="#33322E" data-name="render_art.py">
+							<rect x="1153.0" y="95.0" height="120.0" width="234.0" data-name="render_art.py"></rect>
+							<path d="M1153.0 135.0 L1274.0 135.0 L1294.0 115.0 L1294.0 95.0" fill="none" data-name="render_art.py"></path>
+							<path d="M1153.0 175.0 L1387.0 175.0" fill="none" data-name="render_art.py"></path>
+						</g>
+						<g transform="translate(1153, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="render_art.py" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="render_art.py" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="render_art.py" data-compartment="0">render_art.py</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1153, 135)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="render_art.py" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="render_art.py" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="render_art.py" data-compartment="1">rsvg-convert, dann magick</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1153, 175)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="render_art.py" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="render_art.py" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="render_art.py" data-compartment="2">silhouette() fuer Figuren</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="game/data/art/*.gif">
+						<g fill="#eee8d5" stroke="#33322E" data-name="game/data/art/*.gif">
+							<rect x="1457.0" y="95.0" height="120.0" width="190.0" data-name="game/data/art/*.gif"></rect>
+							<path d="M1457.0 135.0 L1617.0 135.0 L1637.0 115.0 L1637.0 95.0" fill="none" data-name="game/data/art/*.gif"></path>
+							<path d="M1457.0 175.0 L1647.0 175.0" fill="none" data-name="game/data/art/*.gif"></path>
+						</g>
+						<g transform="translate(1457, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="game/data/art/*.gif" data-compartment="0">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="game/data/art/*.gif" data-compartment="0">
+								<text x="0.0" y="14.1" stroke="none" data-name="game/data/art/*.gif" data-compartment="0">game/data/art/*.gif</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1457, 135)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="game/data/art/*.gif" data-compartment="1">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="game/data/art/*.gif" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="game/data/art/*.gif" data-compartment="1">1-Bit, Pattern 0/1</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1457, 175)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="game/data/art/*.gif" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="game/data/art/*.gif" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="game/data/art/*.gif" data-compartment="2">lilt-lesbar</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

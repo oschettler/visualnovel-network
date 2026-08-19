@@ -88,6 +88,43 @@ def nase(p, x, y0, y1, w=8):
              w=(0, 2.4, 0), amp=0.6)
 
 
+# Umriss der Figur als geschlossene Flaeche. Sie wird VOR allem anderen
+# gezeichnet und deckend weiss gefuellt, damit die Figur den Hintergrund
+# verdeckt. Die Tuschekonturen duerfen weiterhin offen bleiben, sie liegen
+# darueber.
+#
+# Je Figur: der Scheitelpunkt, die halbe Breite der Haarpartie oben und auf
+# Ohrhoehe, und wo die Haarpartie endet. Die Schulterlinie ist bei allen
+# dieselbe, sie kommt aus hals_schultern().
+UMRISS = {
+    "michael": dict(oben=96, hw_oben=64, seite=196, hw_seite=76, haar_y=372, hw_haar=70),
+    "sarah": dict(oben=74, hw_oben=82, seite=190, hw_seite=96, haar_y=414, hw_haar=92),
+    "jamal": dict(oben=84, hw_oben=70, seite=196, hw_seite=80, haar_y=360, hw_haar=72),
+    "kat": dict(oben=78, hw_oben=80, seite=192, hw_seite=92, haar_y=372, hw_haar=88),
+    "lena": dict(oben=76, hw_oben=80, seite=192, hw_seite=92, haar_y=392, hw_haar=88),
+    "tom": dict(oben=72, hw_oben=76, seite=196, hw_seite=84, haar_y=352, hw_haar=74),
+}
+
+SCHULTER_L = [(150, 402), (103, 425), (66, 467), (52, 524)]
+SCHULTER_R = [(253, 399), (299, 423), (335, 465), (349, 524)]
+
+
+def umriss(p, kurz):
+    """Weisse Silhouette der Figur, vor der Tusche gezeichnet."""
+    u = UMRISS[kurz]
+    cx = 200
+    pts = [(cx - u["hw_seite"], u["seite"])]
+    pts += [(cx - u["hw_oben"], u["oben"] + 26), (cx, u["oben"]),
+            (cx + u["hw_oben"], u["oben"] + 26)]
+    pts += [(cx + u["hw_seite"], u["seite"]),
+            (cx + u["hw_haar"], u["haar_y"])]
+    pts += SCHULTER_R
+    pts += [(400, 524), (400, 528), (0, 528), (0, 524)]
+    pts += list(reversed(SCHULTER_L))
+    pts += [(cx - u["hw_haar"], u["haar_y"])]
+    p.flaeche(pts, wob=1.6)
+
+
 def hals_schultern(p, schulter_l=None, schulter_r=None):
     kopf = p.turn
     # Hals folgt dem Kopf zum Teil, der Rumpf dreht kaum mit
@@ -248,6 +285,7 @@ def mundzug(p, geo, row):
 def michael(p, turn=0.0, row=None, blink=False):
     row = row or EMOTES["neutral"]
     p.set_turn(turn)
+    umriss(p, "michael")
     # Kopf leicht gedreht: linke Wange voller, rechte Seite knapper
     # --- Schaedel: kahl, Kontur laeuft ueber den Scheitel
     kontur(p, [(133, 190), (135, 141), (153, 104), (186, 84), (221, 86),
@@ -340,6 +378,7 @@ def sarah(p, turn=0.0, row=None, blink=False):
     """Dunkles, glattes Haar bis auf die Schultern, muede und entschlossen."""
     row = row or EMOTES["neutral"]
     p.set_turn(turn)
+    umriss(p, "sarah")
     kontur(p, [(141, 176), (138, 232), (147, 288), (163, 328), (182, 353), (203, 363)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.58), (0.65, 1.0)],
            druck=[(0.44, 0.88)], druck_w=5.6)
@@ -413,6 +452,7 @@ def jamal(p, turn=0.0, row=None, blink=False):
     """Kurzes Haar, graue Schlaefen, Dreitagebart, Kapuzenpulli."""
     row = row or EMOTES["neutral"]
     p.set_turn(turn)
+    umriss(p, "jamal")
     kontur(p, [(136, 184), (133, 238), (142, 292), (159, 330), (181, 354), (203, 363)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.57), (0.64, 1.0)],
            druck=[(0.44, 0.88)], druck_w=5.8)
@@ -480,6 +520,7 @@ def kat(p, turn=0.0, row=None, blink=False):
     """Kurzer, zerzauster Schnitt mit Undercut, Sommersprossen, warm."""
     row = row or EMOTES["neutral"]
     p.set_turn(turn)
+    umriss(p, "kat")
     kontur(p, [(140, 182), (137, 234), (147, 288), (164, 326), (183, 350), (203, 359)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.57), (0.64, 1.0)],
            druck=[(0.42, 0.86)], druck_w=5.6)
@@ -543,6 +584,7 @@ def lena(p, turn=0.0, row=None, blink=False):
     """Scharfer Bob mit geradem Pony, wacher und skeptischer Blick."""
     row = row or EMOTES["neutral"]
     p.set_turn(turn)
+    umriss(p, "lena")
     kontur(p, [(144, 186), (141, 238), (150, 290), (166, 326), (184, 350), (203, 359)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.56), (0.63, 1.0)],
            druck=[(0.44, 0.86)], druck_w=5.6)
@@ -618,6 +660,7 @@ def tom(p, turn=0.0, row=None, blink=False):
     """Wilde Locken, jung, energisch -- offenes Grinsen."""
     row = row or EMOTES["neutral"]
     p.set_turn(turn)
+    umriss(p, "tom")
     kontur(p, [(142, 190), (139, 240), (149, 290), (166, 324), (184, 346), (203, 355)],
            w=(0, 3.2, 0), amp=1.6, cuts=[(0.0, 0.56), (0.63, 1.0)],
            druck=[(0.42, 0.86)], druck_w=5.4)
@@ -728,9 +771,15 @@ def lade_emotes():
 EMOTES = lade_emotes()
 
 
-def schreibe_svg(p, pfad):
+def schreibe_svg(p, pfad, grund=False):
+    """Schreibt die Zeichnung.
+
+    Die Puppen bekommen keinen weissen Bildgrund (grund=False): deckend ist
+    nur die Silhouette aus umriss(), alles daneben bleibt durchsichtig. Nur
+    so verdeckt die Figur den Hintergrund, ohne als weisser Kasten auf ihm
+    zu liegen."""
     with open(pfad, "w") as fh:
-        fh.write(p.svg(W, H))
+        fh.write(p.svg(W, H, grund=grund))
     return len(p.paths)
 
 
@@ -744,49 +793,55 @@ def zeichne_ansichten(name, fn, seed):
         print("geschrieben:", os.path.basename(pfad), f"({n} Pfade)")
 
 
-def zeichne_emotes(name, fn, seed, kurz):
-    """Alle 14 Emote-Canvases einer Figur, alle mit demselben Zufallsstartwert.
+# Blickrichtungen einer Puppe. Sprechen zwei Figuren miteinander, wendet sich
+# die linke nach rechts und die rechte nach links -- das wirkt lebendiger als
+# zwei frontale Koepfe. Der Suffix wird zum eigenen Puppennamen, weil
+# Puppeteer eine Puppe ueber den Namen ihrer Karte anspricht; die Engine
+# (game/lil/vn.lil) waehlt die Variante automatisch anhand der Buehnenposition.
+#
+# turn ist positiv, wenn sich das Gesicht nach rechts wendet.
+RICHTUNGEN = [
+    ("", 0.0),      # frontal, fuer eine allein stehende Figur
+    ("_r", 0.30),   # schaut nach rechts, steht also links
+    ("_l", -0.30),  # schaut nach links, steht also rechts
+]
 
-    Nur das Gesicht (Brauen, Augen, Mund) unterscheidet sich zwischen den
-    Dateien -- Haare und Silhouette werden vor dem Gesicht gezeichnet und
-    verbrauchen den Zufallsstrom deshalb identisch, unabhaengig vom Emote."""
-    zielverzeichnis = os.path.join(EMOTE_OUT, kurz)
-    os.makedirs(zielverzeichnis, exist_ok=True)
+
+def zeichne_emotes(name, fn, seed, kurz):
+    """Alle Emote-Canvases einer Figur in allen drei Blickrichtungen.
+
+    Innerhalb einer Blickrichtung haben alle Emotes denselben
+    Zufallsstartwert: nur das Gesicht (Brauen, Augen, Mund) unterscheidet
+    sich, Haare und Silhouette werden davor gezeichnet und verbrauchen den
+    Zufallsstrom identisch. Zwischen den Blickrichtungen darf sich der
+    Startwert unterscheiden, dort aendert sich die Zeichnung ohnehin
+    vollstaendig."""
     manifest_zeilen = []
 
-    for emote in EMOTE_NAMEN:
-        row = EMOTES[emote]
+    for suffix, turn in RICHTUNGEN:
+        ordner = kurz + suffix
+        zielverzeichnis = os.path.join(EMOTE_OUT, ordner)
+        os.makedirs(zielverzeichnis, exist_ok=True)
 
-        p = Pen(seed)
-        fn(p, 0.0, row=row, blink=False)
-        pfad = os.path.join(zielverzeichnis, f"{emote}.svg")
-        n = schreibe_svg(p, pfad)
-        print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
-        manifest_zeilen.append(
-            (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
-             f"figuren/{kurz}/{emote}.gif", "480", "624", "1"))
+        def schreibe(emote, row, blink, dateiname):
+            p = Pen(seed)
+            fn(p, turn, row=row, blink=blink)
+            pfad = os.path.join(zielverzeichnis, f"{dateiname}.svg")
+            n = schreibe_svg(p, pfad)
+            print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
+            manifest_zeilen.append(
+                (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
+                 f"figuren/{ordner}/{dateiname}.gif", "480", "624", "1"))
 
-        offen_row = dict(row)
-        offen_row["mund_offen"] = 1
-        p = Pen(seed)
-        fn(p, 0.0, row=offen_row, blink=False)
-        pfad = os.path.join(zielverzeichnis, f"{emote}_open.svg")
-        n = schreibe_svg(p, pfad)
-        print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
-        manifest_zeilen.append(
-            (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
-             f"figuren/{kurz}/{emote}_open.gif", "480", "624", "1"))
+        for emote in EMOTE_NAMEN:
+            row = EMOTES[emote]
+            schreibe(emote, row, False, emote)
+            offen_row = dict(row)
+            offen_row["mund_offen"] = 1
+            schreibe(emote, offen_row, False, f"{emote}_open")
 
-    for emote in BLINK_EMOTES:
-        row = EMOTES[emote]
-        p = Pen(seed)
-        fn(p, 0.0, row=row, blink=True)
-        pfad = os.path.join(zielverzeichnis, f"{emote}_blink.svg")
-        n = schreibe_svg(p, pfad)
-        print("geschrieben:", os.path.relpath(pfad, ROOT), f"({n} Pfade)")
-        manifest_zeilen.append(
-            (os.path.relpath(pfad, ROOT).replace(os.sep, "/"),
-             f"figuren/{kurz}/{emote}_blink.gif", "480", "624", "1"))
+        for emote in BLINK_EMOTES:
+            schreibe(emote, EMOTES[emote], True, f"{emote}_blink")
 
     return manifest_zeilen
 
@@ -810,8 +865,10 @@ def schreibe_manifest(neue_zeilen, bearbeitete_kurznamen):
                 if not pfad.startswith("doc/img/emotes/"):
                     behalten.append(zeile)
                     continue
-                betroffen = any(pfad.startswith(f"doc/img/emotes/{k}/")
-                                 for k in bearbeitete_kurznamen)
+                # Eine Figur hat drei Ordner: kurz, kurz_r und kurz_l.
+                betroffen = any(pfad.startswith(f"doc/img/emotes/{k}{suffix}/")
+                                 for k in bearbeitete_kurznamen
+                                 for suffix, _ in RICHTUNGEN)
                 if not betroffen:
                     behalten.append(zeile)
 

@@ -450,7 +450,7 @@ Michael: Noch sind wir im legalen Rahmen. Aber wir müssen vorsichtig sein.
 
 ? Wie rahmt Kat das Projekt?
 
-[[Wir nennen es ein Resilienz-Projekt.->k04-vorsicht]]
+[[Wir nennen es ein Projekt für Resilienz.->k04-vorsicht]]
 [[Wir stehen zusammen, komme, was wolle.->k04-zusammenhalt]]
 
 :: k04-vorsicht [kapitel-04 teil-1 pov-kat]
@@ -687,7 +687,7 @@ Michael: Aber wir müssen vorsichtig sein. Je mehr Menschen involviert sind, des
 
 ? Wie reagiert Tom auf Michaels Warnung?
 
-[[Die Chaos-Leute verstehen OpSec.->k06-vertrauen]]
+[[Die Leute vom Congress verstehen OpSec.->k06-vertrauen]]
 [[Klare Grenzen sind richtig.->k06-grenzen]]
 
 :: k06-vertrauen [kapitel-06 teil-1 pov-tom]
@@ -1101,3 +1101,2237 @@ Er schrieb bis spät in die Nacht. Mit jedem Wort wusste er: Es gab kein Zurück
 Sie hatten die Grenze überschritten. Von der Grauzone in die Illegalität.
 
 Und im September würden sie entscheiden müssen, wie weit sie zu gehen bereit waren.
+
+[[Der September kam.->t2-runde]]
+
+:: t2-runde [teil-2] {"titel":"Teil II: Die Entscheidung"}
+!clear
+!bg uebersicht
+!zeit September 2027
+
+Sechs Menschen, sechs Abende vor der Abstimmung. Jeder entscheidet für sich, bevor sie gemeinsam entscheiden.
+
+? Wessen Abend willst du sehen?
+
+{if g09 "" else rtext.make["Sarah schreibt die Einladung." "" "k09-einladung"] end}
+{if g10 "" else rtext.make["Jamal, allein mit seiner Angst." "" "k10-angst"] end}
+{if g11 "" else rtext.make["Kat, im Haus ihrer Eltern." "" "k11-familie"] end}
+{if g12 "" else rtext.make["Michael, zwischen Theorie und Praxis." "" "k12-ethiker"] end}
+{if g13 "" else rtext.make["Lena, Journalistin oder Akteurin." "" "k13-journalistin"] end}
+{if g14 "" else rtext.make["Tom, der am wenigsten zu verlieren hat." "" "k14-idealist"] end}
+{gesamt:g09+g10+g11+g12+g13+g14 if 6~gesamt rtext.make["Der 16. September, 20 Uhr." "" "k15-abstimmung"] else "" end}
+
+:: k09-einladung [kapitel-09 teil-2 pov-sarah datum-2027-09] {"titel":"Kapitel 9: Sarah - Die Einladung"}
+!clear
+!bg sarahs-wohnung
+!zeit 15. September 2027, Bonn
+!dunkel
+
+!show sarah denk center
+
+Regen lief die Scheibe hinunter. Sarah hatte die E-Mail schon dreimal angefangen und wieder gelöscht.
+
+Ihr Handy vibrierte.
+
+Michael: Hast du die Nachrichten gesehen? AfD vierunddreißig Prozent in Sachsen. Die werden koalieren müssen.
+
+!show sarah schock
+
+Historischer Sieg, titelte die eine Zeitung. Dammbruch, die andere. Eine Politikerin im Interview: Wir werden die öffentlich-rechtlichen Medien grundlegend reformieren. Der BRI ist das krasseste Beispiel für Steuergeldverschwendung.
+
+Sarahs Hände zitterten leicht. Bei ähnlichen Zahlen 2029 kam die Koalition. Minus achtzig Prozent Budget. Das Ende des BRI, wie sie ihn kannte.
+
+Sie dachte an den kleinen Sendemast an ihrem Schlüsselbund. Ein Versprechen, achtzehn Monate alt. Heute fühlte es sich an wie eine Bürde, die sie fünf anderen aufladen wollte.
+
+[[Sie öffnete eine verschlüsselte Datei.->k09-plan]]
+
+:: k09-plan [kapitel-09 teil-2 pov-sarah]
+!show sarah denk
+
+Ein Dokument, drei Wochen alt: Szenario, konspirative Fortsetzung des Projekts. Sie hatte alles durchgerechnet. Es war möglich. Aber es war illegal. Budgets umleiten, Anträge fälschen, Vorgesetzte belügen. Untreue, Betrug, Urkundenfälschung, nüchterne Worte für das, was sie vorhatte.
+
+Und sie würde fünf Menschen bitten, dasselbe zu tun. Fünf Karrieren, fünf Leben, für eine Idee, an die nur sie ganz sicher glaubte.
+
+Ihr Handy klingelte. Michael.
+
+Michael: Denkst du wirklich, es ist richtig?
+
+Sarah: Ich denke, es ist notwendig.
+
+Michael: Und wenn jemand Nein sagt?
+
+Sarah: Dann ist das Projekt vorbei.
+
+Michael: Wann und wo?
+
+Sarah: Morgen Abend, bei mir. Keine Handys, keine Aufzeichnungen.
+
+? Wie lädt Sarah die anderen ein?
+
+[[Jeder entscheidet ganz allein für sich.->k09-vorsicht]]
+[[Wir tragen die Entscheidung gemeinsam.->k09-zusammenhalt]]
+
+:: k09-vorsicht [kapitel-09 teil-2 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah sorge
+
+Sarah: Keine Gruppendynamik. Keiner soll Ja sagen, weil die anderen Ja sagen. Jeder für sich, ohne mich im Raum, wenn er es liest.
+
+Michael: Das schützt sie. Und dich, wenn später jemand fragt, wer wen überredet hat.
+
+[[Sie kehrte zu ihrem Laptop zurück.->k09-email]]
+
+:: k09-zusammenhalt [kapitel-09 teil-2 pov-sarah]
+{zusammenhalt:zusammenhalt+1 ""}
+!show sarah ent
+
+Sarah: Nein. Alle an einem Tisch. Wenn wir das tragen, tragen wir es gemeinsam, von der ersten Minute an.
+
+Michael: Und wenn dann einer nicht mitzieht?
+
+Sarah: Dann sehen wir uns dabei in die Augen. Das ist ehrlicher als sechs einsame Antworten auf sechs stille Handys.
+
+[[Sie kehrte zu ihrem Laptop zurück.->k09-email]]
+
+:: k09-email [kapitel-09 teil-2 pov-sarah]
+!show sarah ent
+
+Liebe Alle, ich möchte euch bitten, morgen Abend um zwanzig Uhr zu mir zu kommen. Bonner Straße, dritter Stock. Keine Handys. Sagt niemandem, wohin ihr geht.
+
+Was ich vorschlagen werde, ist nicht legal. Es ist nicht ungefährlich. Und es ist nicht rückgängig zu machen. Wenn ihr nicht kommen wollt, verstehe ich das. Wenn ihr kommt und Nein sagt, respektiere ich das.
+
+Sarah
+
+Sie klickte auf Senden.
+
+!shake 3 3 10
+
+Die E-Mail verschwand. Es gab kein Zurück mehr.
+
+[[Am nächsten Morgen antworteten sie, einer nach dem anderen.->k09-antworten]]
+
+:: k09-antworten [kapitel-09 teil-2 pov-sarah]
+!clear
+!bg sarahs-wohnung
+!zeit 16. September 2027, Bonn, morgens
+!hell
+
+!show sarah neutral center
+
+Jamal: Ich komme.
+
+Kat: Bin dabei. Aber ich habe Angst.
+
+Lena: Ich komme. Ich dokumentiere alles. Auch das.
+
+Tom: Zwanzig Uhr. Verstanden.
+
+Alle fünf würden kommen. Fünf Ja aus fünf verschiedenen Leben. Sarah wusste jetzt schon, was sie ihnen abverlangt hatte.
+
+Sie trank ihren Kaffee aus und fuhr zur Arbeit. Ein ganz normaler Tag beim BRI.
+
+Noch.
+
+{g09:1 ""}
+
+[[Zurück zur Übersicht.->t2-runde]]
+
+:: k10-angst [kapitel-10 teil-2 pov-jamal datum-2027-09] {"titel":"Kapitel 10: Jamal - Die Angst"}
+!clear
+!bg jamals-wohnung
+!zeit 16. September 2027, Bonn-Beuel
+!dunkel
+
+!show jamal denk center
+
+Jamal wachte auf, bevor der Wecker klingelte. Sarahs E-Mail hatte er dreimal gelesen. Was ich vorschlagen werde, ist nicht legal. Es ist nicht ungefährlich. Und es ist nicht rückgängig zu machen.
+
+Diese Worte kannte er. Damaskus, 2015. Sein Freund Tariq hatte ihm einen USB-Stick in die Hand gedrückt: Bring das nach Europa. Drei Tage später war Tariq verschwunden.
+
+!show jamal sorge
+
+Jamal stand auf und sah aus dem Fenster, hinunter auf die Straßen von Beuel. Elf Jahre in diesem Land, ein Job, der sich nach mehr anfühlte als Überleben.
+
+Nur eine Aufenthaltserlaubnis, kein deutscher Pass. Wer erwischt wird, wird ausgewiesen. Und seine Familie war noch in Syrien. Er hatte mehr zu verlieren als jeder andere am Tisch.
+
+[[Sein Handy klingelte. Eine Nummer aus Syrien.->k10-anruf]]
+
+:: k10-anruf [kapitel-10 teil-2 pov-jamal]
+!show jamal sorge
+
+Amira: Jamal? Ich habe die Nachrichten gesehen. Sie sagen, die AfD will Flüchtlinge zurückschicken. Stimmt das?
+
+Jamal: Nicht alle. Es ist kompliziert.
+
+Amira: Sei vorsichtig. Bitte.
+
+Jamal: Ich bin vorsichtig, ich verspreche es.
+
+Amira: Pass auf dich auf, kleiner Bruder.
+
+Sie legte auf. Jamal saß da, das Handy in der Hand. Wenn er Ja sagte, riskierte er nicht nur sich selbst. War es fair, sie mit hineinzuziehen, ohne dass sie je gefragt worden war?
+
+? Wie geht Jamal mit dem Risiko für seine Familie um?
+
+[[Er sagt niemandem, was er vorhat.->k10-schweigen]]
+[[Er entscheidet trotzdem, denn Schweigen hat auch seinen Preis.->k10-mut]]
+
+:: k10-schweigen [kapitel-10 teil-2 pov-jamal]
+{vorsicht:vorsicht+1 ""}
+!show jamal sorge
+
+Amira sollte nichts wissen. Je weniger sie wusste, desto sicherer war sie. Das hatte er in Damaskus gelernt. Schweigen schützt die, die man liebt.
+
+[[Er öffnete sein Postfach und tippte.->k10-email]]
+
+:: k10-mut [kapitel-10 teil-2 pov-jamal]
+{entschlossenheit:entschlossenheit+1 ""}
+!show jamal ent
+
+Schweigen hatte auch einen Preis. Er hatte einmal alles verloren, weil er weggeschaut hatte, wenn andere wegschauten. Das würde er nicht wiederholen.
+
+[[Er öffnete sein Postfach und tippte.->k10-email]]
+
+:: k10-email [kapitel-10 teil-2 pov-jamal]
+!show jamal denk
+
+Ich komme.
+
+Zwei Worte. Er hatte nicht Ja gesagt. Aber auch nicht Nein. Er hatte gesagt: Ich höre zu.
+
+[[Um vierzehn Uhr, in der Kantine.->k10-kantine]]
+
+:: k10-kantine [kapitel-10 teil-2 pov-jamal]
+!clear
+!bg innovation-lab
+!zeit 16. September 2027, Bonn, Kantine
+!hell
+
+!show jamal neutral centerleft
+!show tom neutral centerright
+
+Tom: Du hast die E-Mail auch bekommen. Kommst du?
+
+Jamal: Ja. Du?
+
+Tom: Natürlich. Das ist doch genau das, wofür wir das alles gemacht haben.
+
+Jamal betrachtete ihn. Sechsundzwanzig, deutscher Pass, keine Familie in einem Kriegsgebiet.
+
+Jamal: Hast du keine Angst?
+
+Tom: Doch, schon. Aber manchmal muss man Angst haben und es trotzdem tun.
+
+Jamal: Für dich verlierst du im schlimmsten Fall den Job. Ich bin kein Deutscher. Wenn ich erwischt werde, werde ich ausgewiesen. Zurück nach Syrien.
+
+!show tom sorge
+
+Tom: Scheiße. Daran habe ich nicht gedacht.
+
+!show jamal ent
+
+Jamal: Und trotzdem komme ich. Weil ich schon einmal weggelaufen bin. Ich will es nicht noch einmal tun.
+
+[[Um 19:55 Uhr stand er vor Sarahs Tür.->k10-ankunft]]
+
+:: k10-ankunft [kapitel-10 teil-2 pov-jamal]
+!clear
+!bg sarahs-wohnung
+!zeit 16. September 2027, Bonn, 20 Uhr
+!dunkel
+
+!show jamal sorge centerleft
+!show sarah neutral centerright
+
+Sarah: Jamal. Danke, dass du gekommen bist.
+
+Jamal: Ich habe gesagt, ich komme.
+
+Sarah: Ich weiß auch, was es dich kostet.
+
+!hide sarah
+!show michael neutral centerright
+
+Michael: Schön, dass du da bist.
+
+Jamal: Schön ist nicht das richtige Wort.
+
+Er trat ein, die Hände in den Taschen, damit niemand sah, dass sie zitterten. Sechs Menschen, eine unmögliche Entscheidung. Er hörte zu.
+
+Aber er hatte noch nicht entschieden.
+
+{g10:1 ""}
+
+[[Zurück zur Übersicht.->t2-runde]]
+
+:: k11-familie [kapitel-11 teil-2 pov-kat datum-2027-09] {"titel":"Kapitel 11: Kat - Die Familie"}
+!clear
+!bg goerlitz-kinderzimmer
+!zeit 15. September 2027, Görlitz
+!hell
+
+!show kat sorge center
+
+Acht Stunden Regionalexpress von Bonn nach Görlitz, einen Tag vor Sarahs Treffen. Sie hätte nicht fahren sollen, nicht ausgerechnet heute. Aber ihre Mutter hatte angerufen: Vaters Geburtstag, die ganze Familie, auch Markus.
+
+Ihr Bruder. Seit er seine AfD-Mitgliedschaft verkündet hatte, hatten sie kein Wort mehr gewechselt. Als er sie im Flur des Plattenbaus sah, hatte er nur genickt. Keine Umarmung.
+
+Beim Kaffee hatte Onkel Werner die Wahl in Sachsen gefeiert. Historischer Sieg, hatte Markus gelächelt. Der BRI sei das beste Beispiel für linke Propaganda mit Steuergeld.
+
+Kat: Ich arbeite beim BRI.
+
+Markus: Ich weiß. Deshalb sage ich es ja.
+
+Vater: Genug! Das ist mein Geburtstag. Ich will keinen Streit.
+
+Kat war aufgestanden und gegangen, hinauf in ihr altes Zimmer, vorbei an Fotos einer Familie, die es so nicht mehr gab.
+
+[[In ihrem alten Zimmer klopfte es.->k11-mutter]]
+
+:: k11-mutter [kapitel-11 teil-2 pov-kat]
+!show kat sorge
+
+Mutter: Es tut mir leid. Wegen Markus. Er hat vor drei Jahren seinen Job verloren. Und Schuldige gefunden. Flüchtlinge. Journalisten.
+
+Kat: Er ist nicht böse, Mama.
+
+Mutter: Nein. Nur verloren. Das macht es nicht leichter.
+
+Kat: Mama, darf ich dich etwas fragen? Damals, in der DDR. Hast du dich manchmal gewünscht, du hättest mehr getan?
+
+Mutter: Jeden Tag. Aber die Angst war keine Entschuldigung. Nur eine Erklärung.
+
+Kat: Ich stehe vor einer ähnlichen Entscheidung. Etwas, das richtig ist, aber nicht legal.
+
+Mutter sah sie lange an, so lange, dass Kat schon dachte, sie hätte zu viel gesagt.
+
+Mutter: Ich würde dir sagen: Tu, was ich nicht getan habe. Sei mutiger, als ich war.
+
+? Was nimmt Kat sich vor?
+
+[[Mutiger sein, als ihre Mutter war.->k11-mut]]
+[[Es tun, aber niemanden allein tragen lassen.->k11-zusammenhalt]]
+
+:: k11-mut [kapitel-11 teil-2 pov-kat]
+{entschlossenheit:entschlossenheit+1 ""}
+!show kat ent
+
+Kat: Und wenn ich erwischt werde?
+
+Mutter: Dann bin ich trotzdem stolz auf dich.
+
+Sie umarmten sich lange.
+
+[[Um 19:45 Uhr klappte Kat den Laptop auf.->k11-call]]
+
+:: k11-zusammenhalt [kapitel-11 teil-2 pov-kat]
+{zusammenhalt:zusammenhalt+1 ""}
+!show kat ent
+
+Kat: Nicht allein. Fünf andere tragen dasselbe Risiko. Das macht es leichter.
+
+Mutter: Dann bist du nicht so verloren wie Markus.
+
+Sie umarmten sich lange.
+
+[[Um 19:45 Uhr klappte Kat den Laptop auf.->k11-call]]
+
+:: k11-call [kapitel-11 teil-2 pov-kat]
+!clear
+!bg goerlitz-kinderzimmer
+!zeit 16. September 2027, Görlitz, 19:45 Uhr
+!dunkel
+
+!show kat denk center
+
+Kopfhörer auf, Tür abgeschlossen. VPN, dann Tor, dann Jamals P2P-System. Sarahs Wohnzimmer erschien auf dem Bildschirm. Michael, Jamal, Lena, alle waren da, und Tom in einem zweiten Fenster, aus Berlin.
+
+Sarah: Kat. Danke, dass du dabei bist. Auch aus der Ferne.
+
+Kat: Es geht. Ich bin hier. Virtuell, aber hier.
+
+Unten im Wohnzimmer saß Markus, ahnungslos, ein Bier in der Hand, wie am Nachmittag. Aber sie dachte an ihre Mutter, an ihren Großvater, an die Entscheidung, die sie gleich treffen würde.
+
+!show kat ent
+
+Sie wusste: Was auch geschah, sie würde nicht in zwanzig Jahren zurückblicken und sich wünschen, mutiger gewesen zu sein. Sie war hier. Sie hörte zu.
+
+{g11:1 ""}
+
+[[Zurück zur Übersicht.->t2-runde]]
+
+:: k12-ethiker [kapitel-12 teil-2 pov-michael datum-2027-09] {"titel":"Kapitel 12: Michael - Der Ethiker"}
+!clear
+!bg michael-buero
+!zeit 16. September 2027, Bonn, 14 Uhr
+!dunkel
+!show michael denk center
+
+Michael saß über Bonhoeffers "Ethik" gebeugt, dieselbe Seite seit einer halben Stunde.
+
+Michael: Wer in Verantwortung steht, wagt sein Handeln in der Freiheit des eigenen Selbst, ohne die Frage nach Gut und Böse fremdem Urteil zu unterwerfen.
+
+Diesen Satz hatte er zwanzig Jahre lang Studenten erklärt. Über Whistleblower. Über zivilen Ungehorsam. Theorie, sicher hinter einem Pult. Jetzt bat ihn Sarah, sie in die Praxis zu übersetzen.
+
+!show michael sorge
+
+Sein Telefon summte. Claudia.
+
+Claudia: Die Chemo war heute wieder hart.
+
+Michael: Ich komme gleich nach Hause.
+
+Claudia: Du klingst komisch.
+
+Michael: Nur viel Arbeit.
+
+Er hatte gelogen. Wieder.
+
+[[Er öffnete die Schublade mit den Pensionsunterlagen.->k12-pension]]
+
+:: k12-pension [kapitel-12 teil-2 pov-michael]
+!show michael sorge centerleft
+
+Der Anspruch auf Pension erlischt bei schweren Dienstvergehen, insbesondere bei Untreue, Betrug oder Urkundenfälschung.
+
+Achtundfünfzig war er. Sieben Jahre bis zur Rente. Genug, um Claudias Behandlung zu bezahlen. Sagte er heute Abend Ja, stand das alles auf dem Spiel.
+
+!show sarah neutral offcenterright
+!move sarah centerright 40
+!wait
+
+Sarah: Ich wollte sichergehen, dass du heute Abend kommst.
+
+Michael: Ich habe es versprochen.
+
+Sarah: Ich weiß auch, was ich von dir verlange. Du bist der Ethiker. Und jetzt bitte ich dich, etwas zu tun, das vielleicht falsch ist.
+
+Michael: Warum ich? Warum hast du mich in dieses Team geholt?
+
+Sarah: Weil wir jemanden brauchen, der zweifelt. Der Fragen stellt. Wir brauchen ein Gewissen.
+
+? Was antwortet Michael?
+
+[[Ein Gewissen darf auch einmal Nein sagen, das musst du aushalten.->k12-gewissen]]
+[[Ein Gewissen, das nur zweifelt, nutzt niemandem, ich gehe mit.->k12-mitgehen]]
+
+:: k12-gewissen [kapitel-12 teil-2 pov-michael]
+{vorsicht:vorsicht+1 ""}
+!show michael denk
+
+Michael: Ein Gewissen darf auch einmal Nein sagen. Das musst du aushalten, auch heute Abend.
+
+!show sarah denk
+
+Sarah: Das halte ich aus. Ich will, dass du fragst, nicht dass du nur zustimmst.
+
+[[Er sah auf die Uhr und nickte.->k12-heimkehr]]
+
+:: k12-mitgehen [kapitel-12 teil-2 pov-michael]
+{entschlossenheit:entschlossenheit+1 ""}
+!show michael ent
+
+Michael: Ein Gewissen, das nur zweifelt, nutzt niemandem. Ich gehe mit, um eines zu bleiben.
+
+!show sarah ent
+
+Sarah: Das ist mehr, als ich zu hoffen wagte.
+
+[[Er sah auf die Uhr und nickte.->k12-heimkehr]]
+
+:: k12-heimkehr [kapitel-12 teil-2 pov-michael]
+!clear
+!bg bad-godesberg
+!zeit 16. September 2027, Bad Godesberg, 18 Uhr
+!show michael sorge center
+
+Claudia saß auf dem Sofa, als er heimkam, müde vom Tag, aber wach in den Augen.
+
+Michael: Ich muss heute Abend eine Entscheidung treffen. Eine wichtige.
+
+Claudia: Was für eine?
+
+Michael: Es geht um das Projekt. Um die Frage, wie weit man gehen darf, um etwas zu schützen.
+
+Claudia: Ich kenne dich seit dreißig Jahren. Wenn du unsicher bist, ist es wichtig.
+
+Michael: Aber deine Behandlung...
+
+Claudia: Wird bezahlt. Irgendwie. Tu, was richtig ist. Nicht was sicher ist.
+
+!show michael neutral
+
+Michael: Ich liebe dich.
+
+Claudia: Ich liebe dich auch. Jetzt geh.
+
+[[Um fünf vor acht stand er vor Sarahs Tür.->k12-schluss]]
+
+:: k12-schluss [kapitel-12 teil-2 pov-michael]
+!clear
+!bg sarahs-wohnung
+!zeit 16. September 2027, Bonn, 19:55 Uhr
+!show michael denk center
+
+Ein Theoretiker oder ein Praktiker. Ein Feigling oder ein Mutiger. Endgültig entschieden hatte er noch nicht.
+
+{if vorsicht>entschlossenheit "Aber er wusste, dass er heute Abend fragen würde, so lange, bis er die Antworten verstand." else "Aber er wusste, dass er heute Abend mitgehen würde, mit offenen Augen." end}
+
+Er klingelte.
+
+{g12:1 ""}
+
+[[Zurück zur Übersicht.->t2-runde]]
+
+:: k13-journalistin [kapitel-13 teil-2 pov-lena datum-2027-09] {"titel":"Kapitel 13: Lena - Die Journalistin"}
+!clear
+!bg lena-buero
+!zeit 16. September 2027, Bonn, 16 Uhr
+!dunkel
+!show lena denk center
+
+Drei Bildschirme. Links AfD-Wahlprogramme, in der Mitte ihre Recherche-Datenbank, rechts polnische Nachrichtenseiten. Lena schrieb an einem Artikel: Die AfD und die Medien, ein Vergleich mit Polen.
+
+2015 hatte die PiS gewählt. 2016 das öffentlich-rechtliche Fernsehen übernommen. 2017 kritische Journalisten entlassen, reihenweise, ohne Vorwarnung. Deutschland stand vor derselben Kurve, nur ein paar Jahre versetzt.
+
+!show lena schock
+
+Eine neue E-Mail traf ein. Kein bekannter Absender.
+
+Ein Patriot: Wir haben Ihre Berichterstattung verfolgt. Ihre Lügen. Ihre Hetze. Wenn die AfD an die Macht kommt, und das wird sie, werden wir uns an Sie erinnern.
+
+!show lena sorge
+
+Es war nicht die erste. Der Ordner Drohungen zählte siebenundvierzig E-Mails, jede sorgfältig abgelegt, keine gelöscht. Beweise, auch das.
+
+[[Um 17 Uhr traf sie den Kontakt zum Hintergrundgespräch.->k13-interview]]
+
+:: k13-interview [kapitel-13 teil-2 pov-lena]
+!clear
+!bg cafe-bonn
+!zeit 16. September 2027, Bonn, 17 Uhr
+!show lena neutral center
+
+Ein AfD-Politiker, ein Hintergrundgespräch, off the record. Höflich, ruhig, fast freundlich.
+
+Lena: Was genau planen Sie mit dem BRI?
+
+Der Politiker: Eine Reform. Effizienz. Politische Neutralität. Keine einseitige Berichterstattung über Migration, keine Propaganda für Multikulti.
+
+Lena: Auch wenn das bedeutet, die Pressefreiheit einzuschränken?
+
+Der Politiker: Pressefreiheit heißt nicht, dass der Steuerzahler linke Propaganda finanziert. Die Zeiten ändern sich, Frau Kowalski.
+
+!show lena ent
+
+Er ging, zufrieden mit sich. Sie hatte ihre Antwort. Gewann die AfD, überlebte der BRI nicht.
+
+Lena schlug ihr Notizbuch auf und schrieb die Frage, die sie seit Wochen umtrieb. Bin ich noch Journalistin, wenn ich Teil der Geschichte werde?
+
+? Was schreibt Lena hinein?
+
+[[Journalistin sein heißt, die Wahrheit zu schützen, auch handelnd.->k13-akteurin]]
+[[Journalistin sein heißt, erst zu dokumentieren, dann zu handeln.->k13-dokumentieren]]
+
+:: k13-akteurin [kapitel-13 teil-2 pov-lena]
+{entschlossenheit:entschlossenheit+1 ""}
+!show lena ent
+
+Lena: Neutral sein, wenn die Demokratie bedroht ist, ist keine Tugend. Ich schütze die Wahrheit, auch wenn ich Teil der Geschichte werde.
+
+Sie klappte das Notizbuch zu, entschlossen, ohne zu zögern.
+
+[[Sie packte die Tasche und fuhr los.->k13-schluss]]
+
+:: k13-dokumentieren [kapitel-13 teil-2 pov-lena]
+{vorsicht:vorsicht+1 ""}
+!show lena denk
+
+Lena: Ich handle erst, wenn ich alles dokumentiert habe. Beweise zuerst, dann Schritte. Ohne Beweise ist Mut nur Behauptung.
+
+Sie schrieb weiter, jede Zeile ein Beleg für später.
+
+[[Sie packte die Tasche und fuhr los.->k13-schluss]]
+
+:: k13-schluss [kapitel-13 teil-2 pov-lena]
+!clear
+!bg sarahs-wohnung
+!zeit 16. September 2027, Bonn, 19:50 Uhr
+!show lena neutral centerleft
+!show sarah denk centerright
+
+Vor der Tür wartete sie einen Atemzug, das Notizbuch in der Hand, so vertraut wie ein Talisman. Dann klingelte sie.
+
+Sarah: Lena...
+
+Lena: Ich dokumentiere. Das ist, was ich tue. Das ist, wer ich bin.
+
+!show sarah neutral
+
+Sarah: Okay. Aber nur handschriftlich.
+
+Lena schlug die erste Seite auf. Sarahs Wohnung, dachte sie, wir sind zu viert, gleich beginnt es. Dann schrieb sie den letzten Satz: Ich bin bereit.
+
+{g13:1 ""}
+
+[[Zurück zur Übersicht.->t2-runde]]
+
+:: k14-idealist [kapitel-14 teil-2 pov-tom datum-2027-09] {"titel":"Kapitel 14: Tom - Der Idealist"}
+!clear
+!bg toms-wg
+!zeit 16. September 2027, Berlin-Kreuzberg, 18 Uhr
+!dunkel
+!show tom denk center
+
+Tom saß auf dem Bett, Laptop auf den Knien, Sarahs Nachricht zum zehnten Mal gelesen.
+
+Sarah: Was ich vorschlagen werde, ist nicht legal. Nicht ungefährlich. Und nicht rückgängig zu machen.
+
+Und zum zehnten Mal spürte er dasselbe: Aufregung, Nervosität, so etwas wie Respekt.
+
+Sechsundzwanzig war er, Werkstudent, ein Bachelor in Informatik, mit wenig zu verlieren. Aber verstand er wirklich, was auf dem Spiel stand?
+
+!show tom sorge
+
+Er rief seine Schwester an.
+
+Lisa: Tom, was hast du vor?
+
+Tom: Ich kann nicht alle Details sagen. Aber es geht um etwas Wichtiges. Und es ist illegal.
+
+Lisa: Du bist mein kleiner Bruder. Aber manchmal bist du zu idealistisch.
+
+Tom: Ich bin nicht naiv.
+
+Lisa: Versprich mir, dass du wirklich nachdenkst. Dass du nicht einfach Ja sagst, weil es sich gut anfühlt.
+
+Tom: Ich verspreche es.
+
+[[Er öffnete den Browser und suchte nach dem Strafmaß.->k14-recherche]]
+
+:: k14-recherche [kapitel-14 teil-2 pov-tom]
+!show tom denk
+
+Untreue. Betrug. Urkundenfälschung. Bis zu fünf Jahre Gefängnis. Eine Vorstrafe, lebenslang im Führungszeugnis.
+
+Er las jedes Detail und wollte es sich beweisen, sich selbst und Lisa. Nicht naiv. Nicht blauäugig. Wer die Konsequenzen kennt und trotzdem Ja sagt, ist kein Träumer.
+
+!show tom sorge
+
+Aber je mehr er las, desto lauter wurde eine andere Frage. Was, wenn er in zwanzig Jahren zurückblickte und sich fragte, warum er nichts getan hatte?
+
+? Was schreibt Tom seinem zukünftigen Ich?
+
+[[Ich sage Ja, weil ich euch vertraue, komme, was wolle.->k14-vertrauen]]
+[[Ich sage Ja, aber ich ziehe für mich eine rote Linie.->k14-grenze]]
+
+:: k14-vertrauen [kapitel-14 teil-2 pov-tom]
+{zusammenhalt:zusammenhalt+1 ""}
+!show tom ent
+
+Tom: Ich sage Ja. Weil ich euch vertraue. Zusammen tragen wir, was kommt.
+
+Er klappte das Notizbuch zu, sicher, dass das genug wäre.
+
+[[Um zehn vor acht loggte er sich ein.->k14-anruf]]
+
+:: k14-grenze [kapitel-14 teil-2 pov-tom]
+{vorsicht:vorsicht+1 ""}
+!show tom denk
+
+Tom: Ich sage Ja. Aber ich ziehe eine Linie, die ich nicht überschreite, egal, was passiert.
+
+Er schrieb die Linie auf, eine einzige Regel, ohne zu wissen, wie schnell Regeln sich verschieben.
+
+[[Um zehn vor acht loggte er sich ein.->k14-anruf]]
+
+:: k14-anruf [kapitel-14 teil-2 pov-tom]
+!clear
+!bg toms-wg
+!zeit 16. September 2027, Berlin, 19:58 Uhr
+!show tom neutral center
+
+Um 19:58 Uhr loggte sich Tom in die verschlüsselte Konferenz ein. Sarahs Wohnzimmer erschien im Bild, alle schon da.
+
+Sarah: Tom. Schön, dass du dabei bist.
+
+Tom: Natürlich bin ich dabei.
+
+!show tom denk
+
+Tom: Ich weiß, was ihr denkt. Zu jung. Zu idealistisch. Zu naiv.
+
+Niemand widersprach.
+
+!show tom ent
+
+Tom: Und vielleicht habt ihr recht. Aber ich habe recherchiert, nachgedacht, verstanden. Und ich bin trotzdem hier. Nicht weil ich dumm bin. Weil ich mutig sein will.
+
+Michael: Mut ist nicht die Abwesenheit von Angst. Mut ist, Angst zu haben und trotzdem zu handeln.
+
+Tom: Genau. Ich habe Angst. Aber ich bin trotzdem hier.
+
+{g14:1 ""}
+
+[[Zurück zur Übersicht.->t2-runde]]
+:: k15-abstimmung [kapitel-15 teil-2 pov-alle datum-2027-09] {"titel":"Kapitel 15: Die Abstimmung"}
+!clear
+!bg sarahs-wohnung
+!zeit 16. September 2027, 22 Uhr
+!dunkel
+
+!show sarah ent centerleft
+
+Vier saßen im Raum. Kat war aus Görlitz zugeschaltet, Tom aus Berlin. Dreieinhalb Stunden hatten sie geredet.
+
+Sarah: Jetzt entscheiden wir. Jeder für sich. Geheim. Anonym.
+
+Sarah holte sechs Zettel hervor.
+
+Sarah: Für Kat und Tom: Schreibt euer Ja oder Nein auf einen Zettel, fotografiert ihn, und schickt das Foto verschlüsselt.
+
+!show sarah sorge
+
+Sarah: Und wenn auch nur einer Nein sagt, ist das Projekt vorbei. Wir brauchen Einstimmigkeit.
+
+Sie schrieben. Jeder für sich.
+
+? Wessen Zettel ist deiner?
+
+[[Sarah. Die es angefangen hat.->k15-als-sarah]]
+[[Jamal. Der am meisten riskiert.->k15-als-jamal]]
+[[Michael. Der die Fragen stellt.->k15-als-michael]]
+[[Kat. Die die Hubs kennt.->k15-als-kat]]
+[[Lena. Die es kommen sah.->k15-als-lena]]
+[[Tom. Der am wenigsten zu verlieren hat.->k15-als-tom]]
+
+:: k15-als-sarah [kapitel-15 teil-2]
+{figur:"Sarah" ""}
+[[Der Stift liegt in deiner Hand.->k15-stimme]]
+
+:: k15-als-jamal [kapitel-15 teil-2]
+{figur:"Jamal" ""}
+[[Der Stift liegt in deiner Hand.->k15-stimme]]
+
+:: k15-als-michael [kapitel-15 teil-2]
+{figur:"Michael" ""}
+[[Der Stift liegt in deiner Hand.->k15-stimme]]
+
+:: k15-als-kat [kapitel-15 teil-2]
+{figur:"Kat" ""}
+[[Der Stift liegt in deiner Hand.->k15-stimme]]
+
+:: k15-als-lena [kapitel-15 teil-2]
+{figur:"Lena" ""}
+[[Der Stift liegt in deiner Hand.->k15-stimme]]
+
+:: k15-als-tom [kapitel-15 teil-2]
+{figur:"Tom" ""}
+[[Der Stift liegt in deiner Hand.->k15-stimme]]
+
+:: k15-stimme [kapitel-15 teil-2]
+!show sarah neutral centerleft
+
+Fünf Zettel liegen schon in der Schale. Deiner ist der sechste.
+
+{"" fuse (figur,", was schreibst du?")}
+
+? Ja oder nein?
+
+[[Ja.->k15-ja]]
+[[Nein.->k15-nein]]
+
+:: k15-ja [kapitel-15 teil-2]
+!show sarah ent centerleft
+
+Sarah öffnete den ersten Zettel.
+
+Sarah: Ja.
+
+Den zweiten. Ja. Den dritten. Ja. Den vierten. Ja. Den fünften. Ja.
+
+!show sarah sorge
+
+Sie hielt inne. Ein Zettel war noch übrig.
+
+Sarah öffnete den letzten Zettel.
+
+Sarah: Ja.
+
+Stille. Sechs Ja. Einstimmig.
+
+Es gab kein Zurück mehr.
+
+[[Michael stand auf.->k15-konsequenzen]]
+
+:: k15-nein [kapitel-15 teil-2]
+{ausgestiegen:1 ""}
+!show sarah ent centerleft
+
+Sarah öffnete den ersten Zettel.
+
+Sarah: Ja.
+
+Den zweiten. Ja. Den dritten. Ja. Den vierten. Ja. Den fünften. Ja.
+
+!show sarah schock
+
+Sie hielt inne. Ein Zettel war noch übrig. Sie öffnete ihn.
+
+Sarah: Nein.
+
+Niemand sagte etwas. Die Regel war klar gewesen, und sie war ihre eigene.
+
+!show michael denk centerright
+
+Michael: Dann ist es vorbei. So haben wir es abgemacht.
+
+!show sarah sorge
+
+Sarah: Ja. So haben wir es abgemacht.
+
+Und dann sprach jemand aus, was die Regel nicht vorgesehen hatte.
+
+{"" fuse (figur,": Ich sage nicht, dass ihr es lassen sollt. Ich sage, dass ich es nicht mittrage.")}
+
+!show michael sorge
+
+Michael: Das ist nicht dasselbe wie ein Nein zum Projekt.
+
+{"" fuse (figur,": Nein. Es ist ein Nein zu meiner Beteiligung, nicht zu eurer.")}
+
+Michael: Und wer aussteigt, weiß alles und trägt nichts. Das ist für uns gefährlicher als jede Wahl heute Abend.
+
+!show sarah ent
+
+Sarah: Dann tragen wir das Risiko. Wer geht, geht als Freund. Wer bleibt, bleibt mit offenen Augen.
+
+Am Ende blieben fünf. Einer ging, und nahm alles mit, was er wusste.
+
+[[Michael stand auf.->k15-konsequenzen]]
+
+:: k15-konsequenzen [kapitel-15 teil-2]
+!clear
+!zeit 16. September 2027, 22:30 Uhr
+!show michael ent centerleft
+
+Michael: Wir haben gerade beschlossen, Kriminelle zu werden. Das ist uns allen klar, oder?
+
+Nicken.
+
+Michael: Dann lasst uns sicherstellen, dass wir es richtig machen.
+
+!hide michael
+!show tom denk centerright
+
+Tom: Regel eins: keine digitale Kommunikation über das Projekt. Nur persönliche Treffen oder verschlüsselte Kanäle.
+
+Tom: Regel zwei: keine Spuren in offiziellen Systemen. Regel drei: plausible Bestreitbarkeit. Regel vier: regelmäßige Sicherheitsprüfungen.
+
+[[23 Uhr. Der Schwur.->k15-schwur]]
+
+:: k15-schwur [kapitel-15 teil-2]
+!clear
+!zeit 16. September 2027, 23 Uhr
+!show sarah ent center
+
+Sarah nahm den Sendemast-Schlüsselanhänger vom Schlüsselbund und legte ihn auf den Tisch.
+
+Sarah: Wir versprechen, dass wir das nicht für uns tun. Sondern für die Stimmen, die sonst nicht gehört werden.
+
+Sie reichte ihn weiter. Jeder hielt ihn kurz.
+
+Sarah: Wir versprechen, dass wir zusammenhalten. Dass wir uns gegenseitig schützen. Dass wir die Konsequenzen tragen.
+
+Sarah: Wir versprechen, dass wir uns in zwanzig Jahren nicht schämen werden.
+
+Sarah: Sind wir uns einig?
+
+{if ausgestiegen "Fünf nickten. Der sechste Platz am Tisch war leer, und der Anhänger ging an ihm vorbei." else "Alle nickten." end}
+
+Sarah: Dann gibt es kein Zurück mehr.
+
+!clear
+!zeit 16. September 2027, 23:30 Uhr
+
+Die im Raum umarmten sich. Auf dem Bildschirm sahen Kat und Tom zu. Dann wurde die Verbindung getrennt.
+
+!show sarah sorge center
+
+Sarah blieb allein zurück. Sie verbrannte die Zettel. Löschte die Präsentation.
+
+{if ausgestiegen "Sie hatte es getan. Fünf hatten Ja gesagt, einer nicht. Das war der Preis, und sie hatte ihn selbst festgesetzt." else "Sie hatte es getan. Alle hatten Ja gesagt." end}
+
+Ende von Teil II. Sechs Menschen haben beschlossen, Kriminelle zu werden. Oder Helden. Die Geschichte wird es entscheiden.
+
+[[Oktober 2027. Die erste Unterschrift.->k16-unterschrift]]
+
+:: k16-unterschrift [kapitel-16 teil-3 pov-sarah datum-2027-10] {"titel":"Kapitel 16: Sarah - Die erste Unterschrift"}
+!clear
+!bg sarah-buero
+!zeit Oktober 2027, Bonn, abends
+!dunkel
+
+!show sarah denk center
+
+Der Projektantrag lag vor ihr. Internationale Medienpartnerschaften, Phase zwei, fünfundsiebzigtausend Euro. Jedes Wort korrekt. Jedes Wort gelogen. Das Geld würde nicht in Partnerschaften fließen, sondern in Server, in Bandbreite, in das Netzwerk, das sie im Geheimen aufbauten.
+
+!show sarah sorge
+
+Sarah nahm den Stift, legte ihn wieder hin. Sie trat ans Fenster. Bonn lag dunkel unter ihr, Lichter, die nichts ahnten von dem, was hier gerade geschah. Irgendwo da draußen lebten Menschen, die nicht wussten, dass eine Frau in einem Büro dabei war, eine Grenze zu überschreiten.
+
+Sarah: Regeln sind das Fundament der Gesellschaft, hat mein Vater immer gesagt.
+
+Sie drehte den kleinen Sendemast-Anhänger in den Fingern. Michaels altes Geschenk, warm von ihrer Haut.
+
+? Woran hält sich Sarah in diesem Moment fest?
+
+[[An die Pflicht, auch falsche Regeln zu brechen.->k16-pflicht]]
+[[An die Kosten, die diese Unterschrift haben wird.->k16-kosten]]
+
+:: k16-pflicht [kapitel-16 teil-3 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!show sarah ent
+
+Sarah: Aber er hat auch gesagt, es gibt Momente, in denen man entscheiden muss, welche Regeln wichtiger sind als andere.
+
+Sie dachte an Michael, der ihr den Anhänger einst gegeben hatte. Freie Information, für alle, überall, hatte er gesagt.
+
+[[Sie setzte sich wieder an den Schreibtisch.->k16-liste]]
+
+:: k16-kosten [kapitel-16 teil-3 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah sorge
+
+Sarah: Fünfzehn Jahre, theoretisch, wenn alles zusammenkäme. Ich sollte wissen, was ich unterschreibe, bevor ich es tue.
+
+Sie öffnete noch einmal die Nachrichten auf ihrem Laptop. AfD bei einunddreißig Prozent in aktueller Umfrage. Eine Politikerin kündigte eine grundlegende Medienreform an. Experten warnten vor Erosion der Pressefreiheit. Dann klappte sie den Laptop zu.
+
+[[Sie öffnete eine verschlüsselte Datei.->k16-liste]]
+
+:: k16-liste [kapitel-16 teil-3 pov-sarah]
+!show sarah denk
+
+Untreue nach Paragraf 266, Betrug nach Paragraf 263, Urkundenfälschung nach Paragraf 267 des Strafgesetzbuchs. Jeweils bis zu fünf Jahre Freiheitsstrafe, macht fünfzehn Jahre, theoretisch, wenn alles zusammenkäme. Aber die Alternative war schlimmer: zusehen, wie die Pressefreiheit erstickte.
+
+Sarah dachte an die Abstimmung im September. {if ausgestiegen "Sie waren zu fünft. Der leere Platz am Tisch fiel niemandem mehr auf, und genau das war das Schlimme daran." else "An die sechs Ja Stimmen, einstimmig, ohne Zögern." end}
+
+Sarah: Für die Stimmen, die sonst nicht gehört werden.
+
+[[Sie nahm den Stift noch einmal in die Hand.->k16-unterschreiben]]
+
+:: k16-unterschreiben [kapitel-16 teil-3 pov-sarah]
+!show sarah ent
+
+Diesmal zitterten ihre Finger nicht. Dr. Sarah Hoffmann, schwarz auf weiß, unwiderruflich.
+
+Sarah: Ich bin jetzt eine Kriminelle.
+
+Seltsam. Sie fühlte sich nicht schuldig, nur erleichtert. Der Rubikon war überschritten.
+
+[[Ihr Handy vibrierte.->k16-nachricht]]
+
+:: k16-nachricht [kapitel-16 teil-3 pov-sarah]
+!zeit Oktober 2027, Bonn, spät abends
+
+Jamal: Server sind bereit. Warten auf Finanzierung.
+
+Sarah: Antrag ist unterschrieben. Geht morgen raus.
+
+Jamal: Verstanden. Kein Zurück mehr.
+
+Sarah: Nein. Kein Zurück mehr.
+
+Sie schaltete das Licht aus und ging zu ihrem Auto. Sie blieb eine Weile sitzen, ohne den Motor zu starten, allein in der Dunkelheit mit dem, was sie gerade getan hatte. In ein paar Monaten würde sie vielleicht im Gefängnis sitzen. Oder als Heldin gelten. Oder beides. Aber das war jetzt gleich. Die Entscheidung war getroffen.
+
+[[Sie fuhr nach Hause und schlief kaum.->k17-architektur]]
+
+:: k17-architektur [kapitel-17 teil-3 pov-jamal datum-2028-01] {"titel":"Kapitel 17: Jamal - Die Architektur"}
+!clear
+!bg innovation-lab
+!zeit Januar 2028, Bonn
+!dunkel
+
+!show jamal denk center
+
+Drei Monate unter Hochdruck, jede freie Minute. Auf dem Bildschirm ein Diagramm: fünf Knoten, verschlüsselt verbunden. Nairobi online, Neu Delhi folgte, Beirut, Kiew und Bogotá in verschiedenen Stadien. Fiel einer, liefen die anderen weiter.
+
+Jamal: Das ist der Plan. Das ist die Hoffnung.
+
+!show jamal neutral
+
+Die Server liefen in Finnland, Island, der Schweiz, bezahlt durch Anträge, die Sarah unterschrieben hatte. Mastodon für die Beiträge, PeerTube für Videos, WriteFreely für lange Texte. Alles föderiert, verschlüsselt, getarnt als gewöhnlicher Datenverkehr.
+
+!show jamal sorge
+
+Aber es gab Probleme, immer wieder Probleme. Die Latenz zwischen den Hubs war oft zu hoch, Videos brauchten zu lange zum Laden, die Synchronisation der Datenbanken war kompliziert. Jeder Journalist bekam einen eigenen kryptographischen Schlüssel, jeder Beitrag wurde signiert, fälschungssicher. Nicht perfekt. Aber es funktionierte.
+
+[[Sein Handy vibrierte.->k17-amira]]
+
+:: k17-amira [kapitel-17 teil-3 pov-jamal]
+!show jamal sorge
+
+Amira: Jamal, ich habe gehört, die AfD wird stärker in Deutschland. Bist du sicher?
+
+Jamal: Ich bin sicher. Mach dir keine Sorgen.
+
+Eine Lüge. Er war in Gefahr, jeden Tag ein wenig mehr. Kein deutscher Pass, nur eine Aufenthaltserlaubnis. Wurde er erwischt, verlor er mehr als nur den Job.
+
+Er dachte an Tariq, der ihm vor seinem Verschwinden einen USB-Stick zugesteckt hatte. Dokumentiere, was hier passiert, hatte Tariq gesagt.
+
+? Wie geht Jamal mit der Angst um?
+
+[[Er denkt an Tariq und macht weiter, komme, was wolle.->k17-tariq]]
+[[Er löscht jede Spur, bevor er weiterdenkt.->k17-spuren]]
+
+:: k17-tariq [kapitel-17 teil-3 pov-jamal]
+{zusammenhalt:zusammenhalt+1 ""}
+!show jamal ent
+
+Jamal: Das tue ich. Auf meine Weise. Mit Code statt mit Worten.
+
+Er baute ein System, das die Wahrheit verbreiten würde, auch wenn die Mächtigen es nicht wollten. Für Tariq. Für Amira. Für alle, die eine Stimme brauchten.
+
+[[Um Mitternacht schrieb er den Statusbericht.->k17-status]]
+
+:: k17-spuren [kapitel-17 teil-3 pov-jamal]
+{vorsicht:vorsicht+1 ""}
+!show jamal denk
+
+Jamal: Erst die Logs bereinigen. Jede Spur, die auf das Projekt hinweist, muss verschwinden.
+
+Er öffnete ein Terminal und arbeitete methodisch, ohne Eile. Die Angst ließ sich nicht wegdenken. Aber man konnte ihr Regeln geben.
+
+[[Um Mitternacht schrieb er den Statusbericht.->k17-status]]
+
+:: k17-status [kapitel-17 teil-3 pov-jamal]
+
+Jamal: Nairobi hundert Prozent, Neu Delhi hundert Prozent, Beirut achtzig, Kiew sechzig, Bogotá vierzig. Gesamtfortschritt sechsundsiebzig Prozent, geschätzte Fertigstellung Juni.
+
+Sarah: Gut. Wir liegen im Zeitplan. Aber sei vorsichtig, Hartmann wird misstrauisch.
+
+Jamal: Verstanden. Ich lösche alle Spuren.
+
+Im Zeitplan. Als wäre das ein normales Projekt. Als würden sie nicht jeden Tag Gesetze brechen. Aber so war es jetzt, das war ihre Realität. Er schloss den Laptop erst um drei Uhr morgens und ging nach Hause. In fünf Stunden würde er wieder hier sein, weitermachen, weiterbauen.
+
+[[Kat war schon unterwegs nach Nairobi.->k18-hubs]]
+
+:: k18-hubs [kapitel-18 teil-3 pov-kat datum-2028-04] {"titel":"Kapitel 18: Kat - Die Hubs"}
+!clear
+!bg nairobi-hub
+!zeit April 2028, Nairobi
+!hell
+
+!show kat neutral center
+
+Offiziell war sie hier für ein BRI Akademie Training. Inoffiziell, um den ersten Hub zu aktivieren, den ersten Knoten in einem Netzwerk, das die Pressefreiheit retten sollte.
+
+Aisha: Willkommen in Nairobi. Wir sind bereit.
+
+!show kat freude
+
+Drei Bildschirme, mehrere Server, ein Team von fünf Leuten. Keine Schilder am Gebäude, nur eine Klingel.
+
+Aisha: Zweitausendsiebzehn hat unsere Regierung versucht, kritische Medien zu schließen. Websites blockiert, Journalisten verhaftet. Wir haben gelernt, dezentral zu arbeiten, im Schatten zu operieren.
+
+Aisha zeigte auf eine Weltkarte an der Wand. Rote Punkte, Länder, in denen die Pressefreiheit bedroht war. Ungarn, Polen, die Türkei, Brasilien, Indien.
+
+Aisha: Wenn Deutschland fällt, sind wir alle in Gefahr.
+
+[[Sie verbrachten den Tag mit Tests.->k18-tests]]
+
+:: k18-tests [kapitel-18 teil-3 pov-kat]
+!show kat denk
+
+Joseph: Wir haben drei Backup-Leitungen. Fällt eine aus, übernimmt die nächste. Und wir haben Vereinbarungen mit Providern in Uganda und Tansania, falls Kenia uns abschaltet.
+
+Kat: Ihr habt an alles gedacht.
+
+Joseph: Wir mussten. Unsere Regierung hat uns gelehrt, paranoid zu sein.
+
+Um achtzehn Uhr war alles bereit. Mastodon lief stabil, PeerTube funktionierte, die Verbindung nach Bonn war verschlüsselt und schnell.
+
+[[Am Abend saßen sie auf der Terrasse eines kleinen Restaurants.->k18-terrasse]]
+
+:: k18-terrasse [kapitel-18 teil-3 pov-kat]
+!zeit April 2028, Nairobi, abends
+!show kat denk
+
+Kat: Hast du Angst? Vor dem, was wir tun?
+
+Aisha: Manchmal. Aber mehr Angst habe ich vor dem, was passiert, wenn wir nichts tun.
+
+Kat dachte an ihre Mutter, an die DDR-Geschichten, an den Satz, den sie in Görlitz gehört hatte: wir hätten lauter sein sollen.
+
+? Was nimmt Kat aus diesem Satz mit?
+
+[[Wir gehen zusammen, über Grenzen hinweg.->k18-zusammen]]
+[[Die Sache ist größer als jede einzelne Angst.->k18-groesser]]
+
+:: k18-zusammen [kapitel-18 teil-3 pov-kat]
+{zusammenhalt:zusammenhalt+1 ""}
+!show kat ent
+
+Kat: Wenn du schnell gehen willst, geh allein. Wenn du weit gehen willst, geh zusammen. Genau das machen wir hier.
+
+Aisha: Über Kontinente hinweg. Und jetzt bist du lauter.
+
+Kat: Wir sind lauter. Zusammen.
+
+[[Am nächsten Morgen stand Kat am Flughafen.->k18-abschied]]
+
+:: k18-groesser [kapitel-18 teil-3 pov-kat]
+{entschlossenheit:entschlossenheit+1 ""}
+!show kat ent
+
+Kat: Dann ist das hier nicht klein. Das hier ist global.
+
+Aisha: Und es funktioniert.
+
+[[Am nächsten Morgen stand Kat am Flughafen.->k18-abschied]]
+
+:: k18-abschied [kapitel-18 teil-3 pov-kat]
+!zeit April 2028, Nairobi, Flughafen
+!show kat sorge
+
+Aisha: Pass auf dich auf. Und grüß Sarah von mir. Sag ihr, wenn der Tag kommt, sind wir da.
+
+Kat: Ich werde es ihr sagen.
+
+Sie umarmten sich. Ein Hub war fertig, vier weitere warteten. Kat dachte noch einmal an die Weltkarte in Aishas Büro, an die roten Punkte, an die Länder, in denen die Pressefreiheit starb. Deutschland würde keiner von ihnen werden, nicht, wenn sie es verhindern konnte.
+
+[[Sie schnallte sich an und dachte schon an das nächste Ziel, Neu Delhi.->k19-zweifel]]
+
+:: k19-zweifel [kapitel-19 teil-3 pov-michael datum-2028-07] {"titel":"Kapitel 19: Michael - Die Zweifel"}
+!clear
+!bg michael-buero
+!zeit Juli 2028, Bonn
+!dunkel
+
+!show michael denk center
+
+Dr. Hartmann: Professor Weber, Ihr Zwischenbericht ist interessant. Aber ich habe Fragen. Fünfundvierzigtausend Euro für Server, in einem Projekt über Medienethik.
+
+!show michael sorge
+
+Michael: Big Data. Wir untersuchen die Verbreitung von Desinformation. Dafür brauchen wir Rechenkapazität.
+
+Dr. Hartmann: Und die Reisen nach Nairobi, nach Neu Delhi? Frau Müller war auch dort, nicht wahr?
+
+Michael: Interdisziplinäre Feldforschung.
+
+Dr. Hartmann: Interdisziplinär. Interessant. Ich werde mir die Unterlagen noch einmal ansehen. Wir sprechen uns.
+
+Er ging. Michaels Hände zitterten.
+
+Er dachte an die Pensionsunterlagen in seiner Schublade. Der Anspruch erlischt bei schweren Dienstvergehen, bei Untreue, bei Betrug, bei Urkundenfälschung. Sieben Jahre noch bis zur Rente. Genug, um Claudias Behandlung zu bezahlen.
+
+[[Er rief Sarah an.->k19-anruf]]
+
+:: k19-anruf [kapitel-19 teil-3 pov-michael]
+!show michael sorge
+
+Michael: Hartmann war hier. Er stellt Fragen. Über die Ausgaben, die Reisen. Er wird misstrauisch.
+
+Sarah: Was machen wir?
+
+Michael: Wir machen weiter. Wir sind zu weit gekommen, um aufzuhören.
+
+Sarah: Und wenn er uns erwischt?
+
+Michael: Dann tragen wir die Konsequenzen. Zusammen.
+
+Er legte auf und starrte an die Decke. Sein ganzes Leben lang hatte er über Ethik gelehrt, über die Pflicht, die Wahrheit zu sagen. Und jetzt log er, jeden Tag.
+
+? Wie begegnet Michael seinem Zweifel?
+
+[[Er stellt sich der Angst und bleibt bei seiner Wahl.->k19-standhaft]]
+[[Er wird noch vorsichtiger, bevor er weitermacht.->k19-vorsicht]]
+
+:: k19-standhaft [kapitel-19 teil-3 pov-michael]
+{entschlossenheit:entschlossenheit+1 ""}
+!show michael ent
+
+Michael: Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.
+
+Der kategorische Imperativ, das Fundament seiner akademischen Karriere. Konnte er wollen, dass Lügen ein allgemeines Gesetz wurde? Nein. Aber konnte er wollen, dass Schweigen angesichts von Tyrannei ein allgemeines Gesetz wurde? Auch nicht.
+
+Kant half ihm nicht, nicht hier, nicht jetzt. Aber die Frage selbst gab ihm die Antwort, die er brauchte.
+
+[[Er dachte an Claudia.->k19-claudia]]
+
+:: k19-vorsicht [kapitel-19 teil-3 pov-michael]
+{vorsicht:vorsicht+1 ""}
+!show michael denk
+
+Michael: Jeden Schritt doppelt prüfen, bevor ich ihn gehe. Das schulde ich allen, nicht nur mir.
+
+Er nahm sich vor, den nächsten Bericht dreimal zu lesen, bevor er ihn abschickte.
+
+[[Er dachte an Claudia.->k19-claudia]]
+
+:: k19-claudia [kapitel-19 teil-3 pov-michael]
+!show michael sorge
+
+Claudia lag zu Hause im Bett, geschwächt von der Chemotherapie. Sie brauchten das Geld, seine Pension, die Krankenversicherung.
+
+Claudia: Ich habe dich geheiratet, weil du ein Mann mit Prinzipien bist. Wenn du aufhörst, das zu sein, bist du nicht mehr der Mann, den ich liebe. Tu, was du tun musst.
+
+!show michael ent
+
+Michael: Es gibt Momente, in denen man wählen muss, zwischen dem Gesetz und der Gerechtigkeit, zwischen der Pflicht und dem Gewissen. Ich habe gewählt. Und ich werde zu meiner Wahl stehen, bis zum Ende.
+
+Er schrieb die letzten Zeilen des Berichts, schickte ihn ab und ging nach Hause. Claudia wartete auf ihn.
+
+[[Im Oktober sollte Lena beinahe alles auffliegen lassen.->k20-beinahe]]
+
+:: k20-beinahe [kapitel-20 teil-3 pov-lena datum-2028-10] {"titel":"Kapitel 20: Lena - Die Beinahe-Entdeckung"}
+!clear
+!bg lena-buero
+!zeit Oktober 2028, Bonn
+!dunkel
+
+!show lena neutral center
+
+Kaffee in der Hand, kam Lena aus der Kantine, als sie Dr. Hartmann vor Sarahs Büro stehen sah. Er telefonierte, leise, aber Lena hatte gute Ohren. Jahre als investigative Journalistin hatten sie gelehrt, zuzuhören.
+
+Dr. Hartmann: Ja, die Ausgaben sind ungewöhnlich. Ich werde mir das genauer ansehen.
+
+!show lena sorge
+
+Ihr Herz schlug schneller. Sie zwang sich, auf ihr Handy zu starren. Nicht aufzufallen.
+
+Dr. Hartmann: Noch keine Beweise. Aber die Muster sind verdächtig. Die Reisen. Die Server-Kosten. Nächste Woche reiche ich einen formellen Bericht ein.
+
+Hartmann beendete das Gespräch und drehte sich um. Für einen Moment trafen sich ihre Blicke.
+
+Dr. Hartmann: Frau Kowalski. Arbeiten Sie auch am Wochenende?
+
+Lena: Nur ein paar Recherchen. Die Nachrichten schlafen nie.
+
+Er musterte sie einen Moment. Dann ging er den Flur hinunter.
+
+!show lena schock
+
+Ihre Hände zitterten so stark, dass sie den Kaffee verschüttete. Sie bemerkte es kaum. In ihrem Büro schickte sie eine verschlüsselte Nachricht an Sarah. Dringend. Hartmann telefoniert über ungewöhnliche Ausgaben. Formeller Bericht, nächste Woche.
+
+Die Antwort kam sofort. Treffen heute Abend. Meine Wohnung. Zwanzig Uhr. Alle.
+
+[[Sie saßen in Sarahs Wohnzimmer, Vorhänge zugezogen.->k20-treffen]]
+
+:: k20-treffen [kapitel-20 teil-3 pov-lena]
+!clear
+!bg sarahs-wohnung
+!zeit Oktober 2028, Bonn, abends
+!dunkel
+
+{if ausgestiegen "Fünf saßen im Wohnzimmer, nicht sechs. Der leere Platz am Tisch war seit einem Jahr derselbe geblieben." else "Alle sechs saßen im Wohnzimmer, Vorhänge zugezogen, keine Handys, keine Aufzeichnungen." end}
+
+!show lena sorge centerleft
+!show sarah neutral centerright
+
+Die Stimmung war angespannt. Lena konnte die Angst im Raum spüren.
+
+Sarah: Hartmann wird misstrauisch. Er stellt Fragen, über Budgets, über Reisen. Er hat Muster erkannt.
+
+!hide sarah
+!show jamal denk centerright
+
+Jamal: Ich kann die Logs bereinigen, die Verbindungen besser tarnen. Aber wir brauchen weniger Spuren.
+
+!hide jamal
+!show michael denk centerright
+
+Michael: Und wenn er uns trotzdem erwischt, dann müssen wir bereit sein, die Konsequenzen zu tragen.
+
+!hide michael
+!show sarah sorge centerright
+
+Sarah: Wir haben zwei Optionen. Aufhören. Oder weitermachen, vorsichtiger, klüger.
+
+!show lena denk
+
+Lena dachte an Polen, an die Kollegen, die dort verhaftet worden waren. Sie hatte gedacht, in Deutschland wäre sie sicher. Diesmal würde sie nicht weglaufen.
+
+? Was schlägt Lena vor?
+
+[[Ich dokumentiere alles, für den Tag, an dem wir es erklären müssen.->k20-dokumentation]]
+[[Wir schreiben nichts auf, das man später gegen uns verwenden kann.->k20-vorsicht]]
+
+:: k20-dokumentation [kapitel-20 teil-3 pov-lena]
+{entschlossenheit:entschlossenheit+1 ""}
+!show lena ent
+
+Lena: Ich dokumentiere alles. Jede Entscheidung, jedes Treffen, jede Aktion. Wenn wir erwischt werden, soll die Welt wissen, warum wir es getan haben.
+
+!show sarah denk
+
+Sarah: Ist das klug? Beweise können auch gegen uns verwendet werden.
+
+!show lena neutral
+
+Lena: Oder für uns. Es kommt darauf an, wer die Geschichte erzählt. Ich bin Journalistin. Das ist es, was ich tue.
+
+[[Draußen wurde es dunkel über Bonn.->k20-schluss]]
+
+:: k20-vorsicht [kapitel-20 teil-3 pov-lena]
+{vorsicht:vorsicht+1 ""}
+!show lena denk
+
+Lena: Wir schreiben nichts auf, das man später gegen uns verwenden kann. Nur was in unseren Köpfen bleibt, kann niemand beschlagnahmen.
+
+!show sarah neutral
+
+Sarah: Auch keine Notizen mehr für dich?
+
+!show lena sorge
+
+Lena: Ich merke mir jedes Wort. Das muss reichen.
+
+[[Draußen wurde es dunkel über Bonn.->k20-schluss]]
+
+:: k20-schluss [kapitel-20 teil-3 pov-lena]
+!clear
+!bg sarahs-wohnung
+!zeit Oktober 2028, Bonn, nachts
+!dunkel
+
+!show sarah ent center
+
+Sarah: Wir machen weiter. Vorsichtiger. Klüger. Keine Fehler mehr.
+
+!hide sarah
+!show jamal ent center
+
+Jamal: Ich überarbeite die Sicherheitsprotokolle. Strengere Verschlüsselung, weniger Spuren.
+
+!hide jamal
+!show sarah denk center
+
+Sarah: Ich werde Sandra einweihen. Wenn sie auf unserer Seite ist, können wir Hartmann besser ablenken.
+
+!hide sarah
+!show lena sorge center
+
+Alle nickten. Lena spürte, wie sich das Risiko vergrößerte, mit jedem Menschen, der eingeweiht wurde. Die Lichter von Bonn glitzerten hinter dem Fenster. Sechs Monate hatten sie. Es musste reichen.
+
+[[Der Januar brachte einen anderen Fehler.->k21-fehler]]
+
+:: k21-fehler [kapitel-21 teil-3 pov-tom datum-2029-01] {"titel":"Kapitel 21: Tom - Der Fehler"}
+!clear
+!bg innovation-lab
+!zeit Januar 2029, Bonn
+!dunkel
+
+!show tom sorge center
+
+Tom starrte auf den Bildschirm, das Herz hämmerte in seinen Ohren. Ein Tippfehler in einer Konfigurationsdatei, eine falsche Adresse. Zehn Minuten lang war einer der Server öffentlich sichtbar gewesen.
+
+Er scrollte durch die Protokolle. Ein Server war dem offenen Netz ausgesetzt gewesen, eine Firewallregel falsch gesetzt, ein Port ungeschützt erreichbar.
+
+!show tom schock
+
+Zehn Minuten. Hatte jemand es gesehen? Er prüfte die Zugriffsprotokolle. Keine ungewöhnlichen Verbindungen, keine Scans, keine Angriffe.
+
+Vielleicht hatte er Glück gehabt. Oder vielleicht wartete jemand nur ab, sammelte Beweise, bereitete etwas vor.
+
+Toms Hände zitterten.
+
+? Ruft Tom an?
+
+[[Er greift zum Telefon.->k21-beichte]]
+[[Er löscht die Logs und schweigt.->k21-schweigen]]
+
+:: k21-beichte [kapitel-21 teil-3 pov-tom]
+{tom_gestanden:1 ""}
+!show tom sorge
+
+Tom rief Jamal an.
+
+Tom: Ich habe einen Fehler gemacht. Zehn Minuten war ein Server offen. Ich habe alles geprüft, keine Zugriffe.
+
+Schweigen am anderen Ende. Das Schweigen war schlimmer als jeder Vorwurf.
+
+Jamal: Zehn Minuten. Das ist nicht gut.
+
+Tom: Ich weiß.
+
+Jamal: Aber die Protokolle zeigen keine Zugriffe. Dann hatten wir vielleicht Glück.
+
+Jamal seufzte, müde, wie ein Mann, der zu viele Nächte nicht geschlafen hatte.
+
+Jamal: Wir müssen vorsichtiger sein, alle von uns. Komm morgen früh ins Lab, wir gehen es zusammen durch.
+
+Tom: Es tut mir leid.
+
+Jamal: Ich weiß. Aber wir können es nicht ungeschehen machen. Wir können nur daraus lernen.
+
+[[Er legte auf und fühlte sich elend, wie ein Kind, das etwas kaputt gemacht hatte.->k21-lehre]]
+
+:: k21-schweigen [kapitel-21 teil-3 pov-tom]
+{vorsicht:vorsicht+1 ""}
+!show tom denk
+
+Tom löschte die Zeilen aus dem Protokoll, eine nach der anderen. Niemand musste es wissen. Niemand musste sich sorgen, misstrauisch werden, ihm weniger vertrauen.
+
+!show tom sorge
+
+Er würde vorsichtiger sein, das reichte, das musste reichen. Aber die Zahl blieb in seinem Kopf, zehn Minuten, die nur er kannte. Ein Wissen, das er ganz allein trug, ohne Jamals müden Seufzer, ohne die Sicherheit, dass jemand sonst mitdachte.
+
+[[Er saß lange allein im Lab, bevor er den Laptop wieder aufklappte.->k21-lehre]]
+
+:: k21-lehre [kapitel-21 teil-3 pov-tom]
+!clear
+!bg innovation-lab
+!zeit Januar 2029, Bonn, nachts
+!dunkel
+
+!show tom denk center
+
+Er dachte an die Worte, die er bei der Abstimmung gesagt hatte. Ich bin nicht naiv, ich bin mutig. War er das wirklich? Oder nur ein Kind, das mit Dingen spielte, die es nicht verstand?
+
+Um drei Uhr morgens hatte er ein neues System entworfen. Vier Augen für jede kritische Änderung. Automatische Prüfung vor jedem Deployment. Alarme in Echtzeit.
+
+!show tom ent
+
+Tom: Betreff, neue Sicherheitsprotokolle. Ich habe einen Fehler gemacht, der uns hätte verraten können. Das darf nicht wieder passieren.
+
+Er klickte auf Senden und lehnte sich zurück.
+
+Er dachte an Alex vom Congress. Fehler passieren, hatte sie gesagt. Das Wichtige ist, was du daraus lernst.
+
+Er würde beweisen, dass er mehr war als ein naiver Idealist. Ein Teil des Teams, auf den man sich verlassen konnte.
+
+[[Der April brachte Sandra Brandt vor Sarahs Tür.->k22-konfrontation]]
+
+:: k22-konfrontation [kapitel-22 teil-3 pov-sarah datum-2029-04] {"titel":"Kapitel 22: Sarah - Die Konfrontation"}
+!clear
+!bg sarah-buero
+!zeit April 2029, Bonn
+!dunkel
+
+!show sarah neutral center
+
+Sandra Brandt stand in Sarahs Büro, schloss die Tür und drehte sich um. Nicht Wut in ihren Augen. Etwas anderes. Verständnis.
+
+Sandra: Sarah, wir müssen reden. Über die Unregelmäßigkeiten. Die Ausgaben. Die Projekte, die nicht existieren.
+
+Sarahs Magen zog sich zusammen. Das war es also.
+
+Sarah: Ich weiß nicht, was du meinst.
+
+Sandra: Doch, das weißt du. Fünfundsiebzigtausend Euro für Medienpartnerschaften. Fünfundvierzigtausend für Server. Alles genehmigt, alles dokumentiert, alles falsch.
+
+{if tom_gestanden "Seit Toms Beichte im Januar prüfte das Team jede Zahl doppelt, und trotzdem hatte Sandra die Lücken gefunden." else "Niemand im Team wusste von den zehn Minuten im Januar, in denen ein Server offen gestanden hatte, und trotzdem hatte Sandra die Lücken gefunden." end}
+
+!show sarah sorge
+
+Sarah: Wie lange weißt du es schon?
+
+Sandra: Seit drei Monaten. Vielleicht länger.
+
+Sarah: Und warum hast du nichts gesagt?
+
+Sandra: Weil ich verstehe, warum ihr es tut.
+
+[[Sandra setzte sich, und das Gespräch wurde ein anderes.->k22-entscheidung]]
+
+:: k22-entscheidung [kapitel-22 teil-3 pov-sarah]
+!show sarah neutral
+
+Sandra: Die AfD wird die Wahl gewinnen. Ich habe die Pläne für die Medienreform gesehen. Der BRI wird zerstört, systematisch, Stück für Stück.
+
+Sarah: Deshalb bauen wir das Netzwerk.
+
+Sandra: Ihr baut eine Versicherung. Ich will euch helfen.
+
+Sarah: Helfen? Warum?
+
+Sandra: Weil ich auch an Pressefreiheit glaube. Fünfzehn Jahre arbeite ich schon beim BRI. Ich werde nicht zusehen, wie das zerstört wird, nicht ohne zu kämpfen.
+
+Sarah: Aber du weißt, dass es illegal ist.
+
+Sandra: Untreue, Betrug, Urkundenfälschung. Ich kenne die Gesetze. Und ich kenne die Risiken.
+
+? Wie reagiert Sarah auf Sandras Angebot?
+
+[[Wir brauchen jede Verbündete, die wir kriegen können.->k22-vertrauen]]
+[[Je mehr Menschen wissen, desto größer das Risiko.->k22-vorsicht]]
+
+:: k22-vertrauen [kapitel-22 teil-3 pov-sarah]
+{zusammenhalt:zusammenhalt+1 ""}
+!show sarah ent
+
+Sarah: Wir brauchen jede Verbündete, die wir kriegen können. Willkommen an Bord, Sandra.
+
+!show sarah neutral
+
+Sandra: Eine Bedingung. Wenn es schiefgeht, weiß ich von nichts. Plausible Bestreitbarkeit. Ich werde nicht lügen, aber auch nicht die Wahrheit sagen.
+
+Sarah: Einverstanden.
+
+[[Sie besiegelten die Abmachung mit einem Handschlag.->k22-einweihung]]
+
+:: k22-vorsicht [kapitel-22 teil-3 pov-sarah]
+{vorsicht:vorsicht+1 ""}
+!show sarah denk
+
+Sarah: Je mehr Menschen wissen, desto größer das Risiko. Aber ohne dich sehen wir die Lücken nicht, die du siehst.
+
+!show sarah neutral
+
+Sandra: Eine Bedingung. Wenn es schiefgeht, weiß ich von nichts. Plausible Bestreitbarkeit.
+
+Sarah: Einverstanden. Aber nur, was du unbedingt wissen musst.
+
+[[Sie besiegelten die Abmachung mit einem Handschlag.->k22-einweihung]]
+
+:: k22-einweihung [kapitel-22 teil-3 pov-sarah]
+!clear
+!bg sarah-buero
+!zeit April 2029, Bonn, später
+!dunkel
+
+!show sarah denk center
+
+Sie gingen die Budgets durch. Sandra war besser, als Sarah erwartet hatte. Sie sah Lücken, die Sarah selbst übersehen hatte.
+
+Sandra: Diese Reisekosten sind zu regelmäßig, das fällt auf. Und die Server-Kosten liegen alle beim selben Anbieter. Verteilt sie, verschiedene Länder.
+
+Sarah machte sich Notizen. Sandra war ein Geschenk. Ein unerwartetes, gefährliches Geschenk.
+
+Am Ende stand Sandra auf.
+
+Sandra: Ich hoffe, ihr wisst, was ihr tut. Ich hoffe, es ist das wert.
+
+Sarah: Ich hoffe es auch.
+
+Sandra: Dann sind wir jetzt sieben.
+
+Sie ging. Sarah blieb allein zurück. Das Netzwerk wuchs, nicht nur technisch, auch menschlich. Und das machte es stärker. Aber auch gefährlicher.
+
+[[Zwei Monate später stand Dr. Hartmann in Michaels Büro.->k23-entdeckung]]
+
+:: k23-entdeckung [kapitel-23 teil-3 pov-michael datum-2029-06] {"titel":"Kapitel 23: Michael - Die Entdeckung"}
+!clear
+!bg michael-buero
+!zeit Juni 2029, Bonn
+!dunkel
+
+!show michael sorge center
+
+Dr. Hartmann stand in Michaels Büro, ernster, als Michael ihn je gesehen hatte.
+
+Dr. Hartmann: Professor Weber, ich habe das Projekt gefunden.
+
+Michael spürte, wie ihm das Blut aus dem Gesicht wich.
+
+Michael: Welches Projekt?
+
+Dr. Hartmann: Das föderierte Netzwerk. Die Hubs in Nairobi, Neu-Delhi, Beirut, Kiew, Bogotá. Jede Transaktion, jede Reise, jede Lüge, alles dokumentiert.
+
+{if tom_gestanden "Michael dachte an Toms Beichte im Januar, an die neuen Protokolle, die sie seither befolgten. Trotzdem hatte Hartmann den Weg gefunden, über Budgets und Reisen, langsam, aber unaufhaltsam." else "Michael wusste nichts von den zehn Minuten im Januar, in denen ein Server offen gestanden hatte, und konnte sich nicht erklären, woher die erste Spur stammte, die Hartmann gefunden hatte." end}
+
+Michael: Wie lange wissen Sie es schon?
+
+Dr. Hartmann: Seit zwei Wochen. Die Budgets, die Reisen, die Server-Protokolle. Am Ende war das Muster klar.
+
+Michael: Und was werden Sie tun?
+
+Dr. Hartmann setzte sich, müde, älter als seine Jahre.
+
+Dr. Hartmann: Das ist die Frage, nicht wahr?
+
+[[Er sah Michael lange an, bevor er weitersprach.->k23-gespraech]]
+
+:: k23-gespraech [kapitel-23 teil-3 pov-michael]
+!show michael neutral
+
+Dr. Hartmann: Ich verstehe, warum Sie es getan haben. Die AfD, die Bedrohung, die Pressefreiheit. Aber Sie haben das Gesetz gebrochen. Untreue, Betrug, Urkundenfälschung. Ich müsste Sie anzeigen. Das ist meine Pflicht.
+
+Michael: Ich weiß.
+
+Hartmann stand auf, ging zum Fenster.
+
+Dr. Hartmann: Dreißig Jahre arbeite ich für den öffentlich-rechtlichen Rundfunk. Ich glaube an die Pressefreiheit. Aber ich glaube auch an das Gesetz. Ohne Regeln gibt es Chaos.
+
+Michael: Und was überwiegt? Das Gesetz oder die Pressefreiheit?
+
+Hartmann schwieg lange.
+
+? Wie antwortet Michael auf Hartmanns Zweifel?
+
+[[Manchmal muss man Regeln brechen, um ein höheres Gut zu schützen.->k23-ungehorsam]]
+[[Ich verstehe, wenn Sie Ihre Pflicht tun müssen.->k23-pflicht]]
+
+:: k23-ungehorsam [kapitel-23 teil-3 pov-michael]
+{entschlossenheit:entschlossenheit+1 ""}
+!show michael ent
+
+Michael: Ich habe das einmal geschrieben, vor zwanzig Jahren, aus der Sicherheit meines Büros. Jetzt bin ich selbst in dieser Situation. Es ist schwerer, als ich dachte. Aber ich bereue es nicht.
+
+!show michael denk
+
+Hartmann nahm ein Buch vom Regal und blätterte darin.
+
+Dr. Hartmann: Und Sie stehen immer noch dazu?
+
+Michael: Mehr denn je.
+
+[[Hartmann legte das Buch zurück.->k23-entscheidung]]
+
+:: k23-pflicht [kapitel-23 teil-3 pov-michael]
+{vorsicht:vorsicht+1 ""}
+!show michael sorge
+
+Michael: Ich verstehe, wenn Sie Ihre Pflicht tun müssen. Ich habe die Konsequenzen gekannt, seit dem ersten Tag.
+
+Dr. Hartmann: Das macht es nicht leichter.
+
+Michael: Nein. Aber es macht es ehrlich.
+
+[[Hartmann nickte langsam.->k23-entscheidung]]
+
+:: k23-entscheidung [kapitel-23 teil-3 pov-michael]
+!show michael sorge
+
+Dr. Hartmann: Ich habe eine Tochter. Journalistin, beim Spiegel. Letzte Woche hat sie mir erzählt, dass sie Morddrohungen bekommt, weil sie die Wahrheit schreibt. Ich wusste nicht, wie ich sie schützen kann.
+
+Michael: Deshalb tun wir das. Für Menschen wie Ihre Tochter. Für alle, die eine Stimme brauchen.
+
+Hartmann nickte langsam.
+
+Dr. Hartmann: Die Bundestagswahl ist in drei Monaten. Dann wird der BRI zerstört werden. Funktioniert Ihr Netzwerk?
+
+Michael: Ja. Fünf Hubs, fünf Kontinente, fast fertig.
+
+Dr. Hartmann: Ich werde nachdenken. Bis zur Wahl, drei Monate. Dann entscheide ich, basierend auf dem, was richtig ist.
+
+Er nahm den Ordner vom Tisch, legte ihn aber in Michaels Schublade.
+
+Dr. Hartmann: Behalten Sie das. Als Erinnerung, an das, was Sie riskieren.
+
+Er ging.
+
+[[Michael griff zum Telefon und rief Sarah an.->k23-schluss]]
+
+:: k23-schluss [kapitel-23 teil-3 pov-michael]
+!show michael denk
+
+Michael: Hartmann weiß alles. Aber er gibt uns Zeit. Bis zur Wahl.
+
+Sarah: Drei Monate.
+
+Michael: Drei Monate.
+
+Sarah: Dann müssen wir fertig werden. Schneller als geplant.
+
+Er legte auf und öffnete die Schublade. Der Ordner lag dort, rot markiert, vollständig dokumentiert. Ein Beweis für alles, was sie getan hatten. Aber auch ein Beweis für alles, woran sie glaubten.
+
+Das Projekt war entdeckt. Aber noch nicht verraten. Drei Monate bis zur Wahl. Drei Monate, um alles zu entscheiden.
+
+[[Drei Monate, um das Netzwerk fertigzustellen.->k24-aktivierung]]
+
+:: k24-aktivierung [kapitel-24 teil-4 pov-sarah datum-2029-07] {"titel":"Kapitel 24: Sarah - Die Aktivierung"}
+!clear
+!bg sarahs-wohnung
+!zeit 28. Juli 2029, Bonn, 6:47 Uhr
+!dunkel
+!show sarah schock center
+
+Die Nachricht kam um sieben vor sieben. AfD stärkste Kraft, einunddreißig Prozent. CDU vierundzwanzig, weit abgeschlagen. Koalitionsverhandlungen ab morgen. Sarah saß in ihrer Küche, der Kaffee kalt geworden, das Handy in der Hand. Draußen ging die Sonne auf, ein Sommermorgen wie jeder andere. Außer dass er es nicht war. Es war passiert, wovor sie sich drei Jahre gefürchtet hatten, und wofür sie drei Jahre gearbeitet hatten. Beides zugleich.
+
+!show sarah denk
+
+Sie griff nach dem Schlüsselanhänger neben der Tasse. Der kleine Sendemast. Sie drehte ihn zwischen den Fingern, wie so oft in den letzten drei Jahren. Drei Jahre Arbeit hatten zu diesem Morgen geführt.
+
+Sarah: Jetzt beginnt es wirklich.
+
+[[Acht Uhr. Die anderen kommen.->k24-team]]
+
+:: k24-team [kapitel-24 teil-4 pov-sarah]
+!clear
+!bg sarahs-wohnung
+!zeit 28. Juli 2029, Bonn, 8 Uhr
+!show sarah ent centerleft
+!show michael sorge centerright
+
+Sie saßen im Wohnzimmer, so viele wie ihr Bündnis noch zählte, Kaffee auf dem Tisch, keiner hatte geschlafen.
+
+Sarah: Es ist soweit. Die Kürzungen kommen, so sicher wie der Herbst.
+
+Michael: Wie viel Zeit bleibt uns?
+
+Sarah: Wochen. Vielleicht Monate. Nicht mehr.
+
+!hide michael
+!show jamal denk centerright
+
+Jamal: Das Netzwerk ist bereit. Fünf Hubs, alle online, alle verbunden.
+
+!hide jamal
+!show kat freude centerright
+
+Kat: Ich habe jeden einzeln getestet. Nairobi, Neu-Delhi, Beirut, Kiew, Bogotá.
+
+!hide kat
+!show tom denk centerright
+
+Tom: Sandra hat die letzten Lücken geschlossen. Sie gehört jetzt dazu, auch wenn sie an diesem Tisch fehlt.
+
+!hide tom
+!show lena sorge centerright
+
+Lena: Und wir? Was wird aus uns, wenn es losgeht?
+
+{if ausgestiegen "Sarah sah in die Runde. Sie waren zu fünft, und der leere Platz war an diesem Morgen besonders laut." else "Sarah sah jeden einzeln an. Sie waren zu sechst, vollzählig, zum ersten Mal seit Wochen." end}
+
+? Was sagt Sarah der Runde?
+
+[[Was auch kommt, wir haben es zusammen entschieden.->k24-mut]]
+[[Wir haben Zeit gehabt, uns vorzubereiten. Das reicht.->k24-ruhig]]
+
+:: k24-mut [kapitel-24 teil-4 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!hide lena
+!show sarah ent centerleft
+
+Sarah: Was auch kommt, wir haben es zusammen entschieden. Niemand von uns ist allein hineingegangen.
+
+Die Runde nickte, langsam, aber sie nickte.
+
+[[Sarah öffnete den Laptop.->k24-start]]
+
+:: k24-ruhig [kapitel-24 teil-4 pov-sarah]
+{entschlossenheit:entschlossenheit+1 ""}
+!hide lena
+!show sarah neutral centerleft
+
+Sarah: Wir haben Zeit gehabt, uns vorzubereiten. Fünf Hubs, drei Jahre, ein Plan. Das reicht.
+
+Niemand widersprach. Es reichte, weil es reichen musste.
+
+[[Sarah öffnete den Laptop.->k24-start]]
+
+:: k24-start [kapitel-24 teil-4 pov-sarah]
+!clear
+!bg sarahs-wohnung
+!show sarah ent center
+
+Drei Jahre Arbeit, Hunderte Lügen, Tausende Risiken. Alles kam auf diesen Moment an. Sarah tippte den Befehl.
+
+Sarah: Aktivierung. Föderiertes Netzwerk. Status: live.
+
+!shake 3 3 10
+
+Fünf grüne Punkte erschienen auf dem Bildschirm. Fünf Hubs, fünf Kontinente, alle aktiv. Es war getan.
+
+[[Sie hob den Blick.->k24-toast]]
+
+:: k24-toast [kapitel-24 teil-4 pov-sarah]
+!hell
+!show sarah freude center
+
+Jemand öffnete eine Flasche, irgendwer lachte, zum ersten Mal seit Wochen.
+
+Sarah: Auf die Pressefreiheit.
+
+!hide sarah
+!show michael freude center
+
+Michael: Auf die Pressefreiheit.
+
+!hide michael
+!show jamal freude center
+
+Jamal: Auf das Netzwerk.
+
+!hide jamal
+
+Sie tranken, schweigend, gemeinsam. Draußen ging die Sonne höher, über einen neuen Tag, eine neue Ära. Was auch kommen würde, sie hatten getan, was sie tun mussten.
+
+[[Ein Monat später, im Innovation Lab.->k25-netzwerk]]
+
+:: k25-netzwerk [kapitel-25 teil-4 pov-jamal datum-2029-08] {"titel":"Kapitel 25: Jamal - Das Netzwerk lebt"}
+!clear
+!bg innovation-lab
+!zeit August 2029, Bonn
+!hell
+!show jamal neutral center
+
+Fünf Fenster auf seinem Bildschirm, fünf Hubs, alle grün. Nairobi online. Neu-Delhi online. Beirut online. Kiew online. Bogotá online. Das Netzwerk lebte.
+
+!show jamal freude
+
+Er öffnete die Mastodon-Instanz in Nairobi.
+
+Aisha: Erste Sendung aus dem Nairobi Hub. Unabhängig. Dezentral. Frei.
+
+Tausende Likes in einer Stunde. Das Netzwerk verbreitete sich schneller, als er gehofft hatte.
+
+!show jamal denk
+
+Er sah auf die Verbindungsgrafik. Fünf Knoten, und zwischen ihnen kein Zentrum. Das war der Punkt, an dem er zwei Jahre lang gearbeitet hatte: Es gab keine Stelle mehr, an der jemand einen Schalter umlegen konnte.
+
+Wer Nairobi abschaltete, hatte immer noch Beirut. Wer Beirut abschaltete, hatte immer noch Kiew. Und jeder Hub trug eine Kopie von allem.
+
+Er hatte das oft erklärt, in Anträgen, in Präsentationen, in Sätzen, die niemand hören wollte. Jetzt stand es einfach da und lief.
+
+[[Sein Handy vibrierte.->k25-schwester]]
+
+:: k25-schwester [kapitel-25 teil-4 pov-jamal]
+!show jamal denk center
+
+Amira: Jamal, ich habe von dem Netzwerk gehört. Ist das dein Werk?
+
+Jamal: Ja. Das ist mein Werk.
+
+Amira: Ich bin stolz auf dich, kleiner Bruder. Papa wäre auch stolz.
+
+!show jamal schock
+
+Jamal spürte Tränen in den Augen. Sein Vater, der Journalist, der für die Pressefreiheit gestorben war. Jetzt lebte sein Vermächtnis weiter, in einem Netzwerk, das niemand abschalten konnte.
+
+? Wie antwortet Jamal seiner Schwester?
+
+[[Ich habe keine Angst mehr, es zu zeigen.->k25-offen]]
+[[Sag niemandem, dass du das von mir weißt.->k25-vorsichtig]]
+
+:: k25-offen [kapitel-25 teil-4 pov-jamal]
+{entschlossenheit:entschlossenheit+1 ""}
+!show jamal ent
+
+Jamal: Ich habe keine Angst mehr, es zu zeigen. Papa hätte gewollt, dass wir es laut sagen.
+
+Er schrieb es trotzdem verschlüsselt. Laut sein und vorsichtig sein schlossen sich nicht aus.
+
+[[Um Mitternacht schrieb er dem Team.->k25-mitternacht]]
+
+:: k25-vorsichtig [kapitel-25 teil-4 pov-jamal]
+{vorsicht:vorsicht+1 ""}
+!show jamal sorge
+
+Jamal: Sag niemandem, dass du das von mir weißt. Noch nicht. Bitte.
+
+Seine Schwester schwieg einen Moment, dann schrieb sie nur ein Herz zurück. Das musste reichen.
+
+[[Um Mitternacht schrieb er dem Team.->k25-mitternacht]]
+
+:: k25-mitternacht [kapitel-25 teil-4 pov-jamal]
+!clear
+!bg innovation-lab
+!show jamal neutral center
+
+Jamal: Alle Hubs operational. Erste Sendungen erfolgreich. Das Netzwerk lebt.
+
+Sarahs Antwort kam sofort.
+
+Sarah: Gut. Jetzt müssen wir nur noch überleben.
+
+Jamal lächelte bitter. Überleben, das war immer die Frage gewesen. Aber egal, was mit ihnen geschah, das Netzwerk würde weiterleben. Das war alles, was zählte.
+
+[[Einen Monat später sendeten alle fünf Hubs zugleich.->k26-senden]]
+
+:: k26-senden [kapitel-26 teil-4 pov-kat datum-2029-09] {"titel":"Kapitel 26: Kat - Die Hubs senden"}
+!clear
+!bg nairobi-hub
+!zeit September 2029, Nairobi
+!hell
+!show kat neutral center
+
+Kat saß vor den Monitoren im Nairobi Hub und beobachtete die Feeds aus allen fünf Hubs. Nairobi sendete über Pressefreiheit in Afrika, Neu-Delhi über die Lage in Deutschland, Beirut über den Nahen Osten, Kiew über Russland, Bogotá über globale Folgen. Fünf Stimmen, fünf Perspektiven, ein Netzwerk.
+
+!show kat freude
+
+Aisha: Millionen Aufrufe in vierundzwanzig Stunden. Internationale Medien berichten.
+
+Kat las die Schlagzeilen. Ein deutsches Untergrund-Netzwerk sendet trotz Regierungsdruck. Föderiertes Mediensystem trotzt Zensur. Sie lächelte. Sie hatten es geschafft.
+
+!show kat denk
+
+Drei Jahre zuvor war das eine Liste mit Namen gewesen, Kontakte aus der Akademie, Leute, die sie zweimal im Jahr auf Konferenzen traf. Rajesh in Neu-Delhi. Nadia in Beirut. Menschen, die etwas riskierten für ein Projekt, das offiziell nicht existierte.
+
+Kat: Ihr sendet gerade in fünf Sprachen gleichzeitig. Ist euch das klar?
+
+Aisha: Uns ist vor allem klar, dass niemand uns die Genehmigung dafür gegeben hat.
+
+Kat: Genau das ist der Punkt.
+
+!show kat freude
+
+Partnerschaft auf Augenhöhe, so hatte sie es immer genannt, in Anträgen, in denen es hohl klang. Hier klang es zum ersten Mal nicht hohl.
+
+? Wen ruft Kat zuerst an?
+
+[[Zuerst das Team, das mit ihr gebangt hat.->k26-team]]
+[[Zuerst die Mutter, bevor sie es woanders hört.->k26-mama]]
+
+:: k26-team [kapitel-26 teil-4 pov-kat]
+{zusammenhalt:zusammenhalt+1 ""}
+!show kat ent
+
+Kat: Zuerst das Team, das mit mir gebangt hat.
+
+Sie schrieb in die Gruppe, ein Wort nur, geschafft, und wartete nicht auf Antwort, bevor sie das Handy wieder in die Hand nahm.
+
+[[Dann klingelte ihr Handy.->k26-mutter]]
+
+:: k26-mama [kapitel-26 teil-4 pov-kat]
+{entschlossenheit:entschlossenheit+1 ""}
+!show kat sorge
+
+Kat: Zuerst die Mutter, bevor sie es woanders hört.
+
+Noch bevor sie wählen konnte, klingelte das Handy von selbst.
+
+[[Sie nahm ab.->k26-mutter]]
+
+:: k26-mutter [kapitel-26 teil-4 pov-kat]
+!clear
+!bg nairobi-hub
+!show kat neutral center
+
+Die Mutter: Katharina, ich habe die Nachrichten gesehen. Das Netzwerk. Das bist du, oder?
+
+Kat: Ja, Mama. Das bin ich.
+
+Schweigen, lang genug, dass Kat schon nach Worten suchte, es zu erklären.
+
+Die Mutter: Ich bin stolz auf dich. Dein Großvater wäre auch stolz. Und Markus, dein Bruder, hat es dreimal geteilt.
+
+!show kat freude
+
+Kat: Danke, Mama.
+
+Die Mutter: Pass auf dich auf. Bitte.
+
+Kat: Ich werde es versuchen.
+
+Sie legte auf. Draußen ging die Sonne unter, über Nairobi und über Bonn. Aber das Netzwerk sendete weiter.
+
+[[Einen Monat später ging Lena mit allem an die Öffentlichkeit.->k27-oeffentlichkeit]]
+
+:: k27-oeffentlichkeit [kapitel-27 teil-4 pov-lena datum-2029-10] {"titel":"Kapitel 27: Lena - Die Öffentlichkeit"}
+!clear
+!bg pressekonferenz
+!zeit Oktober 2029, Berlin
+!dunkel
+!show lena ent center
+
+Lena veröffentlichte ihre Dokumentation, alles, von Anfang an, drei Jahre festgehalten, jedes Treffen, jede Entscheidung, jede Lüge, jede Angst. Jetzt war es öffentlich, auf der eigenen Mastodon-Instanz, auf dem Netzwerk, das sie mitgebaut hatte. Die Ironie war ihr nicht entgangen.
+
+!show lena sorge
+
+Die Reaktionen waren gespalten, wie erwartet. Helden oder Kriminelle, fragte die eine Zeitung. Whistleblower oder Verräter, fragte die andere. Manche nannten sie Heldinnen, manche Verbrecherinnen. Die Wahrheit lag irgendwo dazwischen, wie immer.
+
+? Wie tritt Lena vor die Kameras?
+
+[[Trotzig. Sie soll ruhig laut werden, diese Debatte.->k27-trotzig]]
+[[Besonnen. Jedes Wort muss tragen, nicht nur klingen.->k27-besonnen]]
+
+:: k27-trotzig [kapitel-27 teil-4 pov-lena]
+{entschlossenheit:entschlossenheit+1 ""}
+!show lena ent
+
+Lena: Fragt mich, was ihr wollt. Ich habe nichts mehr zu verlieren, das ich nicht schon riskiert hätte.
+
+Sie trat vors Mikrofon, ohne zu zögern.
+
+[[Der erste Journalist meldete sich.->k27-interview]]
+
+:: k27-besonnen [kapitel-27 teil-4 pov-lena]
+{entschlossenheit:entschlossenheit+1 ""}
+!show lena denk
+
+Lena: Jedes Wort muss tragen. Ich habe drei Jahre dokumentiert, damit es diesmal stimmt.
+
+Sie ordnete ihre Karten noch einmal, dann trat sie vors Mikrofon.
+
+[[Der erste Journalist meldete sich.->k27-interview]]
+
+:: k27-interview [kapitel-27 teil-4 pov-lena]
+!clear
+!bg pressekonferenz
+!show lena neutral center
+
+Der Journalist: Bereuen Sie, was Sie getan haben?
+
+Millionen würden ihre Antwort hören.
+
+Lena: Nein. Wir haben das Gesetz gebrochen, das ist wahr. Aber wir haben etwas geschützt, das wichtiger ist.
+
+Der Journalist: Und wenn Sie ins Gefängnis gehen?
+
+Lena: Dann gehe ich ins Gefängnis. Aber das Netzwerk sendet weiter. Die Wahrheit findet ihren Weg.
+
+{if tom_gestanden "Ihre Dokumentation zeigte auch Tom, wie er seinen Fehler selbst gestand, bevor jemand ihn dazu zwang. Genau diese Seite zitierten die Zeitungen am häufigsten." else "Ihre Dokumentation ließ offen, wie Toms Fehler ans Licht gekommen war. Genau diese Lücke griffen die Zeitungen am häufigsten auf." end}
+
+[[Später, allein in ihrer Wohnung.->k27-notizbuch]]
+
+:: k27-notizbuch [kapitel-27 teil-4 pov-lena]
+!clear
+!bg lena-buero
+!hell
+!show lena neutral center
+
+Lena öffnete ihr Notizbuch, die letzte Seite. Oktober 2029, schrieb sie. Die Geschichte ist erzählt. Die Wahrheit ist öffentlich. Wir haben gewonnen oder verloren, das weiß ich noch nicht. Aber wir haben gekämpft, wir haben nicht geschwiegen.
+
+Ihre Mutter hatte ihr einmal erzählt, wie es war, in Polen unter der PiS zu leben, die Angst, die Selbstzensur, das Schweigen. Das Schlimmste ist nicht die Unterdrückung, hatte sie gesagt. Das Schlimmste ist, wenn du aufhörst zu kämpfen.
+
+Lena: Wir haben nicht aufgehört. Und wir werden nicht aufhören, egal was kommt.
+
+Sie schloss das Notizbuch. Die Geschichte war erzählt. Aber sie war noch nicht zu Ende.
+
+[[Im November stand der erste Prozess an.->k28-konsequenzen]]
+
+:: k28-konsequenzen [kapitel-28 teil-4 pov-tom datum-2029-11] {"titel":"Kapitel 28: Tom - Die Konsequenzen"}
+!clear
+!bg landgericht
+!zeit November 2029, Berlin
+!dunkel
+
+Sechs Menschen auf der Anklagebank. Untreue. Betrug. Urkundenfälschung.
+
+Der Staatsanwalt: Die Angeklagten haben über Jahre öffentliche Gelder zweckentfremdet. Sie haben gefälschte Anträge eingereicht und ihre Vorgesetzten belogen.
+
+Der Staatsanwalt: Es spielt keine Rolle, aus welchen Motiven sie gehandelt haben. Das Gesetz kennt keine guten Absichten. Es kennt nur Taten.
+
+Die Verteidigerin: Meine Mandanten haben das Gesetz gebrochen. Das bestreiten wir nicht. Sie haben es getan, um ein höheres Gut zu schützen.
+
+Die Verteidigerin: Was nützt ein Recht, das nicht mehr ausgeübt werden kann?
+
+Das Land war gespalten. Wie der Saal.
+
+{if ausgestiegen "Fünf saßen auf der Bank. Der sechste war als Zeuge geladen und musste aussagen, was er wusste. Niemand nahm es ihm übel. Es machte die Sache trotzdem nicht leichter." else "Sechs saßen auf der Bank, so wie sie zwei Jahre zuvor an einem Tisch gesessen hatten." end}
+
+[[Tom wurde aufgerufen.->k28-aussage]]
+
+:: k28-aussage [kapitel-28 teil-4 pov-tom]
+!clear
+!bg landgericht
+!zeit November 2029, Berlin
+!show tom sorge center
+
+Er legte die Hand auf das Grundgesetz und schwor, die Wahrheit zu sagen.
+
+Der Richter: Herr Schneider, Sie sind der Jüngste der Angeklagten. Sie waren vierundzwanzig, als das Projekt begann. Haben Sie verstanden, was Sie taten?
+
+Tom: Ja.
+
+Der Richter: Und Sie haben es trotzdem getan?
+
+Tom: Ja.
+
+Der Richter: Warum?
+
+{if tom_gestanden "Er dachte an die Nacht, in der er zum Telefon gegriffen hatte. An Jamals Schweigen. Daran, wie leicht es gewesen wäre, es für sich zu behalten." else "Er dachte an die Nacht, in der er die Logs gelöscht hatte. Niemand im Saal wusste davon. Er wusste es." end}
+
+? Was antwortet Tom?
+
+[[Er sagt den Satz, den er sich vor zwei Jahren aufgeschrieben hat.->k28-satz]]
+[[Er sagt, was er heute denkt, nicht was er damals dachte.->k28-heute]]
+
+:: k28-satz [kapitel-28 teil-4 pov-tom]
+{entschlossenheit:entschlossenheit+1 ""}
+!show tom ent
+
+Tom: Weil ich nicht in zwanzig Jahren zurückblicken und mich fragen wollte, warum ich zugesehen habe, wie die Pressefreiheit stirbt.
+
+Der Richter: Auch wenn es bedeutet, ins Gefängnis zu gehen?
+
+Tom: Auch dann.
+
+[[Draußen vor dem Gericht.->k28-draussen]]
+
+:: k28-heute [kapitel-28 teil-4 pov-tom]
+{vorsicht:vorsicht+1 ""}
+!show tom denk
+
+Tom: Damals hätte ich gesagt, weil es richtig ist. Heute sage ich, weil ich nicht wusste, wie schwer es wird, und es trotzdem wieder täte.
+
+Der Richter: Das ist keine besonders heldenhafte Antwort.
+
+Tom: Nein. Aber es ist die wahre.
+
+[[Draußen vor dem Gericht.->k28-draussen]]
+
+:: k28-draussen [kapitel-28 teil-4 pov-tom]
+!clear
+!zeit November 2029, vor dem Landgericht
+!hell
+!show tom neutral centerleft
+!show sarah ent centerright
+
+Vor dem Gericht standen Hunderte. Plakate, Rufe, Kameras. Pressefreiheit ist kein Verbrechen. Freiheit für die Sechs. Das Netzwerk lebt.
+
+Sie waren nie allein gewesen. Das Netzwerk war größer als sie, größer als dieser Saal.
+
+Sarah: Du hast gut ausgesagt.
+
+Tom: Ich habe nur die Wahrheit gesagt.
+
+Sarah: Das ist das Schwierigste von allem.
+
+Drei Wochen später verlas der Richter das Urteil. Bewährungsstrafen. Keine Haft. Und für jeden von ihnen der Verlust dessen, was er beruflich war.
+
+[[Dezember, Bad Godesberg.->k29-vermaechtnis]]
+
+:: k29-vermaechtnis [kapitel-29 teil-4 pov-michael datum-2029-12] {"titel":"Kapitel 29: Michael - Das Vermächtnis"}
+!clear
+!bg bad-godesberg
+!zeit Dezember 2029, Bad Godesberg
+!dunkel
+
+!show michael denk center
+
+Auf Michaels Schreibtisch lag das Urteil. Bewährung, keine Haft, Verlust der Pension. Er hatte genau das verloren, wovor er sich zwei Jahre lang gefürchtet hatte.
+
+Und fühlte sich frei.
+
+Claudia: Kannst du nicht schlafen?
+
+Michael: Nein.
+
+Sie setzte sich neben ihn. Die Chemotherapie war abgeschlossen, die Prognose gut.
+
+Claudia: Bereust du es?
+
+? Was antwortet Michael?
+
+[[Nein. Nicht einmal die Pension.->k29-nein]]
+[[Ich bereue, wie lange ich gebraucht habe.->k29-spaet]]
+
+:: k29-nein [kapitel-29 teil-4 pov-michael]
+{entschlossenheit:entschlossenheit+1 ""}
+!show michael ent
+
+Michael: Nein. Ich bereue es nicht.
+
+Claudia: Auch nicht die Pension?
+
+Michael: Auch nicht die Pension. Wir finden einen Weg. Wir haben immer einen gefunden.
+
+[[Sie hielt seine Hand.->k29-brief]]
+
+:: k29-spaet [kapitel-29 teil-4 pov-michael]
+{zusammenhalt:zusammenhalt+1 ""}
+!show michael sorge
+
+Michael: Ich bereue nicht, dass ich mitgemacht habe. Ich bereue, wie lange ich gebraucht habe, um mich zu entscheiden. Sarah hat in dieser Zeit alles allein getragen.
+
+Claudia: Und jetzt?
+
+Michael: Jetzt trage ich mit.
+
+[[Sie hielt seine Hand.->k29-brief]]
+
+:: k29-brief [kapitel-29 teil-4 pov-michael]
+!show michael neutral center
+
+Claudia: Ich bin stolz auf dich.
+
+Michael: Ich bin stolz auf uns alle.
+
+Später öffnete er seinen Laptop. Eine Einladung der Universität Bonn, eine Vorlesung zu halten. Thema: Medienethik in der Praxis, Lehren aus dem Netzwerk.
+
+Er sah lange auf den Bildschirm.
+
+Dreißig Jahre lang hatte er über Menschen geschrieben, die sich entscheiden mussten. Über Whistleblower, über Bonhoeffer, über den schmalen Grat zwischen Gehorsam und Mitschuld. Er hatte Seminare darüber gehalten, in denen Studierende nach der richtigen Antwort fragten, und er hatte ihnen erklärt, dass es sie nicht gibt.
+
+Jetzt wussten sie beide, wovon er sprach.
+
+Die Pension war weg. Vierzig Berufsjahre, und am Ende eine Bewährungsstrafe und ein Aktenzeichen. Claudias Behandlung hatten sie bezahlt bekommen, das war die eine Sorge, die sich in Luft aufgelöst hatte, während alle anderen eingetreten waren.
+
+Sein Vermächtnis waren nicht die Bücher, die er geschrieben hatte, und nicht die Vorlesungen, die er gehalten hatte. Es war die eine Entscheidung, über die er dreißig Jahre lang nur geschrieben hatte.
+
+Er tippte eine Antwort und schickte sie ab.
+
+[[Drei Monate später.->k30-epilog]]
+
+:: k30-epilog [epilog pov-alle datum-2030-03] {"titel":"Epilog: Sechs Monate später"}
+!clear
+!bg konferenzraum
+!zeit März 2030, Bonn
+!hell
+
+Sechs Monate nach dem Urteil. Derselbe Konferenzraum, in dem alles begonnen hatte.
+
+{if ausgestiegen ("" fuse ("Fünf waren eingeladen worden. ",figur," kam trotzdem, und niemand stellte die Frage, ob das in Ordnung war.")) else "Alle sechs waren gekommen." end}
+
+!show sarah neutral centerleft
+
+Martina Bergmann: Danke, dass ihr gekommen seid. Ich trete zurück, Ende des Monats.
+
+Martina Bergmann: Weil ich weggeschaut habe. Ich habe geduldet. Aber ich wollte euch danken. Für euren Mut.
+
+Zwölf Hubs weltweit. Vierhundertdrei Mitarbeitende. Dreiundzwanzig Millionen Zuschauer.
+
+Martina Bergmann: Die Bundesregierung hat eine Kommission eingesetzt. Sie prüft, ob das föderierte Modell auch für andere Sender taugt. Ihr habt etwas angestoßen, das größer ist, als ihr dachtet.
+
+[[Sie fragte jeden, was er jetzt macht.->k30-bilanz]]
+
+:: k30-bilanz [epilog pov-alle]
+!clear
+!zeit März 2030, Bonn
+!show sarah ent center
+
+Sarah: Ich berate NGOs beim Aufbau dezentraler Strukturen. Ich würde es wieder tun.
+
+!hide sarah
+!show jamal freude center
+
+Jamal: Technischer Koordinator des Netzwerks. Mein Aufenthalt ist gesichert. Ich habe die Staatsbürgerschaft beantragt.
+
+!hide jamal
+!show kat neutral center
+
+Kat: Ich koordiniere die Hubs. Markus und ich reden wieder. Nicht viel. Aber wir reden.
+
+!hide kat
+!show michael neutral center
+
+Michael: Ich schreibe ein Buch über die Entscheidung. Claudia ist stabil.
+
+!hide michael
+!show lena ent center
+
+Lena: Kolumnen. Ich bin Journalistin und Aktivistin. Beides.
+
+!hide lena
+!show tom freude center
+
+{if tom_gestanden "Tom: Entwickler beim Netzwerk. Und ich melde Fehler inzwischen am selben Tag." else "Tom: Entwickler beim Netzwerk. Es gibt eine Nacht, über die ich nie gesprochen habe. Ich weiß bis heute nicht, ob das Feigheit war oder Vorsicht." end}
+
+[[Martina sah sie alle an.->k30-frage]]
+
+:: k30-frage [epilog pov-alle]
+!clear
+!zeit März 2030, Bonn
+!show sarah denk center
+
+Martina Bergmann: Und wenn ihr noch einmal davor stündet? Würdet ihr es wieder tun?
+
+Niemand antwortete sofort. Draußen wurde es hell.
+
+{
+ w_ent:entschlossenheit
+ w_vor:vorsicht
+ w_zus:zusammenhalt
+ hoch:if w_ent>w_vor w_ent else w_vor end
+ hoch:if hoch>w_zus hoch else w_zus end
+ if hoch~w_ent
+  "Sie hatten es getan, weil jemand es tun musste, und weil sie nicht auf die Erlaubnis warten wollten. Diese Haltung hatte sie durch zwei Jahre getragen, und sie war noch da."
+ elseif hoch~w_vor
+  "Sie hatten jeden Schritt abgewogen, jede Spur bedacht, jede Nacht zweimal überlegt. Vielleicht hatte genau das sie am Ende gerettet. Vielleicht hätten sie ohne diese Vorsicht mehr erreicht. Sie würden es nie erfahren."
+ else
+  "Was sie zusammengehalten hatte, war nicht die Idee gewesen, sondern dass keiner den anderen allein gelassen hatte. Das war am Ende der Unterschied."
+ end
+}
+
+!show sarah ent
+
+Sarah: Ja.
+
+Und die anderen nickten, einer nach dem anderen.
+
+Draußen, in zwölf Städten auf vier Kontinenten, sendete das Netzwerk weiter.

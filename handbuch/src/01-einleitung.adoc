@@ -1,0 +1,93 @@
+= Worum es geht
+
+== Die Visual Novel
+
+*Das Netzwerk* ist eine spielbare Adaption der Novelle "Das Netzwerk": eine
+lineare, bebilderte Erzählung mit Entscheidungspunkten, kein Adventure und
+kein Tilemap-Spiel. Du klickst dich durch Dialogboxen, siehst sechs Figuren
+als Tuschezeichnungs-Puppen auf einer Bühne und triffst an ausgewählten
+Stellen Entscheidungen, die den Tonfall und den Epilog beeinflussen.
+
+Die Novelle selbst erzählt von sechs Mitarbeitenden eines fiktiven
+öffentlich-rechtlichen Auslandssenders, dem "Bundesrundfunk International"
+(BRI), die zwischen Januar 2026 und März 2030 heimlich ein föderiertes,
+zensurresistentes Sendenetzwerk aufbauen, weil die Zentrale den
+Journalismus nicht mehr schützen kann. Die Handlung bleibt in der
+Adaption vollständig erhalten: 30 Kapitel, vier Teile plus Epilog. Was du
+als Spieler beeinflusst, ist nicht *ob* die Geschichte passiert, sondern
+*mit welcher Haltung* die Figuren hindurchgehen, siehe <<handlung>>.
+
+[NOTE]
+====
+Die Novelle und ihre Adaption sind vollständig fiktional. Alle Figuren,
+Institutionen und Ereignisse sind frei erfunden. Der ausführliche
+rechtliche Hinweis steht im Spiel selbst hinter dem Knopf "Rechtlicher
+Hinweis" auf der Titelkarte.
+====
+
+== Woher der Stoff kommt
+
+Die Vorlage ist eine 19.445 Wörter lange Prosa-Novelle in AsciiDoc, 30
+Kapitel von Januar 2026 bis März 2030. 26 der 30 Kapitel tragen bereits
+strukturierte Metadaten (Erzählperspektive, Datum, Ort). Aus dieser Prosa
+wurde die Spielszene: gekürzt, in Dialog aufgelöst, mit Regieanweisungen
+versehen. Aus rund 19.000 Wörtern Prosa wurden etwa 12.000 Wörter Spieltext
+mit 32 Entscheidungspunkten. Der komplette Bauplan mit allen Entscheidungen
+und ihrer Begründung steht in `plans/graphic-novel-plan.md`, dem
+Ausgangspunkt fast aller Kapitel dieses Handbuchs.
+
+== Was Decker ist
+
+*Decker* ist das Programm, mit dem man das fertige Spiel spielt und mit dem
+man Bilder, Karten und Knöpfe von Hand zusammenklicken kann, so ähnlich
+wie bei einem Karteikasten (daher der Name). Decker wurde von John Earnest
+gebaut und ist kostenlos. *Lil* ist die kleine Programmiersprache, die in
+Decker eingebaut ist. Für "Das Netzwerk" kommen noch drei fertige
+Decker-Module dazu, die die eigentliche Erzählmaschine bilden:
+
+[cols="1,2,3"]
+|===
+|Modul |Schicht |Liefert
+
+|`twee` (Ply)
+|Struktur
+|Passagen, Links, Variablen, eingebettete Lil-Fragmente
+
+|`dd` (Dialogizer)
+|Präsentation
+|modale Dialogbox, Klick-durch, Auswahlknöpfe, Textanimation
+
+|`pt` (Puppeteer)
+|Darstellung
+|Figuren auf der Bühne, Emotes, Blinzeln, Sprechanimation, Bewegung
+|===
+
+Diese Module sind nicht dafür gebaut, zusammen zu laufen, passen aber genau
+ineinander. Wie das zusammenspielt, ist das Kernthema von
+<<software-architektur>>.
+
+Bei "Das Netzwerk" kommt außerdem hinzu: der komplette Erzählinhalt (jede
+Szene, jede Regieanweisung, jede Entscheidung, jede Bedingung) steht in
+einer einzigen Textdatei, `game/data/szenen.twee`. Ein Bauprogramm namens
+`build_vn.lil` liest diese Datei und baut daraus automatisch das fertige
+Deck. Das ist der Grund, warum du für die meisten Änderungen keine
+Programmiersprache lernen musst, siehe <<bearbeiten>>.
+
+== Für wen dieses Handbuch ist
+
+[TIP]
+====
+Wenn du nur spielen willst: lies <<spielen>> und <<einrichtung>>, das
+reicht komplett. Alles danach ist für alle, die tiefer einsteigen wollen:
+wie die Engine funktioniert, wie das Datenformat aufgebaut ist, wie die
+Tuschezeichnungen entstehen, und wie du selbst etwas ergänzt.
+====
+
+<<software-architektur>> und <<das-datenformat>> sind die technischen
+Kernkapitel und setzen etwas Geduld voraus. <<die-bilder>> erklärt, wie aus
+Python-Code Tuschezeichnungen werden. <<handlung>> beschreibt die
+Geschichte selbst, ihre Struktur und ihre Variablen. <<bearbeiten>> zeigt
+dir konkrete Arbeitsabläufe zum Weiterschreiben. <<lil-fuer-ungeuebte>> gibt
+dir gerade so viel Lil, wie du zum Ändern der Engine brauchst, inklusive
+der Fallstricke, in die beim Bau dieses Projekts tatsächlich jemand
+getreten ist.
