@@ -3,5 +3,6 @@ in/
 
 game/build/netzwerk.deck
 game/build/netzwerk.html
+handbuch/output/
 game/data/art/
 __pycache__/
