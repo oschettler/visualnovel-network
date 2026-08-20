@@ -794,11 +794,10 @@ Dazu darf `Pen.svg()` das weisse Rechteck über die ganze Fläche weglassen
 alles daneben durchsichtig. `render_art.py` nimmt anschliessend einfach den
 Alphakanal des gerenderten SVG als Maske.
 
-Ein erster Versuch hatte die Silhouette stattdessen nachträglich aus dem
-fertigen Bild gewonnen: Tusche morphologisch schliessen, von den Rändern
-fluten, das Nichterreichte als Inneres nehmen. Das versiegelte zwar den Kopf,
-nicht aber den Rumpf, denn der endet am unteren Bildrand und ist dort offen.
-Aus der Zeichnung heraus ist es sowohl einfacher als auch vollständig.
+Der Umweg über eine nachträgliche Bildbearbeitung (Tusche schliessen, von den
+Rändern fluten, das Nichterreichte als Inneres nehmen) wurde verworfen: er
+versiegelte den Kopf, nicht aber den Rumpf, denn der endet am unteren Bildrand
+und ist dort offen. Aus der Zeichnung heraus ist es einfacher und vollständig.
 
 **Reihenfolge-Empfehlung:** In M1 bis M5 ersetzt die `!zeit`-Ortsmarke
 (eingeblendeter Text auf leerer Bühne) den Hintergrund. Erst in M7 werden die

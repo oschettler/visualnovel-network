@@ -77,9 +77,10 @@ y0:py+m
 
 == Zehn Fallstricke, alle tatsächlich beim Bau dieses Projekts aufgetreten
 
-Diese Sammlung stammt aus `zelda-network/game/README.md` (Abschnitt
-"Sechs Lil-Fallstricke") und aus `plans/graphic-novel-plan.md`, Abschnitt
-13. Beide gelten unverändert für dieses Projekt.
+Die ersten sechs stammen aus einem früheren Decker-Projekt derselben
+Werkstatt, die übrigen kamen beim Bau dieser Visual Novel dazu. Die
+ausführliche Fassung mit Fundgeschichte steht in
+`plans/graphic-novel-plan.md`, Abschnitt 13.
 
 **1. In `where`-Klauseln gehört `=` hin, nicht `~`.** `where spalte~"x"`
 ist ein stiller No-Op-Filter, `where spalte="x"` filtert richtig. In der
@@ -223,5 +224,3 @@ Rechtsassoziativität aus Fallstrick 3 keine Überraschung erzeugt.
 * https://beyondloom.com/decker/lil.html[Das vollständige Lil-Handbuch]
 * `plans/graphic-novel-plan.md`, Abschnitt 13, für die ausführliche
   Fassung dieser Fallstricke mit Fundgeschichte.
-* `../zelda-network/game/README.md`, Abschnitt "Sechs Lil-Fallstricke",
-  die Quelle der ersten sechs Punkte oben.

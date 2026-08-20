@@ -1,7 +1,7 @@
-<svg version="1.1" baseProfile="full" width="1843.0" height="364.0" viewBox="0 0 1843 364" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="840.0" height="784.0" viewBox="0 0 840 784" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >Laufzeit-Datenfluss einer Passage</title>
 	<desc >#title: Laufzeit-Datenfluss einer Passage
-	#direction: right
+	#direction: down
 	#spacing: 40
 	#padding: 12
 	#background: white
@@ -33,44 +33,44 @@
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="white">
-				<rect x="0.0" y="0.0" height="364.0" width="1843.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="784.0" width="840.0" stroke="none"></rect>
 			</g>
 			<g transform="translate(12, 12)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<path d="M194.0 166.8 L214 160 L227.33333333333334 160 L227.3 160.0 " fill="none"></path>
-					<path d="M220.7 165.3 L227.3 160.0 L220.7 154.7 L234.0 160.0 Z"></path>
-					<path d="M488.0 160.0 L508 160 L521.3333333333334 160 L521.3 160.0 " fill="none"></path>
-					<path d="M514.7 165.3 L521.3 160.0 L514.7 154.7 L528.0 160.0 Z"></path>
-					<path d="M616.7 140.0 L671 100 L708.3333333333334 100 L708.3 100.0 " fill="none"></path>
-					<path d="M701.7 105.3 L708.3 100.0 L701.7 94.7 L715.0 100.0 Z"></path>
-					<path d="M616.7 180.0 L671 220 L684.3333333333334 220 L684.3 220.0 " fill="none"></path>
-					<path d="M677.7 225.3 L684.3 220.0 L677.7 214.7 L691.0 220.0 Z"></path>
-					<path d="M863.0 100.0 L907 100 L920.3333333333334 100 L920.3 100.0 " fill="none"></path>
-					<path d="M913.7 105.3 L920.3 100.0 L913.7 94.7 L927.0 100.0 Z"></path>
-					<path d="M1219.0 100.0 L1239 100 L1272.3333333333333 100 L1272.3 100.0 " fill="none"></path>
-					<path d="M1265.7 105.3 L1272.3 100.0 L1265.7 94.7 L1279.0 100.0 Z"></path>
-					<path d="M1410.0 62.7 L1450 40 L1463.3333333333333 40 L1463.3 40.0 " fill="none"></path>
-					<path d="M1456.7 45.3 L1463.3 40.0 L1456.7 34.7 L1470.0 40.0 Z"></path>
-					<path d="M1410.0 137.3 L1450 160 L1525.3333333333333 160 L1525.3 160.0 " fill="none"></path>
-					<path d="M1518.7 165.3 L1525.3 160.0 L1518.7 154.7 L1532.0 160.0 Z"></path>
-					<path d="M887.0 220.0 L907 220 L943.3333333333334 220 L943.3 220.0 " fill="none"></path>
-					<path d="M936.7 225.3 L943.3 220.0 L936.7 214.7 L950.0 220.0 Z"></path>
-					<path d="M1196.0 220.0 L1239 220 L1285.516345407312 237.63652906438367 L1285.5 237.6 " fill="none"></path>
-					<path d="M1277.4 240.3 L1285.5 237.6 L1281.2 230.3 L1291.8 240.0 Z"></path>
-					<path d="M1291.8 280.0 L1239 300 L1073 300 L1073 300 L907 300 L907 300 L789 300 L789 300 L671 300 L671 300 L589.5 300 L589.5 300 L508 300 L508 300 L361 300 L361 300 L214 300 L214 300 L148.8678206722243 244.33147066002076 L148.9 244.3 " fill="none"></path>
-					<path d="M157.4 244.6 L148.9 244.3 L150.5 252.7 L143.8 240.0 Z"></path>
+					<path d="M480.3 80.0 L452.5 100 L452.5 113.33333333333333 L452.5 113.3 " fill="none"></path>
+					<path d="M447.2 106.7 L452.5 113.3 L457.8 106.7 L452.5 120.0 Z"></path>
+					<path d="M452.5 200.0 L452.5 220 L452.5 233.33333333333334 L452.5 233.3 " fill="none"></path>
+					<path d="M447.2 226.7 L452.5 233.3 L457.8 226.7 L452.5 240.0 Z"></path>
+					<path d="M391.0 275.9 L298 300 L298 313.3333333333333 L298.0 313.3 " fill="none"></path>
+					<path d="M292.7 306.7 L298.0 313.3 L303.3 306.7 L298.0 320.0 Z"></path>
+					<path d="M514.0 275.9 L607 300 L607 313.3333333333333 L607.0 313.3 " fill="none"></path>
+					<path d="M601.7 306.7 L607.0 313.3 L612.3 306.7 L607.0 320.0 Z"></path>
+					<path d="M298.0 360.0 L298 380 L298 393.3333333333333 L298.0 393.3 " fill="none"></path>
+					<path d="M292.7 386.7 L298.0 393.3 L303.3 386.7 L298.0 400.0 Z"></path>
+					<path d="M298.0 480.0 L298 500 L298 513.3333333333334 L298.0 513.3 " fill="none"></path>
+					<path d="M292.7 506.7 L298.0 513.3 L303.3 506.7 L298.0 520.0 Z"></path>
+					<path d="M232.5 587.4 L154.5 620 L154.5 633.3333333333334 L154.5 633.3 " fill="none"></path>
+					<path d="M149.2 626.7 L154.5 633.3 L159.8 626.7 L154.5 640.0 Z"></path>
+					<path d="M363.5 587.4 L441.5 620 L441.5 633.3333333333334 L441.5 633.3 " fill="none"></path>
+					<path d="M436.2 626.7 L441.5 633.3 L446.8 626.7 L441.5 640.0 Z"></path>
+					<path d="M607.0 360.0 L607 380 L607 393.3333333333333 L607.0 393.3 " fill="none"></path>
+					<path d="M601.7 386.7 L607.0 393.3 L612.3 386.7 L607.0 400.0 Z"></path>
+					<path d="M607.0 480.0 L607 500 L657.2527507771426 536.1097610374678 L657.3 536.1 " fill="none"></path>
+					<path d="M648.7 536.6 L657.3 536.1 L655.0 527.9 L662.7 540.0 Z"></path>
+					<path d="M717.7 540.0 L772 500 L772 440 L772 440 L772 380 L772 380 L772 340 L772 340 L772 300 L772 300 L772 260 L772 260 L772 220 L772 220 L772 160 L772 160 L772 100 L772 100 L639.4611235406242 66.30367547642986 L639.5 66.3 " fill="none"></path>
+					<path d="M647.2 62.8 L639.5 66.3 L644.6 73.1 L633.0 64.7 Z"></path>
 					<g data-name="Engine">
 						<g fill="#eee8d5" stroke="#33322E" data-name="Engine">
-							<rect x="0.0" y="160.0" height="80.0" width="194.0" data-name="Engine"></rect>
-							<path d="M0.0 200.0 L194.0 200.0" fill="none" data-name="Engine"></path>
+							<rect x="439.0" y="0.0" height="80.0" width="194.0" data-name="Engine"></rect>
+							<path d="M439.0 40.0 L633.0 40.0" fill="none" data-name="Engine"></path>
 						</g>
-						<g transform="translate(0, 160)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Engine" data-compartment="0">
+						<g transform="translate(439, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Engine" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Engine" data-compartment="0">
 								<text x="85.0" y="14.1" stroke="none" text-anchor="middle" data-name="Engine" data-compartment="0">Engine</text>
 								
 							</g>
 						</g>
-						<g transform="translate(0, 200)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Engine" data-compartment="1">
+						<g transform="translate(439, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Engine" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Engine" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="Engine" data-compartment="1">liest Passagennamen</text>
 								
@@ -79,16 +79,16 @@
 					</g>
 					<g data-name="twee.render">
 						<g fill="#eee8d5" stroke="#33322E" data-name="twee.render">
-							<rect x="234.0" y="120.0" height="80.0" width="254.0" data-name="twee.render"></rect>
-							<path d="M234.0 160.0 L488.0 160.0" fill="none" data-name="twee.render"></path>
+							<rect x="325.5" y="120.0" height="80.0" width="254.0" data-name="twee.render"></rect>
+							<path d="M325.5 160.0 L579.5 160.0" fill="none" data-name="twee.render"></path>
 						</g>
-						<g transform="translate(234, 120)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="twee.render" data-compartment="0">
+						<g transform="translate(325.5, 120)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="twee.render" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="twee.render" data-compartment="0">
 								<text x="115.0" y="14.1" stroke="none" text-anchor="middle" data-name="twee.render" data-compartment="0">twee.render</text>
 								
 							</g>
 						</g>
-						<g transform="translate(234, 160)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="twee.render" data-compartment="1">
+						<g transform="translate(325.5, 160)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="twee.render" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="twee.render" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="twee.render" data-compartment="1">Ply: Markup, Variablen, Links</text>
 								
@@ -97,9 +97,9 @@
 					</g>
 					<g data-name="rtext-Tabelle">
 						<g fill="#eee8d5" stroke="#33322E" data-name="rtext-Tabelle">
-							<rect x="528.0" y="140.0" height="40.0" width="123.0" data-name="rtext-Tabelle"></rect>
+							<rect x="391.0" y="240.0" height="40.0" width="123.0" data-name="rtext-Tabelle"></rect>
 						</g>
-						<g transform="translate(528, 140)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="rtext-Tabelle" data-compartment="0">
+						<g transform="translate(391, 240)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="rtext-Tabelle" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="rtext-Tabelle" data-compartment="0">
 								<text x="49.5" y="14.1" stroke="none" text-anchor="middle" data-name="rtext-Tabelle" data-compartment="0">rtext-Tabelle</text>
 								
@@ -108,9 +108,9 @@
 					</g>
 					<g data-name="Prosa (arg leer)">
 						<g fill="#eee8d5" stroke="#33322E" data-name="Prosa (arg leer)">
-							<rect x="715.0" y="80.0" height="40.0" width="148.0" data-name="Prosa (arg leer)"></rect>
+							<rect x="224.0" y="320.0" height="40.0" width="148.0" data-name="Prosa (arg leer)"></rect>
 						</g>
-						<g transform="translate(715, 80)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Prosa (arg leer)" data-compartment="0">
+						<g transform="translate(224, 320)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Prosa (arg leer)" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Prosa (arg leer)" data-compartment="0">
 								<text x="62.0" y="14.1" stroke="none" text-anchor="middle" data-name="Prosa (arg leer)" data-compartment="0">Prosa (arg leer)</text>
 								
@@ -119,9 +119,9 @@
 					</g>
 					<g data-name="Auswahl (arg gesetzt)">
 						<g fill="#eee8d5" stroke="#33322E" data-name="Auswahl (arg gesetzt)">
-							<rect x="691.0" y="200.0" height="40.0" width="196.0" data-name="Auswahl (arg gesetzt)"></rect>
+							<rect x="509.0" y="320.0" height="40.0" width="196.0" data-name="Auswahl (arg gesetzt)"></rect>
 						</g>
-						<g transform="translate(691, 200)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Auswahl (arg gesetzt)" data-compartment="0">
+						<g transform="translate(509, 320)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Auswahl (arg gesetzt)" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="Auswahl (arg gesetzt)" data-compartment="0">
 								<text x="86.0" y="14.1" stroke="none" text-anchor="middle" data-name="Auswahl (arg gesetzt)" data-compartment="0">Auswahl (arg gesetzt)</text>
 								
@@ -130,16 +130,16 @@
 					</g>
 					<g data-name="dd.say">
 						<g fill="#eee8d5" stroke="#33322E" data-name="dd.say">
-							<rect x="927.0" y="60.0" height="80.0" width="292.0" data-name="dd.say"></rect>
-							<path d="M927.0 100.0 L1219.0 100.0" fill="none" data-name="dd.say"></path>
+							<rect x="152.0" y="400.0" height="80.0" width="292.0" data-name="dd.say"></rect>
+							<path d="M152.0 440.0 L444.0 440.0" fill="none" data-name="dd.say"></path>
 						</g>
-						<g transform="translate(927, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="dd.say" data-compartment="0">
+						<g transform="translate(152, 400)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="dd.say" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="dd.say" data-compartment="0">
 								<text x="134.0" y="14.1" stroke="none" text-anchor="middle" data-name="dd.say" data-compartment="0">dd.say</text>
 								
 							</g>
 						</g>
-						<g transform="translate(927, 100)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="dd.say" data-compartment="1">
+						<g transform="translate(152, 440)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="dd.say" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="dd.say" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="dd.say" data-compartment="1">modale Box, splittet an Leerzeilen</text>
 								
@@ -148,16 +148,16 @@
 					</g>
 					<g data-name="on command">
 						<g fill="#eee8d5" stroke="#33322E" data-name="on command">
-							<rect x="1279.0" y="60.0" height="80.0" width="131.0" data-name="on command"></rect>
-							<path d="M1279.0 100.0 L1410.0 100.0" fill="none" data-name="on command"></path>
+							<rect x="232.5" y="520.0" height="80.0" width="131.0" data-name="on command"></rect>
+							<path d="M232.5 560.0 L363.5 560.0" fill="none" data-name="on command"></path>
 						</g>
-						<g transform="translate(1279, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="on command" data-compartment="0">
+						<g transform="translate(232.5, 520)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="on command" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="on command" data-compartment="0">
 								<text x="53.5" y="14.1" stroke="none" text-anchor="middle" data-name="on command" data-compartment="0">on command</text>
 								
 							</g>
 						</g>
-						<g transform="translate(1279, 100)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="on command" data-compartment="1">
+						<g transform="translate(232.5, 560)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="on command" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="on command" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="on command" data-compartment="1">Karte buehne</text>
 								
@@ -166,16 +166,16 @@
 					</g>
 					<g data-name="pt.command">
 						<g fill="#eee8d5" stroke="#33322E" data-name="pt.command">
-							<rect x="1470.0" y="0.0" height="80.0" width="309.0" data-name="pt.command"></rect>
-							<path d="M1470.0 40.0 L1779.0 40.0" fill="none" data-name="pt.command"></path>
+							<rect x="0.0" y="640.0" height="80.0" width="309.0" data-name="pt.command"></rect>
+							<path d="M0.0 680.0 L309.0 680.0" fill="none" data-name="pt.command"></path>
 						</g>
-						<g transform="translate(1470, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="pt.command" data-compartment="0">
+						<g transform="translate(0, 640)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="pt.command" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="pt.command" data-compartment="0">
 								<text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="pt.command" data-compartment="0">pt.command</text>
 								
 							</g>
 						</g>
-						<g transform="translate(1470, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="pt.command" data-compartment="1">
+						<g transform="translate(0, 680)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="pt.command" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="pt.command" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="pt.command" data-compartment="1">Puppen zeigen, bewegen, sprechen</text>
 								
@@ -184,16 +184,16 @@
 					</g>
 					<g data-name="eigene Kommandos">
 						<g fill="#eee8d5" stroke="#33322E" data-name="eigene Kommandos">
-							<rect x="1532.0" y="120.0" height="80.0" width="185.0" data-name="eigene Kommandos"></rect>
-							<path d="M1532.0 160.0 L1717.0 160.0" fill="none" data-name="eigene Kommandos"></path>
+							<rect x="349.0" y="640.0" height="80.0" width="185.0" data-name="eigene Kommandos"></rect>
+							<path d="M349.0 680.0 L534.0 680.0" fill="none" data-name="eigene Kommandos"></path>
 						</g>
-						<g transform="translate(1532, 120)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="eigene Kommandos" data-compartment="0">
+						<g transform="translate(349, 640)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="eigene Kommandos" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="eigene Kommandos" data-compartment="0">
 								<text x="80.5" y="14.1" stroke="none" text-anchor="middle" data-name="eigene Kommandos" data-compartment="0">eigene Kommandos</text>
 								
 							</g>
 						</g>
-						<g transform="translate(1532, 160)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="eigene Kommandos" data-compartment="1">
+						<g transform="translate(349, 680)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="eigene Kommandos" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="eigene Kommandos" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="eigene Kommandos" data-compartment="1">!bg !hell !dunkel !ton</text>
 								
@@ -202,16 +202,16 @@
 					</g>
 					<g data-name="dd.ask">
 						<g fill="#eee8d5" stroke="#33322E" data-name="dd.ask">
-							<rect x="950.0" y="180.0" height="80.0" width="246.0" data-name="dd.ask"></rect>
-							<path d="M950.0 220.0 L1196.0 220.0" fill="none" data-name="dd.ask"></path>
+							<rect x="484.0" y="400.0" height="80.0" width="246.0" data-name="dd.ask"></rect>
+							<path d="M484.0 440.0 L730.0 440.0" fill="none" data-name="dd.ask"></path>
 						</g>
-						<g transform="translate(950, 180)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="dd.ask" data-compartment="0">
+						<g transform="translate(484, 400)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="dd.ask" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="dd.ask" data-compartment="0">
 								<text x="111.0" y="14.1" stroke="none" text-anchor="middle" data-name="dd.ask" data-compartment="0">dd.ask</text>
 								
 							</g>
 						</g>
-						<g transform="translate(950, 220)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="dd.ask" data-compartment="1">
+						<g transform="translate(484, 440)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="dd.ask" data-compartment="1">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="dd.ask" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="dd.ask" data-compartment="1">Knoepfe, gibt Index zurueck</text>
 								
@@ -220,9 +220,9 @@
 					</g>
 					<g data-name="naechste Passage">
 						<g fill="#eee8d5" stroke="#33322E" data-name="naechste Passage">
-							<rect x="1259.0" y="240.0" height="40.0" width="171.0" data-name="naechste Passage"></rect>
+							<rect x="605.0" y="540.0" height="40.0" width="171.0" data-name="naechste Passage"></rect>
 						</g>
-						<g transform="translate(1259, 240)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="naechste Passage" data-compartment="0">
+						<g transform="translate(605, 540)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="naechste Passage" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="center" data-name="naechste Passage" data-compartment="0">
 								<text x="73.5" y="14.1" stroke="none" text-anchor="middle" data-name="naechste Passage" data-compartment="0">naechste Passage</text>
 								

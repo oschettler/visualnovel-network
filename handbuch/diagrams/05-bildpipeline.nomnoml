@@ -1,5 +1,5 @@
 #title: Wie eine Zeichnung ins Spiel kommt
-#direction: right
+#direction: down
 #spacing: 70
 #padding: 12
 #background: white
@@ -10,7 +10,7 @@
 ]
 
 [<frame>portraits.py / szenen.py|
-  GEO je Figur|
+  GEO und UMRISS je Figur|
   Formenschatz je Ort
 ]
 
@@ -21,7 +21,9 @@
 
 [<frame>doc/img/*.svg|
   eine Datei je Emote|
-  bzw. je Hintergrund
+  bzw. je Hintergrund|
+  Figuren: weisse Silhouette,|
+  Rest durchsichtig
 ]
 
 [<frame>art.csv|
@@ -31,11 +33,13 @@
 
 [<frame>render_art.py|
   rsvg-convert, dann magick|
-  silhouette() fuer Figuren
+  Alphakanal als Maske|
+  fuer die Figuren
 ]
 
 [<frame>game/data/art/*.gif|
-  1-Bit, Pattern 0/1|
+  Figuren: Muster 0, 1, 32|
+  Hintergruende: ohne 0|
   lilt-lesbar
 ]
 

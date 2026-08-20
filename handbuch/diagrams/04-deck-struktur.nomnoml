@@ -8,20 +8,25 @@
   [<frame>Karte titel|
     [Neu beginnen, Weiterspielen, Kapitel, Hinweis]
   ]
+|
   [<frame>Karte index|
     [Widget: liste, ein Feld|Kapitelindex aus den Passagen-Tags]
   ]
+|
   [<frame>Karte buehne|
     [Widget: ortsmarke, stimmung, tempo|Felder fuer den Szenenzustand]
     [Widget sarah, michael, ...|Canvas je sichtbarer Puppe]
   ]
+|
   [<frame>Karte daten, unsichtbar|
     [Widget: quelle, ein Feld|die ganze szenen.twee als Text]
     [Widget: stand, ein Feld|Spielstand als %J-Zeichenkette]
   ]
+|
   [<frame>Karte hintergruende|
     [Widget je Ort|ein Canvas je Hintergrundbild]
   ]
+|
   [<frame>Karte sarah (Figurenblatt)|
     [Widget neutral, denk, sorge, ...|ein Canvas je Emote]
   ]

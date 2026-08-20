@@ -4,7 +4,7 @@
 Jede Zeichnung im Spiel ist generiert, keine ist von Hand in einem
 Zeichenprogramm entstanden. Das gilt für die sechs Figuren genauso wie für
 die 18 Hintergründe. Vorlage ist der Tuschezeichnungsstil der
-Urmel-Bücher (Franz Josef Tripp), verbindlich beschrieben in
+Urmel-Bücher (Erich Hölle), verbindlich beschrieben in
 `doc/stil-tuschezeichnung.md`. Dieses Kapitel erklärt, wie aus Python-Code
 Tuschezeichnungen werden, und wie die daraus entstehenden SVGs zu den
 1-Bit-GIFs werden, die `lilt` tatsächlich lesen kann.
@@ -217,14 +217,15 @@ def kasten(p, x, y, b, h, w=FEIN, offen=True):
     vier Eckwinkel statt einer Form."""
 ----
 
-**Warum die Bildmitte frei bleibt:** die Puppen im Spiel sind transparente
-Strichgrafik, der Hintergrund scheint also durch sie hindurch, sobald sie
-nicht selbst eine deckende Fläche bekommen (dazu gleich mehr). Alles, was
-in der Bildmitte liegt, erschiene sonst mitten im Gesicht der Figuren.
-Deshalb stehen die Gegenstände in `szenen.py` konsequent am linken und
-rechten Rand (`LINKS, RECHTS = 150, 874` bei 1024 Pixel Breite), und die
-Mitte bleibt Papier. Das ist keine Notlösung, sondern genau der Aufbau der
-Urmel-Vorlagen selbst.
+**Warum die Bildmitte frei bleibt:** dort stehen im Spiel die Figuren, und
+was hinter ihnen liegt, sieht man ohnehin nicht. Ein Gegenstand in der Mitte
+wäre also Arbeit, die niemand zu Gesicht bekommt, und bei einer einzelnen
+Figur auf `center` säße er genau hinter ihrem Kopf. Deshalb stehen die
+Gegenstände in `szenen.py` konsequent am linken und rechten Rand
+(`LINKS, RECHTS = 150, 874` bei 1024 Pixel Breite), und die Mitte bleibt
+Papier. Das ist keine Notlösung, sondern genau der Aufbau der
+Urmel-Vorlagen selbst: dort stehen die Dinge neben der Figur, nicht hinter
+ihr.
 
 image::bilder/beispiel-lab.png[Beispielszene: Innovation Lab, align=center]
 image::bilder/beispiel-gericht.png[Beispielszene: Landgericht, align=center]
@@ -280,11 +281,12 @@ Zeichnung.
 
 === Warum die Figur weißes Papier braucht
 
-Eine reine Strichzeichnung besteht nur aus Tusche und Transparenz. Ohne
-Gegenmaßnahme scheint der Hintergrund mitten durch die Figur, das
-Fensterkreuz landet im Auge, die Bodenschraffur quer über dem Mund. In den
-Vorlagen ist die Figur dagegen weißes Papier und verdeckt, was hinter ihr
-liegt.
+In den Urmel-Vorlagen ist eine Figur weißes Papier mit Tusche darauf. Sie
+verdeckt, was hinter ihr liegt, genau wie ein Gegenstand im Vordergrund.
+Eine Zeichnung, die nur aus Tuschestrichen bestünde, könnte das nicht: der
+Hintergrund läge dann im Gesicht, das Fensterkreuz im Auge, die
+Bodenschraffur quer über dem Mund. Die Figur braucht also ihre eigene weiße
+Fläche.
 
 Hergestellt wird das nicht durch Bildbearbeitung, sondern beim Zeichnen:
 `umriss()` in `tools/portraits.py` legt vor allem anderen eine geschlossene
@@ -343,18 +345,6 @@ nehmen:
          "-compose", "CopyOpacity", "-composite", f"GIF:{gif_pfad}"],
     ]
 ----
-
-[NOTE]
-====
-Ein erster Versuch hatte die Silhouette nachträglich aus dem fertigen Bild
-gewonnen: die Tusche morphologisch schließen, von den Bildecken aus mit einer
-Signalfarbe fluten, das Nichterreichte als Inneres nehmen. Das versiegelte
-zwar den Kopf, nicht aber den Rumpf, denn der endet am unteren Bildrand und
-ist dort offen, sodass die Flut von unten hereinlief. Auch ein größerer
-Schließradius half nicht. Aus der Zeichnung heraus ist es sowohl einfacher
-als auch vollständig: vier Bildbearbeitungsschritte sind zu zweien geworden,
-und die Schultern decken jetzt ebenfalls.
-====
 
 `render_art.py --pruefen` (auch als `make art` im Projekt-Wurzelverzeichnis)
 ruft nach dem Umwandeln zusätzlich `lilt` auf jede erzeugte Datei auf und

@@ -1,4 +1,4 @@
-# Stilvorlage: Tuschezeichnung (Urmel-Bücher, Franz Josef Tripp)
+# Stilvorlage: Tuschezeichnung (Urmel-Bücher, Erich Hölle)
 
 Verbindliche Beschreibung des Zielstils für alle Grafiken in [img/](img/).
 

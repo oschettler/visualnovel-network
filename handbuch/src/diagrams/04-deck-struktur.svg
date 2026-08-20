@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="3162.0" height="352.0" viewBox="0 0 3162 352" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="793.0" height="1552.0" viewBox="0 0 793 1552" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >Wie netzwerk.deck aufgebaut ist</title>
 	<desc >#title: Wie netzwerk.deck aufgebaut ist
 	#direction: down
@@ -10,20 +10,25 @@
 	  [&lt;frame&gt;Karte titel|
 	    [Neu beginnen, Weiterspielen, Kapitel, Hinweis]
 	  ]
+	|
 	  [&lt;frame&gt;Karte index|
 	    [Widget: liste, ein Feld|Kapitelindex aus den Passagen-Tags]
 	  ]
+	|
 	  [&lt;frame&gt;Karte buehne|
 	    [Widget: ortsmarke, stimmung, tempo|Felder fuer den Szenenzustand]
 	    [Widget sarah, michael, ...|Canvas je sichtbarer Puppe]
 	  ]
+	|
 	  [&lt;frame&gt;Karte daten, unsichtbar|
 	    [Widget: quelle, ein Feld|die ganze szenen.twee als Text]
 	    [Widget: stand, ein Feld|Spielstand als %J-Zeichenkette]
 	  ]
+	|
 	  [&lt;frame&gt;Karte hintergruende|
 	    [Widget je Ort|ein Canvas je Hintergrundbild]
 	  ]
+	|
 	  [&lt;frame&gt;Karte sarah (Figurenblatt)|
 	    [Widget neutral, denk, sorge, ...|ein Canvas je Emote]
 	  ]
@@ -32,14 +37,19 @@
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="white">
-				<rect x="0.0" y="0.0" height="352.0" width="3162.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="1552.0" width="793.0" stroke="none"></rect>
 			</g>
 			<g transform="translate(12, 12)" fill="#33322E">
 				<g transform="translate(20, 20)">
 					<g data-name="Deck (netzwerk.deck)">
 						<g fill="#eee8d5" stroke="#33322E" data-name="Deck (netzwerk.deck)">
-							<rect x="0.0" y="0.0" height="288.0" width="3098.0" data-name="Deck (netzwerk.deck)"></rect>
+							<rect x="0.0" y="0.0" height="1488.0" width="729.0" data-name="Deck (netzwerk.deck)"></rect>
 							<path d="M0.0 40.0 L185.0 40.0 L205.0 20.0 L205.0 0.0" fill="none" data-name="Deck (netzwerk.deck)"></path>
+							<path d="M0.0 248.0 L729.0 248.0" fill="none" data-name="Deck (netzwerk.deck)"></path>
+							<path d="M0.0 496.0 L729.0 496.0" fill="none" data-name="Deck (netzwerk.deck)"></path>
+							<path d="M0.0 744.0 L729.0 744.0" fill="none" data-name="Deck (netzwerk.deck)"></path>
+							<path d="M0.0 992.0 L729.0 992.0" fill="none" data-name="Deck (netzwerk.deck)"></path>
+							<path d="M0.0 1240.0 L729.0 1240.0" fill="none" data-name="Deck (netzwerk.deck)"></path>
 						</g>
 						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (netzwerk.deck)" data-compartment="0">
 							<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Deck (netzwerk.deck)" data-compartment="0">
@@ -52,16 +62,16 @@
 								<g transform="translate(20, 20)" data-name="Deck (netzwerk.deck)" data-compartment="1">
 									<g data-name="Karte titel">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte titel">
-											<rect x="0.0" y="20.0" height="144.0" width="452.0" data-name="Karte titel"></rect>
-											<path d="M0.0 60.0 L89.0 60.0 L109.0 40.0 L109.0 20.0" fill="none" data-name="Karte titel"></path>
+											<rect x="0.0" y="0.0" height="144.0" width="452.0" data-name="Karte titel"></rect>
+											<path d="M0.0 40.0 L89.0 40.0 L109.0 20.0 L109.0 0.0" fill="none" data-name="Karte titel"></path>
 										</g>
-										<g transform="translate(0, 20)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte titel" data-compartment="0">
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte titel" data-compartment="0">
 											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte titel" data-compartment="0">
 												<text x="0.0" y="14.1" stroke="none" data-name="Karte titel" data-compartment="0">Karte titel</text>
 												
 											</g>
 										</g>
-										<g transform="translate(0, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte titel" data-compartment="1">
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte titel" data-compartment="1">
 											<g transform="translate(12, 12)" fill="#33322E" data-name="Karte titel" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="Karte titel" data-compartment="1">
 													<g data-name="Neu beginnen, Weiterspielen, Kapitel, Hinweis">
@@ -79,18 +89,24 @@
 											</g>
 										</g>
 									</g>
+								</g>
+							</g>
+						</g>
+						<g transform="translate(0, 248)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (netzwerk.deck)" data-compartment="2">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Deck (netzwerk.deck)" data-compartment="2">
+								<g transform="translate(20, 20)" data-name="Deck (netzwerk.deck)" data-compartment="2">
 									<g data-name="Karte index">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte index">
-											<rect x="497.0" y="0.0" height="184.0" width="383.0" data-name="Karte index"></rect>
-											<path d="M497.0 40.0 L601.0 40.0 L621.0 20.0 L621.0 0.0" fill="none" data-name="Karte index"></path>
+											<rect x="0.0" y="0.0" height="184.0" width="383.0" data-name="Karte index"></rect>
+											<path d="M0.0 40.0 L104.0 40.0 L124.0 20.0 L124.0 0.0" fill="none" data-name="Karte index"></path>
 										</g>
-										<g transform="translate(497, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte index" data-compartment="0">
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte index" data-compartment="0">
 											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte index" data-compartment="0">
 												<text x="0.0" y="14.1" stroke="none" data-name="Karte index" data-compartment="0">Karte index</text>
 												
 											</g>
 										</g>
-										<g transform="translate(497, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte index" data-compartment="1">
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte index" data-compartment="1">
 											<g transform="translate(12, 12)" fill="#33322E" data-name="Karte index" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="Karte index" data-compartment="1">
 													<g data-name="Widget: liste, ein Feld">
@@ -115,18 +131,24 @@
 											</g>
 										</g>
 									</g>
+								</g>
+							</g>
+						</g>
+						<g transform="translate(0, 496)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (netzwerk.deck)" data-compartment="3">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Deck (netzwerk.deck)" data-compartment="3">
+								<g transform="translate(20, 20)" data-name="Deck (netzwerk.deck)" data-compartment="3">
 									<g data-name="Karte buehne">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte buehne">
-											<rect x="925.0" y="0.0" height="184.0" width="665.0" data-name="Karte buehne"></rect>
-											<path d="M925.0 40.0 L1046.0 40.0 L1066.0 20.0 L1066.0 0.0" fill="none" data-name="Karte buehne"></path>
+											<rect x="0.0" y="0.0" height="184.0" width="665.0" data-name="Karte buehne"></rect>
+											<path d="M0.0 40.0 L121.0 40.0 L141.0 20.0 L141.0 0.0" fill="none" data-name="Karte buehne"></path>
 										</g>
-										<g transform="translate(925, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte buehne" data-compartment="0">
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte buehne" data-compartment="0">
 											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte buehne" data-compartment="0">
 												<text x="0.0" y="14.1" stroke="none" data-name="Karte buehne" data-compartment="0">Karte buehne</text>
 												
 											</g>
 										</g>
-										<g transform="translate(925, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte buehne" data-compartment="1">
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte buehne" data-compartment="1">
 											<g transform="translate(12, 12)" fill="#33322E" data-name="Karte buehne" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="Karte buehne" data-compartment="1">
 													<g data-name="Widget: ortsmarke, stimmung, tempo">
@@ -169,18 +191,24 @@
 											</g>
 										</g>
 									</g>
+								</g>
+							</g>
+						</g>
+						<g transform="translate(0, 744)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (netzwerk.deck)" data-compartment="4">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Deck (netzwerk.deck)" data-compartment="4">
+								<g transform="translate(20, 20)" data-name="Deck (netzwerk.deck)" data-compartment="4">
 									<g data-name="Karte daten, unsichtbar">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte daten, unsichtbar">
-											<rect x="1635.0" y="0.0" height="184.0" width="655.0" data-name="Karte daten, unsichtbar"></rect>
-											<path d="M1635.0 40.0 L1834.0 40.0 L1854.0 20.0 L1854.0 0.0" fill="none" data-name="Karte daten, unsichtbar"></path>
+											<rect x="0.0" y="0.0" height="184.0" width="655.0" data-name="Karte daten, unsichtbar"></rect>
+											<path d="M0.0 40.0 L199.0 40.0 L219.0 20.0 L219.0 0.0" fill="none" data-name="Karte daten, unsichtbar"></path>
 										</g>
-										<g transform="translate(1635, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte daten, unsichtbar" data-compartment="0">
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte daten, unsichtbar" data-compartment="0">
 											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte daten, unsichtbar" data-compartment="0">
 												<text x="0.0" y="14.1" stroke="none" data-name="Karte daten, unsichtbar" data-compartment="0">Karte daten, unsichtbar</text>
 												
 											</g>
 										</g>
-										<g transform="translate(1635, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte daten, unsichtbar" data-compartment="1">
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte daten, unsichtbar" data-compartment="1">
 											<g transform="translate(12, 12)" fill="#33322E" data-name="Karte daten, unsichtbar" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="Karte daten, unsichtbar" data-compartment="1">
 													<g data-name="Widget: quelle, ein Feld">
@@ -223,18 +251,24 @@
 											</g>
 										</g>
 									</g>
+								</g>
+							</g>
+						</g>
+						<g transform="translate(0, 992)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (netzwerk.deck)" data-compartment="5">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Deck (netzwerk.deck)" data-compartment="5">
+								<g transform="translate(20, 20)" data-name="Deck (netzwerk.deck)" data-compartment="5">
 									<g data-name="Karte hintergruende">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte hintergruende">
-											<rect x="2335.0" y="0.0" height="184.0" width="322.0" data-name="Karte hintergruende"></rect>
-											<path d="M2335.0 40.0 L2507.0 40.0 L2527.0 20.0 L2527.0 0.0" fill="none" data-name="Karte hintergruende"></path>
+											<rect x="0.0" y="0.0" height="184.0" width="322.0" data-name="Karte hintergruende"></rect>
+											<path d="M0.0 40.0 L172.0 40.0 L192.0 20.0 L192.0 0.0" fill="none" data-name="Karte hintergruende"></path>
 										</g>
-										<g transform="translate(2335, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte hintergruende" data-compartment="0">
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte hintergruende" data-compartment="0">
 											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte hintergruende" data-compartment="0">
 												<text x="0.0" y="14.1" stroke="none" data-name="Karte hintergruende" data-compartment="0">Karte hintergruende</text>
 												
 											</g>
 										</g>
-										<g transform="translate(2335, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte hintergruende" data-compartment="1">
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte hintergruende" data-compartment="1">
 											<g transform="translate(12, 12)" fill="#33322E" data-name="Karte hintergruende" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="Karte hintergruende" data-compartment="1">
 													<g data-name="Widget je Ort">
@@ -259,18 +293,24 @@
 											</g>
 										</g>
 									</g>
+								</g>
+							</g>
+						</g>
+						<g transform="translate(0, 1240)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck (netzwerk.deck)" data-compartment="6">
+							<g transform="translate(12, 12)" fill="#33322E" data-name="Deck (netzwerk.deck)" data-compartment="6">
+								<g transform="translate(20, 20)" data-name="Deck (netzwerk.deck)" data-compartment="6">
 									<g data-name="Karte sarah (Figurenblatt)">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Karte sarah (Figurenblatt)">
-											<rect x="2702.0" y="0.0" height="184.0" width="332.0" data-name="Karte sarah (Figurenblatt)"></rect>
-											<path d="M2702.0 40.0 L2919.0 40.0 L2939.0 20.0 L2939.0 0.0" fill="none" data-name="Karte sarah (Figurenblatt)"></path>
+											<rect x="0.0" y="0.0" height="184.0" width="332.0" data-name="Karte sarah (Figurenblatt)"></rect>
+											<path d="M0.0 40.0 L217.0 40.0 L237.0 20.0 L237.0 0.0" fill="none" data-name="Karte sarah (Figurenblatt)"></path>
 										</g>
-										<g transform="translate(2702, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte sarah (Figurenblatt)" data-compartment="0">
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte sarah (Figurenblatt)" data-compartment="0">
 											<g transform="translate(12, 12)" fill="#33322E" text-align="left" data-name="Karte sarah (Figurenblatt)" data-compartment="0">
 												<text x="0.0" y="14.1" stroke="none" data-name="Karte sarah (Figurenblatt)" data-compartment="0">Karte sarah (Figurenblatt)</text>
 												
 											</g>
 										</g>
-										<g transform="translate(2702, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte sarah (Figurenblatt)" data-compartment="1">
+										<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Karte sarah (Figurenblatt)" data-compartment="1">
 											<g transform="translate(12, 12)" fill="#33322E" data-name="Karte sarah (Figurenblatt)" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="Karte sarah (Figurenblatt)" data-compartment="1">
 													<g data-name="Widget neutral, denk, sorge, ...">

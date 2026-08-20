@@ -93,9 +93,8 @@ die Geschichte noch nicht zu Ende gespielt wurde.
 
 [IMPORTANT]
 ====
-Wie beim zugehörigen Tilemap-Spiel "Das Netzwerk" (zelda-network) gilt: die
-interaktive Decker-App darf aus Sicherheitsgründen keine Dateien selbst von
-der Festplatte nachladen. Nach jedem Neubau des Decks (siehe
+Die interaktive Decker-App darf aus Sicherheitsgründen keine Dateien selbst
+von der Festplatte nachladen. Nach jedem Neubau des Decks (siehe
 <<einrichtung>>) musst du `netzwerk.deck` deshalb in Decker neu öffnen,
 damit deine Änderungen ankommen. Der gespeicherte Spielstand steckt *im*
 Deck selbst, ein frisch gebautes Deck hat also wieder einen leeren Stand.

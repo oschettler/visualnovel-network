@@ -3,8 +3,8 @@
 == Die Visual Novel
 
 *Das Netzwerk* ist eine spielbare Adaption der Novelle "Das Netzwerk": eine
-lineare, bebilderte Erzählung mit Entscheidungspunkten, kein Adventure und
-kein Tilemap-Spiel. Du klickst dich durch Dialogboxen, siehst sechs Figuren
+lineare, bebilderte Erzählung mit Entscheidungspunkten, kein Adventure.
+Du klickst dich durch Dialogboxen, siehst sechs Figuren
 als Tuschezeichnungs-Puppen auf einer Bühne und triffst an ausgewählten
 Stellen Entscheidungen, die den Tonfall und den Epilog beeinflussen.
 
@@ -27,10 +27,20 @@ Hinweis" auf der Titelkarte.
 
 == Woher der Stoff kommt
 
-Die Vorlage ist eine 19.445 Wörter lange Prosa-Novelle in AsciiDoc, 30
-Kapitel von Januar 2026 bis März 2030. 26 der 30 Kapitel tragen bereits
-strukturierte Metadaten (Erzählperspektive, Datum, Ort). Aus dieser Prosa
-wurde die Spielszene: gekürzt, in Dialog aufgelöst, mit Regieanweisungen
+Im Februar 2026 fragte ich mich, wie man die Mission einer Rundfunkanstalt 
+vor zerstörerischen Absichten politischer Kräfte im eigenen Land schützen könnte. 
+Wenn das Budget plötzlich wegbricht, verschieben sich die Schwerpunkte weg von Reichweite
+und "Wir sind die Größten" hin zu "Es gibt uns noch". Aber wie bringe ich Akteure
+im öffentlich-rechtlichen Rundfunk dazu, eine Dreijahresperspektive einzunehmen und
+anzufangen, sich auf den Ernstfall vorzubereiten? Ein ins Internet gestelltes Manifest
+wird niemand lesen. Also machte ich mich daran, ein Szenario als erfundene Geschichte zu
+spinnen. Herausgekommen war eine Novelle, eine Form im Umfang zwischen Kurzgeschichte und
+Roman mit ein paar interessanten Eigenschaften: Es gibt ein *unerhörte Begebenheit* und 
+oft spielt ein *Dingsymbol* eine Rolle. 
+
+Diese Novelle mit ihren 30 Kapiteln diente als Vorlage für die Visual Novel. 
+Die Handlung spielt von Januar 2026 bis März 2030. Aus der Prosa
+wurden die Spielszenen: gekürzt, in Dialog aufgelöst, mit Regieanweisungen
 versehen. Aus rund 19.000 Wörtern Prosa wurden etwa 12.000 Wörter Spieltext
 mit 32 Entscheidungspunkten. Der komplette Bauplan mit allen Entscheidungen
 und ihrer Begründung steht in `plans/graphic-novel-plan.md`, dem
@@ -41,7 +51,7 @@ Ausgangspunkt fast aller Kapitel dieses Handbuchs.
 *Decker* ist das Programm, mit dem man das fertige Spiel spielt und mit dem
 man Bilder, Karten und Knöpfe von Hand zusammenklicken kann, so ähnlich
 wie bei einem Karteikasten (daher der Name). Decker wurde von John Earnest
-gebaut und ist kostenlos. *Lil* ist die kleine Programmiersprache, die in
+erfunden und ist kostenlos. *Lil* ist die kleine Programmiersprache, die in
 Decker eingebaut ist. Für "Das Netzwerk" kommen noch drei fertige
 Decker-Module dazu, die die eigentliche Erzählmaschine bilden:
 
@@ -80,7 +90,7 @@ Programmiersprache lernen musst, siehe <<bearbeiten>>.
 Wenn du nur spielen willst: lies <<spielen>> und <<einrichtung>>, das
 reicht komplett. Alles danach ist für alle, die tiefer einsteigen wollen:
 wie die Engine funktioniert, wie das Datenformat aufgebaut ist, wie die
-Tuschezeichnungen entstehen, und wie du selbst etwas ergänzt.
+Tuschezeichnungen entstehen und wie du selbst etwas ergänzt.
 ====
 
 <<software-architektur>> und <<das-datenformat>> sind die technischen
