@@ -4,7 +4,7 @@ Umsetzung der Novelle [Novelle_Zukunft-der-DW](../../Novelle_Zukunft-der-DW)
 als spielbare Visual Novel in [Decker](../extern/decker), mit den Modulen
 `dd` (Dialogizer), `pt` (Puppeteer) und `twee` (Ply).
 
-Leitprinzip, analog zu [zelda-network/game](../../zelda-network/game/README.md):
+Leitprinzip:
 **Die Geschichte ist eine Datei, kein Programm.** Wer eine Szene ändert, eine
 Figur auftreten lässt, einen Hintergrund wechselt oder eine Entscheidung
 einbaut, editiert `game/data/szenen.twee` und baut neu. Kein Lil-Code nötig.
@@ -14,7 +14,7 @@ einbaut, editiert `game/data/szenen.twee` und baut neu. Kein Lil-Code nötig.
 ## 1. Ziel und Abgrenzung
 
 Ziel ist eine **lineare, bebilderte Erzählung mit Entscheidungspunkten**, kein
-Adventure und kein Tilemap-Spiel (das ist zelda-network). Der Spieler klickt
+Adventure und kein Tilemap-Spiel. Der Spieler klickt
 sich durch Dialogboxen, sieht die sechs Figuren als Tuschezeichnungs-Puppen auf
 einer Bühne und trifft an definierten Stellen Entscheidungen, die Textvarianten
 und den Epilog beeinflussen.
@@ -749,8 +749,7 @@ dort. Aufgefallen ist das erst beim Adaptieren, nicht beim Planen.
 
 ### Wie die Hintergründe aussehen
 
-Die Vorlagen sind die Tuschezeichnungen der Urmel-Bücher (`in/u1`, `in/u2`,
-`in/u3`). Drei Dinge machen sie als Szene aus:
+Drei Dinge machen die Vorlagen als Szene aus:
 
 1. Es gibt keinen Horizont und keine Wände. Die Gegenstände stehen auf
    weissem Papier.
@@ -815,9 +814,8 @@ Team stimmt zu, das Netzwerk entsteht, die Kürzung kommt, das Netzwerk hält.
 Alles andere wäre eine zweite Novelle, keine Adaption.
 
 Was der Spieler stattdessen tut: **er entscheidet, mit welcher Haltung die
-Figuren durch die Geschichte gehen.** Das ist der eigentliche Stoff der Vorlage
-(siehe `plans/diagrams/06-moralische-dilemmata.nomnoml`: Argumente dafür,
-dagegen, persönliche Kosten) und passt zu einem Medium, das aus Dialogboxen
+Figuren durch die Geschichte gehen.** Das ist der eigentliche Stoff der Vorlage: 
+Argumente dafür, dagegen, persönliche Kosten) und passt zu einem Medium, das aus Dialogboxen
 besteht.
 
 ### 9.2 Drei Arten von Auswahl
@@ -884,7 +882,7 @@ Textvarianten entstehen im twee direkt:
 
 ### 9.4 Kapitel-zu-Passagen-Landkarte
 
-Aus den Kapitelmetadaten (POV, Datum, Ort) plus `plans/orte.md`:
+Aus den Kapitelmetadaten (POV, Datum, Ort):
 
 | K | POV | Zeit | Ort / Hintergrund | Rolle im Spiel |
 |---|---|---|---|---|
@@ -1102,15 +1100,14 @@ Speicherpipeline (Abschnitt 2).
   die einzige lohnende siebte Zeichnung.
 
 **Rechtlich:** Die Novelle ist anonymisiert und steht unter CC BY 4.0. Die
-Visual Novel erbt beides. Der rechtliche Hinweis aus `src/00-master.adoc` gehört
+Visual Novel erbt beides. Der rechtliche Hinweis aus der Novelle gehört
 als eigene Karte hinter die Titelkarte, wortgleich.
 
 ---
 
 ## 13. Vor der ersten Zeile Lil
 
-Die sechs Lil-Fallstricke aus
-[zelda-network/game/README.md](../../zelda-network/game/README.md) gelten hier
+Die sechs Lil-Fallstricke gelten hier
 unverändert und sind Pflichtlektüre. Die für dieses Projekt gefährlichsten:
 
 - Keine Operator-Priorität: Tupel nur aus fertig berechneten Variablen bauen.

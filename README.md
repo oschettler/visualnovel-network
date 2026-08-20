@@ -1,17 +1,6 @@
 # Visual Novel
 
-## Urmel-Bücher
-
-- [Wikipedia](https://de.wikipedia.org/wiki/Urmel_aus_dem_Eis)
-
-### Bildvorlagen
-
-- [u1](in/u1/OEBPS/Images)
-- [u2](in/u2)
-- [u3](in/u3)
-
-Leitreferenz für den Zeichenstil ist [in/u2/000008.jpg](in/u2/000008.jpg); die
-daraus abgeleiteten Merkmale stehen in
+Die Merkmale der Figuren stehen in
 [doc/stil-tuschezeichnung.md](doc/stil-tuschezeichnung.md).
 
 ### Gesichter erzeugen
@@ -30,10 +19,6 @@ Pro Figur entstehen drei Ansichten für Dialoge: `name.svg` (frontal),
 
 - [tools/ink.py](tools/ink.py) – Strichgenerator (Feder-Duktus, Haare, Kleckse)
 - [tools/portraits.py](tools/portraits.py) – Bildinhalt der sechs Figuren
-
-## Novelle "Das Netzwerk"
-
-- [Quelle](~/Documents/privat/Novelle_Zukunft-der-DW)
 
 ### Personen
 
